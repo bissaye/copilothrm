@@ -1,0 +1,14 @@
+select.theme-1 {
+    height: 2rem;
+    min-height: 50px;
+    min-width: 75px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 12px;
+    background-color: #bebfc200;
+    border: 1px solid #fbfbfb;
+    color: #333;
+    text-align: center;
+    font-size: medium;
+    padding-right: 5px;
+}

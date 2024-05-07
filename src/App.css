@@ -1,0 +1,46 @@
+
+/* Personnaliser la barre de défilement */
+::-webkit-scrollbar {
+  width: 6px;
+  margin-left: 4px;
+}
+
+/* Barre de défilement piste */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+/* Barre de défilement */
+::-webkit-scrollbar-thumb {
+  background-color: #b3b3b3;
+  border-radius: 6px;
+}
+
+/* Barre de défilement au survol */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b3b3b3;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.min-scrollbar::-webkit-scrollbar {
+  width: 2px;
+  height: 7px;
+  margin-left: 2px;
+}
+/*.react-international-phone-input-container{*/
+/*    width: 300px !important;*/
+/*}*/
+.react-international-phone-input{
+  width: 450px
+}
