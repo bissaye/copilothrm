@@ -13,18 +13,17 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
     const {text , icon, onClick} = props;
 
     return <Fragment>
-        <div 
+        <button
             onClick={() => {
                 onClick && onClick()
             }}
-            
-            className={` bg-primary text-white flex flex-row justify-around items-center gap-3 rounded-lg px-3`}
+            className={` bg-primary-200 text-white flex flex-row justify-around items-center gap-3 rounded-lg px-3`}
         >
             {
                 icon &&
                 <FontAwesomeIcon icon={icon} />
             }
             {text}
-        </div>
+        </button>
     </Fragment>
 }
