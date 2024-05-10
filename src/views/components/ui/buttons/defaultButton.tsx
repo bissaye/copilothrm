@@ -17,7 +17,7 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
             onClick={() => {
                 onClick && onClick()
             }}
-            className={` bg-primary-200 text-white flex flex-row justify-around items-center gap-3 rounded-lg px-3`}
+            className={` bg-primary-200 font-semibold  text-white flex flex-row justify-around items-center gap-3 rounded-lg px-3`}
         >
             {
                 icon &&
