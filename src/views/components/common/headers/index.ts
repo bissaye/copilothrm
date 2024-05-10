@@ -1,5 +1,5 @@
-import { AppHeader } from "./appHeader";
+import { PublicHeader } from "./publicHeader";
 
 export {
-    AppHeader
+    PublicHeader
 }

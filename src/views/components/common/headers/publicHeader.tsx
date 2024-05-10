@@ -5,9 +5,10 @@ import { publicRoutes } from '../../../../services/routes/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSignIn, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useIntl } from 'react-intl';
+import { CustomDefaultButton, DefaultButton, LinkButton, PuceButton } from '../../ui/buttons';
 
 
-export const AppHeader : React.FC = () => {
+export const PublicHeader : React.FC = () => {
 
     const {formatMessage} = useIntl();
 
@@ -18,17 +19,33 @@ export const AppHeader : React.FC = () => {
             </h1>
             <div className='flex flex-row justify-end items-center gap-4 md:gap-8'>
                 <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
-                    <FontAwesomeIcon icon={faHome} className='mx-1 md:mx-2'/>
-                    {formatMessage({id:"home_link"})}
+                    <DefaultButton
+                        text= {formatMessage({id:"home_link"})}
+                        icon={faHome}
+                    />
                 </Link>
                 <Link to={publicRoutes.SignInPage.path} type='link' className=' text-slate-600'>
-                    <FontAwesomeIcon icon={faSignIn} className='mx-1 md:mx-2'/>
-                    {formatMessage({id:"sign_in_link"})}
+                    <CustomDefaultButton
+                        text={formatMessage({id:"sign_in_link"})}
+                        icon={faSignIn}                    
+                    />
                 </Link>
                 <Link to={publicRoutes.SignUpPage.path} type='link' className=' text-slate-600'>
                     <FontAwesomeIcon icon={faUserPlus} className='mx-1 md:mx-2'/>
                     {formatMessage({id:"sign_up_link"})}
                 </Link>
+
+                <PuceButton 
+                    text={"1"}
+                    width={40}
+                    bgPrimary={200}
+                />
+
+                <LinkButton
+                    text='Renvoyer le mail'
+                    textSize={20}
+                    underline= {true}
+                />
                 <LanguageSwitcher/>
             </div>
         </div>

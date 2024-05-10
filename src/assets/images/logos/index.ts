@@ -1,4 +1,4 @@
-import copilotLogo from "./copilot.png" ;
+import copilotLogo from "./logo_copilot.png" ;
 
 export const imagesLogo={
     main : copilotLogo 
