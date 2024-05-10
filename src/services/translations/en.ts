@@ -9,7 +9,10 @@ const en: Record<string, string> = {
     sign_up_link: "Sign up",
     functionality_link: "Functionalities",
     about_link: "About",
-    contact_link: "Contact"
+    contact_link: "Contact",
+    user: "Users",
+    entreprise: "Enterprises",
+    positive_reviews: "Positive reviews"
 }
 
 export default en;
