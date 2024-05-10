@@ -17,8 +17,8 @@ export const Router: React.FC = () => {
             
             <Route path={"/"} element={<PublicBaseLayout/>}>
                 {
-                    Object.entries(publicRoutes).map(([_, route]) => (
-                        <Route id={route.id} path={route.path} element={route.element} />
+                    Object.entries(publicRoutes).map(([key, route]) => (
+                        <Route key={key} id={route.id} path={route.path} element={route.element} />
                     ))
                 }
             </Route>
