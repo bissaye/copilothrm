@@ -1,12 +1,15 @@
 const en: Record<string, string> = {
-    home_Page : "home page",
-    landing_Page : "landing page", 
-    sign_in_page : "sign in page",
-    sign_up_page : "sign up page",
-    not_found_page : "page not found",
-    home_link: "home",
-    sign_in_link: "sign in",
-    sign_up_link: "sign up"
+    home_Page : "Home page",
+    landing_Page : "Landing page", 
+    sign_in_page : "Sign in page",
+    sign_up_page : "Sign up page",
+    not_found_page : "Page not found",
+    home_link: "Home",
+    sign_in_link: "Sign in",
+    sign_up_link: "Sign up",
+    functionality_link: "Functionalities",
+    about_link: "About",
+    contact_link: "Contact"
 }
 
 export default en;
