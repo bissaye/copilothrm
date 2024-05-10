@@ -19,22 +19,20 @@ export const PublicHeader : React.FC = () => {
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
             </Link>
+            
             <div className='flex flex-row justify-end items-center gap-4 md:gap-10'>
-                {/* <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
-                    <DefaultButton
-                        text= {formatMessage({id:"home_link"})}
-                        icon={faHome}
-                    />
-                </Link> */}
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px]'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
                     {formatMessage({id:"functionality_link"})}
                 </Link>
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px]'>
+                
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
                     {formatMessage({id:"about_link"})}
                 </Link>
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px]'>
+                
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
                     {formatMessage({id:"contact_link"})}
                 </Link>
+                
                 <div className='flex flex-row justify-end items-center gap-4 md:gap-5'>
                     <Link to={publicRoutes.SignInPage.path} type='link' className=' text-slate-600'>
                         <CustomDefaultButton
@@ -51,23 +49,9 @@ export const PublicHeader : React.FC = () => {
                             icon={faUserPlus}
                             paddingY={5}                    
                         />
-                        {/* <FontAwesomeIcon icon={faUserPlus} className='mx-1 md:mx-2'/>
-                        {formatMessage({id:"sign_up_link"})} */}
                     </Link>
                 </div>
                 
-
-                {/* <PuceButton 
-                    text={"1"}
-                    width={40}
-                    bgPrimary={200}
-                /> */}
-
-                {/* <LinkButton
-                    text='Renvoyer le mail'
-                    textSize={20}
-                    underline= {true}
-                /> */}
                 <LanguageSwitcher/>
             </div>
         </div>
