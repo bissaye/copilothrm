@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useIntl } from 'react-intl';
 import { imagesLogo } from '../../../assets/images';
 import "./style.css";
-import { LandingPageSlider } from '../../components/ui/sliders';
+import { LandingPageSlider } from '../../components/common/sliders';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faCheck, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,8 +12,7 @@ export const LandingPage : React.FC = () => {
 
     return <Fragment>
         <div className='landingPageContent w-full flex flex-col bg-primary-50'>
-            <div className=' h-96 capitalize text-4xl font-bold text-white bg-white flex flex-col justify-center text-center tracking-wide'>
-                
+            <div className=' h-[30rem] capitalize text-4xl font-bold text-white bg-white flex flex-col justify-center text-center tracking-wide'>
                 <LandingPageSlider />
             </div>
             <div className=' h-96 px-48 capitalize text-4xl font-bold text-primary bg-white flex flex-row justify-between items-center tracking-wide'>
