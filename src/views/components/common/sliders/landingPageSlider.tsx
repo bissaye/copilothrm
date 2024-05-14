@@ -1,4 +1,4 @@
-import React, { Fragment, ReactNode } from "react";
+import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { imagesLogo } from "../../../../assets/images";
@@ -10,53 +10,60 @@ interface LandingPageSliderProps {
 }
 
 export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
-    
-    const images = Object.values(sliderImages)
+
+    const images = Object.values(sliderImages);
 
     let indexValue = 0;
 
     const showImg = (e: number) => {
-        debugger
-        if(e >= images.length) indexValue = 0;
-        if(e < 0) indexValue = images.length - 1;
+        if(e >= images.length) 
+            indexValue = 0;
+        if(e < 0) 
+            indexValue = images.length - 1;
         
-        const img = document.getElementById("img0");
+        const img0 = document.getElementById("img0");
         const percentage = (indexValue)*(-100) + "%";
-        if(img != null ) {
-            img!.style.transition = `0.7s`;
-            img!.style.marginLeft = `${percentage}`;
+        if(img0 != null ) {
+            img0!.style.transition = `1s`;
+            img0!.style.marginLeft = `${percentage}`;
         };
 
-        var buttonId = "button-" + e;
+        var slideButtons = document.getElementsByClassName("slide-buttons");
+        for(var i = 0; i < slideButtons.length; i++){
+            if(slideButtons[i].classList.contains("btn-active"))
+                slideButtons[i].classList.remove("btn-active")
+        }
+        var buttonId = "button-" + indexValue;
         const btn = document.getElementById(buttonId);
         if(btn != null ) {
             btn!.style.transition = '0.7s';
             btn!.classList.add("btn-active");
         };
+
     }
     
     showImg(indexValue);
 
     const sideSlide = (e: number) => {
-        showImg(indexValue += e)
+        showImg(indexValue += e);
     }
 
     const btnSlide = (e: number) => {
-        debugger
-        showImg(indexValue += e)
+        indexValue = e;
+        showImg(indexValue)
     }
 
-    if(images.length > 0){
-
+    const autoPlay = () => {
+        showImg(indexValue += 1);
     }
 
-    const swipeImage = (id: string) => {
-        const image = document.getElementById("img0");
-        const percentage = parseInt(id)*(-100) + "%";
-        // debugger
-        image!.style.transition = `0.7s`;
-        image!.style.marginLeft = `${percentage}`;
-    }
+    useEffect(() => {
+        var timer = setInterval(autoPlay, 3000);
+
+        return () => {
+            clearInterval(timer);
+        }
+    });
 
     return(
         <Fragment>
@@ -72,12 +79,12 @@ export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
                                 return <img key={index} src={img} id={id} className='sliderImage w-full h-full transition ease-in-out duration-300'/>
                             })}
                         </div>  
-                        <div className="slides-radios mb-3 h-0 flex flex-row items-center justify-center gap-4 absolute bottom-[5px] left-[46%]">
+                        <div className="mb-3 h-0 flex flex-row items-center justify-center gap-4 absolute bottom-[5px] left-[46%]">
                             {images.map((_, index) => {
                                 let id = "button-" + index;
                                 return <button
                                 key={index}
-                                className="cursor-pointer w-[15px] h-[15px] rounded-full border border-2 border-white"
+                                className="slide-buttons cursor-pointer w-[15px] h-[15px] rounded-full border border-2 border-white"
                                 id={id}
                                 onClick={() => btnSlide(index)}
                                 ></button>
