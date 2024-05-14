@@ -20,20 +20,20 @@ export const PublicHeader : React.FC = () => {
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
             </Link>
             
-            <div className='flex flex-row justify-end items-center gap-4 md:gap-10'>
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
+            <div className='flex flex-row justify-end items-center'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"functionality_link"})}
                 </Link>
                 
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"about_link"})}
                 </Link>
                 
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] px-8'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"contact_link"})}
                 </Link>
                 
-                <div className='flex flex-row justify-end items-center gap-4 md:gap-5'>
+                <div className='flex flex-row justify-end items-center mx-4 gap-4 md:gap-5'>
                     <Link to={publicRoutes.SignInPage.path} type='link' className=' text-slate-600'>
                         <CustomDefaultButton
                             text={formatMessage({id:"sign_in_link"})}
