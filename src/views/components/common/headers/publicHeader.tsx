@@ -2,10 +2,9 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { publicRoutes } from '../../../../services/routes/routes';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faSignIn, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSignIn, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useIntl } from 'react-intl';
-import { CustomDefaultButton, DefaultButton, LinkButton, PuceButton } from '../../ui/buttons';
+import { CustomDefaultButton } from '../../ui/buttons';
 import { imagesLogo } from '../../../../assets/images';
 
 
@@ -14,22 +13,22 @@ export const PublicHeader : React.FC = () => {
     const {formatMessage} = useIntl();
 
     return <Fragment>
-        <div className=' bg-white h-16 flex flex-row justify-between items-center px-4 md:px-8 lg:gap-14 xl:px-20'>
+        <div className=' bg-white flex flex-row justify-between items-center px-4 md:px-8 lg:gap-14 xl:px-20 fixed z-10 w-[100vw] h-[8vh]'>
             
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
             </Link>
             
             <div className='flex flex-row justify-end items-center'>
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className='text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"functionality_link"})}
                 </Link>
                 
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className='text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"about_link"})}
                 </Link>
                 
-                <Link to={publicRoutes.LandingPage.path} type='link' className=' rounded rounded-md text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
+                <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600 font-semibold text-[16px] py-2 px-6 hover:bg-primary-50 hover:text-white'>
                     {formatMessage({id:"contact_link"})}
                 </Link>
                 
