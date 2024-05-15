@@ -1,9 +1,7 @@
-import {imagesBackground} from "./backgrounds";
 import {imagesLogo} from "./logos";
-import {sliderImages} from "./slider";
+import {sliderImagesBackground} from "./backgrounds/slider";
 
 export {
-    imagesBackground,
     imagesLogo,
-    sliderImages
+    sliderImagesBackground
 }

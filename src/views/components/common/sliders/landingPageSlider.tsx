@@ -2,7 +2,7 @@ import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { imagesLogo } from "../../../../assets/images";
-import { sliderImages } from "../../../../assets/images";
+import { sliderImagesBackground } from "../../../../assets/images";
 import "./style.css";
 
 interface LandingPageSliderProps {
@@ -11,7 +11,7 @@ interface LandingPageSliderProps {
 
 export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
 
-    const images = Object.values(sliderImages);
+    const images = Object.values(sliderImagesBackground);
 
     let indexValue = 0;
 

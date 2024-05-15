@@ -3,7 +3,7 @@ import img2 from "./img2.png" ;
 import img3 from "./img3.png" ;
 import img4 from "./img4.png" ;
 
-export const sliderImages={
+export const sliderImagesBackground={
     main : img1,
     second: img2, 
     third: img3,
