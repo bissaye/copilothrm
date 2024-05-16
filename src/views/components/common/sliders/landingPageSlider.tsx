@@ -5,20 +5,20 @@ import { sliderImagesBackground } from "../../../../assets/images";
 import "./style.css";
 
 interface LandingPageSliderProps {
-    imagesList?: string;
+
 }
 
 export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
 
-    const images = Object.values(sliderImagesBackground);
+    const imagesList = Object.values(sliderImagesBackground);
 
     let indexValue = 0;
 
     const showImg = (e: number) => {
-        if (e >= images.length)
+        if (e >= imagesList.length)
             indexValue = 0;
         if (e < 0)
-            indexValue = images.length - 1;
+            indexValue = imagesList.length - 1;
 
         const img0 = document.getElementById("img0");
         const percentage = (indexValue) * (-100) + "%";
@@ -74,13 +74,13 @@ export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
                 />
                 <div className="flex flex-col w-full h-full relative">
                     <div className="flex flex-row overflow-hidden w-full h-full">
-                        {images.map((img, index) => {
+                        {imagesList.map((img, index) => {
                             let id = "img" + index;
                             return <img key={index} src={img} id={id} className='sliderImage w-full h-full transition ease-in-out duration-300' />
                         })}
                     </div>
                     <div className="mb-3 h-0 flex flex-row items-center justify-center gap-4 absolute bottom-[5px] left-[46%]">
-                        {images.map((_, index) => {
+                        {imagesList.map((_, index) => {
                             let id = "button-" + index;
                             return <button
                                 key={index}
