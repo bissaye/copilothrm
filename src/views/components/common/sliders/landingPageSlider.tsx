@@ -15,34 +15,6 @@ export const LandingPageSlider: React.FC<LandingPageSliderProps> = () => {
     const [indexValue, setIndexValue] = useState<number>(0);
     const [slideValue, setSlideValue] = useState<number>(indexValue * (-100));
 
-    const showImg = (e: number) => {
-        if (e >= imagesList.length)
-            setIndexValue(0);
-        if (e < 0)
-            setIndexValue(imagesList.length - 1);
-
-        const img0 = document.getElementById("img0");
-        const percentage = (indexValue) * (-100) + "%";
-        if (img0 != null) {
-            img0!.style.transition = `1s`;
-            img0!.style.marginLeft = `${percentage}`;
-        };
-
-        var slideButtons = document.getElementsByClassName("slide-buttons");
-        for (var i = 0; i < slideButtons.length; i++) {
-            if (slideButtons[i].classList.contains("btn-active"))
-                slideButtons[i].classList.remove("btn-active")
-        }
-        var buttonId = "button-" + indexValue;
-        const btn = document.getElementById(buttonId);
-        if (btn != null) {
-            btn!.style.transition = '0.7s';
-            btn!.classList.add("btn-active");
-        };
-
-    }
-
-
     const sideSlide = (direction: number) => {
         setIndexValue((prevIndex) => {
             let newIndex = prevIndex + direction;
