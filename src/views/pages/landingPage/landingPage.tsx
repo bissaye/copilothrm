@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { useIntl } from 'react-intl';
-import { imagesLogo } from '../../../assets/images';
 import "./style.css";
 import { LandingPageSlider } from '../../components/common/sliders';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
