@@ -10,6 +10,7 @@ The `PuceButton` component is a button component built using React and TypeScrip
 - **onClick** (`() => void`, optional): A callback function to be executed when the button is clicked.
 - **bgPrimary** (`50 | 100 | 200 | 300`, optional): Background primary color intensity of the button (e.g., `50` for light, `100` for medium, `200` for dark).
 - **width** (`number`, optional): Width of the button in pixels.
+- **className** (`string`, optional): css custum classes.
 
 #### Usage
 
