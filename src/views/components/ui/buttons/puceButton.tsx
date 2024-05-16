@@ -5,11 +5,12 @@ interface PuceButtonProps {
     onClick?: () => void,
     bgPrimary?: 50 | 100 | 200 | 300 ,
     width? : number,
+    className?: string
 }
 
 export const PuceButton : React.FC<PuceButtonProps> = (props: PuceButtonProps) => {
 
-    const {text , onClick, bgPrimary, width} = props;
+    const {text , onClick, bgPrimary, width, className} = props;
     const backGround = {
         50 : "bg-primary-50",
         100 : "bg-primary-100",
@@ -17,7 +18,7 @@ export const PuceButton : React.FC<PuceButtonProps> = (props: PuceButtonProps) =
         300 : "bg-primary-300",
     }
 
-    let backgroundColorClass : string = "";
+    let backgroundColorClass : string = "bg-primary-200";
     if (bgPrimary) {
         backgroundColorClass = backGround[bgPrimary];
     }
@@ -37,7 +38,7 @@ export const PuceButton : React.FC<PuceButtonProps> = (props: PuceButtonProps) =
             onClick={() => {
                 onClick && onClick()
             }}
-            className={` w-14 text-white font-bold text-center flex flex-row justify-around items-center gap-3 rounded-full  ${backgroundColorClass}`}
+            className={` w-14 text-white font-bold text-center flex flex-row justify-around items-center gap-3 rounded-full  ${backgroundColorClass} ${className ? className : ""}`}
             style={{
                 width : size,
                 height : height,
