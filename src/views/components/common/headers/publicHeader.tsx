@@ -4,7 +4,7 @@ import { LanguageSwitcher } from '../internationalisation';
 import { publicRoutes } from '../../../../services/routes/routes';
 import { faSignIn, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useIntl } from 'react-intl';
-import { CustomDefaultButton } from '../../ui/buttons';
+import { CustomDefaultButton } from '../../ui';
 import { imagesLogo } from '../../../../assets/images';
 
 
