@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { publicRoutes } from '../../../../services/routes/routes';
@@ -12,8 +12,25 @@ export const PublicHeader : React.FC = () => {
 
     const {formatMessage} = useIntl();
 
+    const [isFixed, setIsFixed] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const topOffset = window.scrollY;
+            const shouldFix = topOffset > 20; 
+
+            setIsFixed(shouldFix);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
     return <Fragment>
-        <div className=' bg-white flex flex-row justify-between items-center px-4 md:px-8 lg:gap-14 xl:px-20 fixed z-10 w-[100vw] h-[8vh]'>
+        <div className={`bg-white h-16 flex flex-row justify-between items-center px-4 md:px-8 lg:gap-14 xl:px-20 w-full ${isFixed ? 'fixed z-10' : ''}`}>
             
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
