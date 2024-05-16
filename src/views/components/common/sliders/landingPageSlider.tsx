@@ -1,7 +1,6 @@
-import React, { Fragment, ReactNode, useEffect, useState } from "react";
+import React, { Fragment, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleChevronLeft, faCircleChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { imagesLogo } from "../../../../assets/images";
 import { sliderImagesBackground } from "../../../../assets/images";
 import "./style.css";
 
