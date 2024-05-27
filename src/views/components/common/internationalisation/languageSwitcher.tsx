@@ -1,9 +1,5 @@
 import { useLangStore } from "../../../../services/store";
 import "./style.css";
-import "@fontsource/baloo-2"; 
-import "@fontsource/baloo-2/400.css"; 
-import "@fontsource/outfit"; 
-import "@fontsource/outfit/400.css"; 
 
 
 
@@ -14,7 +10,7 @@ export interface ComponentSwitcherProps {
 
 const LanguageSwitcherComponent: React.FC<ComponentSwitcherProps> = (props) => {
 
-    const { theme = "theme-1", className } = props;
+    const {className } = props;
     const { setLang, lang } = useLangStore();
 
     const StringToLang = (lang: string): "fr" | "en" => {
