@@ -2,6 +2,7 @@ import { useLangStore } from "../../../../services/store";
 import "./style.css";
 
 
+
 export interface ComponentSwitcherProps {
     theme?: "theme-1" | "theme-2";
     className?:string;
@@ -9,7 +10,7 @@ export interface ComponentSwitcherProps {
 
 const LanguageSwitcherComponent: React.FC<ComponentSwitcherProps> = (props) => {
 
-    const { theme = "theme-1", className } = props;
+    const {className } = props;
     const { setLang, lang } = useLangStore();
 
     const StringToLang = (lang: string): "fr" | "en" => {
@@ -18,12 +19,11 @@ const LanguageSwitcherComponent: React.FC<ComponentSwitcherProps> = (props) => {
 
     const defaultRender = () => (
         <select
-            className={"select-custom "+
-                theme === "theme-1" ? "theme-1" : `` +
-                theme === "theme-2" ? "btn btn-rounded-2 uppercase justify-self-start" : ``}
-        value={lang} onChange={(e) => setLang(StringToLang(e.target.value))}>
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
+          className={" font-body flex flex-row justify-between items-center min-w-32 px-3  min-h-9 text-black bg-gray-300  text-t3 rounded-m"}
+          value={lang} onChange={(e) => setLang(StringToLang(e.target.value))}
+        >
+            <option value="fr">Français</option>
+            <option value="en">English</option>
         </select>
     );
 

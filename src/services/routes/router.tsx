@@ -4,14 +4,14 @@ import { NotFoundPage } from "../../views/pages";
 import { PublicBaseLayout } from "../../views/layouts";
 import { useAuthStore } from "../store";
 import { publicRoutes, managerRoutes} from "./routes";
+import { PageTracker } from "../../views/components/common";
 
 
 export const Router: React.FC = () => {
     const {isLogged} = useAuthStore();
-    
-
     return (
     <BrowserRouter>
+        <PageTracker/>
         <Routes>
             <Route path="*" element={<NotFoundPage/>} />
             
@@ -23,20 +23,20 @@ export const Router: React.FC = () => {
                 }
             </Route>
             
-            <Route path={"/manager"} element={<PublicBaseLayout/>}>
-                {
-                    Object.entries(managerRoutes).map(([rootKey, route]) => (
-                        <Fragment key={rootKey}>
-                            {
-                                route.authRequired ?
-                                <Route id={route.id} path={route.path} element={isLogged ? route.element : <Navigate to={publicRoutes.SignInPage.path}/>} />
-                                :
-                                <Route id={route.id} path={route.path} element={route.element} />
-                            }
-                        </Fragment>
-                    ))
-                }
-            </Route>
+
+            {
+                Object.entries(managerRoutes).map(([rootKey, route]) => (
+                    <Fragment key={rootKey}>
+                        {
+                            route.authRequired ?
+                            <Route id={route.id} path={route.path} element={ isLogged ? route.element : <Navigate to={publicRoutes.SignInPage.path}/>} />
+                            :
+                            <Route id={route.id} path={route.path} element={route.element} />
+                        }
+                    </Fragment>
+                ))
+            }
+
 
         </Routes>
     </BrowserRouter>

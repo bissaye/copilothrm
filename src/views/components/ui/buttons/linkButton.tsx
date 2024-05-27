@@ -2,25 +2,43 @@ import React, { Fragment } from "react";
 
 interface LinkButtonProps {
     text: string,
+    type: "primary" | "secondary",
     onClick?: () => void,
     textSize ? : number,
-    underline ? : boolean
+    underline ? : boolean,
+    width?: number,
+    height?: number,
+    className?: string
 }
 
 export const LinkButton : React.FC<LinkButtonProps> = (props: LinkButtonProps) => {
 
-    const {text , onClick, textSize, underline} = props;
+    const {type, text , onClick, textSize, underline, width, height, className} = props;
+    
+    const textType = {
+        "primary" : "text-primary",
+        "secondary" : "text-secondary",
+    }
+    const borderType = {
+        "primary" : "border-b-primary",
+        "secondary" : "border-b-secondary",
+    }
 
-    let fontSize = textSize ? `${textSize}px` : "";
+    const fontSize = textSize ? `${textSize}px` : "16px";
+
+    const sizeWidth = width ? `${width}px` : "auto";
+    const sizeHeight = height ? `${height}px` : "auto";
 
     return <Fragment>
         <button
             onClick={() => {
                 onClick && onClick()
             }}
-            className={` text-primary-50 font-light ${underline ? " border-b border-b-primary-50": ""}`}
+            className={` ${textType[type]} ${className} font-body ${underline ? ` border-b ${borderType[type]}`: ""}`}
             style={{
                 fontSize: fontSize,
+                width : sizeWidth,
+                height : sizeHeight
             }}
         >
             {text}
