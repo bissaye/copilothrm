@@ -1,6 +1,6 @@
 export type AuthStore = {
-    isLogged?: boolean;
-    signIn: () => void;
-    signOut: () => void;
+    isLogged: boolean;
+    signIn: () => Promise<boolean>;
+    signOut: () => Promise<boolean>;
     initAuth: () => void;
   };
