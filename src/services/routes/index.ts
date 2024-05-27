@@ -1,7 +1,8 @@
 import { Router } from "./router";
-import { publicRoutes, managerRoutes} from "./routes";
+import { publicRoutes, managerRoutes, allRoutes} from "./routes";
 
 export {
+    allRoutes,
     publicRoutes,
     managerRoutes,
     Router
