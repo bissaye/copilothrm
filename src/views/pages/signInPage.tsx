@@ -117,13 +117,13 @@ export const SignInPage : React.FC = () => {
                     </div>
                     <div className='flex flex-row gap-4'>
                         <p className='font-bold font-body text-t4 text-gray-800'>{formatMessage({id:"no_account_yet"})}</p>
-                        <Link to={publicRoutes.SignUpPage.path} type='link'>
-                            <LinkButton
-                                text= {formatMessage({id:"sign_up_link"})}
-                                type='primary'
-                                className='font-bold'
-                            />
-                        </Link>
+                        
+                        <LinkButton
+                            text= {formatMessage({id:"sign_up_link"})}
+                            type='primary'
+                            className='font-bold'
+                            onClick={() => {navigateById(pageIds.SignUpPage)}}
+                        />
                         
                     </div>
                 </div>
