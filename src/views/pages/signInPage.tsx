@@ -13,9 +13,6 @@ import { userSignInSchema } from '../../services/forms/validations';
 import { useNavigateById } from '../../hooks';
 import { useAuthStore } from '../../services/store';
 import { pageIds } from '../../utils/constantes';
-import { Link } from 'react-router-dom';
-import { publicRoutes } from '../../services/routes';
-
 
 
 export const SignInPage : React.FC = () => {
