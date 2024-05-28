@@ -1,7 +1,9 @@
-import {imagesBackground} from "./backgrounds";
 import {imagesLogo} from "./logos";
+import { landingPageImage } from "./backgrounds/landingPage";
+import { avatars } from "./avatars";
 
 export {
-    imagesBackground,
-    imagesLogo
+    imagesLogo,
+    landingPageImage,
+    avatars
 }

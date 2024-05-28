@@ -1,8 +1,9 @@
 import { HomePage } from "./homePage";
 import { SignInPage } from "./signInPage";
 import { SignUpPage } from "./signUpPage";
-import { LandingPage } from "./landingPage";
+import { LandingPage } from "./landingPage/landingPage";
 import { NotFoundPage } from "./notFoundPage";
+import { ChooseOrg } from "./ChooseOrg";
 
 
 export {
@@ -10,5 +11,6 @@ export {
     SignInPage,
     SignUpPage,
     LandingPage,
-    NotFoundPage
+    NotFoundPage,
+    ChooseOrg
 }

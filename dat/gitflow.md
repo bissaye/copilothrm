@@ -71,6 +71,83 @@ Exemple :
 ``Cette fonctionnalité permet aux utilisateurs de rechercher des produits par nom, catégorie ou prix.
 Elle utilise l'API de recherche pour interroger la base de données et affiche les résultats dans une liste.``
 
+## Principales branches GitFlow et commandes:
+
+### Rôles des Branches dans GitFlow :
+
+- **`main`** : Branche stable représentant la version en production.
+
+- **`develop`** : Branche de développement principale où les fonctionnalités sont intégrées.
+
+- **`feature/`** : Branches individuelles pour développer de nouvelles fonctionnalités.
+
+- **`release/`** : Branches pour la préparation des versions à déployer.
+
+- **`hotfix/`** : Branches pour les correctifs critiques appliqués directement sur la production.
+
+- **`support/`** : Branches pour fournir un support à une version spécifique en production.
+
+- **`bugfix/`** : Branches pour les correctifs de bugs non critiques.
+
+### Commandes GitFlow :
+
+- **Initialiser GitFlow :**
+
+  ```bash
+  git flow init
+
+- **Démarrer une nouvelle fonctionnalité :**
+
+  ```bash
+  git flow feature start nom-de-la-fonctionnalite
+
+- **Terminer une fonctionnalité :**
+
+  ```bash
+  git flow feature finish nom-de-la-fonctionnalite
+
+- **Démarrer une release :**
+
+  ```bash
+  git flow release start nom-de-la-version
+
+- **Terminer une une release :**
+
+  ```bash
+  git flow release finish nom-de-la-version
+
+- **Démarrer un correctif :**
+
+  ```bash
+  git flow hotfix start nom-du-correctif
+
+- **Terminer un correctif :**
+
+  ```bash
+  git flow hotfix finish nom-du-correctif
+
+- **Démarrer une branche de support  :**
+
+  ```bash
+  git flow support start nom-de-la-version
+
+- **Terminer une branche de support :**
+
+  ```bash
+  git flow support finish nom-de-la-version
+
+- **Démarrer un correctif de bug :**
+
+  ```bash
+  git flow bugfix start nom-du-correctif
+
+- **Terminer un correctif de bug :**
+
+  ```bash
+  git flow bugfix finish nom-du-correctif
+
+
+
 ## Conseils supplémentaires :
 
 Évitez les commits trop volumineux. Il vaut mieux diviser les modifications en plusieurs commits plus petits et cohérents.

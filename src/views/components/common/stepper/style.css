@@ -1,0 +1,7 @@
+.stepper-bar-transition-colors {
+    transition: border-color 0.5s ease; 
+}
+
+.stepper-puce-transition-colors {
+    transition: background-color 0.9s ease; 
+}

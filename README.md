@@ -4,31 +4,32 @@
 
 The project follows a typical React application structure with TypeScript. Here's an overview of the directory layout:
 ```
-├── public # Public assets and HTML template
+├── dat                        # all documentations
+├── public                     # Public assets and HTML template
 └── src
-├── assets # Static assets like images and fonts
+├── assets                     # Static assets like images and fonts
 │ ├── images
 │ │ ├── backgrounds
 │ │ └── logos
-├── hooks # Reusable custom hooks
-├── services # Application services
-│ ├── api # API integration modules
-│ ├── routes # Routing configuration
-│ ├── store # State management setup
-│ │ ├── auth # Authentication related state logic
-│ │ └── lang # Language and localization logic
-│ └── translations # Localization data and utilities
-├── utils # Utility functions and helpers
-│ ├── helpers # General helper functions
-│ └── interfaces # Type interfaces
-│ ├── DTO # Data transfer object interfaces
-│ └── type # Other type interfaces
-└── views # Application views
-├── components # Reusable UI components
-│ ├── common # Common components like headers, footers, etc.
-│ └── ui # UI components like buttons, forms, modals, etc.
-├── layouts # Layout components for organizing page structure
-└── pages # Application pages
+├── hooks                      # Reusable custom hooks
+├── services                   # Application services
+│ ├── api                      # API integration modules
+│ ├── routes                   # Routing configuration
+│ ├── store                    # State management setup
+│ │ ├── auth                   # Authentication related state logic
+│ │ └── lang                   # Language and localization logic
+│ └── translations             # Localization data and utilities
+├── utils                      # Utility functions and helpers
+│ ├── helpers                  # General helper functions
+│ └── interfaces               # Type interfaces
+│ ├── DTO                      # Data transfer object interfaces
+│ └── type                     # Other type interfaces
+└── views                      # Application views
+├── components                 # Reusable UI components
+│ ├── common                   # Common components like headers, footers, etc.
+│ └── ui                       # UI components like buttons, forms, modals, etc.
+├── layouts                    # Layout components for organizing page structure
+└── pages                      # Application pages
 ```
 
 ## Key Dependencies
@@ -39,7 +40,9 @@ The project follows a typical React application structure with TypeScript. Here'
 - **axios** (`axios`) for REST request management.
 - **React Intl** (`react-intl`) for internationalization (i18n) support.
 - **Font Awesome** (`@fortawesome/react-fontawesome`) for icons.
-  
+- **Formik** (`formik`) pour la gestion des formulaires.
+- **Yup** (`yup`) pour la validation de schémas
+
 ## Development Tools
 
 - **Vite** (`vite`) for fast development server with hot module replacement (HMR).
