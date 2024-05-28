@@ -46,7 +46,6 @@ export const SignInPage : React.FC = () => {
             console.log(body) // ce log sera enlevé des que l'authentification sera complète
             signIn().then(
                 ()=>{
-                    console.log("ok")
                     navigateById(pageIds.ChooseOrg)
                 }
             );
