@@ -13,6 +13,8 @@ import { userSignInSchema } from '../../services/forms/validations';
 import { useNavigateById } from '../../hooks';
 import { useAuthStore } from '../../services/store';
 import { pageIds } from '../../utils/constantes';
+import { Link } from 'react-router-dom';
+import { publicRoutes } from '../../services/routes';
 
 
 
@@ -46,7 +48,6 @@ export const SignInPage : React.FC = () => {
             console.log(body) // ce log sera enlevé des que l'authentification sera complète
             signIn().then(
                 ()=>{
-                    console.log("ok")
                     navigateById(pageIds.ChooseOrg)
                 }
             );
@@ -116,11 +117,14 @@ export const SignInPage : React.FC = () => {
                     </div>
                     <div className='flex flex-row gap-4'>
                         <p className='font-bold font-body text-t4 text-gray-800'>{formatMessage({id:"no_account_yet"})}</p>
+                        
                         <LinkButton
                             text= {formatMessage({id:"sign_up_link"})}
                             type='primary'
                             className='font-bold'
+                            onClick={() => {navigateById(pageIds.SignUpPage)}}
                         />
+                        
                     </div>
                 </div>
 
