@@ -103,6 +103,8 @@ const en: Record<string, string> = {
     members: "members",
     add_an_organization: "Add an organization",
     sign_out: "Sign out",
+    user_account_created: "User account and company successfully created. Please activate it via the link that was emailed to you.",
+    resend_mail: "Resend mail"
 }
 
 export default en;
