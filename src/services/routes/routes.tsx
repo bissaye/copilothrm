@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 
 
@@ -24,6 +24,12 @@ export const publicRoutes : Record<string, AppRoute> = {
         path: "/signup",
         authRequired: false,
         element: <SignUpPage/>
+    },
+    SignUpFromValidationPage :{
+        id: pageIds.SignUpFromInvitationPage,
+        path: "/signupfrominvitation",
+        authRequired: false,
+        element: <SignUpFromInvitationPage/>
     },
 }
 

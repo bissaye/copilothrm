@@ -4,7 +4,7 @@ import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
 
 export const InputText : React.FC<InputTextProps> = (props : InputTextProps) => {
-    const {id, name, value, placeholder, disabled, onChange} = props
+    const {id, name, value, placeholder, disabled, onChange, onBlur} = props
     return <Fragment>
         <CustumInputContainer
             {...props}
@@ -20,6 +20,11 @@ export const InputText : React.FC<InputTextProps> = (props : InputTextProps) => 
                 onChange={(e) => {
                     if(onChange){
                         onChange(e);
+                    }
+                }}
+                onBlur={(e) => {
+                    if(onBlur){
+                        onBlur(e);
                     }
                 }}
                 autoComplete=""

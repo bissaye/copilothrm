@@ -1,11 +1,13 @@
-.stepper-transition-bar-forward {
-    animation: slide-in 1s forwards;
-}
-
-.stepper-transition-bar-back {
+.show-sub-menu {
+    display: flex;
+    flex-direction: column;
     animation: slide-out 1s forwards;
 }
 
+.hide-sub-menu {
+    display: none;
+    animation: slide-in 1s forwards;
+}
 
 @keyframes slide-in {
     0%{

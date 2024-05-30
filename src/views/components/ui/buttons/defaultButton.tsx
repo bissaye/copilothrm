@@ -18,11 +18,12 @@ interface DefaultButtonProps {
     widthFull?: boolean;
     height?: number;
     className?: string;
+    disabled?: boolean;
 }
 
 export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButtonProps) => {
 
-    const { type, text, icon, onClick, bgWhite, typeForm, textSize, paddingX, paddingY, marginX, marginY,  width, widthFull, height, className} = props;
+    const { type, text, icon, onClick, bgWhite, typeForm, textSize, paddingX, paddingY, marginX, marginY,  width, widthFull, height, className, disabled} = props;
 
     const bgType = {
         "primary" : "bg-primary",
@@ -50,7 +51,7 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
 
     let margin : any = {};
 
-    let sizeWidth = width ? `${width}px` : "165px";
+    let sizeWidth = width ? `${width}px` : "auto";
     let sizeHeight = height ? `${height}px` : "44px";
 
     if(widthFull){
@@ -107,6 +108,7 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
                     height : sizeHeight
                 }}
                 type={typeForm ? typeForm : "button"}
+                disabled={disabled}
             >
                 {icon && <FontAwesomeIcon icon={icon} />}
                 {text}
