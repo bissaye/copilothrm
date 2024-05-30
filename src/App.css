@@ -46,10 +46,14 @@
   width: 450px
 }
 
+table, tr {
+  @apply border border-gray-250
+}
+
 tbody > tr:nth-of-type(even) {
-  @apply bg-gray-250;
+  @apply bg-gray-100;
 }
 
 thead {
-  @apply bg-gray-250;
+  @apply bg-gray-400;
 }
