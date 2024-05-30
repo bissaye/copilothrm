@@ -1,5 +1,5 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { ReactNode, ChangeEvent } from "react";
+import { ReactNode, FocusEvent, ChangeEvent } from "react";
 
 export interface CustomInputProps {
     label? : string
@@ -16,6 +16,7 @@ export interface InputTextProps extends CustomInputProps {
     placeholder? : string
     disabled?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
 export interface InputSelectProps extends Omit<InputTextProps, 'onChange'> {
