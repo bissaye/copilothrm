@@ -51,6 +51,13 @@ const en: Record<string, string> = {
     no_account_yet : "No account yet ?",
     incorrect_email_address_format :"Incorrect email address format",
     required_field: "Required field",
+    welcome_back: "Welcome back",
+    choose_a_workspace_below: "Choose a workspace below",
+    to_work_with_your_team_again: "to work with your team again",
+    organization_for : "Organization for",
+    members: "members",
+    add_an_organization: "Add an organization",
+    sign_out: "Sign out",
 }
 
 export default en;
