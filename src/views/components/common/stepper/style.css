@@ -1,7 +1,27 @@
-.stepper-bar-transition-colors {
-    transition: border-color 0.5s ease; 
+.stepper-transition-bar-forward {
+    animation: slide-in 1s forwards;
 }
 
-.stepper-puce-transition-colors {
-    transition: background-color 0.9s ease; 
+.stepper-transition-bar-back {
+    animation: slide-out 1s forwards;
+}
+
+
+@keyframes slide-in {
+    0%{
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+
+@keyframes slide-out {
+    0%{
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }

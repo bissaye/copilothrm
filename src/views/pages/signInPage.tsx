@@ -14,8 +14,6 @@ import { useNavigateById } from '../../hooks';
 import { useAuthStore } from '../../services/store';
 import { pageIds } from '../../utils/constantes';
 
-
-
 export const SignInPage : React.FC = () => {
 
     const {formatMessage} = useIntl();
@@ -51,7 +49,7 @@ export const SignInPage : React.FC = () => {
             );
         }
     })
-    const {values, errors, handleChange, handleSubmit} = formik
+    const {values, errors, touched, handleChange, handleSubmit} = formik
 
     return <Fragment>
         <div className='min-h-svh w-full flex flex-col justify-start items-center'>
@@ -72,7 +70,7 @@ export const SignInPage : React.FC = () => {
                             icon = {faEnvelope}  
                             value={values[fields.email.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.email ? errors.email.toString() : undefined}
+                            errorMessage={ errors.email && touched.email ? errors.email.toString() : undefined}
                         />
                     </div>
 
@@ -85,7 +83,7 @@ export const SignInPage : React.FC = () => {
                             icon = {faLock}  
                             value={values[fields.password.name]} 
                             onChange={handleChange}  
-                            errorMessage={ errors.password ? errors.password.toString() : undefined}
+                            errorMessage={ errors.password && touched.password ? errors.password.toString() : undefined}
                         />
                     </div>
 

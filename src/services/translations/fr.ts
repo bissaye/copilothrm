@@ -95,9 +95,14 @@ const fr: Record<string, string> = {
     organization_logo: "Logo de l'organisation",
     user_title: "Utilisateur",
     organization_title: "Organisation",
-    select: "Séléctionnez"
-
-
+    select: "Séléctionnez",
+    welcome_back: "Bon retour parmi nous",
+    choose_a_workspace_below: "Choisissez un espace de travail ci-dessous",
+    to_work_with_your_team_again: "pour travailler à nouveau avec votre equipe",
+    organization_for : "Organisation pour",
+    members: "membres",
+    add_an_organization: "Ajouter une organisation",
+    sign_out: "Se déconnecter",
 }
 
 export default fr;

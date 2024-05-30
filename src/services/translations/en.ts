@@ -95,7 +95,14 @@ const en: Record<string, string> = {
     organization_logo: "Company logo",
     user_title: "User",
     organization_title: "Company",
-    select: "Select"
+    select: "Select",
+    welcome_back: "Welcome back",
+    choose_a_workspace_below: "Choose a workspace below",
+    to_work_with_your_team_again: "to work with your team again",
+    organization_for : "Organization for",
+    members: "members",
+    add_an_organization: "Add an organization",
+    sign_out: "Sign out",
 }
 
 export default en;
