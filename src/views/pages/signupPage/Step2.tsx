@@ -19,7 +19,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
 
     // hooks
     const {formatMessage} = useIntl();
-    const { setUserData } = useSignupStore();
+    const { userData, setUserData } = useSignupStore();
 
     //constantes
     const fields : Record<string, FieldsInfo> = {
@@ -38,7 +38,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     }
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] ="";
+        initialValues[field.name] = userData[field.name as keyof UserSignupData];
         return field
     })
     const formik = useFormik({
@@ -52,7 +52,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             handleSubmitNextStep();
         }
     })
-    const {values, errors, touched, handleChange, handleBlur, handleSubmit} = formik;
+    const {values, errors, handleChange, handleSubmit} = formik;
 
     // fonctions
 

@@ -1,11 +1,10 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
 import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
-import { useFormik, Form } from "formik";
+import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
 import { UserSignupData } from "../../../utils/interfaces/DTO/request";
 import { useSignupStore } from "../../../services/store";
-import { useEffect } from "react";
 
 interface Step1Props {
     handleSubmitNextStep: () => void;
@@ -76,7 +75,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] ="";
+        initialValues[field.name] = userData[field.name as keyof UserSignupData];
         return field
     })
 
@@ -92,9 +91,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
         }
     })
     const {values, errors, touched, handleChange, handleSubmit} = formik
-
-    console.log(errors)
-
     return (
         <form 
             className="flex flex-col gap-7 items-center w-full"

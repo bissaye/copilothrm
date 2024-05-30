@@ -7,6 +7,7 @@ import { pageIds } from "../../../utils/constantes";
 import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import { SummaryBox } from "../../components/common";
 
 interface Step4Props {
     handleSubmitNextStep?: () => void;
@@ -28,20 +29,103 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
-            return await new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // resolve(navigateById(pageIds.ChooseOrg))
-                    setIsSubmitted(true);
-                }, 2000)
-            })
             return setTimeout(() => {
-                    // resolve(navigateById(pageIds.ChooseOrg))
                     setIsSubmitted(true);
                 }, 2000)
         }
     })
 
-    const { values, handleSubmit } = formik;
+    const userInfos = [
+        {
+            id: "surname",
+            name: formatMessage({id:"surname"}),
+            value: userData.surname
+        },
+        {
+            id: "firstname",
+            name: formatMessage({id:"firstname"}),
+            value: userData.firstname
+        },
+        {
+            id: "birthdate",
+            name: formatMessage({id:"birthdate"}),
+            value: userData.birthdate
+        },
+        {
+            id: "birthplace",
+            name: formatMessage({id:"birth_place"}),
+            value: userData.birthplace
+        },
+        {
+            id: "phone",
+            name: formatMessage({id:"phone"}),
+            value: userData.userPhone
+        },
+        {
+            id: "userCountry",
+            name: formatMessage({id:"country"}),
+            value: userData.userCountry
+        },
+        {
+            id: "userCity",
+            name: formatMessage({id:"city"}),
+            value: userData.userCity
+        },
+        {
+            id: "address",
+            name: formatMessage({id:"address"}),
+            value: userData.userAddress
+        },
+        {
+            id: "postCode",
+            name: formatMessage({id:"post_code"}),
+            value: userData.userPostcode
+        },
+        {
+            id: "gender",
+            name: formatMessage({id:"gender"}),
+            value: userData.gender
+        },
+    ]
+    const orgInfos = [
+        {
+            id: "socialReason",
+            name: formatMessage({id:"social_reason"}),
+            value: userData.socialReason
+        },
+        {
+            id: "siret",
+            name: formatMessage({id:"siret"}),
+            value: userData.siret
+        },
+        {
+            id: "orgCountry",
+            name: formatMessage({id:"country"}),
+            value: userData.orgCountry
+        },
+        {
+            id: "orgCity",
+            name: formatMessage({id:"city"}),
+            value: userData.orgCity
+        },
+        {
+            id: "orgPostCode",
+            name: formatMessage({id:"post_code"}),
+            value: userData.orgPostcode
+        },
+        {
+            id: "orgAddress",
+            name: formatMessage({id:"address"}),
+            value: userData.orgAddress
+        },
+        {
+            id: "industry",
+            name: formatMessage({id:"industry"}),
+            value: userData.industry
+        }
+    ]
+
+    const { handleSubmit } = formik;
     
     return(
         <Fragment>
@@ -53,216 +137,21 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
                 <div className="flex flex-col items-center gap-5">
                     {/* <h1 className="text-primary font-bold text-center">Step 4</h1> */}
                     <div className="flex flex-col md:flex-row gap-20">
+
                         {/* Résumé des infos de l'utilisateur */}
-                        <div className="h-[470px] w-[350px] md:w-[400px] pt-3 pb-7 border border-primary rounded rounded-[8px] flex flex-col items-center gap-3 overflow-scroll">
-                            <h1 
-                                className="text-primary font-heading font-extrabold mb-5"
-                                >{formatMessage({id:"user_title"})}
-                                </h1>
-                            {/* Nom de famille */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'surname'    
-                                    name =  'surname' 
-                                    label={formatMessage({id:"surname"})}
-                                    value={values.surname}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Prénom */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'firstname'    
-                                    name = 'firstname'  
-                                    label={formatMessage({id:"firstname"})}
-                                    value={userData.firstname}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Lieu de naissance */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'birthplace'    
-                                    name = 'birthplace'  
-                                    label={formatMessage({id:"birth_place"})}
-                                    value={userData.birthplace}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Date de naissance */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'birthdate'   
-                                    name = 'birthdate' 
-                                    label = {formatMessage({id:"birthdate"})}
-                                    value = {userData.birthdate.toString()}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Téléphone */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'userPhone'   
-                                    name = 'userPhone'  
-                                    label={formatMessage({id:"phone"})}
-                                    value={userData.userPhone}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Pays */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'userCountry'    
-                                    name = 'userCountry' 
-                                    label={formatMessage({id:"country"})}
-                                    value={userData.userCountry}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Ville */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'userCity'    
-                                    name = 'userCity'  
-                                    label={formatMessage({id:"city"})}
-                                    value={userData.userCity}
-                                    disabled = {true}
-                                />
-                            </div>
-                            {/* Code postal */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'userPostcode'    
-                                    name = 'userPostcode'  
-                                    label={formatMessage({id:"post_code"})}
-                                    value={userData.userPostcode}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Adresse postale */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'userAddress'   
-                                    name = 'userAddress' 
-                                    label = {formatMessage({id:"address"})}
-                                    value = {userData.userAddress}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Sexe */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'gender'   
-                                    name = 'gender'  
-                                    label={formatMessage({id:"gender"})}
-                                    value={userData.gender}
-                                    disabled = {true}
-                                />
-                            </div>
-                        </div>
+                        <SummaryBox 
+                            title={formatMessage({id:"user_title"})}
+                            infos={userInfos}
+                        />
 
                         {/* Résumé des informations de l'organisation */}
-                        <div className="h-[470px] w-[350px] md:w-[400px] pt-3 pb-7 border border-primary rounded rounded-[8px] flex flex-col items-center gap-3 overflow-scroll">
-                            <h1 className="text-primary font-extrabold mb-5">{formatMessage({id:"organization_title"})}</h1>
-                            
-                            {/* Raison sociale */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'socialReason'    
-                                    name = 'socialReason' 
-                                    label = {formatMessage({id:"social_reason"})}
-                                    value = {userData.socialReason}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Siret */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'siret'    
-                                    name = 'siret'  
-                                    label={formatMessage({id:"siret"})}
-                                    value={userData.siret}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Pays de l'organisation */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'orgCounrty'    
-                                    name = 'orgCounrty'  
-                                    label={formatMessage({id:"country"})}
-                                    value={userData.orgCountry}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Ville de l'organisation */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'orgCity'   
-                                    name = 'orgCity' 
-                                    label = {formatMessage({id:"city"})}
-                                    value = {userData.orgCity}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Code postal de l'organisation */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'orgPostcode'   
-                                    name = 'orgPostcode' 
-                                    label = {formatMessage({id:"post_code"})}
-                                    value = {userData.orgPostcode}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Adresse postal de l'organisation */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'orgAddress'   
-                                    name = 'orgAddress' 
-                                    label = {formatMessage({id:"address"})}
-                                    value = {userData.orgAddress}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Industrie */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'industry'   
-                                    name = 'industry' 
-                                    label = {formatMessage({id:"industry"})}
-                                    value = {userData.industry}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                            {/* Logo de l'organisation */}
-                            <div className="w-2/3">
-                                <InputText
-                                    id = 'orgLogo'   
-                                    name = 'orgLogo' 
-                                    label = 'Logo'
-                                    value = {userData.orgLogo?.name}
-                                    disabled = {true}
-                                />
-                            </div>
-
-                        </div>
+                        <SummaryBox 
+                            title={formatMessage({id:"organization_title"})}
+                            infos={orgInfos}
+                        />
                     </div>
+
+
                     <div className="flex flex-col md:flex-row md:gap-6">
                         <DefaultButton
                             type = "primary"
@@ -287,7 +176,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
                         />
                     </div>
                 </div>
-                </form>
+            </form>
             :
             <div className="flex flex-col justify-center items-center gap-5 w-full">
                 <FontAwesomeIcon icon={faCheckCircle} className="text-primary text-6xl" />
