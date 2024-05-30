@@ -4,8 +4,8 @@ import { DefaultButton, InputPassword, InputText } from "../../components/ui";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { userSignUpStepTwoSchema } from "../../../services/forms/validations";
-import { UserSignupData } from "../../../utils/interfaces/DTO/request";
-import { useSignupStore } from "../../../services/store";
+import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { useInvitationSignupStore } from "../../../services/store/signup/signupStore";
 
 interface Step2Props {
     handleSubmitNextStep: () => void;
@@ -19,7 +19,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
 
     // hooks
     const {formatMessage} = useIntl();
-    const { userData, setUserData } = useSignupStore();
+    const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
 
     //constantes
     const fields : Record<string, FieldsInfo> = {
@@ -38,7 +38,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     }
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] = userData[field.name as keyof UserSignupData];
+        initialValues[field.name] = invitedUserDatas[field.name as keyof InvitedUserSignupDatas];
         return field
     })
     const formik = useFormik({
@@ -47,8 +47,8 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
-            const body: UserSignupData = {...values};
-            setUserData(body);
+            const body: InvitedUserSignupDatas = {...values};
+            setInvitedUserDatas(body);
             handleSubmitNextStep();
         }
     })
@@ -115,12 +115,12 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 />
                 <DefaultButton
                     type = "primary"
-                    text = {formatMessage({id: "next"})}
+                    text = {formatMessage({id: "sign_up_link"})}
                     bgWhite = {false}
                     typeForm='submit'
                     marginY={20}
                     width={335}
-                    disabled={!formik.isValid}
+                    disabled={!formik.isValid || formik.isSubmitting}
                     className="rounded-[4px] disabled:bg-primary/70"
                 />
             </div>

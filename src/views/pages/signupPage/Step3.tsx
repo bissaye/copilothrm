@@ -18,7 +18,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
     
     // hooks
     const {formatMessage} = useIntl();
-    const { setUserData } = useSignupStore();
+    const { userData, setUserData } = useSignupStore();
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
@@ -58,7 +58,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] ="";
+        initialValues[field.name] = userData[field.name as keyof UserSignupData];
         return field
     })
 

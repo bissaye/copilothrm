@@ -24,14 +24,6 @@ export const SignUpPage : React.FC = () => {
         setSignupStep(signupStep - 1 as  1 | 2 | 3 | 4 )
     }
 
-    // const submitForm = () => {
-    //     return new Promise((resolve, reject) => {
-    //         setTimeout(() => {
-    //             resolve(navigateById(pageIds.ChooseOrg))
-    //         }, 2000)
-    //     }) 
-    // }
-
     return <Fragment>
         <div className='w-full h-full flex flex-col justify-center items-center gap-4'>
             <div className='flex flex-col items-center w-4/5 lg:min-h-[536px] rounded-xl mb-16 border-gray-500 p-4'>
@@ -54,6 +46,7 @@ export const SignUpPage : React.FC = () => {
                 { signupStep === 4 &&
                     <Step4 handlePrevStep={prevStep}/>
                 }
+                
                 { signupStep === 1 &&
                 <div className='flex flex-row gap-4 mt-3'>
                     <p className='font-bold font-body text-t2 text-gray-800'>{formatMessage({id:"already_an_account"})}</p>

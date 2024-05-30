@@ -3,8 +3,8 @@ import { FieldsInfo } from "../../../utils/interfaces/type";
 import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
-import { UserSignupData } from "../../../utils/interfaces/DTO/request";
-import { useSignupStore } from "../../../services/store";
+import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { useInvitationSignupStore } from "../../../services/store";
 
 interface Step1Props {
     handleSubmitNextStep: () => void;
@@ -14,7 +14,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const { handleSubmitNextStep } = props;
     const {formatMessage} = useIntl();
-    const { userData, setUserData } = useSignupStore();
+    const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
     const fields : Record<string, FieldsInfo> = {
         surname :{
             id : "surname",
@@ -75,7 +75,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] = userData[field.name as keyof UserSignupData];
+        initialValues[field.name] = invitedUserDatas[field.name as keyof InvitedUserSignupDatas];
         return field
     })
 
@@ -85,12 +85,13 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
-            const body: UserSignupData = {...values};
-            setUserData(body);
+            const body: InvitedUserSignupDatas = {...values};
+            setInvitedUserDatas(body);
             handleSubmitNextStep();
         }
     })
-    const {values, errors, touched, handleChange, handleSubmit} = formik
+    const {values, errors, handleChange, handleSubmit} = formik
+
     return (
         <form 
             className="flex flex-col gap-7 items-center w-full"

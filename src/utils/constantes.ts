@@ -3,5 +3,6 @@ export const pageIds  = {
     SignInPage : "SignInPage",
     SignUpPage : "SignUpPage",
     HomePage : "HomePage",
-    ChooseOrg : "ChooseOrg"
+    ChooseOrg : "ChooseOrg",
+    SignUpFromInvitationPage: "SignUpFromInvitation"
 }

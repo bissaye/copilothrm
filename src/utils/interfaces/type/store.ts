@@ -1,4 +1,4 @@
-import { UserSignupData } from "../DTO/request";
+import { InvitedUserSignupDatas, UserSignupData } from "../DTO/request";
 
 export type AuthStore = {
     isLogged: boolean;
@@ -12,4 +12,9 @@ export type SignupStore = {
   setSignupStep: (step: 1 | 2 | 3 | 4) => void;
   userData: UserSignupData;
   setUserData: (values: UserSignupData) => void
+}
+
+export type InvitationSignupStore = {
+  invitedUserDatas: InvitedUserSignupDatas;
+  setInvitedUserDatas: (values: InvitedUserSignupDatas) => void
 }
