@@ -7,7 +7,7 @@ import { useNavigateById } from '../../../hooks';
 import { Step2 } from './Step2';
 import { Step3 } from './Step3';
 import { Step4 } from './Step4';
-import { useSignupStore } from '../../../services/store';
+import { Stepper } from '../../components/common';
 
 export const SignUpPage : React.FC = () => {
     const {formatMessage} = useIntl();
@@ -15,10 +15,8 @@ export const SignUpPage : React.FC = () => {
 
 
     const [signupStep, setSignupStep] = useState< 1 | 2 | 3 | 4 >(1);
-    const { userData } = useSignupStore();
 
     const nextStep = () => {
-        // setUserDatas({... body });
         setSignupStep(signupStep + 1 as  1 | 2 | 3 | 4 );
     }
 
@@ -26,13 +24,13 @@ export const SignUpPage : React.FC = () => {
         setSignupStep(signupStep - 1 as  1 | 2 | 3 | 4 )
     }
 
-    const submitForm = () => {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(navigateById(pageIds.ChooseOrg))
-            }, 2000)
-        }) 
-    }
+    // const submitForm = () => {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve(navigateById(pageIds.ChooseOrg))
+    //         }, 2000)
+    //     }) 
+    // }
 
     return <Fragment>
         <div className='w-full h-full flex flex-col justify-center items-center gap-4'>
@@ -40,6 +38,7 @@ export const SignUpPage : React.FC = () => {
                 <h1 className='font-bold font-heading text-t8 text-black capitalize my-4'>
                     {formatMessage({id:"sign_up_link"})}
                 </h1>
+                <Stepper currentStep={signupStep} steps={4} />
                 { signupStep === 1 &&
                     <Step1 handleSubmitNextStep={nextStep} />
                 }
@@ -53,8 +52,9 @@ export const SignUpPage : React.FC = () => {
                 }
 
                 { signupStep === 4 &&
-                    <Step4 handleSubmitNextStep={submitForm} handlePrevStep={prevStep}/>
+                    <Step4 handlePrevStep={prevStep}/>
                 }
+                { signupStep === 1 &&
                 <div className='flex flex-row gap-4 mt-3'>
                     <p className='font-bold font-body text-t2 text-gray-800'>{formatMessage({id:"already_an_account"})}</p>
                         
@@ -66,7 +66,7 @@ export const SignUpPage : React.FC = () => {
                         onClick={() => {navigateById(pageIds.SignInPage)}}
                     />
                 </div>
-                
+                }
             </div>
         </div>
         
