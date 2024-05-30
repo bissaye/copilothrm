@@ -7,7 +7,7 @@ export interface UserSignupData {
     surname: string,
     firstname: string,
     birthplace: string,
-    birthdate: Date,
+    birthdate: string,
     userPhone: string,
     userCountry: string,
     userCity: string,
@@ -25,4 +25,20 @@ export interface UserSignupData {
     orgCity: string,
     orgPostcode: string,
     orgLogo?: File | null
+}
+
+export interface InvitedUserSignupDatas {
+    surname: string,
+    firstname: string,
+    birthplace: string,
+    birthdate: string,
+    userPhone: string,
+    userCountry: string,
+    userCity: string,
+    userPostcode: string,
+    userAddress: string,
+    gender: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
 }
