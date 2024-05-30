@@ -13,16 +13,14 @@ export const CustumInputContainer : React.FC<CustomInputProps> = (props : Custom
         <div className=' text-t4 font-body flex flex-col justify-start items-baseline'>
             {
                 label &&
-                <label className='text-black font-bold flex gap-1'>
-                    {label} {required && <p className=" text-danger">*</p>} 
+                <label className='text-gray-800 font-bold flex gap-1 w-full'>
+                    {label} {required && <p className=" text-danger">*</p>}
                     {
                         errorMessage &&
-                        <p className=" ml-1 text-danger text-[12px]">{formatMessage({id:errorMessage})}</p>
+                        <p className=" ml-1 text-danger text-[12px] leading-3 font-bold self-center max-w-72 mr-3">{formatMessage({id:errorMessage})}</p>
                     }
                 </label>
-                
             }
-            
             <div className={`bg-gray-200 p-2 w-full  flex flex-row justify-start items-center gap-2 ${errorMessage && "border border-danger"}`}>
                 {
                     icon &&
