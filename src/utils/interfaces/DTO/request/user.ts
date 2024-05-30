@@ -13,5 +13,16 @@ export interface UserSignupData {
     userCity: string,
     userPostcode: string,
     userAddress: string,
-    gender: string
+    gender: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
+    socialReason: string,
+    siret: string,
+    industry: string,
+    orgAddress: string,
+    orgCountry: string,
+    orgCity: string,
+    orgPostcode: string,
+    orgLogo?: File | null
 }
