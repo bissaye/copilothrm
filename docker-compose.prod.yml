@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    image: gitlab-repo.apps.abyster.com/copilothrm/frontend:IMAGE_TAG_val
+    networks:
+      - traefik_public
+    deploy:
+      replicas: 1
+      resources:
+        reservations:
+          memory: 512M
+        limits:
+          memory: 1024M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.copilothrm-front.entrypoints=https
+        - traefik.http.services.copilothrm-front.loadbalancer.server.port=8000
+        
+networks:
+  traefik_public:
+    external: true

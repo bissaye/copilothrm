@@ -1,0 +1,117 @@
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+
+stages: 
+  - build_webapp
+  - docker_build
+  - delivery_image
+  - deploy_dev
+  - deploy_release
+  - clean_up
+
+
+.only_mr_on_develop_and_main:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+      
+
+default:
+  image: node:20-alpine
+  cache:
+    paths:
+      - node_modules/
+
+variables:
+  image_tag: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+  CI_REGISTRY_IMAGE: $CI_REGISTRY_URL/copilothrm/frontend
+
+
+build_app:
+  stage: build_webapp
+  image: node:20-alpine
+  rules:
+    - !reference [.only_mr_on_develop_and_main, rules]
+  artifacts:
+    paths:
+      - dist/
+  script:
+    - npm ci
+    - |
+      if ["$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "develop" ];then
+        npm run build -- --mode=stagging;
+      else;
+        npm run build -- --mode=production;
+      fi
+  tags:
+    - docker_runner62
+
+
+docker_image_build:
+  image: docker:24.0.7-cli-alpine3.18
+  stage: docker_build
+  dependencies:
+    - build_app
+  services:
+    - docker:24.0.7-cli-alpine3.18
+  cache: {}
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
+    - apk add --no-cache curl
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:dev .
+    - docker run -d --name copilothrm_testing $CI_REGISTRY_IMAGE:dev
+    - if [ $(docker inspect -f '{{.State.Running}}' copilothrm_testing) = "true" ]; then echo "Application well started"; else exit 1; fi
+    - docker rm -f copilothrm_testing
+    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:pre_release && docker push $CI_REGISTRY_IMAGE:pre_release; else docker push $CI_REGISTRY_IMAGE:dev; fi
+    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker rmi $CI_REGISTRY_IMAGE:dev && docker rmi $CI_REGISTRY_IMAGE:pre_release; else docker rmi $CI_REGISTRY_IMAGE:dev; fi
+    - - docker system prune -f
+  tags:
+    - docker_runner62
+
+  
+deploy_dev_env:
+  image: docker:24.0.7-cli-alpine3.18
+  stage: deploy_dev
+  services:
+    - docker:24.0.7-cli-alpine3.18
+  before_script:
+    - sed -i 's/IMAGE_TAG_val/$CI_COMMIT_BRANCH/g' docker-compose.dev.yml
+  - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
+  script: 
+    - docker stack deploy - docker-compose.dev.yml --with-registry-auth copilothrm-dev
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+  tags:
+    - swarm_runner
+
+deploy_prod_env:
+  image: docker:24.0.7-cli-alpine3.18
+  stage: deploy_release
+  services:
+    - docker:24.0.7-cli-alpine3.18
+  before_script:
+    - sed -i 's/IMAGE_TAG_val/pre_release/g' docker-compose.prod.yml
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
+  script: 
+    - docker stack deploy - docker-compose.prod.yml --with-registry-auth copilothrm
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+      allow_failure: false
+  tags:
+    - swarm_runner
+
+pipeline_clean_up:
+  image: docker:24.0.7-cli-alpine3.18
+  stage: clean_up
+  tags:
+    - runner_62
+    - swarm_runner
+  script:
+    - - docker system prune -f
+
