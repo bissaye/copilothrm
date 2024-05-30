@@ -78,7 +78,6 @@ export const PublicHeader : React.FC = () => {
                                 type="secondary"
                                 bgWhite={false}
                                 text={formatMessage({id:"sign_up_link"})}
-                                width={165}            
                             />
                         </Link>
                     }
