@@ -14,7 +14,6 @@ import { useNavigateById } from '../../hooks';
 import { useAuthStore } from '../../services/store';
 import { pageIds } from '../../utils/constantes';
 
-
 export const SignInPage : React.FC = () => {
 
     const {formatMessage} = useIntl();

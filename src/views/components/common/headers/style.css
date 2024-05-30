@@ -1,0 +1,29 @@
+.show-sub-menu {
+    display: flex;
+    flex-direction: column;
+    animation: slide-out 1s forwards;
+}
+
+.hide-sub-menu {
+    display: none;
+    animation: slide-in 1s forwards;
+}
+
+@keyframes slide-in {
+    0%{
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+
+@keyframes slide-out {
+    0%{
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
