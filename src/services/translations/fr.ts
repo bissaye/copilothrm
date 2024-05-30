@@ -74,9 +74,30 @@ const fr: Record<string, string> = {
     next: "Suivant",
     previous: "Précédent",
     invalid_name_input_format: "Ce champ ne peut contenir que des lettres, des chiffres, des tirets «-», et des underscores «_»",
-    invalid_country_city_input_format: "Ce champ ne peut contenir que des lettres",
-    invalid_address_postcode_input_format: "Ce champ ne peut contenir que des lettres, des chiffres",
-    invalid_phone_input_format: "Ce champ ne peut contenir que des chiffres"
+    invalid_country_city_input_format: "Ce champ ne peut contenir que des lettres, pas de caractères spéciaux",
+    invalid_address_postcode_input_format: "Ce champ ne peut contenir que des lettres et des chiffres",
+    invalid_phone_input_format: "Ce champ ne peut contenir que des chiffres",
+    already_an_account: "Vous avez déjà un compte ?",
+    confirm_password: "Confirmez le mot de passe",
+    confirm_your_password: "Confirmez votre mot de passe",
+    incorrect_password_format: "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre, et un charactère spécial",
+    unmatching_password: "Les mots de passe ne correspondent pas",
+    social_reason: "Raison sociale",
+    enter_social_reason: "Entrer le nom légal de l'entreprise",
+    siret: "SIRET",
+    enter_siret_number: "Numéro de SIRET",
+    industry: "Industrie",
+    choose_industry: "Domaine d'activité",
+    address_of_organization: "Adresse postale de l'entreprise",
+    country_of_organization: "Pays où est localisée l'entreprise",
+    city_of_organization: "Ville où est localisée l'entreprise",
+    post_code_of_organization: "Code postal de l'entreprise",
+    organization_logo: "Logo de l'organisation",
+    user_title: "Utilisateur",
+    organization_title: "Organisation",
+    select: "Séléctionnez"
+
+
 }
 
 export default fr;

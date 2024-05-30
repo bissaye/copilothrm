@@ -73,10 +73,29 @@ const en: Record<string, string> = {
     enter_your_address: "Address",
     next: "Next",
     previous: "Previous",
-    invalid_text_input_format: "This field can only contain letters, numbers, dashes «-», and underscores «_»",
-    invalid_country_city_input_format: "This field can only contain letters",
+    invalid_name_input_format: "This field can only contain letters, numbers, dashes «-», and underscores «_»",
+    invalid_country_city_input_format: "This field can only contain letters and no special characters",
     invalid_address_postcode_input_format: "This field can only contain letters and numbers",
-    invalid_phone_input_format: "This field can only contain numbers"
+    invalid_phone_input_format: "This field can only contain numbers",
+    already_an_account: "You already have an account ?",
+    confirm_password: "Confirm password",
+    confirm_your_password: "Confirm your password",
+    incorrect_password_format: "Your password must contain at least 8 characters, an uppercase letter, a lowercase letter, a number and a special character",
+    unmatching_password: "Passwords don't match",
+    social_reason: "Social reason",
+    enter_social_reason: "Enter the legal name of your company",
+    siret: "SIRET",
+    enter_siret_number: "SIRET number",
+    industry: "Industry",
+    choose_industry: "Domain of activity",
+    address_of_organization: "Company address",
+    country_of_organization: "Company country",
+    city_of_organization: "Company city",
+    post_code_of_organization: "Company postcode",
+    organization_logo: "Company logo",
+    user_title: "User",
+    organization_title: "Company",
+    select: "Select"
 }
 
 export default en;
