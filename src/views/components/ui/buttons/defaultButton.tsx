@@ -51,7 +51,7 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
 
     let margin : any = {};
 
-    let sizeWidth = width ? `${width}px` : "165px";
+    let sizeWidth = width ? `${width}px` : "auto";
     let sizeHeight = height ? `${height}px` : "44px";
 
     if(widthFull){
