@@ -1,3 +1,4 @@
+# build and inject brotli nginx module
 FROM ubuntu:22.04 as setup
 
 RUN apt update \
@@ -11,6 +12,7 @@ RUN git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli
 RUN cd nginx-1.25.5 && ./configure --with-compat --add-dynamic-module=../ngx_brotli \
     && make modules
 
+# wrap up the fianl image
 FROM nginx:1.25.5
 
 COPY --from=setup /app/nginx-1.25.5/objs/ngx_http_brotli_static_module.so /etc/nginx/modules/
@@ -18,9 +20,9 @@ COPY --from=setup /app/nginx-1.25.5/objs/ngx_http_brotli_filter_module.so /etc/n
 
 RUN echo "load_module modules/ngx_http_brotli_filter_module.so;\nload_module modules/ngx_http_brotli_static_module.so;\n$(cat /etc/nginx/nginx.conf)" > /etc/nginx/nginx.conf
 
-COPY nginx-conf/default.conf  /etc/nginx/conf.d/default.conf
-COPY nginx-conf/proxy.conf    /etc/nginx/conf.d/proxy.conf 
-COPY nginx-conf/nginx.conf    /etc/nginx/nginx.conf 
+COPY configs/default.conf  /etc/nginx/conf.d/default.conf
+COPY configs/proxy.conf    /etc/nginx/conf.d/proxy.conf 
+COPY configs/nginx.conf    /etc/nginx/nginx.conf 
 
 COPY dist/  /usr/share/nginx/html
 
