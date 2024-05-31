@@ -1,9 +1,7 @@
 import { useIntl } from "react-intl";
-import { DefaultButton, InputText } from "../../components/ui";
+import { DefaultButton } from "../../components/ui";
 import { useSignupStore } from "../../../services/store";
 import { useFormik } from "formik";
-import { useNavigateById } from "../../../hooks";
-import { pageIds } from "../../../utils/constantes";
 import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
@@ -22,7 +20,6 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     //hooks
     const {formatMessage} = useIntl();
     const { userData } = useSignupStore();
-    const navigateById = useNavigateById();
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
