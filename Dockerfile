@@ -22,6 +22,6 @@ COPY nginx-conf/default.conf  /etc/nginx/conf.d/default.conf
 COPY nginx-conf/proxy.conf    /etc/nginx/conf.d/proxy.conf 
 COPY nginx-conf/nginx.conf    /etc/nginx/nginx.conf 
 
-COPY dist//browser/ /usr/share/nginx/html
+COPY dist/  /usr/share/nginx/html
 
 EXPOSE 80
