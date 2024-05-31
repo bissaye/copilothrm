@@ -43,7 +43,7 @@ build_app:
     - |
       if ["$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "develop" ];then
         npm run build -- --mode=stagging;
-      else;
+      else
         npm run build -- --mode=production;
       fi
   tags:
