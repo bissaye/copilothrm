@@ -22,7 +22,7 @@ export const SignUpFromInvitationPage : React.FC = () => {
     }
 
     const submitForm = () => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve,) => {
             setTimeout(() => {
                 resolve(navigateById(pageIds.ChooseOrg))
             }, 2000)
