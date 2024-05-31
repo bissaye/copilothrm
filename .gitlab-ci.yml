@@ -41,8 +41,8 @@ build_app:
   script:
     - npm ci
     - |
-      if ["$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "develop" ];then
-        npm run build -- --mode=stagging;
+      if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "develop" ]; then
+        npm run build -- --mode=staging;
       else
         npm run build -- --mode=production;
       fi
