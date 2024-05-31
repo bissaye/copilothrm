@@ -16,45 +16,45 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
     const {formatMessage} = useIntl();
     const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
     const fields : Record<string, FieldsInfo> = {
-        surname :{
-            id : "surname",
-            name : "surname",
+        nom :{
+            id : "nom",
+            name : "nom",
         },
-        firstname :{
-            id : "firstname",
-            name : "firstname",
+        prenom :{
+            id : "prenom",
+            name : "prenom",
         },
-        birthplace :{
-            id : "birthplace",
-            name : "birthplace",
+        lieuNais :{
+            id : "lieuNais",
+            name : "lieuNais",
         },
-        birthdate :{
-            id : "birthdate",
-            name : "birthdate",
+        dateNais :{
+            id : "dateNais",
+            name : "dateNais",
         },
-        userPhone :{
-            id : "userPhone",
-            name : "userPhone",
+        telephone :{
+            id : "telephone",
+            name : "telephone",
         },
-        userCountry :{
-            id : "userCountry",
-            name : "userCountry",
+        pays :{
+            id : "pays",
+            name : "pays",
         },
-        userCity :{
-            id : "userCity",
-            name : "userCity",
+        ville :{
+            id : "ville",
+            name : "ville",
         },
         userPostcode :{
             id : "userPostcode",
             name : "userPostcode",
         },
-        userAddress :{
-            id : "userAddress",
-            name : "userAddress",
+        rue :{
+            id : "rue",
+            name : "rue",
         },
-        gender :{
-            id : "gender",
-            name : "gender",
+        sexe :{
+            id : "sexe",
+            name : "sexe",
         }
     }
 
@@ -104,60 +104,60 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                     {/* Nom de famille */}
                     <div>
                         <InputText
-                            id = {fields.surname.id}    
-                            name =  {fields.surname.name}  
+                            id = {fields.nom.id}    
+                            name =  {fields.nom.name}  
                             label={formatMessage({id:"surname"})}
                             placeholder = {formatMessage({id: "enter_your_surname"})} 
-                            value={values[fields.surname.name]}
+                            value={values[fields.nom.name]}
                             onChange={handleChange}
-                            errorMessage={ errors.surname ? errors.surname.toString() : undefined}
+                            errorMessage={ errors.nom ? errors.nom.toString() : undefined}
                         />
                     </div>
                     {/* Prénom */}
                     <div>
                         <InputText
-                            id = {fields.firstname.id}    
-                            name =  {fields.firstname.name}  
+                            id = {fields.prenom.id}    
+                            name =  {fields.prenom.name}  
                             label={formatMessage({id:"firstname"})}
                             placeholder = {formatMessage({id: "enter_your_firstname"})} 
-                            value={values[fields.firstname.name]} 
+                            value={values[fields.prenom.name]} 
                             onChange={handleChange}
-                            errorMessage={ errors.firstname ? errors.firstname.toString() : undefined}
+                            errorMessage={ errors.prenom ? errors.prenom.toString() : undefined}
                         />
                     </div>
                     {/* Lieu de naissance */}
                     <div>
                         <InputText
-                            id = {fields.birthplace.id}    
-                            name = {fields.birthplace.name}  
+                            id = {fields.lieuNais.id}    
+                            name = {fields.lieuNais.name}  
                             label={formatMessage({id:"birth_place"})}
                             placeholder = {formatMessage({id: "your_place_of_birth"})} 
-                            value={values[fields.birthplace.name]} 
+                            value={values[fields.lieuNais.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.birthplace ? errors.birthplace.toString() : undefined}
+                            errorMessage={ errors.lieuNais ? errors.lieuNais.toString() : undefined}
                         />
                     </div>
                     {/* Date de naissance */}
                     <div>
                         <InputDate
-                            id = {fields.birthdate.id}    
-                            name = {fields.birthdate.name}  
+                            id = {fields.dateNais.id}    
+                            name = {fields.dateNais.name}  
                             label={formatMessage({id:"birthdate"})}
-                            value={values[fields.birthdate.name]} 
+                            value={values[fields.dateNais.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.birthdate ? errors.birthdate.toString() : undefined}
+                            errorMessage={ errors.dateNais ? errors.dateNais.toString() : undefined}
                         />
                     </div>
                     {/* Téléphone */}
                     <div>
                         <InputText
-                            id = {fields.userPhone.id}    
-                            name =  {fields.userPhone.name}  
+                            id = {fields.telephone.id}    
+                            name =  {fields.telephone.name}  
                             label={formatMessage({id:"phone"})}
                             placeholder = {formatMessage({id: "enter_your_phone"})} 
-                            value={values[fields.userPhone.name]} 
+                            value={values[fields.telephone.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.userPhone ? errors.userPhone.toString() : undefined}
+                            errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
                         />
                     </div>
                 </div>
@@ -167,25 +167,25 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                     {/* Pays */}
                     <div>
                         <InputText
-                            id = {fields.userCountry.id}    
-                            name =  {fields.userCountry.name}  
+                            id = {fields.pays.id}    
+                            name =  {fields.pays.name}  
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "enter_your_country"})} 
-                            value={values[fields.userCountry.name]} 
+                            value={values[fields.pays.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.userCountry ? errors.userCountry.toString() : undefined}
+                            errorMessage={ errors.pays ? errors.pays.toString() : undefined}
                         />
                     </div>
                     {/* Ville */}
                     <div>
                         <InputText
-                            id = {fields.userCity.id}    
-                            name =  {fields.userCity.name}  
+                            id = {fields.ville.id}    
+                            name =  {fields.ville.name}  
                             label={formatMessage({id:"city"})}
                             placeholder = {formatMessage({id: "enter_your_city"})} 
-                            value={values[fields.userCity.name]} 
+                            value={values[fields.ville.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.userCity ? errors.userCity.toString() : undefined}
+                            errorMessage={ errors.ville ? errors.ville.toString() : undefined}
                         />
                     </div>
                     {/* Code postal */}
@@ -203,25 +203,25 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                     {/* Adresse postale */}
                     <div>
                         <InputText
-                            id = {fields.userAddress.id}    
-                            name =  {fields.userAddress.name}  
+                            id = {fields.rue.id}    
+                            name =  {fields.rue.name}  
                             label={formatMessage({id:"address"})}
                             placeholder = {formatMessage({id: "enter_your_address"})} 
-                            value={values[fields.userAddress.name]} 
+                            value={values[fields.rue.name]} 
                             onChange={handleChange}
-                            errorMessage={ errors.userAddress ? errors.userAddress.toString() : undefined}
+                            errorMessage={ errors.rue ? errors.rue.toString() : undefined}
                         />
                     </div>
                     {/* Sexe */}
                     <div>
                         <InputSelect
-                            id = {fields.gender.id}    
-                            name =  {fields.gender.name}  
+                            id = {fields.sexe.id}    
+                            name =  {fields.sexe.name}  
                             label={formatMessage({id:"gender"})}
-                            value={values[fields.gender.name]} 
+                            value={values[fields.sexe.name]} 
                             onChange={handleChange}
                             options={genderOptions}      
-                            errorMessage={ errors.gender ? errors.gender.toString() : undefined}
+                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
                         />
                     </div>
                 </div>

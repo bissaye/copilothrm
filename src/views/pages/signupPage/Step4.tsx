@@ -29,9 +29,12 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
-            return setTimeout(() => {
-                    setIsSubmitted(true);
-                }, 2000)
+            // return new Promise((resolve, reject) => {
+            //     setTimeout(() => {
+            //         resolve(navigateById(pageIds.ChooseOrg))
+            //     }, 2000)
+            // })
+            return setIsSubmitted(true);
         }
     })
 
@@ -39,42 +42,42 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "surname",
             name: formatMessage({id:"surname"}),
-            value: userData.surname
+            value: userData.nom
         },
         {
             id: "firstname",
             name: formatMessage({id:"firstname"}),
-            value: userData.firstname
+            value: userData.prenom
         },
         {
             id: "birthdate",
             name: formatMessage({id:"birthdate"}),
-            value: userData.birthdate
+            value: userData.dateNais
         },
         {
             id: "birthplace",
             name: formatMessage({id:"birth_place"}),
-            value: userData.birthplace
+            value: userData.lieuNais
         },
         {
             id: "phone",
             name: formatMessage({id:"phone"}),
-            value: userData.userPhone
+            value: userData.telephone
         },
         {
             id: "userCountry",
             name: formatMessage({id:"country"}),
-            value: userData.userCountry
+            value: userData.pays
         },
         {
             id: "userCity",
             name: formatMessage({id:"city"}),
-            value: userData.userCity
+            value: userData.ville
         },
         {
             id: "address",
             name: formatMessage({id:"address"}),
-            value: userData.userAddress
+            value: userData.rue
         },
         {
             id: "postCode",
@@ -84,14 +87,14 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "gender",
             name: formatMessage({id:"gender"}),
-            value: userData.gender
+            value: userData.sexe
         },
     ]
     const orgInfos = [
         {
             id: "socialReason",
             name: formatMessage({id:"social_reason"}),
-            value: userData.socialReason
+            value: userData.raisonSociale
         },
         {
             id: "siret",
@@ -101,12 +104,12 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "orgCountry",
             name: formatMessage({id:"country"}),
-            value: userData.orgCountry
+            value: userData.organisationPays
         },
         {
             id: "orgCity",
             name: formatMessage({id:"city"}),
-            value: userData.orgCity
+            value: userData.organisationVille
         },
         {
             id: "orgPostCode",
@@ -116,12 +119,12 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "orgAddress",
             name: formatMessage({id:"address"}),
-            value: userData.orgAddress
+            value: userData.organisationRue
         },
         {
             id: "industry",
             name: formatMessage({id:"industry"}),
-            value: userData.industry
+            value: userData.industrie
         }
     ]
 
