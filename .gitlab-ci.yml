@@ -82,7 +82,7 @@ deploy_dev_env:
   services:
     - docker:24.0.7-cli-alpine3.18
   before_script:
-    - sed -i 's/IMAGE_TAG_val/$CI_COMMIT_BRANCH/g' docker-compose.dev.yml
+    - sed -i 's/IMAGE_TAG_val/dev/g' docker-compose.dev.yml
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
   script: 
     - docker stack deploy -c docker-compose.dev.yml --with-registry-auth copilothrm-dev
