@@ -20,6 +20,8 @@ export interface UserSignupData {
     raisonSociale: string,
     siret: string,
     industrie: string,
+    organisationEmail: string,
+    organisationPhone: string,
     organisationRue: string,
     organisationPays: string,
     organisationVille: string,
