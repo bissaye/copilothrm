@@ -99,6 +99,16 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
             value: userData.siret
         },
         {
+            id: "email",
+            name: "email",
+            value: userData.organisationEmail
+        },
+        {
+            id: "organisationPhone",
+            name: formatMessage({id:"phone"}),
+            value: userData.organisationPhone
+        },
+        {
             id: "orgCountry",
             name: formatMessage({id:"country"}),
             value: userData.organisationPays

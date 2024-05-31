@@ -34,6 +34,14 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
             id: "industrie",
             name: "industrie"
         },
+        organisationEmail: {
+            id: "organisationEmail",
+            name: "organisationEmail"
+        },
+        organisationPhone: {
+            id: "organisationPhone",
+            name: "organisationPhone"
+        },
         organisationRue: {
             id: "organisationRue",
             name: "organisationRue"
@@ -95,6 +103,19 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             onChange={handleChange}
                             // onBlur={handleBlur}
                             errorMessage={ errors.raisonSociale ? errors.raisonSociale.toString() : undefined}
+                        />
+                    </div>
+                    {/* Email de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationEmail.id}    
+                            name =  {fields.organisationEmail.name}  
+                            label='Email'
+                            placeholder = {formatMessage({id: "enter_social_reason"})} 
+                            value={values[fields.organisationEmail.name]}
+                            onChange={handleChange}
+                            // onBlur={handleBlur}
+                            errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
                         />
                     </div>
                     {/* SIRET */}
@@ -171,6 +192,18 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             value={values[fields.orgPostcode.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.orgPostcode ? errors.orgPostcode.toString() : undefined}
+                        />
+                    </div>
+                    {/* Téléphone de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationPhone.id}    
+                            name =  {fields.organisationPhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            value={values[fields.organisationPhone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
                         />
                     </div>
                     {/* Logo de l'organisation */}
