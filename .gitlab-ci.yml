@@ -21,7 +21,6 @@ stages:
       
 
 default:
-  image: node:20-alpine
   cache:
     paths:
       - node_modules/
@@ -81,7 +80,7 @@ deploy_dev_env:
     - docker:24.0.7-cli-alpine3.18
   before_script:
     - sed -i 's/IMAGE_TAG_val/$CI_COMMIT_BRANCH/g' docker-compose.dev.yml
-  - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
   script: 
     - docker stack deploy - docker-compose.dev.yml --with-registry-auth copilothrm-dev
   rules:
