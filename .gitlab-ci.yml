@@ -62,9 +62,10 @@ docker_image_build:
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
     - apk add --no-cache curl
   script:
+    - ls -laR dist/ 
     - docker build -t $CI_REGISTRY_IMAGE:dev .
     - docker run -d --name copilothrm_testing_$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:dev
-    - if [ $(docker inspect -f '{{.State.Running}}' copilothrm_testing) = "true" ]; then echo "Application well started"; else exit 1; fi
+    - if [ $(docker inspect -f '{{.State.Running}}' copilothrm_testing_$CI_COMMIT_SHA) = "true" ]; then echo "Application well started"; else exit 1; fi
     - docker rm -f copilothrm_testing_$CI_COMMIT_SHA
     - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:pre_release && docker push $CI_REGISTRY_IMAGE:pre_release; else docker push $CI_REGISTRY_IMAGE:dev; fi
     - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker rmi $CI_REGISTRY_IMAGE:dev && docker rmi $CI_REGISTRY_IMAGE:pre_release; else docker rmi $CI_REGISTRY_IMAGE:dev; fi
@@ -110,7 +111,6 @@ pipeline_clean_up:
   stage: clean_up
   tags:
     - runner_62
-    - swarm_runner
   script:
     - - docker system prune -f
 
