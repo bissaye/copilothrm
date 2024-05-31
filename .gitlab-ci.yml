@@ -85,7 +85,7 @@ deploy_dev_env:
     - sed -i 's/IMAGE_TAG_val/$CI_COMMIT_BRANCH/g' docker-compose.dev.yml
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
   script: 
-    - docker stack deploy - docker-compose.dev.yml --with-registry-auth copilothrm-dev
+    - docker stack deploy -c docker-compose.dev.yml --with-registry-auth copilothrm-dev
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
   tags:
@@ -100,7 +100,7 @@ deploy_prod_env:
     - sed -i 's/IMAGE_TAG_val/pre_release/g' docker-compose.prod.yml
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY_URL
   script: 
-    - docker stack deploy - docker-compose.prd.yml --with-registry-auth copilothrm
+    - docker stack deploy -c docker-compose.prd.yml --with-registry-auth copilothrm
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
       when: manual
