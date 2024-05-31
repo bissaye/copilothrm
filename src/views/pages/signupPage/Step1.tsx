@@ -90,7 +90,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
             handleSubmitNextStep();
         }
     })
-    const {values, errors, touched, handleChange, handleSubmit} = formik
+    const {values, errors, handleChange, handleSubmit} = formik
     return (
         <form 
             className="flex flex-col gap-7 items-center w-full"
