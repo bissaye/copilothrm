@@ -72,6 +72,8 @@ docker_image_build:
     - - docker system prune -f
   tags:
     - docker_runner62
+  rules:
+    - !reference [.only_mr_on_develop_and_main, rules]
 
   
 deploy_dev_env:
