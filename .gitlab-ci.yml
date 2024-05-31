@@ -41,7 +41,7 @@ build_app:
   script:
     - npm ci
     - |
-      if ["$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" == "develop" ];then
+      if ["$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "develop" ];then
         npm run build -- --mode=stagging;
       else
         npm run build -- --mode=production;
@@ -66,8 +66,8 @@ docker_image_build:
     - docker run -d --name copilothrm_testing $CI_REGISTRY_IMAGE:dev
     - if [ $(docker inspect -f '{{.State.Running}}' copilothrm_testing) = "true" ]; then echo "Application well started"; else exit 1; fi
     - docker rm -f copilothrm_testing
-    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" == "main" ]; then docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:pre_release && docker push $CI_REGISTRY_IMAGE:pre_release; else docker push $CI_REGISTRY_IMAGE:dev; fi
-    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" == "main" ]; then docker rmi $CI_REGISTRY_IMAGE:dev && docker rmi $CI_REGISTRY_IMAGE:pre_release; else docker rmi $CI_REGISTRY_IMAGE:dev; fi
+    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker tag $CI_REGISTRY_IMAGE:dev $CI_REGISTRY_IMAGE:pre_release && docker push $CI_REGISTRY_IMAGE:pre_release; else docker push $CI_REGISTRY_IMAGE:dev; fi
+    - if [ "$(echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME)" = "main" ]; then docker rmi $CI_REGISTRY_IMAGE:dev && docker rmi $CI_REGISTRY_IMAGE:pre_release; else docker rmi $CI_REGISTRY_IMAGE:dev; fi
     - - docker system prune -f
   tags:
     - docker_runner62
