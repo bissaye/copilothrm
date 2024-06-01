@@ -104,7 +104,16 @@ const en: Record<string, string> = {
     add_an_organization: "Add an organization",
     sign_out: "Sign out",
     user_account_created: "User account and company successfully created. Please activate it via the link that was emailed to you.",
-    resend_mail: "Resend mail"
+    resend_mail: "Resend mail",
+    email_verification_for_account: "We will send a verification code to this email address if an existing copilotHrm account matches",
+    enter_the_6_digit_code: "Enter the 6-digit code",
+    find_verification_code_at: "Go to {email} to find a verification code",
+    choose_a_new_password: "Choose a new password",
+    your_password_has_been_changed: "Your password has been changed",
+    resend_code: "Resend code",
+    send: "Send",
+    back: "Back",
+    import_pic: "Import an image",
 }
 
 export default en;

@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputText } from "../../components/ui";
+import { DefaultButton, InputFile, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { UserSignupData } from "../../../utils/interfaces/DTO/request";
 import { useSignupStore } from "../../../services/store";
@@ -175,13 +175,17 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     </div>
                     {/* Logo de l'organisation */}
                     <div>
-                        <InputText
+                        <InputFile
                             id = {fields.orgLogo.id}    
                             name = {fields.orgLogo.name}  
                             label='Logo'
                             placeholder={formatMessage({id:"organization_logo"})}
                             value={values[fields.orgLogo.name]} 
-                            onChange={handleChange}      
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files[0]) {
+                                    formik.setFieldValue(fields.orgLogo.name, e.target.files[0].name)
+                                }
+                            }}      
                             errorMessage={ errors.orgLogo ? errors.orgLogo.toString() : undefined}
                         />
                     </div>

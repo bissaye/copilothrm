@@ -57,3 +57,7 @@ tbody > tr:nth-of-type(even) {
 thead {
   @apply bg-gray-400;
 }
+
+.first-word-uppercase::first-letter {
+  text-transform: capitalize;
+}
