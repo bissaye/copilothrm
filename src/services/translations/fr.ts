@@ -104,7 +104,16 @@ const fr: Record<string, string> = {
     add_an_organization: "Ajouter une organisation",
     sign_out: "Se déconnecter",
     user_account_created: "Compte utilisateur et organisation créés avec succès. Veuillez l'activer via le lien reçu par mail.",
-    resend_mail: "Renvoyer le mail"
+    resend_mail: "Renvoyer le mail",
+    email_verification_for_account: "Nous enverrons un code de vérification à cette adresse e-mail  si un compte copilotHrm existant correspond",
+    enter_the_6_digit_code: "Saisir le code à 6 chiffres",
+    find_verification_code_at: "Accéder à {email} pour trouver un code de vérification",
+    choose_a_new_password: "Choisir un nouveau mot de passe",
+    your_password_has_been_changed: "Votre mot de passe a été modifié",
+    resend_code: "Renvoyer le code",
+    send: "Envoyer",
+    back: "Retour",
+    import_pic: "Importer une image",
 }
 
 export default fr;
