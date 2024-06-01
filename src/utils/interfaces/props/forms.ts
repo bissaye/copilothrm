@@ -7,6 +7,7 @@ export interface CustomInputProps {
     required? : boolean
     children?: ReactNode
     errorMessage? : string
+    bgNone?: boolean
 }
 
 export interface InputTextProps extends CustomInputProps {
@@ -15,6 +16,8 @@ export interface InputTextProps extends CustomInputProps {
     value? : string,
     placeholder? : string
     disabled?: boolean;
+    blockCopy?: boolean;
+    blockPaste?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 }
