@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 
 
@@ -31,6 +31,12 @@ export const publicRoutes : Record<string, AppRoute> = {
         authRequired: false,
         element: <SignUpFromInvitationPage/>
     },
+    ForgotPasswordPage:{
+        id: pageIds.ForgotPasswordPage,
+        path: "/resetPasswword",
+        authRequired: false,
+        element: <ForgotPasswordPage/>
+    }
 }
 
 export const managerRoutes : Record<string, AppRoute> = {
