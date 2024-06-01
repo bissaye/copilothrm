@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useIntl } from 'react-intl';
-import { FooterSignInPage } from '../components/common';
+import { DefaultCard, FooterSignInPage } from '../components/common';
 import { DefaultButton, InputPassword, InputText, LinkButton } from '../components/ui';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { FieldsInfo } from '../../utils/interfaces/type';
@@ -53,13 +53,10 @@ export const SignInPage : React.FC = () => {
 
     return <Fragment>
         <div className='min-h-svh w-full flex flex-col justify-start items-center'>
-            <div className='w-[495px] lg:min-h-[536px] rounded-xl mt-4 mb-16 border-gray-500 shadow-xl p-4'>
-                <h1 className='font-bold font-heading text-t8 text-black capitalize'>
-                    Hello.
-                </h1>
-                <p className='text-gray-800  text-t6 font-heading capitalize mb-6'>
-                    {formatMessage({id:"happy_to_see_you_again"})}
-                </p>
+            <DefaultCard
+                title='Hello.'
+                subtitle={formatMessage({id:"happy_to_see_you_again"})}
+            >
                 <form onSubmit={handleSubmit} >
                     <div className='mb-4'>
                         <InputText
@@ -91,6 +88,9 @@ export const SignInPage : React.FC = () => {
                         <LinkButton
                             text={formatMessage({id:"forgot_your_password"})}
                             type='primary'
+                            onClick={()=>{
+                                navigateById(pageIds.ForgotPasswordPage)
+                            }}
                         />
                     </div>
                     
@@ -123,8 +123,7 @@ export const SignInPage : React.FC = () => {
                         
                     </div>
                 </div>
-
-            </div>
+            </DefaultCard>
             <FooterSignInPage/>
         </div>
     </Fragment>
