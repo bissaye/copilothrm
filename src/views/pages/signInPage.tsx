@@ -53,7 +53,7 @@ export const SignInPage : React.FC = () => {
 
     return <Fragment>
         <div className='min-h-svh w-full flex flex-col justify-start items-center'>
-            <div className='w-[495px] lg:min-h-[536px] rounded-xl mt-4 mb-16 border-gray-500 shadow-xl p-4'>
+            <div className='w-[90%] md:w-[495px] lg:min-h-[536px] rounded-xl mt-4 mb-16 border-gray-500 shadow-xl p-4'>
                 <h1 className='font-bold font-heading text-t8 text-black capitalize'>
                     Hello.
                 </h1>
