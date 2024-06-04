@@ -114,6 +114,16 @@ const en: Record<string, string> = {
     send: "Send",
     back: "Back",
     import_pic: "Import an image",
+    logout_link: "Logout",
+    invite_member: "Invite a member",
+    view_profile: "View profile",
+    dashboard: "Dashboard",
+    departments: "Departments",
+    teams: "Teams",
+    invitations: "Invitations",
+    messages: "Messages",
+    settings: "Settings",
+    payments: "Payment"
 }
 
 export default en;
