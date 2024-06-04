@@ -7,4 +7,5 @@ export * from './footers'
 export * from './PageTracker'
 export * from './UserNotices'
 export * from './FeatureHighlight'
+export * from './sidebar'
 export { SummaryBox };
