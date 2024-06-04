@@ -126,6 +126,7 @@ export const SignInPage : React.FC = () => {
                         
                     </div>
                 </div>
+            </div>
             <FooterSignInPage/>
         </div>
     </Fragment>
