@@ -208,6 +208,18 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     </div>
                     {/* Logo de l'organisation */}
                     <div>
+                        <InputText
+                            id = {fields.organisationPhone.id}    
+                            name =  {fields.organisationPhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            value={values[fields.organisationPhone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
+                        />
+                    </div>
+                    {/* Logo de l'organisation */}
+                    <div>
                         <InputFile
                             id = {fields.orgLogo.id}    
                             name = {fields.orgLogo.name}  
