@@ -10,6 +10,7 @@ export * from './FeatureHighlight'
 export * from './Cards'
 export * from './otp'
 export * from './IconSuccess'
+export * from './sidebar'
 export { 
     SummaryBox, 
 };
