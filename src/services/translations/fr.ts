@@ -114,6 +114,16 @@ const fr: Record<string, string> = {
     send: "Envoyer",
     back: "Retour",
     import_pic: "Importer une image",
+    logout_link: "Se Déconnecter",
+    invite_member: "Inviter un membre",
+    view_profile: "Voir le profile",
+    dashboard: "Dashboard",
+    departments: "Départements",
+    teams: "Équipes",
+    invitations: "Invitations",
+    messages: "Messages",
+    settings: "Paramètres",
+    payments: "Paie"
 }
 
 export default fr;

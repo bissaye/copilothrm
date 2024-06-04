@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { NotFoundPage } from "../../views/pages";
-import { PublicBaseLayout } from "../../views/layouts";
+import { OrganizationBaseLayout, PublicBaseLayout } from "../../views/layouts";
 import { useAuthStore } from "../store";
 import { publicRoutes, managerRoutes} from "./routes";
 import { PageTracker } from "../../views/components/common";
@@ -23,7 +23,7 @@ export const Router: React.FC = () => {
                 }
             </Route>
             
-
+            <Route path={"/home"} element={<OrganizationBaseLayout/>}>
             {
                 Object.entries(managerRoutes).map(([rootKey, route]) => (
                     <Fragment key={rootKey}>
@@ -36,7 +36,7 @@ export const Router: React.FC = () => {
                     </Fragment>
                 ))
             }
-
+            </Route>
 
         </Routes>
     </BrowserRouter>

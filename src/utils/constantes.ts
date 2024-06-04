@@ -5,7 +5,14 @@ export const pageIds  = {
     SignUpFromInvitationPage: "SignUpFromInvitation",
     ForgotPasswordPage: "ForgotPasswordPage",
     HomePage : "HomePage",
-    ChooseOrg : "ChooseOrg",    
+    DashboardPage: "DashboardPage",
+    Departments: "DepartmentsPage",
+    Teams: "TeamsPage",
+    Invitations: "InvitationsPage",
+    Messages: "MessagesPage",
+    Settings: "SettingsPage",
+    Payments: "PaymentsPage",
+    ChooseOrg : "ChooseOrg",
 }
 
 export const otpLength :number = 6;
