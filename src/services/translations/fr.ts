@@ -104,7 +104,17 @@ const fr: Record<string, string> = {
     add_an_organization: "Ajouter une organisation",
     sign_out: "Se déconnecter",
     user_account_created: "Compte utilisateur et organisation créés avec succès. Veuillez l'activer via le lien reçu par mail.",
-    resend_mail: "Renvoyer le mail"
+    resend_mail: "Renvoyer le mail",
+    logout_link: "Se Déconnecter",
+    invite_member: "Inviter un membre",
+    view_profile: "Voir le profile",
+    dashboard: "Dashboard",
+    departments: "Départements",
+    teams: "Équipes",
+    invitations: "Invitations",
+    messages: "Messages",
+    settings: "Paramètres",
+    payments: "Paie"
 }
 
 export default fr;
