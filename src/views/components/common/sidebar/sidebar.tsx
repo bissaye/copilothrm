@@ -6,10 +6,11 @@ import { avatars } from "../../../../assets/images";
 import { Link } from "react-router-dom";
 import { MANAGER_SIDEBAR_MENU_ITEMS } from "../../../../services/sidebar-menu-items";
 import { useInviteMemberStore, usePageStore } from "../../../../services/store";
+import { InviteMemberModal } from "../modals";
 export const Sidebar : React.FC = () => {
 
     const {formatMessage} = useIntl();
-    const {setShowInviteModal} = useInviteMemberStore()
+    const {showInviteModal, setShowInviteModal} = useInviteMemberStore()
     const { page } = usePageStore();
 
     const sidebarMenuItems = MANAGER_SIDEBAR_MENU_ITEMS;
@@ -56,6 +57,7 @@ return(
                 </div>
             </div>
         </div> 
+        {showInviteModal && <InviteMemberModal onClose={() => setShowInviteModal(false)} />}
     </div>
 )
 }
