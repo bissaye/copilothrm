@@ -19,29 +19,28 @@ export const UserNotice : React.FC<UserNoticeProps> =  (props: UserNoticeProps) 
            <div className='flex flex-row justify-evenly gap-4 items-start h-[40px]'>
                 <img src={avatar} className='w-9 h-9 rounded-full'/>
                 <div className="flex flex-col md:flex-row">
-                <div className='h-full flex flex-col justify-between items-start'>
-                    <h1 className=' font-body font-bold text-black text-t3 capitalize'>
-                        {name}
-                    </h1>
-                    <div className='flex'>
-                        {
-                            Array(rate).map(( _, index) => (
-                                <FontAwesomeIcon key={`rated-${index}`} icon={faStar} className=' text-yellowcustom text-t1'></FontAwesomeIcon>
-                            ))
+                    <div className='h-full flex flex-col justify-between items-start'>
+                        <h1 className=' font-body font-bold text-black text-t3 capitalize'>
+                            {name}
+                        </h1>
+                        <div className='flex'>
+                            {
+                                Array(rate).map(( _, index) => (
+                                    <FontAwesomeIcon key={`rated-${index}`} icon={faStar} className=' text-yellowcustom text-t1'></FontAwesomeIcon>
+                                ))
+                                
+                            }
+                            {
+                                Array(5-rate).map(( _, index) => (
+                                    <FontAwesomeIcon key={`unrated-${index}`} icon={faStarReg} className=' text-yellowcustom text-t1'></FontAwesomeIcon>
+                                ))
+                            }
                             
-                        }
-                        {
-                            Array(5-rate).map(( _, index) => (
-                                <FontAwesomeIcon key={`unrated-${index}`} icon={faStarReg} className=' text-yellowcustom text-t1'></FontAwesomeIcon>
-                            ))
-                        }
-                        
+                        </div>
                     </div>
-                </div>
-                <p className=' text-gray-700 text-t2 font-body'>
-                    il y a {Math.round((new Date().getTime()- date.getTime())/(1000*3600*24))} jour(s)
-                </p>
-
+                    <p className=' text-gray-700 text-t2 font-body'>
+                        il y a {Math.round((new Date().getTime()- date.getTime())/(1000*3600*24))} jour(s)
+                    </p>
                 </div>
            </div>
            <p className='w-full text-black text-t3'>
