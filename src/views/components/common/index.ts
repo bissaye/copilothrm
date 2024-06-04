@@ -11,5 +11,5 @@ export * from './Cards'
 export * from './otp'
 export * from './IconSuccess'
 export * from './sidebar'
-export * from './sidebar'
+export * from './modals'
 export { SummaryBox };
