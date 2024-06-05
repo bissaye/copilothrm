@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 
 
@@ -27,7 +27,7 @@ export const publicRoutes : Record<string, AppRoute> = {
     },
     SignUpFromValidationPage :{
         id: pageIds.SignUpFromInvitationPage,
-        path: "/signupfrominvitation",
+        path: "/signup-from-invitation",
         authRequired: false,
         element: <SignUpFromInvitationPage/>
     },
@@ -42,15 +42,51 @@ export const publicRoutes : Record<string, AppRoute> = {
 export const managerRoutes : Record<string, AppRoute> = {
     HomePage:{
         id: pageIds.HomePage,
-        path: "/home",
+        path: "/home/org-home",
         authRequired: true,
         element: <HomePage/>
     },
     ChooseOrg:{
         id: pageIds.ChooseOrg,
-        path: "/choose-org",
+        path: "/home/choose-org",
         authRequired: true,
         element: <ChooseOrg/>
+    },
+    Departments:{
+        id: pageIds.Departments,
+        path: "/home/org-home/departments",
+        authRequired: true,
+        element: <HomePage/>
+    },
+    Teams:{
+        id: pageIds.Teams,
+        path: "/home/org-home/teams",
+        authRequired: true,
+        element: <HomePage/>
+    },
+    Invitations:{
+        id: pageIds.Invitations,
+        path: "/home/org-home/invitations",
+        authRequired: true,
+        element: <InvitationPage/>
+    },
+    Messages:{
+        id: pageIds.Messages,
+        path: "/home/org-home/messages",
+        authRequired: true,
+        element: <HomePage/>
+    },
+    Settings:{
+        id: pageIds.Settings,
+        path: "/home/org-home/settings",
+        authRequired: true,
+        element: <HomePage/>
+    },
+    Payments:{
+        id: pageIds.Payments,
+        path: "/home/org-home/payments",
+        authRequired: true,
+        element: <HomePage/>
     }
 }
 

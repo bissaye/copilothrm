@@ -19,3 +19,8 @@ export type InvitationSignupStore = {
   invitedUserDatas: InvitedUserSignupDatas;
   setInvitedUserDatas: (values: InvitedUserSignupDatas) => void
 }
+
+export type InviteMemberStore = {
+  showInviteModal: boolean;
+  setShowInviteModal: (show: boolean) => void
+}

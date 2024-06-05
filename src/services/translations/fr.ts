@@ -114,6 +114,28 @@ const fr: Record<string, string> = {
     send: "Envoyer",
     back: "Retour",
     import_pic: "Importer une image",
+    logout_link: "Se Déconnecter",
+    invite_member: "Inviter un membre",
+    view_profile: "Voir le profile",
+    dashboard: "Dashboard",
+    departments: "Départements",
+    department: "Département",
+    teams: "Équipes",
+    invitations: "Invitations",
+    messages: "Messages",
+    settings: "Paramètres",
+    payments: "Paie",
+    add_member: "Ajouter un collaborateur",
+    enter_member_email: "Entrez l'email du collaborateur",
+    invite: "Inviter",
+    username: "Nom d'utilisateur",
+    copy_link: "Copier le lien",
+    role: "Rôle",
+    finances: "Finances",
+    administrative: "Administratif",
+    human_resources: "Resources Humaines",
+    name: "Nom",
+    enter_collaborator_name: "Entrez le nom du collaborateur"
 }
 
 export default fr;

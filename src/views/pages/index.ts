@@ -6,6 +6,7 @@ import { NotFoundPage } from "./notFoundPage";
 import { ChooseOrg } from "./ChooseOrgPage";
 import { SignUpFromInvitationPage } from "./signupFromInvitation";
 import { ForgotPasswordPage } from "./ForgotPassword";
+import { InvitationPage } from "./invitations";
 
 
 export {
@@ -16,5 +17,6 @@ export {
     NotFoundPage,
     ChooseOrg,
     SignUpFromInvitationPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    InvitationPage
 }

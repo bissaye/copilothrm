@@ -22,29 +22,37 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
-        socialReason :{
-            id : "socialReason",
-            name : "socialReason",
+        raisonSociale :{
+            id : "raisonSociale",
+            name : "raisonSociale",
         },
         siret: {
             id: "siret",
             name: "siret"
         },
-        industry: {
-            id: "industry",
-            name: "industry"
+        industrie: {
+            id: "industrie",
+            name: "industrie"
         },
-        orgAddress: {
-            id: "orgAddress",
-            name: "orgAddress"
+        organisationEmail: {
+            id: "organisationEmail",
+            name: "organisationEmail"
         },
-        orgCountry :{
-            id : "orgCountry",
-            name : "orgCountry",
+        organisationPhone: {
+            id: "organisationPhone",
+            name: "organisationPhone"
         },
-        orgCity: {
-            id: "orgCity",
-            name: "orgCity"
+        organisationRue: {
+            id: "organisationRue",
+            name: "organisationRue"
+        },
+        organisationPays :{
+            id : "organisationPays",
+            name : "organisationPays",
+        },
+        organisationVille: {
+            id: "organisationVille",
+            name: "organisationVille"
         },
         orgPostcode: {
             id: "orgPostcode",
@@ -87,14 +95,27 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     {/* Raison sociale */}
                     <div>
                         <InputText
-                            id = {fields.socialReason.id}    
-                            name =  {fields.socialReason.name}  
+                            id = {fields.raisonSociale.id}    
+                            name =  {fields.raisonSociale.name}  
                             label={formatMessage({id:"social_reason"})}
                             placeholder = {formatMessage({id: "enter_social_reason"})} 
-                            value={values[fields.socialReason.name]}
+                            value={values[fields.raisonSociale.name]}
                             onChange={handleChange}
                             // onBlur={handleBlur}
-                            errorMessage={ errors.socialReason ? errors.socialReason.toString() : undefined}
+                            errorMessage={ errors.raisonSociale ? errors.raisonSociale.toString() : undefined}
+                        />
+                    </div>
+                    {/* Email de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationEmail.id}    
+                            name =  {fields.organisationEmail.name}  
+                            label='Email'
+                            placeholder = {formatMessage({id: "enter_social_reason"})} 
+                            value={values[fields.organisationEmail.name]}
+                            onChange={handleChange}
+                            // onBlur={handleBlur}
+                            errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
                         />
                     </div>
                     {/* SIRET */}
@@ -112,25 +133,25 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     {/* Industrie */}
                     <div>
                         <InputText
-                            id = {fields.industry.id}    
-                            name = {fields.industry.name}  
+                            id = {fields.industrie.id}    
+                            name = {fields.industrie.name}  
                             label={formatMessage({id:"industry"})}
                             placeholder = {formatMessage({id: "choose_industry"})} 
-                            value={values[fields.industry.name]} 
+                            value={values[fields.industrie.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.industry ? errors.industry.toString() : undefined}
+                            errorMessage={ errors.industrie ? errors.industrie.toString() : undefined}
                         />
                     </div>
                     {/* Adresse postale */}
                     <div>
                         <InputText
-                            id = {fields.orgAddress.id}    
-                            name = {fields.orgAddress.name}  
+                            id = {fields.organisationRue.id}    
+                            name = {fields.organisationRue.name}  
                             label={formatMessage({id:"enter_your_address"})}
                             placeholder={formatMessage({id:"address_of_organization"})}
-                            value={values[fields.orgAddress.name]} 
+                            value={values[fields.organisationRue.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.orgAddress ? errors.orgAddress.toString() : undefined}
+                            errorMessage={ errors.organisationRue ? errors.organisationRue.toString() : undefined}
                         />
                     </div>
                 </div>
@@ -140,25 +161,25 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     {/* Pays de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgCountry.id}    
-                            name =  {fields.orgCountry.name}  
+                            id = {fields.organisationPays.id}    
+                            name =  {fields.organisationPays.name}  
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "country_of_organization"})} 
-                            value={values[fields.orgCountry.name]}
+                            value={values[fields.organisationPays.name]}
                             onChange={handleChange}
-                            errorMessage={ errors.orgCountry ? errors.orgCountry.toString() : undefined}
+                            errorMessage={ errors.organisationPays ? errors.organisationPays.toString() : undefined}
                         />
                     </div>
                     {/* Ville de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgCity.id}    
-                            name =  {fields.orgCity.name}  
+                            id = {fields.organisationVille.id}    
+                            name =  {fields.organisationVille.name}  
                             label={formatMessage({id:"city"})}
                             placeholder = {formatMessage({id: "city_of_organization"})} 
-                            value={values[fields.orgCity.name]} 
+                            value={values[fields.organisationVille.name]} 
                             onChange={handleChange}
-                            errorMessage={ errors.orgCity ? errors.orgCity.toString() : undefined}
+                            errorMessage={ errors.organisationVille ? errors.organisationVille.toString() : undefined}
                         />
                     </div>
                     {/* Code postal de l'organisation */}
@@ -171,6 +192,30 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             value={values[fields.orgPostcode.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.orgPostcode ? errors.orgPostcode.toString() : undefined}
+                        />
+                    </div>
+                    {/* Téléphone de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationPhone.id}    
+                            name =  {fields.organisationPhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            value={values[fields.organisationPhone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
+                        />
+                    </div>
+                    {/* Logo de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationPhone.id}    
+                            name =  {fields.organisationPhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            value={values[fields.organisationPhone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
                         />
                     </div>
                     {/* Logo de l'organisation */}
