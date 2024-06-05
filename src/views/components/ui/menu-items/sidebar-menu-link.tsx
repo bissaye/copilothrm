@@ -43,7 +43,7 @@ export const SideBarMenuLink : React.FC<SideBarMenuLinkProps> = (props: SideBarM
     let padding : any = {
         paddingRight : "16px",
         paddingLeft : "16px",
-    } ;
+    };
 
     let margin : any = {};
 
@@ -95,7 +95,7 @@ export const SideBarMenuLink : React.FC<SideBarMenuLinkProps> = (props: SideBarM
                         }
                     }
                 }
-                className={`font-body flex flex-row justify-start items-center gap-3 bg-white ${className ? className : ""} ${selected ? `border-4 border-l-primary border-y-0 border-r-0 text-primary font-bold` : "text-gray-800"}`}
+                className={`font-body flex flex-row justify-start items-center gap-3 bg-white transition ease-in-out duration-400 ${className ? className : ""} ${selected ? `border-4 border-l-primary border-y-0 border-r-0 text-primary font-bold` : "text-gray-800"}`}
                 style={{
                     ...padding,
                     ...margin,

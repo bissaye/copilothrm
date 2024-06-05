@@ -1,5 +1,5 @@
-import { faEnvelope, faFolder, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
-import { faChartPie, faGear, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faFolder, faMessage, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
+import { faChartPie, faGear, faUsersLine } from "@fortawesome/free-solid-svg-icons";
 import { managerRoutes } from "../routes";
 
 export const MANAGER_SIDEBAR_MENU_ITEMS = [
@@ -17,19 +17,19 @@ export const MANAGER_SIDEBAR_MENU_ITEMS = [
     },
     {
         title: "teams",
-        icon: faFolder,
+        icon: faUsersLine,
         path: managerRoutes.Teams.path,
         id: managerRoutes.Teams.id
     },
     {
         title: "invitations",
-        icon: faPeopleGroup,
+        icon: faEnvelope,
         path: managerRoutes.Invitations.path,
         id: managerRoutes.Invitations.id
     },
     {
         title: "messages",
-        icon: faEnvelope,
+        icon: faMessage,
         path: managerRoutes.Messages.path,
         id: managerRoutes.Messages.id
     },
