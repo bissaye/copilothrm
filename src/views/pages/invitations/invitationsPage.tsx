@@ -1,7 +1,7 @@
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputText } from "../../components/ui"
-import { useIntl } from "react-intl";
+// import { useIntl } from "react-intl";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import DataTable from 'react-data-table-component';
 import { Invitation } from "../../../utils/interfaces/type";
@@ -115,7 +115,7 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: 'Actions',
-            cell: (row: Invitation) => <div>{actionsList()}</div>
+            cell: () => <div>{actionsList()}</div>
         }
     ]
 

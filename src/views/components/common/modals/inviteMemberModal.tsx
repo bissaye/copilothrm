@@ -1,10 +1,8 @@
-import { faLink, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { DefaultButton, InputSelect, InputText, LinkButton } from "../../ui"
-import { avatars } from "../../../../assets/images"
+import { DefaultButton, InputSelect, InputText } from "../../ui"
 import { useIntl } from "react-intl"
 import { faBuilding } from "@fortawesome/free-regular-svg-icons"
-import { faGear } from "@fortawesome/free-solid-svg-icons/faGear"
 
 interface InviteMemberModalProps {
     onClose: () => void;
