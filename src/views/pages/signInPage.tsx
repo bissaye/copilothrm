@@ -7,18 +7,21 @@ import { FieldsInfo } from '../../utils/interfaces/type';
 import { useFormik } from 'formik';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faApple, faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { UserAuthData } from '../../utils/interfaces/DTO/request';
+import { UserAuthData } from '../../services/api/DTO/request';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { userSignInSchema } from '../../services/forms/validations';
 import { useNavigateById } from '../../hooks';
-import { useAuthStore } from '../../services/store';
 import { pageIds } from '../../utils/constantes';
+import { useAuthUseCase } from '../../services/api/usescases/AuthUseCases';
+import { useApiServices } from '../../services/api/ApiServiceContext';
 
 export const SignInPage : React.FC = () => {
+    const {authService} = useApiServices();
+    const {login} =useAuthUseCase(authService);
 
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
-    const {signIn} = useAuthStore();
+
     const fields : Record<string, FieldsInfo> = {
         email :{
             id : "email",
@@ -40,13 +43,13 @@ export const SignInPage : React.FC = () => {
         initialValues: initialValues,
         validationSchema: userSignInSchema,
         onSubmit: async (values) => {
-            const body : UserAuthData = {...values};
-            console.log(body) // ce log sera enlevé des que l'authentification sera complète
-            signIn().then(
-                ()=>{
-                    navigateById(pageIds.ChooseOrg)
-                }
-            );
+
+            const body : UserAuthData = {username : values.email, password: values.password};
+            try{
+                await login(body)
+            }catch(err){
+                console.log("erreur" , err);
+            }
         }
     })
     const {values, errors, touched, handleChange, handleSubmit} = formik

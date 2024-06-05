@@ -11,6 +11,7 @@ const ApiServicesContext = createContext<{
 export const ApiServiceProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
 
     const apiRequestService : IApiRequestService = ApiRequestService.getInstance();
+    
     const authService : IAuthServices= new AuthServices(apiRequestService);
 
 

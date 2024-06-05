@@ -4,7 +4,9 @@ import { IAuthServices } from "../services/interfaces";
 import { useAuthStore } from "../../store";
 
 export const useAuthUseCase = (authServices: IAuthServices | null) => {
+
   const { signIn } = useAuthStore();
+
   const login = async (data: UserAuthData) => {
     try {
       if (authServices) {
@@ -26,4 +28,5 @@ export const useAuthUseCase = (authServices: IAuthServices | null) => {
   return {
     login,
   };
+  
 };
