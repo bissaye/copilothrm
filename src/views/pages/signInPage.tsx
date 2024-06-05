@@ -18,7 +18,7 @@ export const SignInPage : React.FC = () => {
 
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
-    const {signIn} = useAuthStore();
+    const { signIn } = useAuthStore();
     const fields : Record<string, FieldsInfo> = {
         email :{
             id : "email",

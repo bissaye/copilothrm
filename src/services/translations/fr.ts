@@ -119,11 +119,23 @@ const fr: Record<string, string> = {
     view_profile: "Voir le profile",
     dashboard: "Dashboard",
     departments: "Départements",
+    department: "Département",
     teams: "Équipes",
     invitations: "Invitations",
     messages: "Messages",
     settings: "Paramètres",
-    payments: "Paie"
+    payments: "Paie",
+    add_member: "Ajouter un collaborateur",
+    enter_member_email: "Entrez l'email du collaborateur",
+    invite: "Inviter",
+    username: "Nom d'utilisateur",
+    copy_link: "Copier le lien",
+    role: "Rôle",
+    finances: "Finances",
+    administrative: "Administratif",
+    human_resources: "Resources Humaines",
+    name: "Nom",
+    enter_collaborator_name: "Entrez le nom du collaborateur"
 }
 
 export default fr;

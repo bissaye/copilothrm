@@ -8,8 +8,11 @@ export const OrganizationBaseLayout : React.FC = () => {
     return <Fragment>
 
         { page !== "ChooseOrg" &&<OrganizationHeader/>}
-        { page !== "ChooseOrg" && <Sidebar />}
-        <Outlet/>
+        <div className="flex flex-row gap-5">
+            { page !== "ChooseOrg" && <Sidebar />}
+            <Outlet/>
+        </div>
+        
 
     </Fragment>
 }

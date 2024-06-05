@@ -5,19 +5,21 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { avatars } from "../../../../assets/images";
 import { Link } from "react-router-dom";
 import { MANAGER_SIDEBAR_MENU_ITEMS } from "../../../../services/sidebar-menu-items";
-import { usePageStore } from "../../../../services/store";
+import { useInviteMemberStore, usePageStore } from "../../../../services/store";
+import { InviteMemberModal } from "../modals";
 export const Sidebar : React.FC = () => {
 
     const {formatMessage} = useIntl();
+    const {showInviteModal, setShowInviteModal} = useInviteMemberStore()
     const { page } = usePageStore();
 
-    const siebarMenuItems = MANAGER_SIDEBAR_MENU_ITEMS;
+    const sidebarMenuItems = MANAGER_SIDEBAR_MENU_ITEMS;
 
 return(
-    <div className="sidebar w-[260px] rounded-xl border border-gray-500 shadow-lg shadow-zinc-300 ml-8 px-5 hidden md:flex md:flex-col gap-5">
+    <div className="sidebar md:w-[260px] ld:w-[15%] rounded-xl border border-gray-500 shadow-lg shadow-zinc-300 ml-8 px-5 hidden md:flex md:flex-col gap-5">
         <div className=" h-[80%] w-full mt-5 flex flex-col gap-0.5">
             {
-                siebarMenuItems.map((item, index) =>
+                sidebarMenuItems.map((item, index) =>
                     <Link to={item.path} type='link' key={index}>
                         <SideBarMenuLink
                             selected={page === item.id}
@@ -38,6 +40,7 @@ return(
                 icon={faPlus}
                 text={formatMessage({id:"invite_member"})}
                 className="rounded-sm"
+                onClick={() => setShowInviteModal(true)}
             />
             <div className='flex flex-row justify-evenly gap-4 items-start h-[40px]'>
                 <div className="relative">
@@ -54,6 +57,7 @@ return(
                 </div>
             </div>
         </div> 
+        {showInviteModal && <InviteMemberModal onClose={() => setShowInviteModal(false)} />}
     </div>
 )
 }
