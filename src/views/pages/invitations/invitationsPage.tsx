@@ -7,6 +7,7 @@ import DataTable from 'react-data-table-component';
 import { Invitation } from "../../../utils/interfaces/type";
 import { avatars } from "../../../assets/images";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
+import "./style.css"
 
 export const InvitationPage: React.FC = () => {
 
@@ -19,6 +20,71 @@ export const InvitationPage: React.FC = () => {
                 </button>
             </div>
         )
+    }
+
+    const statusBadge = (status: string) => {
+        let classname;
+        switch(status){
+            case 'Accepted':
+                classname = 'bg-green-100 text-green-700 '
+                break;
+            case 'Pending':
+                classname = 'bg-orange-100 text-orange-700 '
+                break;
+            case 'Rejected':
+                classname = 'bg-red-100 text-red-700'
+                break;
+            case 'Expired':
+            classname = 'bg-gray-100 text-gray-700 '
+            break;
+        }
+        return (
+            <div className="h-full w-full flex justify-center items-center">
+                <span
+                className={`w-20 text-t1 text-center rounded-full px-2 py-1 self-center font-bold ${classname}`}
+                >
+                    {status}
+                </span>
+            </div>
+        )
+    }
+
+   
+
+    const tableCustomStyles = {
+        headRow: {
+            style: {
+              backgroundColor: 'rgb(245 245 245)',
+            },
+        },
+        headCells: {
+            style: {
+              color: 'rgb(82 82 82)',
+            },
+        },
+        rows: {
+            style: {
+              height: '50px',
+              backgroundColor: 'inherit',
+              '&:nth-of-type(even)': {
+                backgroundColor: 'rgb(245 245 245)',
+              },
+              '&:nth-of-type(odd)': {
+                backgroundColor: 'rgb(255 255 255)',
+              }
+            },
+        },
+        cells:{
+            style: {
+                color: 'rgb(23 23 23)',
+            }
+        },
+        table: {
+            style: {
+                boxShadow: '0 10px 10px rgba(0, 0, 0)',
+                border: 'Opx solid #000'
+            }
+        }
     }
 
     // const {formatMessage} = useIntl();
@@ -44,7 +110,8 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: 'Status',
-            selector: (row: Invitation) => row.status
+            cell: (row: Invitation) => statusBadge(row.status),
+            center: true
         },
         {
             name: 'Actions',
@@ -91,7 +158,7 @@ export const InvitationPage: React.FC = () => {
             receiver: 'Karlson Kembou',
             sender: 'Rodrigue Tahago',
             date: new Date().toDateString(),
-            status: 'Accepted' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
+            status: 'Expired' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
         },
         {
             id: 6,
@@ -104,7 +171,7 @@ export const InvitationPage: React.FC = () => {
     ]
     
     return(
-        <div className=' w-full md:w-[900px] lg:w-[76%] h-full flex flex-col justify-start items-start gap-5 px-10 py-5 border border-gray-500 rounded-md shadow-lg bg-white lg:overflow-x-hidden'>
+        <div className=' w-full md:w-[900px] lg:w-[76%] h-full flex flex-col justify-start items-start gap-5 px-10 py-5 bg-white lg:overflow-x-hidden'>
             <div className="flex items-center gap-3">
                 <FontAwesomeIcon icon={faEnvelope} className="text-secondary text-t7" />
                 <h1 className="text-t6 font-heading font-bold">
@@ -142,6 +209,7 @@ export const InvitationPage: React.FC = () => {
             selectableRows
             fixedHeader
             pagination
+            customStyles={tableCustomStyles}
             >
 
             </DataTable>
