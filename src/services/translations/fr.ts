@@ -133,7 +133,9 @@ const fr: Record<string, string> = {
     role: "Rôle",
     finances: "Finances",
     administrative: "Administratif",
-    human_resources: "Resources Humaines"
+    human_resources: "Resources Humaines",
+    name: "Nom",
+    enter_collaborator_name: "Entrez le nom du collaborateur"
 }
 
 export default fr;

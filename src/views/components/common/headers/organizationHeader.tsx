@@ -59,8 +59,6 @@ export const OrganizationHeader : React.FC = () => {
                     
                 <div className='flex flex-row justify-end items-center gap-4 w-full'>
                     {
-                        page == pageIds.HomePage 
-                        &&
                         <Link to={publicRoutes.SignInPage.path} type='link' className=' text-slate-600'>
                             <DefaultButton
                                 type="secondary"

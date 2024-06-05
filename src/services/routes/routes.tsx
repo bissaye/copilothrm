@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 
 
@@ -68,7 +68,7 @@ export const managerRoutes : Record<string, AppRoute> = {
         id: pageIds.Invitations,
         path: "/home/org-home/invitations",
         authRequired: true,
-        element: <HomePage/>
+        element: <InvitationPage/>
     },
     Messages:{
         id: pageIds.Messages,
