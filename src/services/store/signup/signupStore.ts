@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { InvitationSignupStore, SignupStore } from "../../../utils/interfaces/type";
-import { InvitedUserSignupDatas, UserSignupData } from "../../../utils/interfaces/DTO/request";
+import { InvitedUserSignupDatas, UserSignupData } from "../../api/DTO/request";
 
 export const useSignupStore = create<SignupStore>((set) => ({
     signupStep: 1 as 1 | 2 | 3 | 4,

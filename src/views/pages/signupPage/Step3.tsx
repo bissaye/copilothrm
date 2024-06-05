@@ -2,7 +2,7 @@ import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
 import { DefaultButton, InputFile, InputText } from "../../components/ui";
 import { useFormik } from "formik";
-import { UserSignupData } from "../../../utils/interfaces/DTO/request";
+import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
 import { userSignUpStepThreeSchema } from "../../../services/forms/validations";
 
