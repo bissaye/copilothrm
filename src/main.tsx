@@ -6,6 +6,7 @@ import "@fontsource/baloo-2";
 import "@fontsource/baloo-2/400.css"; 
 import "@fontsource/outfit"; 
 import "@fontsource/outfit/400.css"; 
+import { ApiServiceProvider } from './services/api/ApiServiceContext.tsx';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,6 +14,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <ApiServiceProvider>
+      <App />
+    </ApiServiceProvider>
   </React.StrictMode>,
 )

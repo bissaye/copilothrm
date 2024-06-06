@@ -4,7 +4,7 @@ import { DefaultButton, InputPassword, InputText } from "../../components/ui";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { userSignUpStepTwoSchema } from "../../../services/forms/validations";
-import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { InvitedUserSignupDatas } from "../../../services/api/DTO/request";
 import { useInvitationSignupStore } from "../../../services/store/signup/signupStore";
 
 interface Step2Props {

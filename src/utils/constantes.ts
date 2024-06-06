@@ -16,3 +16,5 @@ export const pageIds  = {
 }
 
 export const otpLength :number = 6;
+
+export const api_base_url =  import.meta.env.VITE_API_URL;

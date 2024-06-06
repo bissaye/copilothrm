@@ -1,6 +1,6 @@
 export interface UserAuthData {
-    email : string,
-    passaword : string
+    username : string,
+    password : string
 }
 
 export interface UserSignupData {
@@ -27,6 +27,10 @@ export interface UserSignupData {
     organisationVille: string,
     orgPostcode: string,
     orgLogo?: File | null
+}
+
+export interface refreshData {
+    refreshToken : string
 }
 
 export interface InvitedUserSignupDatas {

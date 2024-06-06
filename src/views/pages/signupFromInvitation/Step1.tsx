@@ -3,7 +3,7 @@ import { FieldsInfo } from "../../../utils/interfaces/type";
 import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
-import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { InvitedUserSignupDatas } from "../../../services/api/DTO/request";
 import { useInvitationSignupStore } from "../../../services/store";
 
 interface Step1Props {
