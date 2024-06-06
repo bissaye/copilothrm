@@ -14,6 +14,7 @@ import { useNavigateById } from '../../hooks';
 import { pageIds } from '../../utils/constantes';
 import { useAuthUseCase } from '../../services/api/usescases/AuthUseCases';
 import { useApiServices } from '../../services/api/ApiServiceContext';
+import { toast } from 'react-toastify';
 
 export const SignInPage : React.FC = () => {
     const {authService} = useApiServices();
@@ -48,6 +49,7 @@ export const SignInPage : React.FC = () => {
             try{
                 await login(body)
             }catch(err){
+                toast("" + err);
                 console.log("erreur" , err);
             }
         }
