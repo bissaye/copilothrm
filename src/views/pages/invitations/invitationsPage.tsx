@@ -91,22 +91,26 @@ export const InvitationPage: React.FC = () => {
     const columns = [
         {
             name: 'Avatar',
-            cell: (row: Invitation) => <img src={row.avatar} className="w-10"></img>
+            cell: (row: Invitation) => <img src={row.avatar} className="w-10"></img>,
+            center: true
         },
         {
             name: 'Emetteur',
             selector: (row: Invitation) => row.sender,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: 'Invité',
             selector: (row: Invitation) => row.receiver,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: 'Date',
             selector: (row: Invitation) => row.date,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: 'Status',
@@ -115,7 +119,8 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: 'Actions',
-            cell: () => <div>{actionsList()}</div>
+            cell: () => <div>{actionsList()}</div>,
+            center: true
         }
     ]
 
