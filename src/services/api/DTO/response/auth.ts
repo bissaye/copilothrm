@@ -1,5 +1,5 @@
 
-import { BaseApiRespone} from "./baseResponses";
+import { BaseApiResponse} from "./baseResponses";
 
 export interface UserData {
     userId: string;
@@ -15,6 +15,10 @@ export interface AuthResponse {
     user: UserData;
 }
 
-export interface UserAuthResponse extends BaseApiRespone {
+export interface UserAuthResponse extends BaseApiResponse {
     content : AuthResponse
+}
+
+export interface UserSignupResponse extends BaseApiResponse {
+    content : UserData
 }

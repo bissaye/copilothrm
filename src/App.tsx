@@ -19,7 +19,13 @@ function App() {
     <Fragment>
       <Internationalisation locale={lang}>
         <Router />
-        <ToastContainer />
+        <ToastContainer
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar={true}
+        closeOnClick={true}
+        pauseOnHover={true}
+         />
       </Internationalisation>
     </Fragment>
   )

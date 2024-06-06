@@ -1,10 +1,10 @@
-export interface BaseApiRespone {
+export interface BaseApiResponse {
     status: number;
     message: string;
     content: any;
 }
 
-export interface BaseApiResponePaginate {
+export interface BaseApiResponsePaginate {
     totalPage: number;
     totalCount: number;
 }

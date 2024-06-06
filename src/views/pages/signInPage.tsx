@@ -14,7 +14,7 @@ import { useNavigateById } from '../../hooks';
 import { pageIds } from '../../utils/constantes';
 import { useAuthUseCase } from '../../services/api/usescases/AuthUseCases';
 import { useApiServices } from '../../services/api/ApiServiceContext';
-import { toast } from 'react-toastify';
+import { toastify } from '../../utils/toasts';
 
 export const SignInPage : React.FC = () => {
     const {authService} = useApiServices();
@@ -47,10 +47,12 @@ export const SignInPage : React.FC = () => {
 
             const body : UserAuthData = {username : values.email, password: values.password};
             try{
-                await login(body)
-            }catch(err){
-                toast("" + err);
-                console.log("erreur" , err);
+                await login(body).then(() => {
+                    navigateById(pageIds.ChooseOrg)
+                });
+            }
+            catch(error: any){
+                toastify('error', error.message);
             }
         }
     })
@@ -69,7 +71,7 @@ export const SignInPage : React.FC = () => {
                     <div className='mb-4'>
                         <InputText
                             id = {fields.email.id}    
-                            name =  {fields.email.name}  
+                            name = {fields.email.name}  
                             label='Email'
                             placeholder = {formatMessage({id: "enter_your_email_address"})}
                             icon = {faEnvelope}  
