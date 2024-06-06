@@ -22,6 +22,7 @@ export const InvitationPage: React.FC = () => {
         )
     }
 
+
     const statusBadge = (status: string) => {
         let classname;
         switch(status){
@@ -29,7 +30,7 @@ export const InvitationPage: React.FC = () => {
                 classname = 'bg-green-100 text-green-700 '
                 break;
             case 'Pending':
-                classname = 'bg-orange-100 text-orange-700 '
+                classname = 'bg-[#fff6cf] text-yellow-700 '
                 break;
             case 'Rejected':
                 classname = 'bg-red-100 text-red-700'
@@ -41,7 +42,7 @@ export const InvitationPage: React.FC = () => {
         return (
             <div className="h-full w-full flex justify-center items-center">
                 <span
-                className={`w-20 text-t1 text-center rounded-full px-2 py-1 self-center font-bold ${classname}`}
+                className={`w-[70px] text-t1 text-center rounded-[30px] px-2 py-1 self-center font-bold ${classname}`}
                 >
                     {status}
                 </span>
