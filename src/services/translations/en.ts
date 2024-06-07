@@ -80,7 +80,11 @@ const en: Record<string, string> = {
     already_an_account: "You already have an account ?",
     confirm_password: "Confirm password",
     confirm_your_password: "Confirm your password",
-    incorrect_password_format: "Your password must contain at least 8 characters, an uppercase letter, a lowercase letter, a number and a special character",
+    incorrect_password_uppercase: "Your password must contain at least one uppercase letter",
+    incorrect_password_lowercase: "Your password must contain at least one lowercase letter",
+    incorrect_password_number: "Your password must contain at least one number",
+    incorrect_password_whitespace: "Your password must nnot contain whitespace",
+    incorrect_password_length: "Your password must have at least 8 characters",
     unmatching_password: "Passwords don't match",
     social_reason: "Social reason",
     enter_social_reason: "Enter the legal name of your company",
@@ -141,6 +145,14 @@ const en: Record<string, string> = {
     change_my_password: "Change password",
     sender: "Sender",
     receiver: "Receiver",
+    cmr: "Cameroon",
+    fr: "France",
+    informatique: "IT",
+    batiment: "Construction",
+    org_size: "Organisation size",
+    choose_org_size: "Choose organisation size",
+    domain_name: "Domain name",
+    enter_domain_name: "Enter your organisation domain"
 }
 
 export default en;

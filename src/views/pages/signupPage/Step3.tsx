@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputFile, InputText } from "../../components/ui";
+import { DefaultButton, InputFile, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
@@ -34,6 +34,14 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
             id: "industrie",
             name: "industrie"
         },
+        nomDomaine:{
+            id: "nomDomaine",
+            name: "nomDomaine"
+        },
+        tailleEntreprise:{
+            id: "tailleEntreprise",
+            name: "tailleEntreprise"
+        },
         organisationEmail: {
             id: "organisationEmail",
             name: "organisationEmail"
@@ -64,6 +72,51 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
         }
     }
 
+    const countryOptions = [
+        {
+            value: "",
+            text: formatMessage({id:"select"})
+        },
+        {
+            value: "0",
+            text: formatMessage({id:"cmr"})
+        },
+        {
+            value: "1",
+            text: formatMessage({id:"fr"})
+        }
+    ]
+
+    const industrieOptions = [
+        {
+            value: "",
+            text: formatMessage({id:"select"})
+        },
+        {
+            value: "0",
+            text: formatMessage({id:"informatique"})
+        },
+        {
+            value: "1",
+            text: formatMessage({id:"communication"})
+        }
+    ]
+
+    const tailleEntrepriseOptions = [
+        {
+            value: "",
+            text: formatMessage({id:"select"})
+        },
+        {
+            value: "0",
+            text: formatMessage({id:"informatique"})
+        },
+        {
+            value: "1",
+            text: formatMessage({id:"batiment"})
+        }
+    ]
+
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
         initialValues[field.name] = userData[field.name as keyof UserSignupData];
@@ -86,10 +139,10 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     return(
         <form 
-            className="flex flex-col gap-7 items-center w-full"
+            className="flex flex-col items-center w-full"
             onSubmit={handleSubmit}
         >
-            <div className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-36 mb-8 w-full">
+            <div className="flex flex-col md:flex-row justify-center items-start gap-5 md:gap-36 mb-8 w-full">
                 {/* colonne de gauche */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Raison sociale */}
@@ -101,21 +154,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             placeholder = {formatMessage({id: "enter_social_reason"})} 
                             value={values[fields.raisonSociale.name]}
                             onChange={handleChange}
-                            // onBlur={handleBlur}
+                            className="h-5"
                             errorMessage={ errors.raisonSociale ? errors.raisonSociale.toString() : undefined}
-                        />
-                    </div>
-                    {/* Email de l'organisation */}
-                    <div>
-                        <InputText
-                            id = {fields.organisationEmail.id}    
-                            name =  {fields.organisationEmail.name}  
-                            label='Email'
-                            placeholder = {formatMessage({id: "enter_social_reason"})} 
-                            value={values[fields.organisationEmail.name]}
-                            onChange={handleChange}
-                            // onBlur={handleBlur}
-                            errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
                         />
                     </div>
                     {/* SIRET */}
@@ -127,46 +167,80 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             placeholder = {formatMessage({id: "enter_siret_number"})} 
                             value={values[fields.siret.name]} 
                             onChange={handleChange}
+                            className="h-5"
                             errorMessage={ errors.siret ? errors.siret.toString() : undefined}
                         />
                     </div>
                     {/* Industrie */}
                     <div>
-                        <InputText
+                        <InputSelect
                             id = {fields.industrie.id}    
                             name = {fields.industrie.name}  
                             label={formatMessage({id:"industry"})}
                             placeholder = {formatMessage({id: "choose_industry"})} 
                             value={values[fields.industrie.name]} 
-                            onChange={handleChange}      
+                            onChange={handleChange}
+                            options={industrieOptions}
+                            className="h-5"
                             errorMessage={ errors.industrie ? errors.industrie.toString() : undefined}
                         />
                     </div>
-                    {/* Adresse postale */}
+                    {/* Taille de l'entreprise */}
+                    <div>
+                        <InputSelect
+                            id = {fields.tailleEntreprise.id}    
+                            name = {fields.tailleEntreprise.name}  
+                            label={formatMessage({id:"org_size"})}
+                            placeholder = {formatMessage({id: "choose_org_size"})} 
+                            value={values[fields.tailleEntreprise.name]} 
+                            onChange={handleChange}
+                            options={tailleEntrepriseOptions}
+                            className="h-5"
+                            errorMessage={ errors.tailleEntreprise ? errors.tailleEntreprise.toString() : undefined}
+                        />
+                    </div>
+                    {/* Email de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.organisationRue.id}    
-                            name = {fields.organisationRue.name}  
-                            label={formatMessage({id:"enter_your_address"})}
-                            placeholder={formatMessage({id:"address_of_organization"})}
-                            value={values[fields.organisationRue.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.organisationRue ? errors.organisationRue.toString() : undefined}
+                            id = {fields.organisationEmail.id}    
+                            name =  {fields.organisationEmail.name}  
+                            label='Email'
+                            placeholder = {formatMessage({id: "enter_social_reason"})} 
+                            value={values[fields.organisationEmail.name]}
+                            onChange={handleChange}
+                            className="h-5"
+                            errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
+                        />
+                    </div>
+                    {/* Nom de domaine de l'organisation */}
+                    <div>
+                        <InputText
+                            id = {fields.nomDomaine.id}    
+                            name =  {fields.nomDomaine.name}  
+                            label={formatMessage({id:"domain_name"})}
+                            placeholder = {formatMessage({id: "enter_domain_name"})} 
+                            value={values[fields.nomDomaine.name]}
+                            onChange={handleChange}
+                            className="h-5"
+                            errorMessage={ errors.nomDomaine ? errors.nomDomaine.toString() : undefined}
                         />
                     </div>
                 </div>
 
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
+                    
                     {/* Pays de l'organisation */}
                     <div>
-                        <InputText
+                        <InputSelect
                             id = {fields.organisationPays.id}    
                             name =  {fields.organisationPays.name}  
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "country_of_organization"})} 
                             value={values[fields.organisationPays.name]}
                             onChange={handleChange}
+                            options={countryOptions}
+                            className="h-5"
                             errorMessage={ errors.organisationPays ? errors.organisationPays.toString() : undefined}
                         />
                     </div>
@@ -179,6 +253,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             placeholder = {formatMessage({id: "city_of_organization"})} 
                             value={values[fields.organisationVille.name]} 
                             onChange={handleChange}
+                            className="h-5"
                             errorMessage={ errors.organisationVille ? errors.organisationVille.toString() : undefined}
                         />
                     </div>
@@ -190,8 +265,22 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             label={formatMessage({id:"post_code"})}
                             placeholder = {formatMessage({id: "post_code_of_organization"})} 
                             value={values[fields.orgPostcode.name]} 
-                            onChange={handleChange}      
+                            onChange={handleChange}    
+                            className="h-5"  
                             errorMessage={ errors.orgPostcode ? errors.orgPostcode.toString() : undefined}
+                        />
+                    </div>
+                    {/* Adresse postale */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationRue.id}    
+                            name = {fields.organisationRue.name}  
+                            label={formatMessage({id:"enter_your_address"})}
+                            placeholder={formatMessage({id:"address_of_organization"})}
+                            value={values[fields.organisationRue.name]} 
+                            onChange={handleChange}   
+                            className="h-5"   
+                            errorMessage={ errors.organisationRue ? errors.organisationRue.toString() : undefined}
                         />
                     </div>
                     {/* Téléphone de l'organisation */}
@@ -202,19 +291,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             label={formatMessage({id:"phone"})}
                             placeholder = {formatMessage({id: "enter_your_phone"})} 
                             value={values[fields.organisationPhone.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
-                        />
-                    </div>
-                    {/* Logo de l'organisation */}
-                    <div>
-                        <InputText
-                            id = {fields.organisationPhone.id}    
-                            name =  {fields.organisationPhone.name}  
-                            label={formatMessage({id:"phone"})}
-                            placeholder = {formatMessage({id: "enter_your_phone"})} 
-                            value={values[fields.organisationPhone.name]} 
-                            onChange={handleChange}      
+                            onChange={handleChange}   
+                            className="h-5"   
                             errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
                         />
                     </div>
@@ -231,6 +309,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                                     formik.setFieldValue(fields.orgLogo.name, e.target.files[0].name)
                                 }
                             }}      
+                            className="h-5"
                             errorMessage={ errors.orgLogo ? errors.orgLogo.toString() : undefined}
                         />
                     </div>

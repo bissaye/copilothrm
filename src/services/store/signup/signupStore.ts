@@ -22,6 +22,8 @@ export const useSignupStore = create<SignupStore>((set) => ({
         raisonSociale: "",
         siret: "",
         industrie: "",
+        nomDomaine: "",
+        tailleEntreprise: "",
         organisationEmail: "",
         organisationPhone: "",
         organisationRue: "",

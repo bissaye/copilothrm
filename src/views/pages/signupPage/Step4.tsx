@@ -6,6 +6,9 @@ import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { SummaryBox } from "../../components/common";
+import { useApiServices } from "../../../services/api/ApiServiceContext";
+import { useAuthUseCase } from "../../../services/api/usescases/AuthUseCases";
+import { toastify } from "../../../utils/toasts";
 
 interface Step4Props {
     handleSubmitNextStep?: () => void;
@@ -20,18 +23,22 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     //hooks
     const {formatMessage} = useIntl();
     const { userData } = useSignupStore();
+    const {authService} = useApiServices();
+    const {register} =useAuthUseCase(authService);
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
-            // return new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //         resolve(navigateById(pageIds.ChooseOrg))
-            //     }, 2000)
-            // })
-            return setIsSubmitted(true);
+            try{
+                await register(userData).then(() => {
+                    setIsSubmitted(true);
+                })
+            }
+            catch(error: any){
+                toastify('error', error.message);
+            }
         }
     })
 

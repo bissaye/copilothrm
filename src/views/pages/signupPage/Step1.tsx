@@ -73,6 +73,21 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
         }
     ]
 
+    const countryOptions = [
+        {
+            value: "",
+            text: formatMessage({id:"select"})
+        },
+        {
+            value: "0",
+            text: formatMessage({id:"cmr"})
+        },
+        {
+            value: "1",
+            text: formatMessage({id:"fr"})
+        }
+    ]
+
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
         initialValues[field.name] = userData[field.name as keyof UserSignupData];
@@ -147,6 +162,23 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.lieuNais ? errors.lieuNais.toString() : undefined}
                         />
                     </div>
+                    {/* Sexe */}
+                    <div>
+                        <InputSelect
+                            id = {fields.sexe.id}    
+                            name =  {fields.sexe.name}  
+                            label={formatMessage({id:"gender"})}
+                            value={values[fields.sexe.name]} 
+                            onChange={handleChange}
+                            options={genderOptions}      
+                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
+                        />
+                    </div>
+                    
+                </div>
+
+                {/* colonne de droite */}
+                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Téléphone */}
                     <div>
                         <InputText
@@ -159,15 +191,12 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
                         />
                     </div>
-                </div>
-
-                {/* colonne de droite */}
-                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Pays */}
                     <div>
-                        <InputText
+                        <InputSelect
                             id = {fields.pays.id}    
                             name =  {fields.pays.name}  
+                            options={countryOptions}
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "enter_your_country"})} 
                             value={values[fields.pays.name]} 
@@ -211,18 +240,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.rue ? errors.rue.toString() : undefined}
                         />
                     </div>
-                    {/* Sexe */}
-                    <div>
-                        <InputSelect
-                            id = {fields.sexe.id}    
-                            name =  {fields.sexe.name}  
-                            label={formatMessage({id:"gender"})}
-                            value={values[fields.sexe.name]} 
-                            onChange={handleChange}
-                            options={genderOptions}      
-                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
-                        />
-                    </div>
+                    
                 </div>
                 
             </div>

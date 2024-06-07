@@ -80,7 +80,11 @@ const fr: Record<string, string> = {
     already_an_account: "Vous avez déjà un compte ?",
     confirm_password: "Confirmez le mot de passe",
     confirm_your_password: "Confirmez votre mot de passe",
-    incorrect_password_format: "Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre, et un charactère spécial",
+    incorrect_password_uppercase: "Le mot de passe doit contenir au moins une majuscule",
+    incorrect_password_lowercase: "Le mot de passe doit contenir au moins une minuscule",
+    incorrect_password_number: "Le mot de passe doit contenir au moins un chiffre",
+    incorrect_password_whitespace: "Le mot de passe ne doit pas contenir d'espace",
+    incorrect_password_length: "Le mot de passe doit faire au moins 8 caractères",
     unmatching_password: "Les mots de passe ne correspondent pas",
     social_reason: "Raison sociale",
     enter_social_reason: "Entrer le nom légal de l'entreprise",
@@ -141,6 +145,14 @@ const fr: Record<string, string> = {
     change_my_password: "Changer mon mot de passe",
     sender: "Emetteur",
     receiver: "Destinataire",
+    cmr: "Cameroun",
+    fr: "France",
+    informatique: "Informatique",
+    batiment: "Bâtiment",
+    org_size: "Taille de l'entreprise",
+    choose_org_size: "Choisissez la taille de l'entreprise",
+    domain_name: "Nom de domaine",
+    enter_domain_name: "Entrez le nom de dommaine de votre organisation"
 }
 
 export default fr;

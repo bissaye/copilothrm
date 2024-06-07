@@ -36,11 +36,13 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             name : "confirmPassword",
         }
     }
+
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
         initialValues[field.name] = userData[field.name as keyof UserSignupData];
         return field
     })
+    
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: userSignUpStepTwoSchema,
@@ -52,6 +54,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             handleSubmitNextStep();
         }
     })
+
     const {values, errors, handleChange, handleSubmit} = formik;
 
     // fonctions
