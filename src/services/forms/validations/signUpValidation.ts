@@ -46,8 +46,7 @@ export const userSignUpStepThreeSchema = yup.object(
         tailleEntreprise: yup.string().required('required_field'),
         organisationRue: yup.string().required("required_field")
                             .matches(/^[a-zA-Z0-9-_\s]+$/, 'invalid_name_input_format'),
-        organisationPays: yup.string().required("required_field")
-                            .matches(/^[a-zA-Z\s]+$/, 'invalid_country_city_input_format'),
+        organisationPays: yup.string().required("required_field"),
         organisationVille: yup.string().required("required_field")
                             .matches(/^[a-zA-Z\s]+$/, 'invalid_country_city_input_format'),
     }
