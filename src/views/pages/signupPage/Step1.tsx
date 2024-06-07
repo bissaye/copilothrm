@@ -124,6 +124,17 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.prenom ? errors.prenom.toString() : undefined}
                         />
                     </div>
+                    {/* Date de naissance */}
+                    <div>
+                        <InputDate
+                            id = {fields.dateNais.id}    
+                            name = {fields.dateNais.name}  
+                            label={formatMessage({id:"birthdate"})}
+                            value={values[fields.dateNais.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.dateNais ? errors.dateNais.toString() : undefined}
+                        />
+                    </div>
                     {/* Lieu de naissance */}
                     <div>
                         <InputText
@@ -134,17 +145,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             value={values[fields.lieuNais.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.lieuNais ? errors.lieuNais.toString() : undefined}
-                        />
-                    </div>
-                    {/* Date de naissance */}
-                    <div>
-                        <InputDate
-                            id = {fields.dateNais.id}    
-                            name = {fields.dateNais.name}  
-                            label={formatMessage({id:"birthdate"})}
-                            value={values[fields.dateNais.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.dateNais ? errors.dateNais.toString() : undefined}
                         />
                     </div>
                     {/* Téléphone */}

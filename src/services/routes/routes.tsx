@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 
 
@@ -40,17 +40,23 @@ export const publicRoutes : Record<string, AppRoute> = {
 }
 
 export const managerRoutes : Record<string, AppRoute> = {
+    ChooseOrg:{
+        id: pageIds.ChooseOrg,
+        path: "/home/choose-org",
+        authRequired: true,
+        element: <ChooseOrg/>
+    },
     HomePage:{
         id: pageIds.HomePage,
         path: "/home/org-home",
         authRequired: true,
         element: <HomePage/>
     },
-    ChooseOrg:{
-        id: pageIds.ChooseOrg,
-        path: "/home/choose-org",
+    Profile:{
+        id: pageIds.Profile,
+        path: "/home/org-home/user-profile",
         authRequired: true,
-        element: <ChooseOrg/>
+        element: <UserProfilePage/>
     },
     Departments:{
         id: pageIds.Departments,

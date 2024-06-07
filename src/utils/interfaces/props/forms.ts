@@ -14,7 +14,8 @@ export interface InputTextProps extends CustomInputProps {
     id: string,
     name: string,
     value? : string,
-    placeholder? : string
+    placeholder? : string,
+    className?: string,
     disabled?: boolean;
     blockCopy?: boolean;
     blockPaste?: boolean;
@@ -24,6 +25,7 @@ export interface InputTextProps extends CustomInputProps {
 
 export interface InputSelectProps extends Omit<InputTextProps, 'onChange'> {
     onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+    className?: string,
     options : {
         value: string,
         text : string

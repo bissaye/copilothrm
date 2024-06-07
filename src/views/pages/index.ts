@@ -1,12 +1,13 @@
 import { HomePage } from "./homePage";
 import { SignInPage } from "./signInPage";
-import { SignUpPage } from "./signupPage/signUpPage";
-import { LandingPage } from "./landingPage/landingPage";
+import { SignUpPage } from "./signupPage";
+import { LandingPage } from "./landingPage";
 import { NotFoundPage } from "./notFoundPage";
 import { ChooseOrg } from "./ChooseOrgPage";
 import { SignUpFromInvitationPage } from "./signupFromInvitation";
 import { ForgotPasswordPage } from "./ForgotPassword";
 import { InvitationPage } from "./invitations";
+import { UserProfilePage } from "./userProfile";
 
 
 export {
@@ -18,5 +19,6 @@ export {
     ChooseOrg,
     SignUpFromInvitationPage,
     ForgotPasswordPage,
-    InvitationPage
+    InvitationPage,
+    UserProfilePage
 }

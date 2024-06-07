@@ -1,5 +1,5 @@
-import { Step1 } from "./Step1";
+import { SignUpPage } from "./signUpPage";
 
 export {
-    Step1
+    SignUpPage
 }

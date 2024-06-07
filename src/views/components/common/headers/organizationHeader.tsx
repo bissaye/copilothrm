@@ -5,7 +5,7 @@ import { pageIds } from '../../../../utils/constantes';
 import { managerRoutes, publicRoutes } from '../../../../services/routes/routes';
 import { useIntl } from 'react-intl';
 import { DefaultButton, LinkButton } from '../../ui';
-import { usePageStore } from '../../../../services/store';
+import { useAuthStore, usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 // import "./style.css"
@@ -15,6 +15,7 @@ export const OrganizationHeader : React.FC = () => {
     const {page} = usePageStore();
 
     const {formatMessage} = useIntl();
+    const {signOut} = useAuthStore();
 
     const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
@@ -35,6 +36,10 @@ export const OrganizationHeader : React.FC = () => {
 
     const showMenu = () => {
         setIsSubmenuVisible(prev => !prev)
+    }
+
+    const logout = async () => {
+        await signOut()
     }
 
 
@@ -58,15 +63,13 @@ export const OrganizationHeader : React.FC = () => {
                 </div>
                     
                 <div className='flex flex-row justify-end items-center gap-4 w-full'>
-                    {
-                        <Link to={publicRoutes.SignInPage.path} type='link' className=' text-slate-600'>
-                            <DefaultButton
-                                type="secondary"
-                                bgWhite={false}
-                                text={formatMessage({id:"logout_link"})}
-                            />
-                        </Link>
-                    }
+
+                    <DefaultButton
+                        type="secondary"
+                        bgWhite={false}
+                        text={formatMessage({id:"logout_link"})}
+                        onClick={logout}
+                    />
 
                     <LanguageSwitcher/>
                 </div>

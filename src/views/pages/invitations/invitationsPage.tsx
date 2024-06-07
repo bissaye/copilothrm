@@ -8,9 +8,12 @@ import { Invitation } from "../../../utils/interfaces/type";
 import { avatars } from "../../../assets/images";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
 import "./style.css"
+import { useIntl } from "react-intl";
 
 export const InvitationPage: React.FC = () => {
 
+    const {formatMessage} = useIntl();
+    
     const actionsList = () => {
         return(
             <div>
@@ -21,7 +24,6 @@ export const InvitationPage: React.FC = () => {
             </div>
         )
     }
-
 
     const statusBadge = (status: string) => {
         let classname;
@@ -49,8 +51,6 @@ export const InvitationPage: React.FC = () => {
             </div>
         )
     }
-
-   
 
     const tableCustomStyles = {
         headRow: {
@@ -96,13 +96,13 @@ export const InvitationPage: React.FC = () => {
             center: true
         },
         {
-            name: 'Emetteur',
+            name: formatMessage({id:"sender"}),
             selector: (row: Invitation) => row.sender,
             sortable: true,
             center: true
         },
         {
-            name: 'Invité',
+            name: formatMessage({id:"receiver"}),
             selector: (row: Invitation) => row.receiver,
             sortable: true,
             center: true

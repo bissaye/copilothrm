@@ -1,9 +1,12 @@
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
 
 interface LinkButtonProps {
     text: string,
-    type: "primary" | "secondary",
+    type?: "primary" | "secondary",
     onClick?: () => void,
+    icon?: IconDefinition;
     textSize ? : number,
     underline ? : boolean,
     width?: number,
@@ -13,7 +16,7 @@ interface LinkButtonProps {
 
 export const LinkButton : React.FC<LinkButtonProps> = (props: LinkButtonProps) => {
 
-    const {type, text , onClick, textSize, underline, width, height, className} = props;
+    const {type, text , onClick, textSize, underline, width, height, className, icon} = props;
     
     const textType = {
         "primary" : "text-primary",
@@ -34,13 +37,14 @@ export const LinkButton : React.FC<LinkButtonProps> = (props: LinkButtonProps) =
             onClick={() => {
                 onClick && onClick()
             }}
-            className={` ${textType[type]} ${className} font-body ${underline ? ` border-b ${borderType[type]}`: ""}`}
+            className={`${className} ${type ? textType[type] : "" } font-body ${type ? underline ? ` border-b ${borderType[type]}`: "" : ""}`}
             style={{
                 fontSize: fontSize,
                 width : sizeWidth,
                 height : sizeHeight
             }}
         >
+            {icon && <FontAwesomeIcon icon={icon} />}
             {text}
         </button>
     </Fragment>
