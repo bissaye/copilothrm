@@ -4,21 +4,28 @@ import { faEnvelope, faPenToSquare, faUser } from "@fortawesome/free-regular-svg
 import { faAt, faLocationDot, faPencil, faUserPen } from "@fortawesome/free-solid-svg-icons"
 import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone"
 import { useIntl } from "react-intl"
-import { useNavigateById } from "../../../hooks"
-import { pageIds } from "../../../utils/constantes"
 import { DefaultButton, InputDate, InputSelect, InputText, LinkButton } from "../../components/ui"
 import { FieldsInfo } from "../../../utils/interfaces/type"
 import { useSignupStore } from "../../../services/store"
 import { useFormik } from "formik"
 import { userSignUpStepOneSchema } from "../../../services/forms/validations"
 import { UserSignupData } from "../../../services/api/DTO/request"
+import { ChangePasswordModal } from "../../components/common"
+import { useState } from "react"
+import { UserData } from "../../../services/api/DTO/response"
 
 export const UserProfilePage: React.FC = () => {
 
     const {formatMessage} = useIntl();
-    const navigateById = useNavigateById();
 
     const { userData, setUserData } = useSignupStore();
+    const [modalVisible, setModalVisible] = useState(false);
+
+    const user: UserData = JSON.parse(localStorage.getItem("user")!)
+
+    const loggedUser = user.staff;
+
+
     const fields : Record<string, FieldsInfo> = {
         nom :{
             id : "nom",
@@ -107,7 +114,7 @@ export const UserProfilePage: React.FC = () => {
                         <div className="flex flex-col justify-center items-start w-full">
                             <span className="flex gap-3 justify-center items-center">
                                 <FontAwesomeIcon icon={faUser} />
-                                <h1 className="font-heading font-bold text-t6">Johnie Doe</h1>
+                                <h1 className="font-heading font-bold text-t6">{loggedUser.prenom} {loggedUser.nom}</h1>
                             </span>
                             <p className="text-neutral-600 font-body text-t3 ml-7">Responsable RH</p>
                             <p className="text-neutral-500 font-body text-t2 ml-7">Abyster Consulting</p>
@@ -115,7 +122,7 @@ export const UserProfilePage: React.FC = () => {
                             <div className="flex flex-col gap-1 justify-start items-start">
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faAt} className="text-neutral-600" />
-                                    <p className="text-neutral-600 font-body text-t3">johnie.doe@abyster.com</p>
+                                    <p className="text-neutral-600 font-body text-t3">{loggedUser.user.username}</p>
                                 </span>
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faPhone} className="text-neutral-600" />
@@ -131,6 +138,7 @@ export const UserProfilePage: React.FC = () => {
                                 </span>
                             </div>
                         </div>
+                    
                     </div>
                     
                     <div className="w-full flex flex-col justify-center items-center">
@@ -143,7 +151,7 @@ export const UserProfilePage: React.FC = () => {
                             paddingX={2}
                             className=' text-t1 hover:text-primary-600 border-0'
                             icon={faPenToSquare}
-                            onClick={() => { navigateById(pageIds.Profile) }}                    
+                            onClick={() => setModalVisible(true)}                    
                         />
                     </div>
                 </div>
@@ -174,7 +182,7 @@ export const UserProfilePage: React.FC = () => {
                                         />
                                     </span>
                                 </div>
-                                <p className="text-neutral-600 font-body text-t3">johnie.doe@abyster.com</p>
+                                <p className="text-neutral-600 font-body text-t3">{loggedUser.user.username}</p>
                             </div>
                             <div className="w-1/2 py-5 px-5 flex flex-col gap-3 ">
                                 {/* Nom de famille */}
@@ -330,6 +338,7 @@ export const UserProfilePage: React.FC = () => {
                         />
                 </form>
             </div>
+           {modalVisible &&  <ChangePasswordModal onClose={() => setModalVisible(false)} />}
         </div>
     )
 }

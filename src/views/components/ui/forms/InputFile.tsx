@@ -13,7 +13,7 @@ export const InputFile: React.FC<InputTextProps> = (props: InputTextProps) => {
     const { id, name, placeholder = formatMessage({id:"import_pic"}), disabled, onChange } = props
     const [fileName, setFileName] = useState<string>("")
     const fileInputRef = useRef<HTMLInputElement>(null);
-
+    const {className} = props;
     const handleImportClick = () => {
         if (fileInputRef.current) {
           fileInputRef.current.click();
@@ -31,7 +31,7 @@ export const InputFile: React.FC<InputTextProps> = (props: InputTextProps) => {
                         id="fileName"
                         name="fileName"
                         type='text'
-                        className='default-input '
+                        className={`default-input ${className}`}
                         value={fileName}
                         placeholder={fileName === "" ? placeholder : fileName}
                         readOnly

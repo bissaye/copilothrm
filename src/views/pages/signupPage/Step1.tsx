@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
+import { CountryData } from "../../../services/api/DTO/response";
+import { InputSelectOptions } from "../../../utils/interfaces/props";
 
 interface Step1Props {
     handleSubmitNextStep: () => void;
@@ -14,7 +16,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const { handleSubmitNextStep } = props;
     const {formatMessage} = useIntl();
-    const { userData, setUserData } = useSignupStore();
+    const { userData, setUserData, countryList, gender } = useSignupStore();
     const fields : Record<string, FieldsInfo> = {
         nom :{
             id : "nom",
@@ -58,20 +60,12 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
         }
     }
 
-    const genderOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: formatMessage({id:"man"})
-        },
-        {
-            value: "1",
-            text: formatMessage({id:"woman"})
+    const countryOptions: InputSelectOptions[] = countryList.map((country) => {
+        return {
+            value: country.countryId,
+            text: country.libelle 
         }
-    ]
+    });
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
@@ -147,6 +141,23 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.lieuNais ? errors.lieuNais.toString() : undefined}
                         />
                     </div>
+                    {/* Sexe */}
+                    <div>
+                        <InputSelect
+                            id = {fields.sexe.id}    
+                            name =  {fields.sexe.name}  
+                            label={formatMessage({id:"gender"})}
+                            value={values[fields.sexe.name]} 
+                            onChange={handleChange}
+                            options={gender}      
+                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
+                        />
+                    </div>
+                    
+                </div>
+
+                {/* colonne de droite */}
+                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Téléphone */}
                     <div>
                         <InputText
@@ -159,15 +170,12 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
                         />
                     </div>
-                </div>
-
-                {/* colonne de droite */}
-                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Pays */}
                     <div>
-                        <InputText
+                        <InputSelect
                             id = {fields.pays.id}    
                             name =  {fields.pays.name}  
+                            options={countryOptions}
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "enter_your_country"})} 
                             value={values[fields.pays.name]} 
@@ -211,18 +219,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             errorMessage={ errors.rue ? errors.rue.toString() : undefined}
                         />
                     </div>
-                    {/* Sexe */}
-                    <div>
-                        <InputSelect
-                            id = {fields.sexe.id}    
-                            name =  {fields.sexe.name}  
-                            label={formatMessage({id:"gender"})}
-                            value={values[fields.sexe.name]} 
-                            onChange={handleChange}
-                            options={genderOptions}      
-                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
-                        />
-                    </div>
+                    
                 </div>
                 
             </div>

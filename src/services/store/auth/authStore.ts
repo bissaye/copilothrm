@@ -9,16 +9,19 @@ export const useAuthStore = create<AuthStore>((set) =>({
     
     // sign in
     signIn : async (authResponse: UserAuthResponse) => {
+        const user = authResponse.content
+
         localStorage.setItem("isLogged", "1");
-        localStorage.setItem("token", authResponse.content.accessToken);
-        localStorage.setItem("refresh", authResponse.content.refreshToken);
-        localStorage.setItem("user", JSON.stringify(authResponse.content.user))
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("refresh", user.refreshToken);
+        localStorage.setItem("user", JSON.stringify(user));
         set({isLogged: true});
         return true;
     },
     
     // sign out
     signOut: async ()  =>{
+        localStorage.clear();
         localStorage.setItem("isLogged", "0");
         set({isLogged: false});
         return false

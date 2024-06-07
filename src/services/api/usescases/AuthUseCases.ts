@@ -22,9 +22,9 @@ export const useAuthUseCase = (authServices: IAuthServices | null) => {
         throw new Error("erreur authServices not set");
       }
     } catch (err: any) {
-      
-      if(err.response.data.errorMessage) {
-        const message = err.response.data.errorMessage;
+      // debugger
+      if(err.response.data.message) {
+        const message = err.response.data.message;
         throw new Error(String(message))
       }
       throw new Error(err);
@@ -41,8 +41,8 @@ export const useAuthUseCase = (authServices: IAuthServices | null) => {
       }
     }
     catch(err: any) {
-      if(err.response.data.errorMessage) {
-        const message = err.response.data.errorMessage;
+      if(err.response.data.message) {
+        const message = err.response.data.message;
         throw new Error(String(message))
       }
       throw new Error(err);

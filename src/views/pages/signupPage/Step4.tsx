@@ -6,6 +6,9 @@ import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { SummaryBox } from "../../components/common";
+import { useApiServices } from "../../../services/api/ApiServiceContext";
+import { useAuthUseCase } from "../../../services/api/usescases/AuthUseCases";
+import { toastify } from "../../../utils/toasts";
 
 interface Step4Props {
     handleSubmitNextStep?: () => void;
@@ -19,19 +22,23 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
 
     //hooks
     const {formatMessage} = useIntl();
-    const { userData } = useSignupStore();
+    const { userData, gender, countryList, industryList } = useSignupStore();
+    const {authService} = useApiServices();
+    const {register} =useAuthUseCase(authService);
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
-            // return new Promise((resolve, reject) => {
-            //     setTimeout(() => {
-            //         resolve(navigateById(pageIds.ChooseOrg))
-            //     }, 2000)
-            // })
-            return setIsSubmitted(true);
+            try{
+                await register(userData).then(() => {
+                    setIsSubmitted(true);
+                })
+            }
+            catch(error: any){
+                toastify('error', error.message);
+            }
         }
     })
 
@@ -64,7 +71,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "userCountry",
             name: formatMessage({id:"country"}),
-            value: userData.pays
+            value: countryList.find((country) => country.countryId == userData.pays)!.libelle
         },
         {
             id: "userCity",
@@ -84,7 +91,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "gender",
             name: formatMessage({id:"gender"}),
-            value: userData.sexe
+            value: gender.find((gen) => gen.value == userData.sexe)!.text
         },
     ]
     const orgInfos = [
@@ -111,7 +118,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "orgCountry",
             name: formatMessage({id:"country"}),
-            value: userData.organisationPays
+            value: countryList.find((country) => country.countryId == userData.organisationPays)!.libelle
         },
         {
             id: "orgCity",
@@ -131,7 +138,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "industry",
             name: formatMessage({id:"industry"}),
-            value: userData.industrie
+            value: industryList.find((industry) => industry.industrieId == userData.industrie)!.libelle
         }
     ]
 
