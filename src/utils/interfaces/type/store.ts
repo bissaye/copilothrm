@@ -1,9 +1,9 @@
 import { InvitedUserSignupDatas, UserSignupData } from "../../../services/api/DTO/request";
-import { AuthResponse } from "../../../services/api/DTO/response";
+import { UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
     isLogged: boolean;
-    signIn: (data: AuthResponse) => Promise<boolean>;
+    signIn: (data: UserAuthResponse) => Promise<boolean>;
     signOut: () => Promise<boolean>;
     initAuth: () => void;
   };

@@ -135,7 +135,12 @@ const en: Record<string, string> = {
     administrative: "Administrative",
     human_resources: "Human Resources",
     name: "Name",
-    enter_collaborator_name: "Enter the name of your collaborator"
+    enter_collaborator_name: "Enter the name of your collaborator",
+    save: "Save",
+    edit_my_profile: "Edit profile",
+    change_my_password: "Change password",
+    sender: "Sender",
+    receiver: "Receiver",
 }
 
 export default en;

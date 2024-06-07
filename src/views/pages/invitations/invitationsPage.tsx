@@ -8,9 +8,12 @@ import { Invitation } from "../../../utils/interfaces/type";
 import { avatars } from "../../../assets/images";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
 import "./style.css"
+import { useIntl } from "react-intl";
 
 export const InvitationPage: React.FC = () => {
 
+    const {formatMessage} = useIntl();
+    
     const actionsList = () => {
         return(
             <div>
@@ -29,7 +32,7 @@ export const InvitationPage: React.FC = () => {
                 classname = 'bg-green-100 text-green-700 '
                 break;
             case 'Pending':
-                classname = 'bg-orange-100 text-orange-700 '
+                classname = 'bg-[#fff6cf] text-yellow-700 '
                 break;
             case 'Rejected':
                 classname = 'bg-red-100 text-red-700'
@@ -41,15 +44,13 @@ export const InvitationPage: React.FC = () => {
         return (
             <div className="h-full w-full flex justify-center items-center">
                 <span
-                className={`w-20 text-t1 text-center rounded-full px-2 py-1 self-center font-bold ${classname}`}
+                className={`w-[70px] text-t1 text-center rounded-[30px] px-2 py-1 self-center font-bold ${classname}`}
                 >
                     {status}
                 </span>
             </div>
         )
     }
-
-   
 
     const tableCustomStyles = {
         headRow: {
@@ -91,22 +92,26 @@ export const InvitationPage: React.FC = () => {
     const columns = [
         {
             name: 'Avatar',
-            cell: (row: Invitation) => <img src={row.avatar} className="w-10"></img>
+            cell: (row: Invitation) => <img src={row.avatar} className="w-10"></img>,
+            center: true
         },
         {
-            name: 'Emetteur',
+            name: formatMessage({id:"sender"}),
             selector: (row: Invitation) => row.sender,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
-            name: 'Invité',
+            name: formatMessage({id:"receiver"}),
             selector: (row: Invitation) => row.receiver,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: 'Date',
             selector: (row: Invitation) => row.date,
-            sortable: true
+            sortable: true,
+            center: true
         },
         {
             name: 'Status',
@@ -115,7 +120,8 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: 'Actions',
-            cell: () => <div>{actionsList()}</div>
+            cell: () => <div>{actionsList()}</div>,
+            center: true
         }
     ]
 

@@ -4,7 +4,7 @@ import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
 
 export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProps) => {
-    const {id, name, value, placeholder, disabled, onChange, options} = props
+    const {id, name, value, placeholder, disabled, onChange, options, className} = props
     return <Fragment>
         <CustumInputContainer
             {...props}
@@ -12,7 +12,7 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
             <select 
                 id = {id}
                 name = {name}
-                className='default-input'
+                className={`default-input ${className}`}
                 value={value}
                 disabled={disabled}
                 onChange={(e) => {

@@ -47,7 +47,6 @@ export const SignUpPage : React.FC = () => {
                     <Step4 handlePrevStep={prevStep}/>
                 }
                 
-                { signupStep === 1 &&
                 <div className='flex flex-row gap-4 mt-3'>
                     <p className='font-bold font-body text-t2 text-gray-800'>{formatMessage({id:"already_an_account"})}</p>
                         
@@ -59,7 +58,6 @@ export const SignUpPage : React.FC = () => {
                         onClick={() => {navigateById(pageIds.SignInPage)}}
                     />
                 </div>
-                }
             </div>
         </div>
         
