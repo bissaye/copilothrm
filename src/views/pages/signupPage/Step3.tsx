@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
 import { userSignUpStepThreeSchema } from "../../../services/forms/validations";
+import { InputSelectOptions } from "../../../utils/interfaces/props";
 
 interface Step3Props {
     handleSubmitNextStep: () => void;
@@ -18,7 +19,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
     
     // hooks
     const {formatMessage} = useIntl();
-    const { userData, setUserData } = useSignupStore();
+    const { userData, setUserData, countryList, industryList } = useSignupStore();
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
@@ -72,35 +73,19 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
         }
     }
 
-    const countryOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: formatMessage({id:"cmr"})
-        },
-        {
-            value: "1",
-            text: formatMessage({id:"fr"})
+    const countryOptions: InputSelectOptions[] = countryList.map((country) => {
+        return {
+            value: country.countryId,
+            text: country.libelle 
         }
-    ]
+    });
 
-    const industrieOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: formatMessage({id:"informatique"})
-        },
-        {
-            value: "1",
-            text: formatMessage({id:"communication"})
+    const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
+        return {
+            value: industry.industrieId,
+            text: industry.libelle 
         }
-    ]
+    })
 
     const tailleEntrepriseOptions = [
         {
@@ -109,11 +94,11 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
         },
         {
             value: "0",
-            text: formatMessage({id:"informatique"})
+            text: '0-10'
         },
         {
             value: "1",
-            text: formatMessage({id:"batiment"})
+            text: '10-50'
         }
     ]
 

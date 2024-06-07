@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Step1 } from './Step1';
 import { LinkButton } from '../../components/ui';
@@ -8,11 +8,17 @@ import { Step2 } from './Step2';
 import { Step3 } from './Step3';
 import { Step4 } from './Step4';
 import { Stepper } from '../../components/common';
+import { ApiRequestService, FormServices } from '../../../services/api/services/implementations';
+import { useSignupStore } from '../../../services/store';
+
 
 export const SignUpPage : React.FC = () => {
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
+    const apiService = ApiRequestService.getInstance()
+    const formService = new FormServices(apiService);
 
+    const {initCountryList, initIndustryList} = useSignupStore();
 
     const [signupStep, setSignupStep] = useState< 1 | 2 | 3 | 4 >(1);
 
@@ -23,6 +29,24 @@ export const SignUpPage : React.FC = () => {
     const prevStep = () => {
         setSignupStep(signupStep - 1 as  1 | 2 | 3 | 4 )
     }
+
+    useEffect(() => {
+        async function getSignupDatas() {
+            try{
+                const countryRes = await formService.getAllCountries();
+                const countryList = countryRes.content
+                initCountryList(countryList)
+
+                const industriesRes = await formService.getAllIndustries();
+                const industryList = industriesRes.content
+                initIndustryList(industryList)
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+        getSignupDatas()
+    }, [])
 
     return <Fragment>
         <div className='w-full h-full flex flex-col justify-center items-center gap-4'>
