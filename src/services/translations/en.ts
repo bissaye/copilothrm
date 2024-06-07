@@ -152,7 +152,12 @@ const en: Record<string, string> = {
     org_size: "Organisation size",
     choose_org_size: "Choose organisation size",
     domain_name: "Domain name",
-    enter_domain_name: "Enter your organisation domain"
+    enter_domain_name: "Enter your organisation domain",
+    current_password: "Current password",
+    enter_current_password: "Enter your current password",
+    new_password: "New password",
+    enter_new_password: "Enter your new password",
+    confirm_new_password: "Confirm your new password",
 }
 
 export default en;

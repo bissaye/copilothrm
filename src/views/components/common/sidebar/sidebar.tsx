@@ -9,6 +9,7 @@ import { useInviteMemberStore, usePageStore } from "../../../../services/store";
 import { InviteMemberModal } from "../modals";
 import { useNavigateById } from "../../../../hooks";
 import { pageIds } from "../../../../utils/constantes";
+import { UserData } from "../../../../services/api/DTO/response";
 export const Sidebar : React.FC = () => {
 
     const {formatMessage} = useIntl();
@@ -17,6 +18,10 @@ export const Sidebar : React.FC = () => {
     const navigateById = useNavigateById();
 
     const sidebarMenuItems = MANAGER_SIDEBAR_MENU_ITEMS;
+
+    const user: UserData = JSON.parse(localStorage.getItem("user")!)
+
+    const loggedUser = user.staff;
 
 return(
     <div className="sidebar md:w-[260px] ld:w-[15%] rounded-xl border border-gray-500 shadow-lg shadow-zinc-300 ml-8 px-5 hidden md:flex md:flex-col gap-5">
@@ -51,8 +56,8 @@ return(
                     <span className="h-3 w-3 rounded-full border-white border-[1.5px] bg-emerald-400 absolute bottom-[0.01rem] left-7"></span>
                 </div>
                 <div className="flex flex-col justify-center items-start">
-                    <h1 className=' font-body font-bold text-black text-t3 capitalize'>
-                        Amanda
+                    <h1 className=' font-body font-bold text-black text-t3'>
+                        {loggedUser.nom} {loggedUser.prenom}
                     </h1>
                     <LinkButton
                         text= {formatMessage({id:"view_profile"})}

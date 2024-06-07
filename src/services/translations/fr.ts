@@ -152,7 +152,12 @@ const fr: Record<string, string> = {
     org_size: "Taille de l'entreprise",
     choose_org_size: "Choisissez la taille de l'entreprise",
     domain_name: "Nom de domaine",
-    enter_domain_name: "Entrez le nom de dommaine de votre organisation"
+    enter_domain_name: "Entrez le nom de dommaine de votre organisation",
+    current_password: "Mot de passe actuel",
+    enter_current_password: "Enrez votre mot de passe actuel",
+    new_password: "Nouveau mot de passe",
+    enter_new_password: "Entrez votre nouveau mot de passe",
+    confirm_new_password: "Confirmez votre nouveau mot de passe",
 }
 
 export default fr;
