@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
-import { CountryData } from "../../../services/api/DTO/response";
 import { InputSelectOptions } from "../../../utils/interfaces/props";
 
 interface Step1Props {
