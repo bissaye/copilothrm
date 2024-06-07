@@ -18,7 +18,7 @@ export class AuthServices implements IAuthServices {
 
     public async register(data: UserSignupData): Promise<any> {
         console.log(data);
-        const response : UserSignupResponse = await this.apiService.post<UserSignupResponse>("/auth/register" , data);    
+        const response : UserSignupResponse = await this.apiService.post<UserSignupResponse>("/organisation/withManager" , data);    
         return response;
     }
 

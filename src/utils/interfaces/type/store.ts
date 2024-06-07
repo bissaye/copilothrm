@@ -1,5 +1,5 @@
 import { InvitedUserSignupDatas, UserSignupData } from "../../../services/api/DTO/request";
-import { UserAuthResponse } from "../../../services/api/DTO/response";
+import { CountryData, IndustryData, UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
     isLogged: boolean;
@@ -12,7 +12,19 @@ export type SignupStore = {
   signupStep: 1 | 2 | 3 | 4;
   setSignupStep: (step: 1 | 2 | 3 | 4) => void;
   userData: UserSignupData;
-  setUserData: (values: UserSignupData) => void
+  setUserData: (values: UserSignupData) => void;
+  initCountryList: (countries: CountryData[]) => void;
+  countryList: CountryData[];
+  initIndustryList: (industries: IndustryData[]) => void;
+  industryList: IndustryData[];
+  gender: [{ 
+    value: string; 
+    text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
+  }]
 }
 
 export type InvitationSignupStore = {

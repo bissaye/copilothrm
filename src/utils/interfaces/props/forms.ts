@@ -26,8 +26,10 @@ export interface InputTextProps extends CustomInputProps {
 export interface InputSelectProps extends Omit<InputTextProps, 'onChange'> {
     onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
     className?: string,
-    options : {
-        value: string,
-        text : string
-    }[]
+    options : InputSelectOptions[]
+}
+
+export interface InputSelectOptions {
+    value: string,
+    text : string
 }
