@@ -21,7 +21,7 @@ export const useAuthStore = create<AuthStore>((set) =>({
     
     // sign out
     signOut: async ()  =>{
-        localStorage.clear();
+        // localStorage.clear();
         localStorage.setItem("isLogged", "0");
         set({isLogged: false});
         return false
