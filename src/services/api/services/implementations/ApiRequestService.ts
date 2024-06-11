@@ -1,3 +1,4 @@
+import { api_base_url } from "../../../../utils/constantes";
 import { apiClient } from "../../apiClient";
 import { IApiRequestService } from "../interfaces/";
 
@@ -7,7 +8,7 @@ import { IApiRequestService } from "../interfaces/";
 export class ApiRequestService implements IApiRequestService {
 
     private static instance: ApiRequestService;
-    private token: string | null = null; 
+    private token: string | null = localStorage.getItem("token"); 
     private apiClient = apiClient;
 
     private constructor() {}
@@ -38,9 +39,9 @@ export class ApiRequestService implements IApiRequestService {
         if (auth) {
             this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
         }
+        console.log("HEADER ", this.token)
         const response = await this.apiClient.post<T>(path, data);
         return response.data as T;
-
     }
 
     public async put<T>(path: string, data: any, auth: boolean = false): Promise<T> {

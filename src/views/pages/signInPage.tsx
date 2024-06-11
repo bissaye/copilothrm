@@ -16,10 +16,13 @@ import { useAuthUseCase } from '../../services/api/usescases/AuthUseCases';
 import { useApiServices } from '../../services/api/ApiServiceContext';
 import { toastify } from '../../utils/toasts';
 import { useSpinnerStore } from '../../services/store';
+import { IApiRequestService } from '../../services/api/services/interfaces';
+import { ApiRequestService } from '../../services/api/services/implementations';
 
 export const SignInPage : React.FC = () => {
     const {authService} = useApiServices();
-    const {login} =useAuthUseCase(authService);
+    const apiRequestService: IApiRequestService = ApiRequestService.getInstance()
+    const {login} =useAuthUseCase(authService, apiRequestService);
 
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();

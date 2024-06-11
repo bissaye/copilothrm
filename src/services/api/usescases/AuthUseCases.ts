@@ -1,9 +1,9 @@
 import { InvitedUserSignupDatas, UserAuthData, UserSignupData } from "../DTO/request";
 import { UserAuthResponse } from "../DTO/response";
-import { IAuthServices } from "../services/interfaces";
+import { IApiRequestService, IAuthServices } from "../services/interfaces";
 import { useAuthStore } from "../../store";
 
-export const useAuthUseCase = (authServices: IAuthServices | null) => {
+export const useAuthUseCase = (authServices: IAuthServices | null, apiRequestService: IApiRequestService | null) => {
 
   const { signIn } = useAuthStore();
 
@@ -17,12 +17,11 @@ export const useAuthUseCase = (authServices: IAuthServices | null) => {
             "erreur lors de l'initialisation des données utilisateur"
           );
         }
-        
+        apiRequestService?.setToken(res.content.accessToken)
       } else {
         throw new Error("erreur authServices not set");
       }
     } catch (err: any) {
-      // debugger
       if(err.response.data.message) {
         const message = err.response.data.message;
         throw new Error(String(message))

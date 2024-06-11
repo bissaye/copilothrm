@@ -26,7 +26,7 @@ export const publicRoutes : Record<string, AppRoute> = {
         authRequired: false,
         element: <SignUpPage/>
     },
-    SignUpFromValidationPage :{
+    SignUpFromInvitationPage :{
         id: pageIds.SignUpFromInvitationPage,
         path: "/signup-from-invitation",
         authRequired: false,

@@ -6,12 +6,24 @@ import { LinkButton } from "../components/ui";
 import { useNavigateById } from "../../hooks";
 import { pageIds } from "../../utils/constantes";
 import { FooterLandingPage } from "../components/common";
+import { useEffect } from "react";
 
 export const ActivateAccount: React.FC = () => {
 
     //hooks
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
+
+    useEffect(() => {
+        const url = location.href
+        const token = url.split('?')[1]
+        if (!token){
+            console.log("pas de token")
+        }
+        else{
+            console.log(token);
+        }
+    }, [])
 
     return(
         <Fragment>
@@ -23,12 +35,12 @@ export const ActivateAccount: React.FC = () => {
                         <FontAwesomeIcon icon={faCheckCircle} className="text-primary text-6xl" />
                         <p className="text-2xl px-10 font-medium text-center">{formatMessage({id:"account_activated"})}</p>
                         <LinkButton
-                                text= {formatMessage({id:"sign_in_link"})}
-                                type='primary'
-                                className='font-bold'
-                                textSize={15}
-                                onClick={() => {navigateById(pageIds.SignInPage)}}
-                            />
+                            text= {formatMessage({id:"sign_in_link"})}
+                            type='primary'
+                            className='font-bold'
+                            textSize={15}
+                            onClick={() => {navigateById(pageIds.SignInPage)}}
+                        />
                     </div>
                 <FooterLandingPage/>
                 </div>
