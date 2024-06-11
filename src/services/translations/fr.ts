@@ -159,7 +159,8 @@ const fr: Record<string, string> = {
     new_password: "Nouveau mot de passe",
     enter_new_password: "Entrez votre nouveau mot de passe",
     confirm_new_password: "Confirmez votre nouveau mot de passe",
-    loading: "Chargement..."
+    loading: "Chargement...",
+    account_activated: "Votre compte a été activé avec succès. Connectez-vous."
 }
 
 export default fr;

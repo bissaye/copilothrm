@@ -57,6 +57,7 @@ export const SignInPage : React.FC = () => {
                     });
             }
             catch(error: any){
+                hideSpinner()
                 toastify('error', error.message);
             }
         }

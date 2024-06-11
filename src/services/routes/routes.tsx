@@ -1,6 +1,7 @@
 import { AppRoute } from "../../utils/interfaces/type"
 import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
+import { ActivateAccount } from "../../views/pages/activateAccount";
 
 
 
@@ -36,6 +37,12 @@ export const publicRoutes : Record<string, AppRoute> = {
         path: "/resetPasswword",
         authRequired: false,
         element: <ForgotPasswordPage/>
+    },
+    ActivateAccountPage:{
+        id: pageIds.ActivateAccount,
+        path: "/activation",
+        authRequired: false,
+        element: <ActivateAccount/>
     }
 }
 
