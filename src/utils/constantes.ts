@@ -13,7 +13,8 @@ export const pageIds  = {
     Settings: "SettingsPage",
     Payments: "PaymentsPage",
     ChooseOrg : "ChooseOrg",
-    Profile : "Profile"
+    Profile : "Profile",
+    ActivateAccount: "ActivateAccount"
 }
 
 export const otpLength :number = 6;

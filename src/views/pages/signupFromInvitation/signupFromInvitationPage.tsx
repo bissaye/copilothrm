@@ -1,15 +1,26 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Step1 } from './Step1';
 import { pageIds } from '../../../utils/constantes';
 import { useNavigateById } from '../../../hooks';
 import { Stepper } from '../../components/common';
 import { Step2 } from './Step2';
+import { ApiRequestService, FormServices } from '../../../services/api/services/implementations';
+import { useInvitationSignupStore, useSpinnerStore } from '../../../services/store';
+import { useApiServices } from '../../../services/api/ApiServiceContext';
+import { useAuthUseCase } from '../../../services/api/usescases/AuthUseCases';
+import { toastify } from '../../../utils/toasts';
 
 export const SignUpFromInvitationPage : React.FC = () => {
+    
     const {formatMessage} = useIntl();
+    const apiService = ApiRequestService.getInstance()
+    const formService = new FormServices(apiService);
+    const {authService} = useApiServices();
+    const {join} = useAuthUseCase(authService);
     const navigateById = useNavigateById();
-
+    const { showSpinner, hideSpinner } = useSpinnerStore()
+    const {initCountryList, invitedUserDatas } = useInvitationSignupStore();
 
     const [signupStep, setSignupStep] = useState< 1 | 2 >(1);
 
@@ -21,13 +32,34 @@ export const SignUpFromInvitationPage : React.FC = () => {
         setSignupStep(signupStep - 1 as  1 | 2 )
     }
 
-    const submitForm = () => {
-        return new Promise((resolve,) => {
-            setTimeout(() => {
-                resolve(navigateById(pageIds.ChooseOrg))
-            }, 2000)
-        })
+    const submitForm = async () => {
+        try{
+            const body = invitedUserDatas;
+            showSpinner()
+            await join(body).then(() => {
+                navigateById(pageIds.SignInPage)
+                hideSpinner();
+            })
+        }
+        catch(error: any){
+            hideSpinner();
+            toastify('error', error.message);
+        }
     }
+
+    useEffect(() => {
+        async function getSignupDatas() {
+            try{
+                const countryRes = await formService.getAllCountries();
+                const countryList = countryRes.content
+                initCountryList(countryList)
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+        getSignupDatas()
+    }, [])
 
     return <Fragment>
         <div className='w-full h-full flex flex-col justify-center items-center gap-4'>

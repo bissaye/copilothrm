@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { DefaultButton } from "../../components/ui";
-import { useSignupStore } from "../../../services/store";
+import { useSignupStore, useSpinnerStore } from "../../../services/store";
 import { useFormik } from "formik";
 import { Fragment, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,19 +24,23 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const {formatMessage} = useIntl();
     const { userData, gender, countryList, industryList } = useSignupStore();
     const {authService} = useApiServices();
-    const {register} =useAuthUseCase(authService);
+    const {register} = useAuthUseCase(authService);
+    const { showSpinner, hideSpinner } = useSpinnerStore()
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
 
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
+            showSpinner();
             try{
                 await register(userData).then(() => {
                     setIsSubmitted(true);
+                    hideSpinner()
                 })
             }
             catch(error: any){
+                hideSpinner()
                 toastify('error', error.message);
             }
         }
@@ -86,7 +90,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "postCode",
             name: formatMessage({id:"post_code"}),
-            value: userData.userPostcode
+            value: userData.zipCode
         },
         {
             id: "gender",
@@ -128,7 +132,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "orgPostCode",
             name: formatMessage({id:"post_code"}),
-            value: userData.orgPostcode
+            value: userData.organisationZipCode
         },
         {
             id: "orgAddress",
@@ -200,7 +204,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
                 <div className="w-full md:w-4/5 px-10 md:px-32 py-12 border border-grey-300 rounded rounded-6 shadow-md">
                     <p className="text-2xl font-medium text-center">{formatMessage({id:"user_account_created"})}</p>
                 </div>
-                <DefaultButton
+                {/* <DefaultButton
                             type = "primary"
                             text = {formatMessage({id: "resend_mail"})}
                             bgWhite = {false}
@@ -208,7 +212,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
                             marginY={20}
                             width={335}
                             className="rounded-[4px] disabled:bg-primary/80"
-                        />
+                        /> */}
             </div>
             }
         </Fragment>

@@ -24,15 +24,39 @@ export type SignupStore = {
   { 
     value: string; 
     text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
   }]
 }
 
 export type InvitationSignupStore = {
   invitedUserDatas: InvitedUserSignupDatas;
-  setInvitedUserDatas: (values: InvitedUserSignupDatas) => void
+  setInvitedUserDatas: (values: InvitedUserSignupDatas) => void;
+  initCountryList: (countries: CountryData[]) => void;
+  countryList: CountryData[];
+  gender: [{ 
+    value: string; 
+    text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
+  }]
 }
 
 export type InviteMemberStore = {
   showInviteModal: boolean;
   setShowInviteModal: (show: boolean) => void
+}
+
+export type SpinnerStore = {
+  loading: boolean;
+  showSpinner: () => void;
+  hideSpinner: () => void;
 }

@@ -147,8 +147,7 @@ export const UserProfilePage: React.FC = () => {
                             text={formatMessage({ id: "change_my_password" })}
                             type='primary'
                             bgWhite={true}
-                            textSize={11.5}
-                            paddingX={2}
+                            textSize={14}
                             className=' text-t1 hover:text-primary-600 border-0'
                             icon={faPenToSquare}
                             onClick={() => setModalVisible(true)}                    

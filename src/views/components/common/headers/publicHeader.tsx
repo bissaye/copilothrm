@@ -49,11 +49,11 @@ export const PublicHeader : React.FC = () => {
             <div className="w-full hidden md:flex">
             
                 <div className='flex flex-row justify-end items-center w-full'>
-                    <Link to={publicRoutes.LandingPage.path} type='link' className={` px-s7 py-s5 text-t3 font-body  ${page === pageIds.LandingPage ? "text-primary font-bold" : "text-gray-800" } `}>
+                    <Link to={publicRoutes.LandingPage.path} type='link' className={`px-s7 py-s5 text-t3 font-body  ${page === pageIds.LandingPage ? "text-primary font-bold" : "text-gray-800" } `}>
                         {formatMessage({id:"home_link"})}
                     </Link>
                     
-                    <Link to={publicRoutes.LandingPage.path} type='link' className='  px-s7 py-s5 text-t3 font-body text-gray-800 capitalize'>
+                    <Link to={publicRoutes.LandingPage.path} type='link' className='px-s7 py-s5 text-t3 font-body text-gray-800 capitalize'>
                         {formatMessage({id:"pricing_link"})}
                     </Link>
                 </div>
@@ -72,6 +72,8 @@ export const PublicHeader : React.FC = () => {
 
                     {
                         page !== pageIds.SignUpPage 
+                        &&
+                        page !== pageIds.ActivateAccount 
                         &&
                         <Link to={publicRoutes.SignUpPage.path} type='link' className=' text-slate-600'>
                             <DefaultButton

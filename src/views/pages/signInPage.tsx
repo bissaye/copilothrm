@@ -15,6 +15,7 @@ import { pageIds } from '../../utils/constantes';
 import { useAuthUseCase } from '../../services/api/usescases/AuthUseCases';
 import { useApiServices } from '../../services/api/ApiServiceContext';
 import { toastify } from '../../utils/toasts';
+import { useSpinnerStore } from '../../services/store';
 
 export const SignInPage : React.FC = () => {
     const {authService} = useApiServices();
@@ -22,6 +23,7 @@ export const SignInPage : React.FC = () => {
 
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
+    const { showSpinner, hideSpinner } = useSpinnerStore()
 
     const fields : Record<string, FieldsInfo> = {
         email :{
@@ -40,6 +42,7 @@ export const SignInPage : React.FC = () => {
         return field
     })
 
+
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: userSignInSchema,
@@ -47,11 +50,14 @@ export const SignInPage : React.FC = () => {
 
             const body : UserAuthData = {username : values.email, password: values.password};
             try{
+                showSpinner()
                 await login(body).then(() => {
-                    navigateById(pageIds.ChooseOrg)
-                });
+                        hideSpinner()
+                        navigateById(pageIds.ChooseOrg)
+                    });
             }
             catch(error: any){
+                hideSpinner()
                 toastify('error', error.message);
             }
         }

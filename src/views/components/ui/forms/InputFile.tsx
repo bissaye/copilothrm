@@ -10,7 +10,7 @@ import { faFile } from "@fortawesome/free-regular-svg-icons";
 export const InputFile: React.FC<InputTextProps> = (props: InputTextProps) => {
 
     const {formatMessage} = useIntl();
-    const { id, name, placeholder = formatMessage({id:"import_pic"}), disabled, onChange } = props
+    const { id, name, placeholder = formatMessage({id:"import_pic"}), disabled, onChange, fileType } = props
     const [fileName, setFileName] = useState<string>("")
     const fileInputRef = useRef<HTMLInputElement>(null);
     const {className} = props;
@@ -68,6 +68,7 @@ export const InputFile: React.FC<InputTextProps> = (props: InputTextProps) => {
                         }
                     }}
                     className=" hidden"
+                    accept={fileType ? fileType : ""}
                     ref={fileInputRef}
                 />
 

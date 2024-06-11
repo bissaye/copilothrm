@@ -14,12 +14,12 @@ export const useSignupStore = create<SignupStore>((set) => ({
         telephone: "",
         pays: "",
         ville: "",
-        userPostcode: "",
+        zipCode: "",
         rue: "",
         sexe: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        cpassword: "",
         raisonSociale: "",
         siret: "",
         industrie: "",
@@ -30,7 +30,7 @@ export const useSignupStore = create<SignupStore>((set) => ({
         organisationRue: "",
         organisationPays: "",
         organisationVille: "",
-        orgPostcode: "",
+        organisationZipCode: "",
         orgLogo: null
     },
     setUserData: (values: UserSignupData) => set((state) => ({
@@ -45,12 +45,16 @@ export const useSignupStore = create<SignupStore>((set) => ({
     industryList: [],
     gender: [
         { 
+            value: "",
+            text: "select"
+        },
+        { 
             value: '0',
-            text: 'Homme'
+            text: 'man'
         },
         { 
             value: '1',
-            text: 'Femme'
+            text: 'woman'
         }]
 }))
 
@@ -58,19 +62,33 @@ export const useInvitationSignupStore = create<InvitationSignupStore>((set) => (
     invitedUserDatas: {
         nom: "",
         prenom: "",
-        lieuNais: "",
-        dateNais: "",
-        telephone: "",
-        pays: "",
-        ville: "",
-        userPostcode: "",
-        rue: "",
+        lieuNaissance: "",
+        dateNaissance: "",
+        mobilePhone: "",
+        country: "",
+        adresseVille: "",
+        adresseZipCode: "",
+        adresseRue: "",
         sexe: "",
         email: "",
         password: "",
-        confirmPassword: ""
     },
     setInvitedUserDatas: (values: InvitedUserSignupDatas) => set((state) => ({
         invitedUserDatas: {...state.invitedUserDatas, ...values}
-    }))
+    })),
+    initCountryList: (countries: CountryData[]) => set({countryList: countries}),
+    countryList: [],
+    gender: [
+        { 
+            value: "",
+            text: "select"
+        },
+        { 
+            value: '0',
+            text: 'man'
+        },
+        { 
+            value: '1',
+            text: 'woman'
+        }]
 }))

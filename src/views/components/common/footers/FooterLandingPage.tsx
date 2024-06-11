@@ -14,9 +14,12 @@ export const FooterLandingPage : React.FC = () => {
 
     return <Fragment>
         <div className="w-full flex flex-col justify-center items-center mt-4 bg-gray-100 border border-gray-500">
-            <div className="w-full flex flex-col md:flex-row gap-7 justify-between items-start py-s17 pl-10 pr-s12 md:pr-s17">
-                <img src={imagesLogo.main} className="w-s20"/>
-                <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-[5vw] w-full">
+            <div className="w-full flex flex-col md:flex-row gap-7 justify-between items-start py-s10 pl-10 pr-s12 md:pr-s17">
+                <div className="flex flex-col justify-center self-center pr-s6">
+                    <img src={imagesLogo.main} className="w-s20"/>
+                    <p className="text-black text-t3 font-body capitalize"> &copy; 2024 Abyster Consulting.</p>
+                </div>
+                <div className="flex flex-col  md:flex-row justify-between gap-10 md:gap-[5vw] w-full">
                     <LinksGroup
                         title={formatMessage({id:"products"})}
                         listLinks={
@@ -88,8 +91,7 @@ export const FooterLandingPage : React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className=" w-full flex flex-row justify-between px-s10 md:px-s17 py-3">
-                <p className="text-black text-t3 font-body capitalize"> &copy; 2024 Abyster Consulting.</p>
+            <div className=" w-full flex flex-row justify-end pr-s10 py-5">
                 <LanguageSwitcher/>
             </div>
         </div>

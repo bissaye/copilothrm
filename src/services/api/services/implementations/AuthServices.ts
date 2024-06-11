@@ -1,5 +1,5 @@
-import { UserAuthData, UserSignupData, refreshData } from "../../DTO/request";
-import { UserAuthResponse, UserSignupResponse } from "../../DTO/response";
+import { InvitedUserSignupDatas, UserAuthData, UserSignupData, refreshData } from "../../DTO/request";
+import { InvitedUserSignupResponse, UserAuthResponse, UserSignupResponse } from "../../DTO/response";
 import { IAuthServices, IApiRequestService } from "../interfaces/";
 
 
@@ -19,6 +19,12 @@ export class AuthServices implements IAuthServices {
     public async register(data: UserSignupData): Promise<any> {
         console.log(data);
         const response : UserSignupResponse = await this.apiService.post<UserSignupResponse>("/organisation/withManager" , data);    
+        return response;
+    }
+
+    public async join(data: InvitedUserSignupDatas): Promise<InvitedUserSignupResponse>{
+        console.log(data);
+        const response : InvitedUserSignupResponse = await this.apiService.post<InvitedUserSignupResponse>("/staff" , data);    
         return response;
     }
 

@@ -65,3 +65,7 @@ export interface UserAuthResponse extends BaseApiResponse {
 export interface UserSignupResponse extends BaseApiResponse {
     content : UserData
 }
+
+export interface InvitedUserSignupResponse extends BaseApiResponse {
+    content: Staff
+}

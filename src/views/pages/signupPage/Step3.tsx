@@ -63,9 +63,9 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
             id: "organisationVille",
             name: "organisationVille"
         },
-        orgPostcode: {
-            id: "orgPostcode",
-            name: "orgPostcode"
+        organisationZipCode: {
+            id: "organisationZipCode",
+            name: "organisationZipCode"
         },
         orgLogo: {
             id: "orgLogo",
@@ -245,14 +245,14 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     {/* Code postal de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgPostcode.id}    
-                            name = {fields.orgPostcode.name}  
+                            id = {fields.organisationZipCode.id}    
+                            name = {fields.organisationZipCode.name}  
                             label={formatMessage({id:"post_code"})}
                             placeholder = {formatMessage({id: "post_code_of_organization"})} 
-                            value={values[fields.orgPostcode.name]} 
+                            value={values[fields.organisationZipCode.name]} 
                             onChange={handleChange}    
                             className="h-5"  
-                            errorMessage={ errors.orgPostcode ? errors.orgPostcode.toString() : undefined}
+                            errorMessage={ errors.organisationZipCode ? errors.organisationZipCode.toString() : undefined}
                         />
                     </div>
                     {/* Adresse postale */}
@@ -295,6 +295,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                                 }
                             }}      
                             className="h-5"
+                            fileType=".jpg, .jpeg, .png"
                             errorMessage={ errors.orgLogo ? errors.orgLogo.toString() : undefined}
                         />
                     </div>
