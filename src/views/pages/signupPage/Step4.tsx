@@ -24,7 +24,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const {formatMessage} = useIntl();
     const { userData, gender, countryList, industryList } = useSignupStore();
     const {authService} = useApiServices();
-    const {register} =useAuthUseCase(authService);
+    const {register} = useAuthUseCase(authService);
     const { showSpinner, hideSpinner } = useSpinnerStore()
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)

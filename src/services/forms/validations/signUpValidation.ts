@@ -44,3 +44,16 @@ export const userSignUpStepThreeSchema = yup.object(
         organisationZipCode: yup.string().required("required_field")
     }
 )
+
+export const invitedUserSignupStepOneSchema = yup.object(
+    {
+        nom: yup.string().required("required_field")
+                            .matches(/^[a-zA-Z0-9-_éà\s]+$/, 'invalid_name_input_format'),
+        dateNaissance: yup.date().required("required_field"),
+        mobilePhone: yup.string().required("required_field")
+                            .matches(/^[0-9]+$/, 'invalid_phone_input_format'),
+        country: yup.string().required("required_field"),
+        adresseVille: yup.string().required("required_field"),
+        sexe: yup.string().required("required_field")
+    }
+)

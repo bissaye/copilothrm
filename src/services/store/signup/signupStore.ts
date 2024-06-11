@@ -62,19 +62,33 @@ export const useInvitationSignupStore = create<InvitationSignupStore>((set) => (
     invitedUserDatas: {
         nom: "",
         prenom: "",
-        lieuNais: "",
-        dateNais: "",
-        telephone: "",
-        pays: "",
-        ville: "",
-        userPostcode: "",
-        rue: "",
+        lieuNaissance: "",
+        dateNaissance: "",
+        mobilePhone: "",
+        country: "",
+        adresseVille: "",
+        adresseZipCode: "",
+        adresseRue: "",
         sexe: "",
         email: "",
         password: "",
-        confirmPassword: ""
     },
     setInvitedUserDatas: (values: InvitedUserSignupDatas) => set((state) => ({
         invitedUserDatas: {...state.invitedUserDatas, ...values}
-    }))
+    })),
+    initCountryList: (countries: CountryData[]) => set({countryList: countries}),
+    countryList: [],
+    gender: [
+        { 
+            value: "",
+            text: "select"
+        },
+        { 
+            value: '0',
+            text: 'man'
+        },
+        { 
+            value: '1',
+            text: 'woman'
+        }]
 }))

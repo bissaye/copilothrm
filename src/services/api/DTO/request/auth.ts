@@ -39,17 +39,19 @@ export interface refreshData {
 }
 
 export interface InvitedUserSignupDatas {
-    nom: string,
-    prenom: string,
-    lieuNais: string,
-    dateNais: string,
-    telephone: string,
-    pays: string,
-    ville: string,
-    userPostcode: string,
-    rue: string,
-    sexe: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
+  country: string,
+  nom: string,
+  prenom?: string,
+  sexe: string,
+  idOrganisation?: string,
+  dateNaissance: string,
+  lieuNaissance?: string,
+  email: string,
+  password: string,
+  mobilePhone: string,
+  adresseRue: string,
+  adresseZipCode: string,
+  adresseVille: string,
+  familyContactPhone?: string,
+  familyContactQuality?: string
 }

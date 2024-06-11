@@ -33,7 +33,21 @@ export type SignupStore = {
 
 export type InvitationSignupStore = {
   invitedUserDatas: InvitedUserSignupDatas;
-  setInvitedUserDatas: (values: InvitedUserSignupDatas) => void
+  setInvitedUserDatas: (values: InvitedUserSignupDatas) => void;
+  initCountryList: (countries: CountryData[]) => void;
+  countryList: CountryData[];
+  gender: [{ 
+    value: string; 
+    text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
+  }]
 }
 
 export type InviteMemberStore = {

@@ -16,11 +16,10 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     // props
     const { handleSubmitNextStep, handlePrevStep } = props;
 
-
     // hooks
     const {formatMessage} = useIntl();
     const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
-
+    
     //constantes
     const fields : Record<string, FieldsInfo> = {
         email :{
@@ -31,9 +30,9 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             id : "password",
             name : "password",
         },
-        confirmPassword :{
-            id : "confirmPassword",
-            name : "confirmPassword",
+        cpassword :{
+            id : "cpassword",
+            name : "cpassword",
         }
     }
     const initialValues: any = {}
@@ -91,14 +90,14 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px]">
                     <InputPassword
-                        id = {fields.confirmPassword.id}    
-                        name =  {fields.confirmPassword.name}  
+                        id = {fields.cpassword.id}    
+                        name =  {fields.cpassword.name}  
                         label={formatMessage({id:"confirm_password"})}
                         placeholder = {formatMessage({id: "confirm_your_password"})}
                         icon = {faLock}  
-                        value={values[fields.confirmPassword.name]} 
+                        value={values[fields.cpassword.name]} 
                         onChange={handleChange}  
-                        errorMessage={ errors.confirmPassword ? errors.confirmPassword.toString() : undefined}
+                        errorMessage={ errors.cpassword ? errors.cpassword.toString() : undefined}
                     />
                 </div>
             </div>
