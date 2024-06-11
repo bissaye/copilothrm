@@ -82,6 +82,7 @@ const en: Record<string, string> = {
     confirm_your_password: "Confirm your password",
     incorrect_password_uppercase: "Your password must contain at least one uppercase letter",
     incorrect_password_lowercase: "Your password must contain at least one lowercase letter",
+    incorrect_password_special_char: "Password must contain at least one special character",
     incorrect_password_number: "Your password must contain at least one number",
     incorrect_password_whitespace: "Your password must nnot contain whitespace",
     incorrect_password_length: "Your password must have at least 8 characters",
@@ -158,6 +159,7 @@ const en: Record<string, string> = {
     new_password: "New password",
     enter_new_password: "Enter your new password",
     confirm_new_password: "Confirm your new password",
+    loading: "Loading..."
 }
 
 export default en;

@@ -82,6 +82,7 @@ const fr: Record<string, string> = {
     confirm_your_password: "Confirmez votre mot de passe",
     incorrect_password_uppercase: "Le mot de passe doit contenir au moins une majuscule",
     incorrect_password_lowercase: "Le mot de passe doit contenir au moins une minuscule",
+    incorrect_password_special_char: "Le mot de passe doit contenir au moins un caractère spécial",
     incorrect_password_number: "Le mot de passe doit contenir au moins un chiffre",
     incorrect_password_whitespace: "Le mot de passe ne doit pas contenir d'espace",
     incorrect_password_length: "Le mot de passe doit faire au moins 8 caractères",
@@ -158,6 +159,7 @@ const fr: Record<string, string> = {
     new_password: "Nouveau mot de passe",
     enter_new_password: "Entrez votre nouveau mot de passe",
     confirm_new_password: "Confirmez votre nouveau mot de passe",
+    loading: "Chargement..."
 }
 
 export default fr;

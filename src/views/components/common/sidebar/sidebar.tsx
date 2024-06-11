@@ -48,6 +48,7 @@ return(
                 icon={faPlus}
                 text={formatMessage({id:"invite_member"})}
                 radius='md'
+                className=" hover:bg-primary-550"
                 onClick={() => setShowInviteModal(true)}
             />
             <div className='flex flex-row justify-evenly gap-4 items-start h-[40px] mb-3'>
@@ -61,8 +62,8 @@ return(
                     </h1>
                     <LinkButton
                         text= {formatMessage({id:"view_profile"})}
-                        className='w-full text-neutral-500 text-t1 underline hover:text-neutral-600'
-                        textSize={12}
+                        className='w-full text-neutral-500 hover:text-neutral-600 hover:underline'
+                        textSize={15}
                         onClick={() => {navigateById(pageIds.Profile)}}
                     />
                 </div>

@@ -2,9 +2,11 @@ import React , {Fragment} from "react";
 import { InputSelectProps } from "../../../../utils/interfaces/props";
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
+import { useIntl } from "react-intl";
 
 export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProps) => {
     const {id, name, value, placeholder, disabled, onChange, options, className} = props
+    const {formatMessage} = useIntl();
     return <Fragment>
         <CustumInputContainer
             {...props}
