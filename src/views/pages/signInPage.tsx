@@ -1,7 +1,7 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { useIntl } from 'react-intl';
 import { FooterSignInPage } from '../components/common';
-import { DefaultButton, InputPassword, InputText, LinkButton, Spinner } from '../components/ui';
+import { DefaultButton, InputPassword, InputText, LinkButton } from '../components/ui';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { FieldsInfo } from '../../utils/interfaces/type';
 import { useFormik } from 'formik';
