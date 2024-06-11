@@ -61,3 +61,7 @@ thead {
 .first-word-uppercase::first-letter {
   text-transform: capitalize;
 }
+
+main {
+  height: calc(100vh - 6rem)
+}
