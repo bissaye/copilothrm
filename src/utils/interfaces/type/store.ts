@@ -24,6 +24,10 @@ export type SignupStore = {
   { 
     value: string; 
     text: string; 
+  },
+  { 
+    value: string; 
+    text: string; 
   }]
 }
 
@@ -35,4 +39,10 @@ export type InvitationSignupStore = {
 export type InviteMemberStore = {
   showInviteModal: boolean;
   setShowInviteModal: (show: boolean) => void
+}
+
+export type SpinnerStore = {
+  loading: boolean;
+  showSpinner: () => void;
+  hideSpinner: () => void;
 }

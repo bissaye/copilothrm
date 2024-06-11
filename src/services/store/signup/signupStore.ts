@@ -14,12 +14,12 @@ export const useSignupStore = create<SignupStore>((set) => ({
         telephone: "",
         pays: "",
         ville: "",
-        userPostcode: "",
+        zipCode: "",
         rue: "",
         sexe: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        cpassword: "",
         raisonSociale: "",
         siret: "",
         industrie: "",
@@ -30,7 +30,7 @@ export const useSignupStore = create<SignupStore>((set) => ({
         organisationRue: "",
         organisationPays: "",
         organisationVille: "",
-        orgPostcode: "",
+        organisationZipCode: "",
         orgLogo: null
     },
     setUserData: (values: UserSignupData) => set((state) => ({
@@ -45,12 +45,16 @@ export const useSignupStore = create<SignupStore>((set) => ({
     industryList: [],
     gender: [
         { 
+            value: "",
+            text: "select"
+        },
+        { 
             value: '0',
-            text: 'Homme'
+            text: 'man'
         },
         { 
             value: '1',
-            text: 'Femme'
+            text: 'woman'
         }]
 }))
 

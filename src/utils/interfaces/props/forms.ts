@@ -19,6 +19,7 @@ export interface InputTextProps extends CustomInputProps {
     disabled?: boolean;
     blockCopy?: boolean;
     blockPaste?: boolean;
+    fileType?: string;
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 }
