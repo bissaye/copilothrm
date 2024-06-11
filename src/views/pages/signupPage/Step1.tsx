@@ -45,9 +45,9 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
             id : "ville",
             name : "ville",
         },
-        userPostcode :{
-            id : "userPostcode",
-            name : "userPostcode",
+        zipCode :{
+            id : "zipCode",
+            name : "zipCode",
         },
         rue :{
             id : "rue",
@@ -58,6 +58,13 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
             name : "sexe",
         }
     }
+
+    const genderOptions = gender.map((obj) => {
+        return {
+            value: obj.value,
+            text: formatMessage({id: obj.text})
+        }
+    })
 
     const countryOptions: InputSelectOptions[] = countryList.map((country) => {
         return {
@@ -148,7 +155,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             label={formatMessage({id:"gender"})}
                             value={values[fields.sexe.name]} 
                             onChange={handleChange}
-                            options={gender}      
+                            options={genderOptions}      
                             errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
                         />
                     </div>
@@ -197,13 +204,13 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                     {/* Code postal */}
                     <div>
                         <InputText
-                            id = {fields.userPostcode.id}    
-                            name =  {fields.userPostcode.name}  
+                            id = {fields.zipCode.id}    
+                            name =  {fields.zipCode.name}  
                             label={formatMessage({id:"post_code"})}
                             placeholder = {formatMessage({id: "enter_your_post_code"})} 
-                            value={values[fields.userPostcode.name]} 
+                            value={values[fields.zipCode.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.userPostcode ? errors.userPostcode.toString() : undefined}
+                            errorMessage={ errors.zipCode ? errors.zipCode.toString() : undefined}
                         />
                     </div>
                     {/* Adresse postale */}
