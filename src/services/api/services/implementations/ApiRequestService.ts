@@ -1,4 +1,3 @@
-import { api_base_url } from "../../../../utils/constantes";
 import { apiClient } from "../../apiClient";
 import { IApiRequestService } from "../interfaces/";
 

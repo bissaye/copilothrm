@@ -17,7 +17,7 @@ export const SignUpFromInvitationPage : React.FC = () => {
     const apiService = ApiRequestService.getInstance()
     const formService = new FormServices(apiService);
     const {authService} = useApiServices();
-    const {join} = useAuthUseCase(authService);
+    const {join} = useAuthUseCase(authService, apiService);
     const navigateById = useNavigateById();
     const { showSpinner, hideSpinner } = useSpinnerStore()
     const {initCountryList, invitedUserDatas } = useInvitationSignupStore();

@@ -2,13 +2,12 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputPassword } from "../../ui"
 import { useIntl } from "react-intl"
-import { faEye } from "@fortawesome/free-regular-svg-icons"
 import { useFormik } from "formik"
 import * as yup from "yup";
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
 import { useSpinnerStore } from "../../../../services/store"
 import { toastify } from "../../../../utils/toasts"
-import { useUserUseCase } from "../../../../services/api/usescases/UserUSeCases"
+import { useUserUseCase } from "../../../../services/api/usescases/UserUseCases"
 import { ChangeUserPasswordData } from "../../../../services/api/DTO/request"
 
 interface ChangePasswordModalProps {
