@@ -9,6 +9,7 @@ import { SummaryBox } from "../../components/common";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useAuthUseCase } from "../../../services/api/usescases/AuthUseCases";
 import { toastify } from "../../../utils/toasts";
+import { ApiRequestService } from "../../../services/api/services/implementations";
 
 interface Step4Props {
     handleSubmitNextStep?: () => void;
@@ -24,7 +25,8 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const {formatMessage} = useIntl();
     const { userData, gender, countryList, industryList } = useSignupStore();
     const {authService} = useApiServices();
-    const {register} = useAuthUseCase(authService);
+    const apiService = ApiRequestService.getInstance()
+    const {register} = useAuthUseCase(authService, apiService);
     const { showSpinner, hideSpinner } = useSpinnerStore()
 
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false)
