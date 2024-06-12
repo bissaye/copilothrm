@@ -56,6 +56,7 @@ export type InviteMemberStore = {
 
 export type SpinnerStore = {
   loading: boolean;
-  showSpinner: () => void;
+  text?: string;
+  showSpinner: (text?: string) => void;
   hideSpinner: () => void;
 }

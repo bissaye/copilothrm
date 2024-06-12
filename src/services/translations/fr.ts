@@ -161,7 +161,8 @@ const fr: Record<string, string> = {
     confirm_new_password: "Confirmez votre nouveau mot de passe",
     loading: "Chargement...",
     account_activated: "Votre compte a été activé avec succès. Connectez-vous.",
-    no_options: "Aucune option..."
+    no_options: "Aucune option...",
+    init_form: "Initialisation du formulaire..."
 }
 
 export default fr;

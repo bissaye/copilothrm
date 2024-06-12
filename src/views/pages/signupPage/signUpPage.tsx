@@ -34,7 +34,7 @@ export const SignUpPage : React.FC = () => {
 
     useEffect(() => {
         async function getSignupDatas() {
-            showSpinner()
+            showSpinner(formatMessage({id:"init_form"}))
             try{
                 await initSignupForm().then(response => {
                     initCountryList(response!.countryList)
