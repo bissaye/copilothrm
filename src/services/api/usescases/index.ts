@@ -1,3 +1,3 @@
 export * from './AuthUseCases';
-export * from './UserUSeCases';
+export * from './UserUseCases';
 export * from './FormUseCases';
