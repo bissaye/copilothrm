@@ -153,6 +153,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             id = {fields.sexe.id}    
                             name =  {fields.sexe.name}  
                             label={formatMessage({id:"gender"})}
+                            placeholder={formatMessage({id:"select"})}
                             value={values[fields.sexe.name]} 
                             onChange={handleChange}
                             options={genderOptions}      
