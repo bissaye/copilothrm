@@ -32,8 +32,8 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             name : "password",
         },
         cPassword :{
-            id : "cPassword",
-            name : "cPassword",
+            id : "cpassword",
+            name : "cpassword",
         }
     }
 

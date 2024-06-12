@@ -31,6 +31,7 @@ export const useSignupStore = create<SignupStore>((set) => ({
         organisationPays: "",
         organisationVille: "",
         organisationZipCode: "",
+        trigram: "",
         orgLogo: null
     },
     setUserData: (values: UserSignupData) => set((state) => ({
@@ -47,11 +48,11 @@ export const useSignupStore = create<SignupStore>((set) => ({
     initTailleEntrepriseList: (taillesEntreprise: TailleEntreprise[]) => set({tailleEntrepriseList: taillesEntreprise}),
     gender: [
         { 
-            value: '0',
+            value: 'homme',
             text: 'man'
         },
         { 
-            value: '1',
+            value: 'femme',
             text: 'woman'
         }]
 }))

@@ -24,7 +24,7 @@ export const userSignUpStepTwoSchema = yup.object(
         .matches(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,"incorrect_password_special_char")
         .test('no(space', "incorrect_password_whitespace", (value) => !/\s/.test(value))
         .min(8, "incorrect_password_length"),
-        cPassword: yup.string().required("required_field")
+        cpassword: yup.string().required("required_field")
                             .oneOf([yup.ref('password')], 'unmatching_password'),
     }
 )
@@ -41,7 +41,9 @@ export const userSignUpStepThreeSchema = yup.object(
         tailleEntreprise: yup.string().required('required_field'),
         organisationPays: yup.string().required("required_field"),
         organisationVille: yup.string().required("required_field"),
-        organisationZipCode: yup.string().required("required_field")
+        organisationZipCode: yup.string().required("required_field"),
+        trigram: yup.string().required("required_field"),
+        siret: yup.string().required("required_field"),
     }
 )
 
