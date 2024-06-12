@@ -49,7 +49,8 @@ export interface Staff {
     adresseZipCode: string,
     adresseVille: string,
     familyContactPhone: string,
-    familyContactQuality: string
+    familyContactQuality: string,
+    userId: string
 }
 
 export interface AuthResponse {

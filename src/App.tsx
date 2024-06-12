@@ -12,7 +12,6 @@ function App() {
   const { lang } = useLangStore();
   const { initAuth } = useAuthStore();
   const {loading} = useSpinnerStore();
-  console.log("App", loading);
 
   useEffect(() => {
     initAuth();

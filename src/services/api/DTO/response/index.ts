@@ -1,5 +1,4 @@
 export * from './auth';
 export * from './baseResponses';
-export * from './country';
-export * from './industry';
+export * from './form';
 export * from './user';

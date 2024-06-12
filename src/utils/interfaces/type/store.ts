@@ -1,5 +1,5 @@
 import { InvitedUserSignupDatas, UserSignupData } from "../../../services/api/DTO/request";
-import { CountryData, IndustryData, UserAuthResponse } from "../../../services/api/DTO/response";
+import { CountryData, IndustryData, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
     isLogged: boolean;
@@ -17,10 +17,9 @@ export type SignupStore = {
   countryList: CountryData[];
   initIndustryList: (industries: IndustryData[]) => void;
   industryList: IndustryData[];
-  gender: [{ 
-    value: string; 
-    text: string; 
-  },
+  tailleEntrepriseList: TailleEntreprise[];
+  initTailleEntrepriseList: (taillesEntreprise: TailleEntreprise[]) => void;
+  gender: [
   { 
     value: string; 
     text: string; 
@@ -57,6 +56,7 @@ export type InviteMemberStore = {
 
 export type SpinnerStore = {
   loading: boolean;
-  showSpinner: () => void;
+  text?: string;
+  showSpinner: (text?: string) => void;
   hideSpinner: () => void;
 }
