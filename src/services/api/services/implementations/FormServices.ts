@@ -1,4 +1,4 @@
-import { CountryListResponse, CountryResponse, IndustryListResponse } from "../../DTO/response";
+import { CountryListResponse, CountryResponse, IndustryListResponse, TailleEntrepriseResponse } from "../../DTO/response";
 import { IApiRequestService, IFormServices } from "../interfaces";
 
 
@@ -22,6 +22,10 @@ export class FormServices implements IFormServices {
 
     public async getAllIndustries(): Promise<IndustryListResponse> {
         const response : IndustryListResponse = await this.apiService.get<IndustryListResponse>("/industrie/");    
+        return response;
+    }
+    public async getTailleEntreprise(): Promise<TailleEntrepriseResponse> {
+        const response : TailleEntrepriseResponse = await this.apiService.get<TailleEntrepriseResponse>("/taille-entreprise/");    
         return response;
     }
 }

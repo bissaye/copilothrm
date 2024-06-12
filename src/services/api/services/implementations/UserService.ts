@@ -1,4 +1,4 @@
-import { ChangeUserPasswordData } from "../../DTO/request";
+import { ChangeUserPasswordData, UpdateUserData } from "../../DTO/request";
 import { ChangeUserPasswordResponse } from "../../DTO/response";
 import { IApiRequestService } from "../interfaces";
 import { IUserServices } from "../interfaces/IUserServices";
@@ -11,8 +11,8 @@ export class UserServices implements IUserServices {
         this.apiService = apiService;
     }
 
-    public async updateProfile(user: any): Promise<any> {
-        const response = this.apiService.put("/staff/", user)
+    public async updateUserProfile(user: UpdateUserData): Promise<any> {
+        const response: any = this.apiService.put<any>("/staff/", user)
         return response;
     }
 

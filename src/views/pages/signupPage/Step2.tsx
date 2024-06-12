@@ -31,9 +31,9 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             id : "password",
             name : "password",
         },
-        confirmPassword :{
-            id : "confirmPassword",
-            name : "confirmPassword",
+        cPassword :{
+            id : "cpassword",
+            name : "cpassword",
         }
     }
 
@@ -61,7 +61,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
 
     return(
         <form 
-            className="flex flex-col gap-7 items-center w-full"
+            className="flex flex-col gap-7 justify-center items-center w-full"
             onSubmit={handleSubmit}
         >
             <div className='w-full md:w-[89%]'>
@@ -69,13 +69,14 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                     id = {fields.email.id}    
                     name =  {fields.email.name}  
                     label='Email'
+                    required
                     placeholder = {formatMessage({id: "enter_your_email_address"})}
                     value={values.email} 
                     onChange={handleChange}      
                     errorMessage={ errors.email ? errors.email.toString() : undefined}
                 />
             </div>
-            <div className="flex flex-col md:flex-row justify-center items-start gap-5 md:gap-36 md:mb-8 w-full h-80">
+            <div className="flex flex-col md:flex-row justify-center items-start gap-5 md:gap-36 md:mb-8 w-full md:w-[89%] h-80">
                 
                 {/* colonne de gauche */}
                 <div className="w-full md:w-[422px]">
@@ -84,6 +85,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                         name =  {fields.password.name}  
                         label={formatMessage({id:"password"})}
                         placeholder = {formatMessage({id: "enter_your_password"})}
+                        required
                         icon = {faLock}  
                         value={values.password} 
                         onChange={handleChange}  
@@ -94,14 +96,15 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px]">
                     <InputPassword
-                        id = {fields.cpassword.id}    
-                        name =  {fields.cpassword.name}  
+                        id = {fields.cPassword.id}    
+                        name =  {fields.cPassword.name}  
                         label={formatMessage({id:"confirm_password"})}
                         placeholder = {formatMessage({id: "confirm_your_password"})}
+                        required
                         icon = {faLock}  
-                        value={values[fields.cpassword.name]} 
+                        value={values[fields.cPassword.name]} 
                         onChange={handleChange}  
-                        errorMessage={ errors.cpassword ? errors.cpassword.toString() : undefined}
+                        errorMessage={ errors.cPassword ? errors.cPassword.toString() : undefined}
                     />
                 </div>
             </div>

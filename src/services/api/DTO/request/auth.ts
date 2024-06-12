@@ -28,7 +28,7 @@ export interface UserSignupData {
   organisationPays: string,
   organisationRue: string,
   organisationVille: string,
-  trigram?: string,
+  trigram: string,
   organisationZipCode: string,
   cpassword: string,
   orgLogo?: File | null

@@ -23,7 +23,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
 
     //hooks
     const {formatMessage} = useIntl();
-    const { userData, gender, countryList, industryList } = useSignupStore();
+    const { userData, gender, countryList, industryList, tailleEntrepriseList } = useSignupStore();
     const {authService} = useApiServices();
     const apiService = ApiRequestService.getInstance()
     const {register} = useAuthUseCase(authService, apiService);
@@ -34,7 +34,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
     const formik = useFormik({
         initialValues: userData,
         onSubmit: async () => {
-            showSpinner();
+            showSpinner(formatMessage({id:"account_creating"}));
             try{
                 await register(userData).then(() => {
                     setIsSubmitted(true);
@@ -112,14 +112,29 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
             value: userData.siret
         },
         {
-            id: "email",
-            name: "email",
+            id: "trigram",
+            name: formatMessage({id:"Trigram"}),
+            value: userData.trigram
+        },
+        {
+            id: "taillEntreprise",
+            name: formatMessage({id:"org_size"}),
+            value: tailleEntrepriseList.find((taille) => taille.tailleEntrepriseId == userData.tailleEntreprise)!.libelle
+        },
+        {
+            id: "Email",
+            name: "Email",
             value: userData.organisationEmail
         },
         {
             id: "organisationPhone",
             name: formatMessage({id:"phone"}),
             value: userData.organisationPhone
+        },
+        {
+            id: "industry",
+            name: formatMessage({id:"industry"}),
+            value: industryList.find((industry) => industry.industrieId == userData.industrie)!.libelle
         },
         {
             id: "orgCountry",
@@ -142,9 +157,9 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
             value: userData.organisationRue
         },
         {
-            id: "industry",
-            name: formatMessage({id:"industry"}),
-            value: industryList.find((industry) => industry.industrieId == userData.industrie)!.libelle
+            id: "orgLogo",
+            name: formatMessage({id:"Logo"}),
+            value: userData.orgLogo?.name
         }
     ]
 

@@ -2,9 +2,11 @@ import { Fragment } from "react/jsx-runtime"
 import { InputText } from "../ui";
 
 interface SummaryBoxProps {
-    infos: {id: string,
+    infos: {
+        id: string,
         name: string,
-        value: string}[],
+        value: string | undefined
+    }[],
     title: string
 }
 

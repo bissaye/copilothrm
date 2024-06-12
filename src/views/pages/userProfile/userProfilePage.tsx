@@ -16,16 +16,16 @@ import { UserData } from "../../../services/api/DTO/response"
 
 export const UserProfilePage: React.FC = () => {
 
+    //hooks
     const {formatMessage} = useIntl();
-
-    const { userData, setUserData } = useSignupStore();
+    const { userData, setUserData, gender } = useSignupStore();
     const [modalVisible, setModalVisible] = useState(false);
 
+    //constantes
     const user: UserData = JSON.parse(localStorage.getItem("user")!)
-
+    
     const loggedUser = user.staff;
-
-
+    
     const fields : Record<string, FieldsInfo> = {
         nom :{
             id : "nom",
@@ -35,54 +35,54 @@ export const UserProfilePage: React.FC = () => {
             id : "prenom",
             name : "prenom",
         },
-        lieuNais :{
-            id : "lieuNais",
-            name : "lieuNais",
+        lieuNaissance :{
+            id : "lieuNaissance",
+            name : "lieuNaissance",
         },
-        dateNais :{
-            id : "dateNais",
-            name : "dateNais",
+        dateNaissance :{
+            id : "dateNaissance",
+            name : "dateNaissance",
         },
-        telephone :{
+        mobilePhone :{
             id : "telephone",
             name : "telephone",
         },
-        pays :{
-            id : "pays",
-            name : "pays",
+        country :{
+            id : "country",
+            name : "country",
         },
-        ville :{
-            id : "ville",
-            name : "ville",
+        adresseVille :{
+            id : "adresseVille",
+            name : "adresseVille",
         },
-        userPostcode :{
-            id : "userPostcode",
-            name : "userPostcode",
+        adresseZipCode :{
+            id : "adresseZipCode",
+            name : "adresseZipCode",
         },
-        rue :{
-            id : "rue",
-            name : "rue",
+        adresseRue :{
+            id : "adresseRue",
+            name : "adresseRue",
         },
         sexe :{
             id : "sexe",
             name : "sexe",
+        },
+        familyContactPhone: {
+            id: "familyContactPhone",
+            name: "familyContactPhone"
+        },
+        familyContactQuality: {
+            id: "familyContactQuality",
+            name: "familyContactQuality"
         }
     }
 
-    const genderOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: formatMessage({id:"man"})
-        },
-        {
-            value: "1",
-            text: formatMessage({id:"woman"})
+    const genderOptions = gender.map((obj) => {
+        return {
+            value: obj.value,
+            text: formatMessage({id: obj.text})
         }
-    ]
+    })
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
@@ -231,39 +231,39 @@ export const UserProfilePage: React.FC = () => {
                                 {/* Date de naissance */}
                                 <div>
                                     <InputDate
-                                        id = {fields.dateNais.id}    
-                                        name = {fields.dateNais.name}
+                                        id = {fields.dateNaissance.id}    
+                                        name = {fields.dateNaissance.name}
                                         className="h-5"
                                         label={formatMessage({id:"birthdate"})}
-                                        value={values[fields.dateNais.name]} 
+                                        value={values[fields.dateNaissance.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.dateNais ? errors.dateNais.toString() : undefined}
+                                        errorMessage={ errors.dateNaissance ? errors.dateNaissance.toString() : undefined}
                                     />
                                 </div>
                                 {/* Lieu de naissance */}
                                 <div>
                                     <InputText
-                                        id = {fields.lieuNais.id}    
-                                        name = {fields.lieuNais.name}
+                                        id = {fields.lieuNaissance.id}    
+                                        name = {fields.lieuNaissance.name}
                                         className="h-5" 
                                         label={formatMessage({id:"birth_place"})}
                                         placeholder = {formatMessage({id: "your_place_of_birth"})} 
-                                        value={values[fields.lieuNais.name]} 
+                                        value={values[fields.lieuNaissance.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.lieuNais ? errors.lieuNais.toString() : undefined}
+                                        errorMessage={ errors.lieuNaissance ? errors.lieuNaissance.toString() : undefined}
                                     />
                                 </div>
                                 {/* Téléphone */}
                                 <div>
                                     <InputText
-                                        id = {fields.telephone.id}    
-                                        name =  {fields.telephone.name}
+                                        id = {fields.mobilePhone.id}    
+                                        name =  {fields.mobilePhone.name}
                                         className="h-5"
                                         label={formatMessage({id:"phone"})}
                                         placeholder = {formatMessage({id: "enter_your_phone"})} 
-                                        value={values[fields.telephone.name]} 
+                                        value={values[fields.mobilePhone.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
+                                        errorMessage={ errors.mobilePhone ? errors.mobilePhone.toString() : undefined}
                                     />
                                 </div>
                             </div>
@@ -273,53 +273,53 @@ export const UserProfilePage: React.FC = () => {
                                 {/* Pays */}
                                 <div>
                                     <InputText
-                                        id = {fields.pays.id}    
-                                        name =  {fields.pays.name}
+                                        id = {fields.country.id}    
+                                        name =  {fields.country.name}
                                         className="h-5"
                                         label={formatMessage({id:"country"})}
                                         placeholder = {formatMessage({id: "enter_your_country"})} 
-                                        value={values[fields.pays.name]} 
+                                        value={values[fields.country.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.pays ? errors.pays.toString() : undefined}
+                                        errorMessage={ errors.country ? errors.country.toString() : undefined}
                                     />
                                 </div>
                                 {/* Ville */}
                                 <div>
                                     <InputText
-                                        id = {fields.ville.id}    
-                                        name =  {fields.ville.name}  
+                                        id = {fields.adresseVille.id}    
+                                        name =  {fields.adresseVille.name}  
                                         className="h-5"
                                         label={formatMessage({id:"city"})}
                                         placeholder = {formatMessage({id: "enter_your_city"})} 
-                                        value={values[fields.ville.name]} 
+                                        value={values[fields.adresseVille.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.ville ? errors.ville.toString() : undefined}
+                                        errorMessage={ errors.adresseVille ? errors.adresseVille.toString() : undefined}
                                     />
                                 </div>
                                 {/* Code postal */}
                                 <div>
                                     <InputText
-                                        id = {fields.userPostcode.id}    
-                                        name =  {fields.userPostcode.name}  
+                                        id = {fields.adresseZipCode.id}    
+                                        name =  {fields.adresseZipCode.name}  
                                         className="h-5"
                                         label={formatMessage({id:"post_code"})}
                                         placeholder = {formatMessage({id: "enter_your_post_code"})} 
-                                        value={values[fields.userPostcode.name]} 
+                                        value={values[fields.adresseZipCode.name]} 
                                         onChange={handleChange}      
-                                        errorMessage={ errors.userPostcode ? errors.userPostcode.toString() : undefined}
+                                        errorMessage={ errors.adresseZipCode ? errors.adresseZipCode.toString() : undefined}
                                     />
                                 </div>
                                 {/* Adresse postale */}
                                 <div>
                                     <InputText
-                                        id = {fields.rue.id}    
-                                        name =  {fields.rue.name}  
+                                        id = {fields.adresseRue.id}    
+                                        name =  {fields.adresseRue.name}  
                                         className="h-5"
                                         label={formatMessage({id:"address"})}
                                         placeholder = {formatMessage({id: "enter_your_address"})} 
-                                        value={values[fields.rue.name]} 
+                                        value={values[fields.adresseRue.name]} 
                                         onChange={handleChange}
-                                        errorMessage={ errors.rue ? errors.rue.toString() : undefined}
+                                        errorMessage={ errors.adresseRue ? errors.adresseRue.toString() : undefined}
                                     />
                                 </div>
                             </div>

@@ -1,17 +1,17 @@
-import { ChangeUserPasswordData } from "../DTO/request";
+import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
 export const useUserUseCase = (userServices: IUserServices | null) => {
     
-    const updateUserProfile = async (data: any) => {
+    const updateUserProfile = async (data: UpdateUserData) => {
         try{
             if(userServices){
-                const response = await userServices.updateProfile(data)
+                const response = await userServices.updateUserProfile(data)
                 return response;
             }
             else {
-                throw new Error("erreur authServices not set");
-              }
+                throw new Error("erreur userServices not set");
+            }
         }
         catch (err: any) {
             if(err.response.data.message) {

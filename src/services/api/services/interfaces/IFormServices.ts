@@ -1,4 +1,4 @@
-import {CountryListResponse, CountryResponse, IndustryListResponse } from '../../DTO/response'
+import {CountryListResponse, CountryResponse, IndustryListResponse, TailleEntrepriseResponse } from '../../DTO/response'
 
 export interface IFormServices {
 
@@ -8,4 +8,7 @@ export interface IFormServices {
 
     // Industries
     getAllIndustries() : Promise<IndustryListResponse>;
+
+    // Tailles d'entreprise
+    getTailleEntreprise(): Promise<TailleEntrepriseResponse>;
 }
