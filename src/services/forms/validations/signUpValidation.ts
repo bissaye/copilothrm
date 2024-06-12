@@ -24,7 +24,7 @@ export const userSignUpStepTwoSchema = yup.object(
         .matches(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,"incorrect_password_special_char")
         .test('no(space', "incorrect_password_whitespace", (value) => !/\s/.test(value))
         .min(8, "incorrect_password_length"),
-        cpassword: yup.string().required("required_field")
+        cPassword: yup.string().required("required_field")
                             .oneOf([yup.ref('password')], 'unmatching_password'),
     }
 )
