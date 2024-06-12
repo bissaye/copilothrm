@@ -1,4 +1,4 @@
-import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
+import { ActivateUserData, ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
 export const useUserUseCase = (userServices: IUserServices | null) => {
@@ -25,7 +25,6 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
     const changeUserPassword = async (data: ChangeUserPasswordData) => {
         try{
             if(userServices){
-                debugger
                 const response = await userServices.changePassword(data)
                 return response;
             }
@@ -34,9 +33,26 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
               }
         }
         catch (err: any) {
-            debugger
             if(err.response.data.message) {
-                debugger
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const activateUserAccount = async (data: ActivateUserData) => {
+        try{
+            if(userServices){
+                const response = await userServices.activateUserAccount(data)
+                return response;
+            }
+            else {
+                throw new Error("erreur authServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
               const message = err.response.data.message;
               throw new Error(String(message))
             }
@@ -46,6 +62,7 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
 
     return {
         updateUserProfile,
-        changeUserPassword
+        changeUserPassword,
+        activateUserAccount
     }
 }

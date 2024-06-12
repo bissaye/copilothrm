@@ -1,5 +1,5 @@
-import { ChangeUserPasswordData, UpdateUserData } from "../../DTO/request";
-import { ChangeUserPasswordResponse } from "../../DTO/response";
+import { ActivateUserData, ChangeUserPasswordData, UpdateUserData } from "../../DTO/request";
+import { BaseApiResponse, ChangeUserPasswordResponse } from "../../DTO/response";
 import { IApiRequestService } from "../interfaces";
 import { IUserServices } from "../interfaces/IUserServices";
 
@@ -18,6 +18,11 @@ export class UserServices implements IUserServices {
 
     public async changePassword(data: ChangeUserPasswordData): Promise<ChangeUserPasswordResponse> {
         const response: ChangeUserPasswordResponse = await this.apiService.post<ChangeUserPasswordResponse>("/user/changePassword", data, true)
+        return response;
+    }
+
+    public async activateUserAccount(data: ActivateUserData): Promise<BaseApiResponse> {
+        const response: BaseApiResponse = await this.apiService.get<BaseApiResponse>(`/user/active/${data.userId}/${data.validationCode}`)
         return response;
     }
 }
