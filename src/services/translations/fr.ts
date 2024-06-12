@@ -70,7 +70,7 @@ const fr: Record<string, string> = {
     enter_your_country: "Pays de résidence actuel",
     enter_your_city: "Ville actuelle",
     enter_your_post_code: "Code postal",
-    enter_your_address: "Adresse postale",
+    enter_your_address: "No Rue",
     next: "Suivant",
     previous: "Précédent",
     invalid_name_input_format: "Ce champ ne peut contenir que des lettres, des chiffres, des tirets «-», et des underscores «_»",
@@ -162,7 +162,8 @@ const fr: Record<string, string> = {
     loading: "Chargement...",
     account_activated: "Votre compte a été activé avec succès. Connectez-vous.",
     no_options: "Aucune option...",
-    init_form: "Initialisation du formulaire..."
+    init_form: "Initialisation du formulaire...",
+    account_creating: "Création de votre compte..."
 }
 
 export default fr;

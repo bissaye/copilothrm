@@ -70,7 +70,7 @@ const en: Record<string, string> = {
     enter_your_country: "Current country of residence",
     enter_your_city: "Current city of residence",
     enter_your_post_code: "Post code",
-    enter_your_address: "Address",
+    enter_your_address: "Street number",
     next: "Next",
     previous: "Previous",
     invalid_name_input_format: "This field can only contain letters, numbers, dashes «-», and underscores «_»",
@@ -162,7 +162,8 @@ const en: Record<string, string> = {
     loading: "Loading...",
     account_activated: "Your account was activated successfully. Sign in.",
     no_options: "No options...",
-    init_form: "Initializing form..."
+    init_form: "Initializing form...",
+    account_creating: "Creating your account..."
 }
 
 export default en;

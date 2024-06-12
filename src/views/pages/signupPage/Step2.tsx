@@ -69,6 +69,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                     id = {fields.email.id}    
                     name =  {fields.email.name}  
                     label='Email'
+                    required
                     placeholder = {formatMessage({id: "enter_your_email_address"})}
                     value={values.email} 
                     onChange={handleChange}      
@@ -84,6 +85,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                         name =  {fields.password.name}  
                         label={formatMessage({id:"password"})}
                         placeholder = {formatMessage({id: "enter_your_password"})}
+                        required
                         icon = {faLock}  
                         value={values.password} 
                         onChange={handleChange}  
@@ -98,6 +100,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                         name =  {fields.cPassword.name}  
                         label={formatMessage({id:"confirm_password"})}
                         placeholder = {formatMessage({id: "confirm_your_password"})}
+                        required
                         icon = {faLock}  
                         value={values[fields.cPassword.name]} 
                         onChange={handleChange}  
