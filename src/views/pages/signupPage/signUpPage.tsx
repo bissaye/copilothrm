@@ -8,17 +8,19 @@ import { Step2 } from './Step2';
 import { Step3 } from './Step3';
 import { Step4 } from './Step4';
 import { Stepper } from '../../components/common';
-import { ApiRequestService, FormServices } from '../../../services/api/services/implementations';
-import { useSignupStore } from '../../../services/store';
+import { useSignupStore, useSpinnerStore } from '../../../services/store';
+import { useFormUseCase } from '../../../services/api/usescases/FormUseCases';
+import { useApiServices } from '../../../services/api/ApiServiceContext';
 
 
 export const SignUpPage : React.FC = () => {
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
-    const apiService = ApiRequestService.getInstance()
-    const formService = new FormServices(apiService);
+    const {formServices} = useApiServices()
+    const {initSignupForm} = useFormUseCase(formServices);
+    const {showSpinner, hideSpinner} = useSpinnerStore()
 
-    const {initCountryList, initIndustryList} = useSignupStore();
+    const {initCountryList, initIndustryList, initTailleEntrepriseList} = useSignupStore();
 
     const [signupStep, setSignupStep] = useState< 1 | 2 | 3 | 4 >(1);
 
@@ -32,16 +34,17 @@ export const SignUpPage : React.FC = () => {
 
     useEffect(() => {
         async function getSignupDatas() {
+            showSpinner()
             try{
-                const countryRes = await formService.getAllCountries();
-                const countryList = countryRes.content
-                initCountryList(countryList)
-
-                const industriesRes = await formService.getAllIndustries();
-                const industryList = industriesRes.content
-                initIndustryList(industryList)
+                await initSignupForm().then(response => {
+                    initCountryList(response!.countryList)
+                    initIndustryList(response!.industryLise)
+                    initTailleEntrepriseList(response!.tailleEntrepriseLsit)
+                    hideSpinner()
+                })
             }
             catch(error){
+                hideSpinner()
                 console.log(error)
             }
         }
