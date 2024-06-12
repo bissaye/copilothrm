@@ -19,7 +19,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
     
     // hooks
     const {formatMessage} = useIntl();
-    const { userData, setUserData, countryList, industryList } = useSignupStore();
+    const { userData, setUserData, countryList, industryList, tailleEntrepriseList } = useSignupStore();
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
@@ -87,20 +87,12 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
         }
     })
 
-    const tailleEntrepriseOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: '0-10'
-        },
-        {
-            value: "1",
-            text: '10-50'
+    const tailleEntrepriseOptions: InputSelectOptions[] = tailleEntrepriseList.map((tailleEntreprise) => {
+        return {
+            value: tailleEntreprise.tailleEntrepriseId,
+            text: tailleEntreprise.libelle 
         }
-    ]
+    })
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
