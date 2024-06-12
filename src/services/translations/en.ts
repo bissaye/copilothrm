@@ -160,7 +160,8 @@ const en: Record<string, string> = {
     enter_new_password: "Enter your new password",
     confirm_new_password: "Confirm your new password",
     loading: "Loading...",
-    account_activated: "Your account was activated successfully. Sign in."
+    account_activated: "Your account was activated successfully. Sign in.",
+    no_options: "No options..."
 }
 
 export default en;
