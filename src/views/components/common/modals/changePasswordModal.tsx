@@ -7,8 +7,8 @@ import * as yup from "yup";
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
 import { useSpinnerStore } from "../../../../services/store"
 import { toastify } from "../../../../utils/toasts"
-import { useUserUseCase } from "../../../../services/api/usescases/UserUseCases"
 import { ChangeUserPasswordData } from "../../../../services/api/DTO/request"
+import { useUserUseCase } from "../../../../services/api/usescases"
 
 interface ChangePasswordModalProps {
     onClose: () => void;
