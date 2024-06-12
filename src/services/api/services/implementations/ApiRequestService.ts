@@ -38,7 +38,6 @@ export class ApiRequestService implements IApiRequestService {
         if (auth) {
             this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
         }
-        console.log("HEADER ", this.token)
         const response = await this.apiClient.post<T>(path, data);
         return response.data as T;
     }
