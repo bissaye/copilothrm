@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { InvitationSignupStore, SignupStore } from "../../../utils/interfaces/type";
 import { InvitedUserSignupDatas, UserSignupData } from "../../api/DTO/request";
-import { CountryData, IndustryData } from "../../api/DTO/response";
+import { CountryData, IndustryData, TailleEntreprise } from "../../api/DTO/response";
 
 export const useSignupStore = create<SignupStore>((set) => ({
     signupStep: 1 as 1 | 2 | 3 | 4,
@@ -43,11 +43,9 @@ export const useSignupStore = create<SignupStore>((set) => ({
     countryList: [],
     initIndustryList: (industries: IndustryData[]) => set({industryList: industries}),
     industryList: [],
+    tailleEntrepriseList: [],
+    initTailleEntrepriseList: (taillesEntreprise: TailleEntreprise[]) => set({tailleEntrepriseList: taillesEntreprise}),
     gender: [
-        { 
-            value: "",
-            text: "select"
-        },
         { 
             value: '0',
             text: 'man'
