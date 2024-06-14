@@ -1,4 +1,4 @@
-import React , {Fragment, useRef, useState} from "react";
+import React , {Fragment, useEffect, useRef, useState} from "react";
 import { InputSelectOptions, InputSelectProps } from "../../../../utils/interfaces/props";
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
@@ -35,6 +35,13 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
     const filterOptionList = (option: InputSelectOptions) => {
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
+
+    useEffect(()=> {
+      if(value){
+        const option = options.find(opt => opt.value == value)
+        if (option) setInputValue(option?.text)
+        }
+    }, [])
     
     return <Fragment>
         <CustumInputContainer
