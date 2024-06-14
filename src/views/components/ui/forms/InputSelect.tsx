@@ -109,7 +109,6 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                 disabled={disabled}
                 onChange={(e) => {
                     if(onChange){
-                        console.log("changed")
                         onChange(e)
                     }
                 }}
