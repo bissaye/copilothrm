@@ -15,7 +15,7 @@ export interface CountryListResponse extends BaseApiResponse {
 }
 
 export interface IndustryData {
-    industrieId: string,
+    id: string,
     libelle: string
 }
 
