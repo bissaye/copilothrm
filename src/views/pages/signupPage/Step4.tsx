@@ -113,7 +113,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         },
         {
             id: "trigram",
-            name: formatMessage({id:"Trigram"}),
+            name:"Trigram",
             value: userData.trigram
         },
         {
@@ -134,7 +134,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "industry",
             name: formatMessage({id:"industry"}),
-            value: industryList.find((industry) => industry.industrieId == userData.industrie)!.libelle
+            value: industryList.find((industry) => industry.id == userData.industrie)!.libelle
         },
         {
             id: "orgCountry",
@@ -158,7 +158,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         },
         {
             id: "orgLogo",
-            name: formatMessage({id:"Logo"}),
+            name: "Logo",
             value: userData.orgLogo?.name
         }
     ]

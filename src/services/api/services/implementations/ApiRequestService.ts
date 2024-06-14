@@ -52,6 +52,16 @@ export class ApiRequestService implements IApiRequestService {
 
     }
 
+    public async patch<T>(path: string, data?: any, auth: boolean = false): Promise<T> {
+
+        if (auth) {
+            this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
+        }
+        const response = await this.apiClient.patch<T>(path, data);
+        return response.data as T;
+
+    }
+
     public async delete<T>(path: string, auth: boolean = false): Promise<T> {
 
         if (auth) {

@@ -1,4 +1,4 @@
-import React , {Fragment, useRef, useState} from "react";
+import React , {Fragment, useEffect, useRef, useState} from "react";
 import { InputSelectOptions, InputSelectProps } from "../../../../utils/interfaces/props";
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
@@ -35,6 +35,19 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
     const filterOptionList = (option: InputSelectOptions) => {
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
+
+    const toggleShowOptions = () => {
+        setShowOptions(prev => !prev)
+    }
+
+    useEffect(()=> {
+      if(value){
+        // debugger
+            const option = options.find(opt => opt.value == value)
+            if (option) 
+                setInputValue(option?.text)
+        }
+    }, [])
     
     return <Fragment>
         <CustumInputContainer
@@ -51,7 +64,9 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                         placeholder= {placeholder}
                         disabled={disabled}
                         onChange={(e) => setInputValue(e.target.value)}
-                        onFocus={() => setShowOptions(true)}
+                        // onFocus={() => setShowOptions(true)}
+                        onKeyDown={() => setShowOptions(true)}
+                        onClick={() => toggleShowOptions()}
                         onBlur={(e) => {
                             if(onBlur){
                                 onBlur(e);
@@ -102,7 +117,6 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                 disabled={disabled}
                 onChange={(e) => {
                     if(onChange){
-                        console.log("changed")
                         onChange(e)
                     }
                 }}
