@@ -25,7 +25,8 @@ export interface UserOrganisation {
     trigam: string,
     basePath: string,
     industrie: string,
-    templateFichePaie: string
+    templateFichePaie: string,
+    nbreCollaborateurs: number
 }
 
 export interface Staff {
