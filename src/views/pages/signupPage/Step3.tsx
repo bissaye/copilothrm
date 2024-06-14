@@ -86,7 +86,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
         return {
-            value: industry.industrieId,
+            value: industry.id,
             text: industry.libelle 
         }
     })
@@ -159,8 +159,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                         <InputText
                             id = {fields.trigram.id}    
                             name =  {fields.trigram.name}  
-                            label={formatMessage({id:"Trigram"})}
-                            placeholder = {formatMessage({id: "Trigram"})}
+                            label="Trigram"
+                            placeholder = "Trigram"
                             required 
                             value={values[fields.trigram.name]} 
                             onChange={handleChange}
