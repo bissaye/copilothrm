@@ -18,3 +18,8 @@ export interface UpdateUserData {
     familyContactPhone: string,
     familyContactQuality: string
   }
+
+export interface ActivateUserData {
+    userId: string,
+    validationCode: string
+}

@@ -32,7 +32,7 @@ export const LandingPage : React.FC = () => {
                 <img src={landingPageImage.img1} className=''/>
                 
             </div>
-            <div className='w-full flex flex-row gap-5 justify-start items-center mt-5 mx-3'>
+            <div className='w-full flex flex-row gap-5 justify-center items-center mt-5 mx-3'>
                     <DefaultButton
                         type='primary'
                         text={formatMessage({id:"begin_now"})}

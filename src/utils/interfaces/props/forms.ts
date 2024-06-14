@@ -24,6 +24,20 @@ export interface InputTextProps extends CustomInputProps {
     onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
 }
 
+export interface InputPhoneProps extends CustomInputProps {
+    id: string,
+    name: string,
+    value? : string,
+    placeholder? : string,
+    className?: string,
+    disabled?: boolean;
+    blockCopy?: boolean;
+    blockPaste?: boolean;
+    countryCode?: string;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+    onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+}
+
 export interface InputSelectProps extends Omit<InputTextProps, 'onChange'> {
     onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
     className?: string,

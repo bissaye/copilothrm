@@ -4,27 +4,49 @@ import { faEnvelope, faPenToSquare, faUser } from "@fortawesome/free-regular-svg
 import { faAt, faLocationDot, faPencil, faUserPen } from "@fortawesome/free-solid-svg-icons"
 import { faPhone } from "@fortawesome/free-solid-svg-icons/faPhone"
 import { useIntl } from "react-intl"
-import { DefaultButton, InputDate, InputSelect, InputText, LinkButton } from "../../components/ui"
+import { DefaultButton, InputDate, InputPhone, InputSelect, InputText, LinkButton } from "../../components/ui"
 import { FieldsInfo } from "../../../utils/interfaces/type"
-import { useSignupStore } from "../../../services/store"
+import { useSignupStore, useSpinnerStore } from "../../../services/store"
 import { useFormik } from "formik"
-import { userSignUpStepOneSchema } from "../../../services/forms/validations"
-import { UserSignupData } from "../../../services/api/DTO/request"
+import { UpdateUserData } from "../../../services/api/DTO/request"
 import { ChangePasswordModal } from "../../components/common"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { UserData } from "../../../services/api/DTO/response"
+import { InputSelectOptions } from "../../../utils/interfaces/props"
+import { useApiServices } from "../../../services/api/ApiServiceContext"
+import { useFormUseCase, useUserUseCase } from "../../../services/api/usescases"
+import { toastify } from "../../../utils/toasts"
 
 export const UserProfilePage: React.FC = () => {
 
     //hooks
-    const {formatMessage} = useIntl();
-    const { userData, setUserData, gender } = useSignupStore();
+    const { formatMessage } = useIntl();
+    const { gender, countryList, initCountryList} = useSignupStore();
+    const { showSpinner, hideSpinner } = useSpinnerStore();
+    const { formServices, userServices } = useApiServices()
+    const { initUpdateUserForm } = useFormUseCase(formServices);
+    const { updateUserProfile, getUserInfos } = useUserUseCase(userServices)
     const [modalVisible, setModalVisible] = useState(false);
 
     //constantes
     const user: UserData = JSON.parse(localStorage.getItem("user")!)
-    
-    const loggedUser = user.staff;
+    const loggedUserInitialValues = {
+        country: user.staff.country.countryId,
+        nom: user.staff.nom,
+        prenom: user.staff.prenom,
+        sexe: user.staff.sexe,
+        dateNaissance: user.staff.dateNaissance,
+        lieuNaissance: user.staff.lieuNaissance,
+        email: user.staff.email,
+        mobilePhone: user.staff.mobilePhone,
+        adresseRue: user.staff.adresseRue,
+        adresseZipCode: user.staff.adresseZipCode,
+        adresseVille: user.staff.adresseVille,
+        familyContactPhone: user.staff.familyContactPhone,
+        familyContactQuality: user.staff.familyContactQuality
+    };
+
+    const [initValues, setInitValues] = useState<UpdateUserData>(loggedUserInitialValues)
     
     const fields : Record<string, FieldsInfo> = {
         nom :{
@@ -44,8 +66,8 @@ export const UserProfilePage: React.FC = () => {
             name : "dateNaissance",
         },
         mobilePhone :{
-            id : "telephone",
-            name : "telephone",
+            id : "mobilePhone",
+            name : "mobilePhone",
         },
         country :{
             id : "country",
@@ -74,34 +96,91 @@ export const UserProfilePage: React.FC = () => {
         familyContactQuality: {
             id: "familyContactQuality",
             name: "familyContactQuality"
+        },
+        email: {
+            id: 'email',
+            name: 'email'
         }
     }
-
+    const getSelectedCountryCode = (countryId: string) => {
+        const selectedCountry = countryList.find(country => country.countryId == countryId)
+        return selectedCountry?.prefixPhone
+    }
     const genderOptions = gender.map((obj) => {
         return {
             value: obj.value,
             text: formatMessage({id: obj.text})
         }
     })
+    const countryOptions: InputSelectOptions[] = countryList.map((country) => {
+        return {
+            value: country.countryId,
+            text: country.libelle 
+        }
+    });
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] = userData[field.name as keyof UserSignupData];
+        initialValues[field.name] = initValues![field.name as keyof UpdateUserData];
         return field
     })
-
+    
     const formik = useFormik({
         initialValues: initialValues,
-        validationSchema: userSignUpStepOneSchema,
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
-            const body: UserSignupData = {...values};
-            setUserData(body);
+            const body: UpdateUserData = {...values};
+            try{
+                showSpinner()
+                await updateUserProfile(body).then(response => {
+                    hideSpinner();
+                    toastify('success', response.message)
+                })
+            }
+            catch(error: any){
+                hideSpinner()
+                toastify('error', error.message)
+            }
         }
     })
     const {values, errors, handleChange, handleSubmit} = formik
 
+    useEffect(() => {
+        async function getUpdateUserDatas() {
+            try{
+                await initUpdateUserForm().then(response => {
+                    initCountryList(response!.content)
+                    hideSpinner()
+                })
+                await getUserInfos(user.staff.staffId).then(response => {
+                    const content = response.content
+                    setInitValues({
+                        country: content.country.countryId,
+                        nom: content.nom,
+                        prenom: content.prenom,
+                        sexe: content.sexe,
+                        dateNaissance: content.dateNaissance,
+                        lieuNaissance: content.lieuNaissance,
+                        email: content.email,
+                        mobilePhone: content.mobilePhone,
+                        adresseRue: content.adresseRue,
+                        adresseZipCode: content.adresseZipCode,
+                        adresseVille: content.adresseVille,
+                        familyContactPhone: content.familyContactPhone,
+                        familyContactQuality: content.familyContactQuality
+                    })
+                })
+            }
+            catch(error: any){
+                hideSpinner()
+                toastify('error', error.message)
+            }
+        }
+        showSpinner(formatMessage({id:"init_form"}))
+        getUpdateUserDatas()
+    }, [])
+    
     return(
         <div className="w-full md:w-[1100px] flex gap-5 ">
             <div className="w-[20%] lg:w-[250px] border border-gray-500 shadow-md rounded-md">
@@ -114,7 +193,7 @@ export const UserProfilePage: React.FC = () => {
                         <div className="flex flex-col justify-center items-start w-full">
                             <span className="flex gap-3 justify-center items-center">
                                 <FontAwesomeIcon icon={faUser} />
-                                <h1 className="font-heading font-bold text-t6">{loggedUser.prenom} {loggedUser.nom}</h1>
+                                <h1 className="font-heading font-bold text-t6">{initValues!.prenom} {initValues!.nom}</h1>
                             </span>
                             <p className="text-neutral-600 font-body text-t3 ml-7">Responsable RH</p>
                             <p className="text-neutral-500 font-body text-t2 ml-7">Abyster Consulting</p>
@@ -122,7 +201,7 @@ export const UserProfilePage: React.FC = () => {
                             <div className="flex flex-col gap-1 justify-start items-start">
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faAt} className="text-neutral-600" />
-                                    <p className="text-neutral-600 font-body text-t3">{loggedUser.user.username}</p>
+                                    <p className="text-neutral-600 font-body text-t3">{user.username}</p>
                                 </span>
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faPhone} className="text-neutral-600" />
@@ -181,7 +260,7 @@ export const UserProfilePage: React.FC = () => {
                                         />
                                     </span>
                                 </div>
-                                <p className="text-neutral-600 font-body text-t3">{loggedUser.user.username}</p>
+                                <p className="text-neutral-600 font-body text-t3">{user.username}</p>
                             </div>
                             <div className="w-1/2 py-5 px-5 flex flex-col gap-3 ">
                                 {/* Nom de famille */}
@@ -222,7 +301,8 @@ export const UserProfilePage: React.FC = () => {
                                         name =  {fields.sexe.name}  
                                         className="h-5"
                                         label={formatMessage({id:"gender"})}
-                                        value={values[fields.sexe.name]} 
+                                        placeholder={formatMessage({id:"select"})}
+                                        value={values[fields.sexe.name]}
                                         onChange={handleChange}
                                         options={genderOptions}      
                                         errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
@@ -253,29 +333,12 @@ export const UserProfilePage: React.FC = () => {
                                         errorMessage={ errors.lieuNaissance ? errors.lieuNaissance.toString() : undefined}
                                     />
                                 </div>
-                                {/* Téléphone */}
-                                <div>
-                                    <InputText
-                                        id = {fields.mobilePhone.id}    
-                                        name =  {fields.mobilePhone.name}
-                                        className="h-5"
-                                        label={formatMessage({id:"phone"})}
-                                        placeholder = {formatMessage({id: "enter_your_phone"})} 
-                                        value={values[fields.mobilePhone.name]} 
-                                        onChange={handleChange}      
-                                        errorMessage={ errors.mobilePhone ? errors.mobilePhone.toString() : undefined}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* colonne de droite */}
-                            <div className="flex flex-col gap-3 w-1/2 px-5 ">
                                 {/* Pays */}
                                 <div>
-                                    <InputText
+                                    <InputSelect
                                         id = {fields.country.id}    
-                                        name =  {fields.country.name}
-                                        className="h-5"
+                                        name =  {fields.country.name}  
+                                        options={countryOptions}
                                         label={formatMessage({id:"country"})}
                                         placeholder = {formatMessage({id: "enter_your_country"})} 
                                         value={values[fields.country.name]} 
@@ -283,6 +346,10 @@ export const UserProfilePage: React.FC = () => {
                                         errorMessage={ errors.country ? errors.country.toString() : undefined}
                                     />
                                 </div>
+                            </div>
+
+                            {/* colonne de droite */}
+                            <div className="flex flex-col gap-3 w-1/2 px-5 ">
                                 {/* Ville */}
                                 <div>
                                     <InputText
@@ -294,6 +361,20 @@ export const UserProfilePage: React.FC = () => {
                                         value={values[fields.adresseVille.name]} 
                                         onChange={handleChange}      
                                         errorMessage={ errors.adresseVille ? errors.adresseVille.toString() : undefined}
+                                    />
+                                </div>
+                                {/* Téléphone */}
+                                <div>
+                                    <InputPhone
+                                        id = {fields.mobilePhone.id}    
+                                        name =  {fields.mobilePhone.name}
+                                        className="h-5"
+                                        countryCode={getSelectedCountryCode(values.country)}
+                                        label={formatMessage({id:"phone"})}
+                                        placeholder = {formatMessage({id: "enter_your_phone"})} 
+                                        value={values[fields.mobilePhone.name]} 
+                                        onChange={handleChange}      
+                                        errorMessage={ errors.mobilePhone ? errors.mobilePhone.toString() : undefined}
                                     />
                                 </div>
                                 {/* Code postal */}

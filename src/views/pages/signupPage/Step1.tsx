@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
+import { DefaultButton, InputDate, InputPhone, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
 import { UserSignupData } from "../../../services/api/DTO/request";
@@ -57,6 +57,11 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
             id : "sexe",
             name : "sexe",
         }
+    }
+
+    const getSelectedCountryCode = (countryId: string) => {
+        const selectedCountry = countryList.find(country => country.countryId == countryId)
+        return selectedCountry?.prefixPhone
     }
 
     const genderOptions = gender.map((obj) => {
@@ -168,19 +173,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
-                    {/* Téléphone */}
-                    <div>
-                        <InputText
-                            id = {fields.telephone.id}    
-                            name =  {fields.telephone.name}  
-                            label={formatMessage({id:"phone"})}
-                            placeholder = {formatMessage({id: "enter_your_phone"})}
-                            required
-                            value={values[fields.telephone.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
-                        />
-                    </div>
                     {/* Pays */}
                     <div>
                         <InputSelect
@@ -206,6 +198,20 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             value={values[fields.ville.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.ville ? errors.ville.toString() : undefined}
+                        />
+                    </div>
+                    {/* Téléphone */}
+                    <div>
+                        <InputPhone
+                            id = {fields.telephone.id}    
+                            name =  {fields.telephone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})}
+                            countryCode={getSelectedCountryCode(values.pays)}
+                            required
+                            value={values[fields.telephone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
                         />
                     </div>
                     {/* Code postal */}
