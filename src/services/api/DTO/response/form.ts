@@ -3,7 +3,8 @@ import { BaseApiResponse} from "./baseResponses";
 export interface CountryData {
     countryId: string,
     code: string,
-    libelle: string
+    libelle: string,
+    prefixPhone: string
 }
 
 export interface CountryResponse extends BaseApiResponse {
