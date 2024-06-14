@@ -11,6 +11,7 @@ import { Stepper } from '../../components/common';
 import { useSignupStore, useSpinnerStore } from '../../../services/store';
 import { useFormUseCase } from '../../../services/api/usescases/FormUseCases';
 import { useApiServices } from '../../../services/api/ApiServiceContext';
+import { toastify } from '../../../utils/toasts';
 
 
 export const SignUpPage : React.FC = () => {
@@ -43,9 +44,9 @@ export const SignUpPage : React.FC = () => {
                     hideSpinner()
                 })
             }
-            catch(error){
+            catch(error: any){
                 hideSpinner()
-                console.log(error)
+                toastify('error', error.message)
             }
         }
         getSignupDatas()

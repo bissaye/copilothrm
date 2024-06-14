@@ -36,10 +36,16 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
 
+    const toggleShowOptions = () => {
+        setShowOptions(prev => !prev)
+    }
+
     useEffect(()=> {
       if(value){
-        const option = options.find(opt => opt.value == value)
-        if (option) setInputValue(option?.text)
+        // debugger
+            const option = options.find(opt => opt.value == value)
+            if (option) 
+                setInputValue(option?.text)
         }
     }, [])
     
@@ -58,7 +64,9 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                         placeholder= {placeholder}
                         disabled={disabled}
                         onChange={(e) => setInputValue(e.target.value)}
-                        onFocus={() => setShowOptions(true)}
+                        // onFocus={() => setShowOptions(true)}
+                        onKeyDown={() => setShowOptions(true)}
+                        onClick={() => toggleShowOptions()}
                         onBlur={(e) => {
                             if(onBlur){
                                 onBlur(e);

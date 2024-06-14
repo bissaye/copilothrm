@@ -1,7 +1,27 @@
-import { ActivateUserData, ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
+import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
+import { StaffResponse } from "../DTO/response";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
 export const useUserUseCase = (userServices: IUserServices | null) => {
+    
+    const getUserInfos = async (staffId: string) => {
+        try{
+            if(userServices){
+                const response: StaffResponse = await userServices.getUserInfos(staffId)
+                return response;
+            }
+            else {
+                throw new Error("erreur userServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
     
     const updateUserProfile = async (data: UpdateUserData) => {
         try{
@@ -63,6 +83,7 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
     return {
         updateUserProfile,
         changeUserPassword,
-        activateUserAccount
+        activateUserAccount,
+        getUserInfos
     }
 }
