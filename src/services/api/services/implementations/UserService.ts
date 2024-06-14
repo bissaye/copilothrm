@@ -21,8 +21,8 @@ export class UserServices implements IUserServices {
         return response;
     }
 
-    public async activateUserAccount(data: ActivateUserData): Promise<BaseApiResponse> {
-        const response: BaseApiResponse = await this.apiService.get<BaseApiResponse>(`/user/active/${data.userId}/${data.validationCode}`)
+    public async activateUserAccount(token: string): Promise<BaseApiResponse> {
+        const response: BaseApiResponse = await this.apiService.patch<BaseApiResponse>(`/user/active/${token}`)
         return response;
     }
 }

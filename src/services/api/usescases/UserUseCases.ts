@@ -41,10 +41,10 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         }
     }
 
-    const activateUserAccount = async (data: ActivateUserData) => {
+    const activateUserAccount = async (token: string) => {
         try{
             if(userServices){
-                const response = await userServices.activateUserAccount(data)
+                const response = await userServices.activateUserAccount(token)
                 return response;
             }
             else {

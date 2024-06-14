@@ -4,5 +4,5 @@ import { BaseApiResponse, ChangeUserPasswordResponse } from "../../DTO/response"
 export interface IUserServices {
     updateUserProfile(user: UpdateUserData): Promise<any>
     changePassword(data: ChangeUserPasswordData): Promise<ChangeUserPasswordResponse>
-    activateUserAccount(data: ActivateUserData): Promise<BaseApiResponse>;
+    activateUserAccount(token: string): Promise<BaseApiResponse>;
 }
