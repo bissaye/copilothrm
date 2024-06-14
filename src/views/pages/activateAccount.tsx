@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useUserUseCase } from "../../services/api/usescases";
 import { useApiServices } from "../../services/api/ApiServiceContext";
 import { ActivateUserData } from "../../services/api/DTO/request";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { toastify } from "../../utils/toasts";
 import { useSpinnerStore } from "../../services/store";
 
@@ -22,39 +22,45 @@ export const ActivateAccount: React.FC = () => {
     const { userServices } = useApiServices()
     const { activateUserAccount } = useUserUseCase(userServices)
     const [accountActivated, setAccountActivated] = useState<boolean | null>(null);
+    const [message, setMessage] = useState('')
     const {showSpinner, hideSpinner} = useSpinnerStore()
 
     useEffect(() => {
         const url = location.href
-        const token = url.split('?')[1]
-        if (!token){
+        const getToken = (val: string = 'token') => {
+            val = val.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + val + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+            if(!results) return null;
+            if(!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        const token = getToken();
+
+        if (token == null || token == ''){
             console.log("pas de token")
         }
         else{
+
             async function activateAccount(){
                 showSpinner()
-                const body: ActivateUserData = {
-                    userId: "",
-                    validationCode: token
-                }
-                const response = await activateUserAccount(body);
-                if(response.status == 200 || response.status == 201){
+                debugger
+                try{
+                    await activateUserAccount(token!).then(response => {
+                        debugger
+                        hideSpinner()
+                        setMessage(response.message)
+                        setAccountActivated(true)
+                    });
+                }catch(error: any){
+                    debugger
                     hideSpinner()
-                    setAccountActivated(true)
-                }
-                else{
-                    hideSpinner()
+                    setMessage(error.message)
                     setAccountActivated(false)
                 }
             }
-            try{
-                activateAccount();
-            }
-            catch(error: any){
-                hideSpinner()
-                setAccountActivated(false)
-                toastify('error', error.message)
-            }
+        
+            activateAccount();
         }
     }, [])
 
@@ -77,8 +83,11 @@ export const ActivateAccount: React.FC = () => {
                     :
 
                         <div className="w-[500px] h-[300px] bg-white shadow-md flex flex-col justify-center items-center gap-5 mt-s12">
-                            <FontAwesomeIcon icon={faExclamation} className="text-red-400 text-6xl" />
-                            <p className="text-2xl px-10 font-medium text-center">{formatMessage({id:"account_activated_error"})}</p>
+                            <FontAwesomeIcon icon={faExclamationCircle} className="text-red-400 text-6xl" />
+                            <p className="text-2xl px-10 font-medium text-center">
+                                {formatMessage({id:"account_activated_error"})} <br />
+                                {message}
+                                </p>
                         </div>
                     }
                 <FooterLandingPage/>
