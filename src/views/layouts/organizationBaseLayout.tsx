@@ -18,6 +18,3 @@ export const OrganizationBaseLayout : React.FC = () => {
     </Fragment>
 }
 
-function showSpinner(arg0: any) {
-    throw new Error('Function not implemented.');
-}

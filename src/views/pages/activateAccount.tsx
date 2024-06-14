@@ -9,9 +9,7 @@ import { FooterLandingPage } from "../components/common";
 import { useEffect, useState } from "react";
 import { useUserUseCase } from "../../services/api/usescases";
 import { useApiServices } from "../../services/api/ApiServiceContext";
-import { ActivateUserData } from "../../services/api/DTO/request";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { toastify } from "../../utils/toasts";
 import { useSpinnerStore } from "../../services/store";
 
 export const ActivateAccount: React.FC = () => {
