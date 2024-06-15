@@ -49,7 +49,7 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
                 return response;
             }
             else {
-                throw new Error("erreur authServices not set");
+                throw new Error("erreur userServices not set");
               }
         }
         catch (err: any) {
@@ -68,7 +68,26 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
                 return response;
             }
             else {
-                throw new Error("erreur authServices not set");
+                throw new Error("erreur userServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const inviteUser = async (data: any) => {
+        try{
+            if(userServices){
+                const response = await userServices.activateUserAccount(data)
+                return response;
+            }
+            else {
+                throw new Error("erreur userServices not set");
             }
         }
         catch (err: any) {
@@ -84,6 +103,7 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         updateUserProfile,
         changeUserPassword,
         activateUserAccount,
-        getUserInfos
+        getUserInfos,
+        inviteUser
     }
 }
