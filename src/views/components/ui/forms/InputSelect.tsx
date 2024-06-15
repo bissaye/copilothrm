@@ -1,4 +1,4 @@
-import React , {Fragment, useEffect, useRef, useState} from "react";
+import React , {FocusEventHandler, Fragment, MouseEventHandler, useEffect, useRef, useState} from "react";
 import { InputSelectOptions, InputSelectProps } from "../../../../utils/interfaces/props";
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
@@ -10,7 +10,8 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
 
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState('');
-    const selectInputRef = useRef<HTMLSelectElement>(null)
+    const selectInputRef = useRef<HTMLSelectElement>(null);
+    const optionsListRef = useRef<HTMLUListElement>(null);
 
     const handleSelectOption = (option: InputSelectOptions) => {
         if(selectInputRef.current){
@@ -36,8 +37,9 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
 
-    const toggleShowOptions = () => {
-        setShowOptions(prev => !prev)
+    const handleShowOptions: FocusEventHandler = (event) => {
+        if(optionsListRef.current && !optionsListRef.current.contains(event.target as Node))
+            setShowOptions(false)
     }
 
     useEffect(()=> {
@@ -53,7 +55,9 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         <CustumInputContainer
             {...props}
         >
-            <div className=" relative w-full">
+            <div 
+            className=" relative w-full"
+            onBlur={handleShowOptions}>
                 <div className=" w-full flex flex-row items-center gap-2">
                     <input 
                         id = {`inputSelect-${id}`}
@@ -66,7 +70,7 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                         onChange={(e) => setInputValue(e.target.value)}
                         // onFocus={() => setShowOptions(true)}
                         onKeyDown={() => setShowOptions(true)}
-                        onClick={() => toggleShowOptions()}
+                        onClick={() => setShowOptions(prev => !prev)}
                         onBlur={(e) => {
                             if(onBlur){
                                 onBlur(e);
@@ -94,7 +98,7 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                 </div>
                 {
                     showOptions &&
-                    <ul className="absolute -left-[8px] top-8 w-full max-h-[300px] bg-white border border-gray-400 shadow-md overflow-y-scroll z-30">
+                    <ul ref={optionsListRef} className="absolute -left-[8px] top-8 w-full max-h-[300px] bg-white border border-gray-400 shadow-md overflow-y-scroll z-30">
                     {
                         options?.filter((option) => filterOptionList(option)).map((option, key) => (
                             <li 

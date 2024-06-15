@@ -30,4 +30,9 @@ export class UserServices implements IUserServices {
         const response: BaseApiResponse = await this.apiService.patch<BaseApiResponse>(`/user/active/${token}`)
         return response;
     }
+
+    public async inviteUser(data: any): Promise<any> {
+        const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>('', data, true)
+        return response
+    }
 }
