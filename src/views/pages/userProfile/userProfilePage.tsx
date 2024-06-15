@@ -25,11 +25,11 @@ export const UserProfilePage: React.FC = () => {
     const { showSpinner, hideSpinner } = useSpinnerStore();
     const { formServices, userServices } = useApiServices()
     const { initUpdateUserForm } = useFormUseCase(formServices);
-    const { updateUserProfile, getUserInfos } = useUserUseCase(userServices)
+    const { updateUserProfile } = useUserUseCase(userServices)
     const [modalVisible, setModalVisible] = useState(false);
 
     //constantes
-    const user: UserData = JSON.parse(localStorage.getItem("user")!)
+    let user: UserData = JSON.parse(localStorage.getItem("user")!)
     const loggedUserInitialValues = {
         country: user.staff.country.countryId,
         nom: user.staff.nom,
@@ -45,9 +45,6 @@ export const UserProfilePage: React.FC = () => {
         familyContactPhone: user.staff.familyContactPhone,
         familyContactQuality: user.staff.familyContactQuality
     };
-
-    const [initValues, setInitValues] = useState<UpdateUserData>(loggedUserInitialValues)
-    
     const fields : Record<string, FieldsInfo> = {
         nom :{
             id : "nom",
@@ -121,10 +118,10 @@ export const UserProfilePage: React.FC = () => {
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
-        initialValues[field.name] = initValues![field.name as keyof UpdateUserData];
+        initialValues[field.name] = loggedUserInitialValues![field.name as keyof UpdateUserData];
         return field
     })
-    
+
     const formik = useFormik({
         initialValues: initialValues,
         validateOnBlur: true,
@@ -134,8 +131,11 @@ export const UserProfilePage: React.FC = () => {
             try{
                 showSpinner()
                 await updateUserProfile(body).then(response => {
+                    debugger
                     hideSpinner();
-                    toastify('success', response.message)
+                    toastify('success', response.message);
+                    user.staff = response.content;
+                    localStorage.setItem("user", JSON.stringify(user))
                 })
             }
             catch(error: any){
@@ -152,24 +152,6 @@ export const UserProfilePage: React.FC = () => {
                 await initUpdateUserForm().then(response => {
                     initCountryList(response!.content)
                     hideSpinner()
-                })
-                await getUserInfos(user.staff.staffId).then(response => {
-                    const content = response.content
-                    setInitValues({
-                        country: content.country.countryId,
-                        nom: content.nom,
-                        prenom: content.prenom,
-                        sexe: content.sexe,
-                        dateNaissance: content.dateNaissance,
-                        lieuNaissance: content.lieuNaissance,
-                        email: content.email,
-                        mobilePhone: content.mobilePhone,
-                        adresseRue: content.adresseRue,
-                        adresseZipCode: content.adresseZipCode,
-                        adresseVille: content.adresseVille,
-                        familyContactPhone: content.familyContactPhone,
-                        familyContactQuality: content.familyContactQuality
-                    })
                 })
             }
             catch(error: any){
@@ -193,7 +175,7 @@ export const UserProfilePage: React.FC = () => {
                         <div className="flex flex-col justify-center items-start w-full">
                             <span className="flex gap-3 justify-center items-center">
                                 <FontAwesomeIcon icon={faUser} />
-                                <h1 className="font-heading font-bold text-t6">{initValues!.prenom} {initValues!.nom}</h1>
+                                <h1 className="font-heading font-bold text-t6">{loggedUserInitialValues!.prenom} {loggedUserInitialValues!.nom}</h1>
                             </span>
                             <p className="text-neutral-600 font-body text-t3 ml-7">Responsable RH</p>
                             <p className="text-neutral-500 font-body text-t2 ml-7">Abyster Consulting</p>
@@ -205,7 +187,7 @@ export const UserProfilePage: React.FC = () => {
                                 </span>
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faPhone} className="text-neutral-600" />
-                                    <p className="text-neutral-600 font-body text-t3">(237) 6 93 42 71 80</p>
+                                    <p className="text-neutral-600 font-body text-t3">{loggedUserInitialValues.mobilePhone}</p>
                                 </span>
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faEnvelope} className="text-neutral-600" />

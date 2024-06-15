@@ -22,6 +22,7 @@ export const ActivateAccount: React.FC = () => {
     const [accountActivated, setAccountActivated] = useState<boolean | null>(null);
     const [message, setMessage] = useState('')
     const {showSpinner, hideSpinner} = useSpinnerStore()
+    const NavigateById = useNavigateById()
 
     useEffect(() => {
         const url = location.href
@@ -36,7 +37,7 @@ export const ActivateAccount: React.FC = () => {
         const token = getToken();
 
         if (token == null || token == ''){
-            console.log("pas de token")
+            NavigateById(pageIds.SignInPage)
         }
         else{
 
