@@ -1,5 +1,3 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputPassword } from "../../ui"
 import { useIntl } from "react-intl"
 import { useFormik } from "formik"

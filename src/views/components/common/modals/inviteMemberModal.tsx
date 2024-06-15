@@ -1,8 +1,5 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputText } from "../../ui"
 import { useIntl } from "react-intl"
-// import { faBuilding } from "@fortawesome/free-regular-svg-icons"
 import { useFormik } from "formik"
 import * as yup from "yup";
 import { BaseModalLayout } from "./baseModalLayout"
