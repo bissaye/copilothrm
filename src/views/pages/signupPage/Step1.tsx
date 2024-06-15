@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
+import { DefaultButton, InputDate, InputPhone, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { userSignUpStepOneSchema } from "../../../services/forms/validations";
 import { UserSignupData } from "../../../services/api/DTO/request";
@@ -59,6 +59,11 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
         }
     }
 
+    const getSelectedCountryCode = (countryId: string) => {
+        const selectedCountry = countryList.find(country => country.countryId == countryId)
+        return selectedCountry?.prefixPhone
+    }
+
     const genderOptions = gender.map((obj) => {
         return {
             value: obj.value,
@@ -106,6 +111,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             id = {fields.nom.id}    
                             name =  {fields.nom.name}  
                             label={formatMessage({id:"surname"})}
+                            required
                             placeholder = {formatMessage({id: "enter_your_surname"})} 
                             value={values[fields.nom.name]}
                             onChange={handleChange}
@@ -130,6 +136,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             id = {fields.dateNais.id}    
                             name = {fields.dateNais.name}  
                             label={formatMessage({id:"birthdate"})}
+                            required
                             value={values[fields.dateNais.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.dateNais ? errors.dateNais.toString() : undefined}
@@ -153,6 +160,8 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             id = {fields.sexe.id}    
                             name =  {fields.sexe.name}  
                             label={formatMessage({id:"gender"})}
+                            placeholder={formatMessage({id:"select"})}
+                            required
                             value={values[fields.sexe.name]} 
                             onChange={handleChange}
                             options={genderOptions}      
@@ -164,18 +173,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
-                    {/* Téléphone */}
-                    <div>
-                        <InputText
-                            id = {fields.telephone.id}    
-                            name =  {fields.telephone.name}  
-                            label={formatMessage({id:"phone"})}
-                            placeholder = {formatMessage({id: "enter_your_phone"})} 
-                            value={values[fields.telephone.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
-                        />
-                    </div>
                     {/* Pays */}
                     <div>
                         <InputSelect
@@ -183,6 +180,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             name =  {fields.pays.name}  
                             options={countryOptions}
                             label={formatMessage({id:"country"})}
+                            required
                             placeholder = {formatMessage({id: "enter_your_country"})} 
                             value={values[fields.pays.name]} 
                             onChange={handleChange}      
@@ -195,10 +193,25 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             id = {fields.ville.id}    
                             name =  {fields.ville.name}  
                             label={formatMessage({id:"city"})}
+                            required
                             placeholder = {formatMessage({id: "enter_your_city"})} 
                             value={values[fields.ville.name]} 
                             onChange={handleChange}      
                             errorMessage={ errors.ville ? errors.ville.toString() : undefined}
+                        />
+                    </div>
+                    {/* Téléphone */}
+                    <div>
+                        <InputPhone
+                            id = {fields.telephone.id}    
+                            name =  {fields.telephone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})}
+                            countryCode={getSelectedCountryCode(values.pays)}
+                            required
+                            value={values[fields.telephone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.telephone ? errors.telephone.toString() : undefined}
                         />
                     </div>
                     {/* Code postal */}

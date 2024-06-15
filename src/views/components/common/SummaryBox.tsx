@@ -2,9 +2,11 @@ import { Fragment } from "react/jsx-runtime"
 import { InputText } from "../ui";
 
 interface SummaryBoxProps {
-    infos: {id: string,
+    infos: {
+        id: string,
         name: string,
-        value: string}[],
+        value: string | undefined
+    }[],
     title: string
 }
 
@@ -19,7 +21,7 @@ export const SummaryBox : React.FC<SummaryBoxProps> = (props: SummaryBoxProps) =
                     className="text-primary font-heading font-extrabold mb-5 absolute text-center bg-white w-full py-3"
                 >{title}
                 </h1>
-                    <form
+                    <div
                     className="w-full overflow-scroll flex flex-col justify-start items-center mt-10"
                     >
                         {
@@ -35,7 +37,7 @@ export const SummaryBox : React.FC<SummaryBoxProps> = (props: SummaryBoxProps) =
                                 </div>
                             ))
                         }
-                    </form>
+                    </div>
                 </div>
         </Fragment>
     )

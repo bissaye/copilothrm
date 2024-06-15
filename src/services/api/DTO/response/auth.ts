@@ -7,11 +7,11 @@ export interface UserData {
     derniereconnexion: string; 
     active: boolean;
     superAdmin: boolean;
-    organisations: UserOrganisation[]
+    organisations: StaffOrganisation[]
     staff: Staff
 }
 
-export interface UserOrganisation {
+export interface StaffOrganisation {
     organisationId: string,
     raisonSociale: string,
     email: string,
@@ -25,18 +25,14 @@ export interface UserOrganisation {
     trigam: string,
     basePath: string,
     industrie: string,
-    templateFichePaie: string
+    templateFichePaie: string,
+    nbreCollaborateurs: number
 }
 
 export interface Staff {
     staffId: string,
-    user: {
-        userId: string,
-        username: string,
-        derniereconnexion: string,
-        active: boolean,
-        superAdmin: boolean
-    },
+    user: StaffUser,
+    country: StaffCountry,
     matricule: string,
     nom: string,
     prenom: string,
@@ -49,8 +45,33 @@ export interface Staff {
     adresseZipCode: string,
     adresseVille: string,
     familyContactPhone: string,
-    familyContactQuality: string
+    familyContactQuality: string,
+    userId: string
 }
+
+export interface DeviseMonetaire {
+    deviseId: string,
+    libelle: string,
+    code: string,
+    symbole: string
+}
+
+export interface StaffUser {
+    userId: string,
+    username: string,
+    derniereconnexion: string,
+    active: boolean,
+    superAdmin: boolean
+}
+
+export interface StaffCountry {
+    countryId: string,
+    code: string,
+    libelle: string,
+    deviseMonetaire: DeviseMonetaire,
+    prefixPhone: string,
+    nbreJoursTravailles: number
+  }
 
 export interface AuthResponse {
     accessToken: string;
@@ -67,5 +88,9 @@ export interface UserSignupResponse extends BaseApiResponse {
 }
 
 export interface InvitedUserSignupResponse extends BaseApiResponse {
+    content: Staff
+}
+
+export interface StaffResponse extends BaseApiResponse {
     content: Staff
 }

@@ -19,7 +19,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
     
     // hooks
     const {formatMessage} = useIntl();
-    const { userData, setUserData, countryList, industryList } = useSignupStore();
+    const { userData, setUserData, countryList, industryList, tailleEntrepriseList } = useSignupStore();
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
@@ -70,6 +70,10 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
         orgLogo: {
             id: "orgLogo",
             name: "orgLogo"
+        },
+        trigram: {
+            id: "trigram",
+            name: "trigram"
         }
     }
 
@@ -82,25 +86,17 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
         return {
-            value: industry.industrieId,
+            value: industry.id,
             text: industry.libelle 
         }
     })
 
-    const tailleEntrepriseOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: '0-10'
-        },
-        {
-            value: "1",
-            text: '10-50'
+    const tailleEntrepriseOptions: InputSelectOptions[] = tailleEntrepriseList.map((tailleEntreprise) => {
+        return {
+            value: tailleEntreprise.tailleEntrepriseId,
+            text: tailleEntreprise.libelle 
         }
-    ]
+    })
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
@@ -136,7 +132,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.raisonSociale.id}    
                             name =  {fields.raisonSociale.name}  
                             label={formatMessage({id:"social_reason"})}
-                            placeholder = {formatMessage({id: "enter_social_reason"})} 
+                            placeholder = {formatMessage({id: "enter_social_reason"})}
+                            required
                             value={values[fields.raisonSociale.name]}
                             onChange={handleChange}
                             className="h-5"
@@ -149,11 +146,26 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.siret.id}    
                             name =  {fields.siret.name}  
                             label={formatMessage({id:"siret"})}
-                            placeholder = {formatMessage({id: "enter_siret_number"})} 
+                            placeholder = {formatMessage({id: "enter_siret_number"})}
+                            required
                             value={values[fields.siret.name]} 
                             onChange={handleChange}
                             className="h-5"
                             errorMessage={ errors.siret ? errors.siret.toString() : undefined}
+                        />
+                    </div>
+                    {/* TRIGRAM */}
+                    <div>
+                        <InputText
+                            id = {fields.trigram.id}    
+                            name =  {fields.trigram.name}  
+                            label="Trigram"
+                            placeholder = "Trigram"
+                            required 
+                            value={values[fields.trigram.name]} 
+                            onChange={handleChange}
+                            className="h-5"
+                            errorMessage={ errors.trigram ? errors.trigram.toString() : undefined}
                         />
                     </div>
                     {/* Industrie */}
@@ -162,7 +174,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.industrie.id}    
                             name = {fields.industrie.name}  
                             label={formatMessage({id:"industry"})}
-                            placeholder = {formatMessage({id: "choose_industry"})} 
+                            placeholder = {formatMessage({id: "choose_industry"})}
+                            required
                             value={values[fields.industrie.name]} 
                             onChange={handleChange}
                             options={industrieOptions}
@@ -176,7 +189,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.tailleEntreprise.id}    
                             name = {fields.tailleEntreprise.name}  
                             label={formatMessage({id:"org_size"})}
-                            placeholder = {formatMessage({id: "choose_org_size"})} 
+                            placeholder = {formatMessage({id: "choose_org_size"})}
                             value={values[fields.tailleEntreprise.name]} 
                             onChange={handleChange}
                             options={tailleEntrepriseOptions}
@@ -190,7 +203,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.organisationEmail.id}    
                             name =  {fields.organisationEmail.name}  
                             label='Email'
-                            placeholder = {formatMessage({id: "enter_social_reason"})} 
+                            placeholder = {formatMessage({id: "enter_social_reason"})}
+                            required
                             value={values[fields.organisationEmail.name]}
                             onChange={handleChange}
                             className="h-5"
@@ -221,7 +235,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.organisationPays.id}    
                             name =  {fields.organisationPays.name}  
                             label={formatMessage({id:"country"})}
-                            placeholder = {formatMessage({id: "country_of_organization"})} 
+                            placeholder = {formatMessage({id: "country_of_organization"})}
+                            required 
                             value={values[fields.organisationPays.name]}
                             onChange={handleChange}
                             options={countryOptions}
@@ -235,7 +250,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.organisationVille.id}    
                             name =  {fields.organisationVille.name}  
                             label={formatMessage({id:"city"})}
-                            placeholder = {formatMessage({id: "city_of_organization"})} 
+                            placeholder = {formatMessage({id: "city_of_organization"})}
+                            required
                             value={values[fields.organisationVille.name]} 
                             onChange={handleChange}
                             className="h-5"
@@ -248,7 +264,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.organisationZipCode.id}    
                             name = {fields.organisationZipCode.name}  
                             label={formatMessage({id:"post_code"})}
-                            placeholder = {formatMessage({id: "post_code_of_organization"})} 
+                            placeholder = {formatMessage({id: "post_code_of_organization"})}
+                            required 
                             value={values[fields.organisationZipCode.name]} 
                             onChange={handleChange}    
                             className="h-5"  
@@ -262,6 +279,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             name = {fields.organisationRue.name}  
                             label={formatMessage({id:"enter_your_address"})}
                             placeholder={formatMessage({id:"address_of_organization"})}
+                            required
                             value={values[fields.organisationRue.name]} 
                             onChange={handleChange}   
                             className="h-5"   
@@ -274,7 +292,8 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.organisationPhone.id}    
                             name =  {fields.organisationPhone.name}  
                             label={formatMessage({id:"phone"})}
-                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            placeholder = {formatMessage({id: "enter_your_phone"})}
+                            required
                             value={values[fields.organisationPhone.name]} 
                             onChange={handleChange}   
                             className="h-5"   

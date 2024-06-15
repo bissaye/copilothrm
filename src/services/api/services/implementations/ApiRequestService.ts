@@ -38,7 +38,6 @@ export class ApiRequestService implements IApiRequestService {
         if (auth) {
             this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
         }
-        console.log("HEADER ", this.token)
         const response = await this.apiClient.post<T>(path, data);
         return response.data as T;
     }
@@ -49,6 +48,16 @@ export class ApiRequestService implements IApiRequestService {
             this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
         }
         const response = await this.apiClient.put<T>(path, data);
+        return response.data as T;
+
+    }
+
+    public async patch<T>(path: string, data?: any, auth: boolean = false): Promise<T> {
+
+        if (auth) {
+            this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;
+        }
+        const response = await this.apiClient.patch<T>(path, data);
         return response.data as T;
 
     }

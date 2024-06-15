@@ -5,6 +5,7 @@ import { usePageStore } from '../../services/store';
 
 export const OrganizationBaseLayout : React.FC = () => {
     const { page } = usePageStore();
+
     return <Fragment>
 
         { page !== "ChooseOrg" &&<OrganizationHeader/>}
@@ -16,3 +17,4 @@ export const OrganizationBaseLayout : React.FC = () => {
 
     </Fragment>
 }
+
