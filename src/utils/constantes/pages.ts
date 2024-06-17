@@ -1,3 +1,4 @@
+
 export const pageIds  = {
     LandingPage : "LandingPage",
     SignInPage : "SignInPage",
@@ -17,6 +18,6 @@ export const pageIds  = {
     ActivateAccount: "ActivateAccount"
 }
 
-export const otpLength :number = 6;
 
-export const api_base_url =  import.meta.env.VITE_API_URL;
+
+
