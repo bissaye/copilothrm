@@ -58,7 +58,7 @@ export const SignUpPage : React.FC = () => {
                 <h1 className='font-bold font-heading text-t8 text-black capitalize my-4'>
                     {formatMessage({id:"sign_up_link"})}
                 </h1>
-                <Stepper currentStep={signupStep} steps={4} />
+                <Stepper currentStep={signupStep} steps={4} titles={["Infos Personnelles","Infos Compte","infos Organisation","Confirmation infos"]} />
                 { signupStep === 1 &&
                     <Step1 handleSubmitNextStep={nextStep} />
                 }
