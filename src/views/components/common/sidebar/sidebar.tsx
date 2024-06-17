@@ -24,7 +24,7 @@ export const Sidebar : React.FC = () => {
     const loggedUser = user.staff;
 
 return(
-    <div className="sidebar md:w-[260px] ld:w-[15%] rounded-xl border border-gray-500 shadow-lg shadow-zinc-300 ml-8 px-5 hidden md:flex md:flex-col gap-5">
+    <div className="sidebar md:w-[260px] ld:w-[300px] rounded-xl border border-gray-500 shadow-lg shadow-zinc-300 ml-8 px-5 hidden md:flex md:flex-col gap-5">
         <div className=" h-[80%] w-full mt-5 flex flex-col gap-0.5">
             {
                 sidebarMenuItems.map((item, index) =>
