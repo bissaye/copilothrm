@@ -31,7 +31,7 @@ export const Stepper : React.FC<StepperProps> = (props : StepperProps) => {
     }, [currentStep])
 
     return <Fragment>
-        <div className={`flex flex-row justify-between mb-4 ${titles ? " mb-20" : ""} `}>
+        <div className={`flex flex-row justify-between ${titles ? " mb-20" : "mb-4"} `}>
             {
                 Array.from( {length:steps}, (_, index ) => (
                     <div className='flex flex-row items-center' key={index}>
