@@ -1,6 +1,6 @@
 export interface StaffInvitation {
     organisationId: string,
-    departementId: string,
+    departementId?: string,
     senderId: string,
     objetInvite: string,
     civilite: string,

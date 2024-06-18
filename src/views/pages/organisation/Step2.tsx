@@ -11,14 +11,13 @@ import { useNavigateById } from "../../../hooks";
 import { pageIds } from "../../../utils/constantes";
 
 interface Step2Props {
-    handleSubmitNextStep?: () => void;
     handlePrevStep: () => void;
 }
 
 export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     
     // props
-    const { handleSubmitNextStep, handlePrevStep } = props;
+    const { handlePrevStep } = props;
 
     //hooks
     const {formatMessage} = useIntl();
@@ -31,11 +30,11 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     const formik = useFormik({
         initialValues: orgData,
         onSubmit: async () => {
-            showSpinner(formatMessage({id:"account_creating"}));
+            showSpinner();
             try{
                 await addOrganisation(orgData).then(response => {
                     hideSpinner()
-                    toastify('error', response.message);
+                    toastify('success', response.message);
                     navigateById(pageIds.ChooseOrg)
                 })
             }
@@ -79,7 +78,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
         {
             id: "industry",
             name: formatMessage({id:"industry"}),
-            value: industryList.find((industry) => industry.id == orgData.industrie)!.libelle
+            value: industryList.find((industry) => industry.industrieId == orgData.industrie)!.libelle
         },
         {
             id: "orgCountry",
@@ -140,14 +139,13 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                         />
                         <DefaultButton
                             type = "primary"
-                            text = {formatMessage({id: "sign_up_link"})}
+                            text = {formatMessage({id: "Ajoutez une organisation"})}
                             bgWhite = {false}
                             typeForm='submit'
                             marginY={20}
                             width={335}
                             disabled={formik.isSubmitting}
                             className="rounded-[4px] disabled:bg-primary/70"
-                            onClick={handleSubmitNextStep}
                         />
                     </div>
                 </div>

@@ -1,6 +1,5 @@
 import React, {Fragment} from "react";
-import { FooterSignInPage } from "../components/common";
-import { imagesLogo, avatars} from "../../assets/images";
+import { avatars} from "../../assets/images";
 import { DefaultButton } from "../components/ui";
 import { faArrowLeft, faArrowRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useAuthStore } from "../../services/store";
@@ -37,8 +36,8 @@ export const ChooseOrg: React.FC = () => {
     }
 
     return <Fragment>
-        <div className="flex flex-col justify-between items-center w-full h-screen pt-7 gap-8">
-            <img src={imagesLogo.main}/>
+        <div className="flex flex-col justify-between items-center w-full h-screen pt-7 gap-3 mb-7">
+            {/* <img src={imagesLogo.main}/> */}
             <div>
                 <h1 className=" font-heading font-bold text-t8 text-center">
                     {formatMessage({id:"welcome_back"})}
@@ -103,7 +102,6 @@ export const ChooseOrg: React.FC = () => {
                     }}
                 />
             </div>
-            <FooterSignInPage/>
         </div>
     </Fragment>
 }

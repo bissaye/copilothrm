@@ -3,7 +3,7 @@ import { useIntl } from "react-intl"
 import { useFormik } from "formik"
 import { BaseModalLayout } from "./baseModalLayout"
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
-import { useUserUseCase } from "../../../../services/api/usescases"
+import { useInvitationUseCase } from "../../../../services/api/usescases"
 import { toastify } from "../../../../utils/toasts"
 import { useSpinnerStore } from "../../../../services/store"
 import { inviteMemberSchema } from "../../../../services/forms/validations";
@@ -19,15 +19,14 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
 
     const { onClose } = props;
     const {formatMessage} = useIntl();
-    const {userServices} = useApiServices();
-    const {inviteUser} = useUserUseCase(userServices)
+    const {invitationService} = useApiServices();
+    const {sendInvitation} = useInvitationUseCase(invitationService)
     const {showSpinner, hideSpinner} = useSpinnerStore()
 
     const organisation: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
     const user: UserData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
     const initialValues = {
         organisationId: organisation.organisationId,
-        departementId: "",
         senderId: user.staff.staffId,
         objetInvite: `Invitation à rejoindre notre organisation ${organisation.raisonSociale}`,
         civilite: "",
@@ -55,8 +54,7 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
             const body: StaffInvitation = {...values}
             try {
                 showSpinner()
-                debugger
-                await inviteUser(body).then(response => {
+                await sendInvitation(body).then(response => {
                     hideSpinner()
                     toastify('success', response.message)
                     onClose()
