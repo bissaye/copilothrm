@@ -11,7 +11,7 @@ import { useUserUseCase } from "../../services/api/usescases";
 import { useApiServices } from "../../services/api/ApiServiceContext";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSpinnerStore } from "../../services/store";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export const ActivateAccount: React.FC = () => {
 
@@ -24,10 +24,13 @@ export const ActivateAccount: React.FC = () => {
     const [message, setMessage] = useState('')
     const {showSpinner, hideSpinner} = useSpinnerStore()
     const NavigateById = useNavigateById()
-    const {token} = useParams();
 
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('token');
+    
     useEffect(() => {
-
+        debugger
         if (!token || token == ''){
             NavigateById(pageIds.SignInPage)
         }
