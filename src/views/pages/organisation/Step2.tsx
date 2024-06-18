@@ -11,14 +11,13 @@ import { useNavigateById } from "../../../hooks";
 import { pageIds } from "../../../utils/constantes";
 
 interface Step2Props {
-    handleSubmitNextStep?: () => void;
     handlePrevStep: () => void;
 }
 
 export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     
     // props
-    const { handleSubmitNextStep, handlePrevStep } = props;
+    const { handlePrevStep } = props;
 
     //hooks
     const {formatMessage} = useIntl();

@@ -11,7 +11,7 @@ import { useUserUseCase } from "../../services/api/usescases";
 import { useApiServices } from "../../services/api/ApiServiceContext";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSpinnerStore } from "../../services/store";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const ActivateAccount: React.FC = () => {
 

@@ -58,7 +58,7 @@ export const AddOrganisation: React.FC = () => {
         }
 
         { addOrgStep === 2 &&
-            <Step2 handleSubmitNextStep={nextStep} handlePrevStep={prevStep}/>
+            <Step2 handlePrevStep={prevStep}/>
         }
         <LinkButton
             type="primary"
