@@ -80,30 +80,10 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         }
     }
 
-    const inviteUser = async (data: StaffInvitation) => {
-        try{
-            if(userServices){
-                const response = await userServices.inviteUser(data)
-                return response;
-            }
-            else {
-                throw new Error("erreur userServices not set");
-            }
-        }
-        catch (err: any) {
-            if(err.response.data.message) {
-              const message = err.response.data.message;
-              throw new Error(String(message))
-            }
-            throw new Error(String(err));
-        }
-    }
-
     return {
         updateUserProfile,
         changeUserPassword,
         activateUserAccount,
-        getUserInfos,
-        inviteUser
+        getUserInfos
     }
 }
