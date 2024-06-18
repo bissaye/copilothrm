@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage, AddOrganisation} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 import { ActivateAccount } from "../../views/pages/activateAccount";
 
@@ -100,6 +100,12 @@ export const managerRoutes : Record<string, AppRoute> = {
         path: "/home/org-home/payments",
         authRequired: true,
         element: <HomePage/>
+    },
+    AddOrganisation: {
+        id: pageIds.AddOrganisation,
+        path: "/home/addOrganisation",
+        authRequired: true,
+        element: <AddOrganisation />
     }
 }
 

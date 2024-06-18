@@ -1,4 +1,4 @@
-import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
+import { ChangeUserPasswordData, StaffInvitation, UpdateUserData } from "../DTO/request";
 import { StaffResponse } from "../DTO/response";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
@@ -80,10 +80,10 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         }
     }
 
-    const inviteUser = async (data: any) => {
+    const inviteUser = async (data: StaffInvitation) => {
         try{
             if(userServices){
-                const response = await userServices.activateUserAccount(data)
+                const response = await userServices.inviteUser(data)
                 return response;
             }
             else {

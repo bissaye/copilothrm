@@ -1,4 +1,3 @@
-
 export const pageIds  = {
     LandingPage : "LandingPage",
     SignInPage : "SignInPage",
@@ -15,7 +14,8 @@ export const pageIds  = {
     Payments: "PaymentsPage",
     ChooseOrg : "ChooseOrg",
     Profile : "Profile",
-    ActivateAccount: "ActivateAccount"
+    ActivateAccount: "ActivateAccount",
+    AddOrganisation: "AddOrganisation"
 }
 
 

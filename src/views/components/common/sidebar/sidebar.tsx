@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import { DefaultButton, LinkButton, SideBarMenuLink } from "../../ui"
 import "./style.css"
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCircleLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { avatars } from "../../../../assets/images";
 import { Link } from "react-router-dom";
 import { MANAGER_SIDEBAR_MENU_ITEMS } from "../../../../services/sidebar-menu-items";
@@ -69,6 +69,14 @@ return(
                 </div>
             </div>
         </div> 
+        <LinkButton
+            type="primary"
+            text={formatMessage({id:"chhose_an_org"})}
+            width={237}
+            icon={faCircleLeft}
+            onClick={() => navigateById(pageIds.ChooseOrg)}
+            className="mb-5"
+        />
         {showInviteModal && <InviteMemberModal onClose={() => setShowInviteModal(false)} />}
     </div>
 )

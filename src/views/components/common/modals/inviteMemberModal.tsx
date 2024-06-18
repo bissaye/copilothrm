@@ -1,12 +1,14 @@
-import { DefaultButton, InputText } from "../../ui"
+import { DefaultButton, InputSelect, InputText } from "../../ui"
 import { useIntl } from "react-intl"
 import { useFormik } from "formik"
-import * as yup from "yup";
 import { BaseModalLayout } from "./baseModalLayout"
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
 import { useUserUseCase } from "../../../../services/api/usescases"
 import { toastify } from "../../../../utils/toasts"
 import { useSpinnerStore } from "../../../../services/store"
+import { inviteMemberSchema } from "../../../../services/forms/validations";
+import { StaffInvitation } from "../../../../services/api/DTO/request";
+import { StaffOrganisation, UserData } from "../../../../services/api/DTO/response";
 
 
 interface InviteMemberModalProps {
@@ -21,28 +23,43 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
     const {inviteUser} = useUserUseCase(userServices)
     const {showSpinner, hideSpinner} = useSpinnerStore()
 
-    const validationSchema = yup.object({
-        email: yup.string().email("incorrect_email_address_format").required("required_field"),
-        nom: yup.string().required("required_field")
-    })
-
+    const organisation: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
+    const user: UserData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
     const initialValues = {
-        email: "",
-        nom: ""
+        organisationId: organisation.organisationId,
+        departementId: "",
+        senderId: user.staff.staffId,
+        objetInvite: `Invitation à rejoindre notre organisation ${organisation.raisonSociale}`,
+        civilite: "",
+        nomComplet: "",
+        emailDestinataire: ""
     }
+
+    const civiliteOptions = [
+        {
+            value: "Monsieur",
+            text: "Monsieur"
+        },
+        {
+            value: "Madame",
+            text: "Madame"
+        }
+    ]
 
     const formik = useFormik({
         initialValues,
-        validationSchema: validationSchema,
+        validationSchema: inviteMemberSchema,
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
-            const body = {...values};
+            const body: StaffInvitation = {...values}
             try {
                 showSpinner()
+                debugger
                 await inviteUser(body).then(response => {
                     hideSpinner()
                     toastify('success', response.message)
+                    onClose()
                 })
             }
             catch(error: any){
@@ -63,40 +80,43 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
                 >
                     <div className="">
                         <InputText 
-                            id={"email"} 
-                            name={"email"}
+                            id={"emailDestinataire"} 
+                            name={"emailDestinataire"}
                             placeholder={formatMessage({id:"enter_member_email"})}
                             label="Email"
-                            value={values.email}
+                            required
+                            value={values.emailDestinataire}
                             onChange={handleChange}
-                            errorMessage={ errors.email ? errors.email.toString() : undefined}
+                            errorMessage={ errors.emailDestinataire ? errors.emailDestinataire.toString() : undefined}
                         />
                     </div>
-                    <div className="mb-4">
-                        <InputText 
-                            id={"name"} 
-                            name={"name"}
-                            placeholder={formatMessage({id:"enter_collaborator_name"})}
-                            label={formatMessage({id:"name"})}
-                            value={values.nom}
-                            onChange={handleChange}
-                            errorMessage={ errors.nom ? errors.nom.toString() : undefined}
-                        />
-                    </div>
-
-                    {/* <div className="flex justify-between mb-4">
-                        <span className="flex gap-3 items-center ml-2">
-                            {<FontAwesomeIcon icon={faBuilding} className="text-t7" />}
-                            <p>{formatMessage({id:"department"})}</p>
-                        </span>
-                        <div className="w-44">
+                    <div className="flex justify-between mb-4">
+                        <div className="mb-4 w-[35%]">
                             <InputSelect 
-                                id={"new_member_email"} 
-                                name={"new_member_email"}
-                                options={departmentsOptions}
+                                id={"civilite"}
+                                name={"civilite"}
+                                value={values.civilite}
+                                onChange={handleChange}
+                                required
+                                placeholder={formatMessage({id:"select"})}
+                                label={formatMessage({id:"civilite"})}
+                                errorMessage={ errors.civilite ? errors.civilite.toString() : undefined}
+                                options={civiliteOptions}
                             />
                         </div>
-                    </div> */}
+                        <div className="mb-4 w-[60%]">
+                            <InputText 
+                                id={"nomComplet"} 
+                                name={"nomComplet"}
+                                placeholder={formatMessage({id:"enter_collaborator_name"})}
+                                label={formatMessage({id:"name"})}
+                                required
+                                value={values.nomComplet}
+                                onChange={handleChange}
+                                errorMessage={ errors.nomComplet ? errors.nomComplet.toString() : undefined}
+                            />
+                        </div>
+                    </div>
 
                     <DefaultButton 
                             type={"primary"} 

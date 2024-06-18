@@ -164,7 +164,9 @@ const fr: Record<string, string> = {
     account_activated_error: "Erreur lors de l'activation de votre compte.",
     no_options: "Aucune option...",
     init_form: "Initialisation du formulaire...",
-    account_creating: "Création de votre compte..."
+    account_creating: "Création de votre compte...",
+    chhose_an_org: "Choisir une organisation",
+    civilite: "Civilité"
 }
 
 export default fr;

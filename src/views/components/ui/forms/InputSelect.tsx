@@ -1,4 +1,4 @@
-import React , {FocusEventHandler, Fragment, useEffect, useRef, useState} from "react";
+import React ,{Fragment, useEffect, useRef, useState} from "react";
 import { InputSelectOptions, InputSelectProps } from "../../../../utils/interfaces/props";
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
@@ -11,7 +11,7 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
     const [showOptions, setShowOptions] = useState<boolean>(false);
     const [inputValue, setInputValue] = useState('');
     const selectInputRef = useRef<HTMLSelectElement>(null);
-    const optionsListRef = useRef<HTMLUListElement>(null);
+    const optionsListRef = useRef<HTMLLIElement>(null);
 
     const handleSelectOption = (option: InputSelectOptions) => {
         if(selectInputRef.current){
@@ -37,10 +37,10 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
 
-    const handleShowOptions: FocusEventHandler = (event) => {
-        if(optionsListRef.current && !optionsListRef.current.contains(event.target as Node))
-            setShowOptions(false)
-    }
+    // const handleShowOptions: FocusEventHandler = (event) => {
+    //     if(optionsListRef.current && !optionsListRef.current.contains(event.target as Node))
+    //         setShowOptions(false)
+    // }
 
     useEffect(()=> {
       if(value){
@@ -57,7 +57,8 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         >
             <div 
             className=" relative w-full"
-            onBlur={handleShowOptions}>
+            // onBlur={handleShowOptions}
+            >
                 <div className=" w-full flex flex-row items-center gap-2">
                     <input 
                         id = {`inputSelect-${id}`}
@@ -98,10 +99,11 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                 </div>
                 {
                     showOptions &&
-                    <ul ref={optionsListRef} className="absolute -left-[8px] top-8 w-full max-h-[300px] bg-white border border-gray-400 shadow-md overflow-y-scroll z-30">
+                    <ul className="absolute -left-[8px] top-8 w-full max-h-[300px] bg-white border border-gray-400 shadow-md overflow-y-scroll z-30">
                     {
                         options?.filter((option) => filterOptionList(option)).map((option, key) => (
                             <li 
+                                ref={optionsListRef}
                                 key={key}
                                 className="w-full px-7 py-3 hover:bg-primary hover:text-white cursor-pointer"
                                 onClick={() => handleSelectOption(option)}

@@ -1,4 +1,4 @@
-import { InvitedUserSignupDatas, UserSignupData } from "../../../services/api/DTO/request";
+import { InvitedUserSignupDatas, OrganizationData, UserSignupData } from "../../../services/api/DTO/request";
 import { CountryData, IndustryData, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
@@ -9,8 +9,6 @@ export type AuthStore = {
   };
 
 export type SignupStore = {
-  signupStep: 1 | 2 | 3 | 4;
-  setSignupStep: (step: 1 | 2 | 3 | 4) => void;
   userData: UserSignupData;
   setUserData: (values: UserSignupData) => void;
   initCountryList: (countries: CountryData[]) => void;
@@ -59,4 +57,15 @@ export type SpinnerStore = {
   text?: string;
   showSpinner: (text?: string) => void;
   hideSpinner: () => void;
+}
+
+export type AddOrgStore = {
+  orgData: OrganizationData,
+  setOrgData: (values: OrganizationData) => void;
+  initCountryList: (countries: CountryData[]) => void;
+  countryList: CountryData[];
+  initIndustryList: (industries: IndustryData[]) => void;
+  industryList: IndustryData[];
+  tailleEntrepriseList: TailleEntreprise[];
+  initTailleEntrepriseList: (taillesEntreprise: TailleEntreprise[]) => void;
 }

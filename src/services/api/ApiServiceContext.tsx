@@ -1,18 +1,21 @@
 import React, { createContext, useContext } from "react";
 import { ApiRequestService } from "./services/implementations/ApiRequestService";
-import { IApiRequestService, IAuthServices, IFormServices, IUserServices } from "./services/interfaces";
+import { IApiRequestService, IAuthServices, IFormServices, IOrganizationServices, IUserServices } from "./services/interfaces";
 import { AuthServices } from "./services/implementations/AuthServices";
 import { FormServices, UserServices } from "./services/implementations";
+import { OrganizationService } from "./services/implementations/OrganizationService";
 
 
 const ApiServicesContext = createContext<{
     authService: IAuthServices | null;
     userServices: IUserServices | null;
     formServices: IFormServices | null;
+    orgServices: IOrganizationServices | null;
 }>({
     authService:null,
     userServices: null,
-    formServices: null
+    formServices: null,
+    orgServices: null
 })
 
 export const ApiServiceProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
@@ -24,11 +27,14 @@ export const ApiServiceProvider: React.FC<{ children: React.ReactNode}> = ({chil
     const userServices: IUserServices = new UserServices(apiRequestService);
 
     const formServices: IFormServices = new FormServices(apiRequestService);
+
+    const orgServices: IOrganizationServices = new OrganizationService(apiRequestService)
     
     return <ApiServicesContext.Provider value={{
         authService, 
         userServices,
-        formServices
+        formServices,
+        orgServices
         }}>
         {children}
     </ApiServicesContext.Provider>
