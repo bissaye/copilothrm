@@ -37,10 +37,10 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
         return option.text.toLowerCase().includes(inputValue.toLowerCase()) ? option :  null;
     }
 
-    const handleShowOptions: FocusEventHandler = (event) => {
-        if(optionsListRef.current && !optionsListRef.current.contains(event.target as Node))
-            setShowOptions(false)
-    }
+    // const handleShowOptions: FocusEventHandler = (event) => {
+    //     if(optionsListRef.current && !optionsListRef.current.contains(event.target as Node))
+    //         setShowOptions(false)
+    // }
 
     useEffect(()=> {
       if(value){
