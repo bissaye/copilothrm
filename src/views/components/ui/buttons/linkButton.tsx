@@ -37,7 +37,7 @@ export const LinkButton : React.FC<LinkButtonProps> = (props: LinkButtonProps) =
             onClick={() => {
                 onClick && onClick()
             }}
-            className={`${className} ${type ? textType[type] : "" } font-body ${type ? underline ? ` border-b ${borderType[type]}`: "" : ""}`}
+            className={`flex gap-3 items-center ${className} ${type ? textType[type] : "" } font-body ${type ? underline ? ` border-b ${borderType[type]}`: "" : ""}`}
             style={{
                 fontSize: fontSize,
                 width : sizeWidth,
