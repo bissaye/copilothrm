@@ -1,8 +1,9 @@
 import { faEnvelope, faFolder, faMessage, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import { faChartPie, faGear, faUsersLine } from "@fortawesome/free-solid-svg-icons";
 import { managerRoutes } from "../routes";
+import { MenuItem } from "../../utils/interfaces/type";
 
-export const MANAGER_SIDEBAR_MENU_ITEMS = [
+export const MANAGER_SIDEBAR_MENU_ITEMS :MenuItem[] = [
     {
         title: "dashboard",
         icon: faChartPie,

@@ -8,6 +8,7 @@ import { useUserUseCase } from "../../../../services/api/usescases"
 import { toastify } from "../../../../utils/toasts"
 import { useSpinnerStore } from "../../../../services/store"
 
+
 interface InviteMemberModalProps {
     onClose: () => void;
 }
@@ -19,25 +20,6 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
     const {userServices} = useApiServices();
     const {inviteUser} = useUserUseCase(userServices)
     const {showSpinner, hideSpinner} = useSpinnerStore()
-
-    // const departmentsOptions = [
-    //     {
-    //         value: "",
-    //         text: formatMessage({id:"select"})
-    //     },
-    //     {
-    //         value: "0",
-    //         text: formatMessage({id:"finances"})
-    //     },
-    //     {
-    //         value: "1",
-    //         text: formatMessage({id:"administrative"})
-    //     },
-    //     {
-    //         value: "2",
-    //         text: formatMessage({id:"human_resources"})
-    //     }
-    // ]
 
     const validationSchema = yup.object({
         email: yup.string().email("incorrect_email_address_format").required("required_field"),
