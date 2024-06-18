@@ -20,6 +20,22 @@ export const OrganizationHeader : React.FC = () => {
     const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
+    let orgHeaderTitle;
+    switch(page) {
+        case "ChooseORg": {
+            orgHeaderTitle = formatMessage({id: "chhose_an_org"});
+            break;
+        }
+        case "AddOrganisation": {
+            orgHeaderTitle = formatMessage({id: "add_org"});
+            break;
+        }
+        default: {
+            orgHeaderTitle = localStorage.getItem("currentOrg") ? JSON.parse(localStorage.getItem("currentOrg")!) : null;
+            break;
+        }
+    }
+
     useEffect(() => {
         const handleScroll = () => {
             const topOffset = window.scrollY;
@@ -59,7 +75,7 @@ export const OrganizationHeader : React.FC = () => {
             <div className="w-full hidden md:flex">
             
                 <div className='flex flex-row justify-end items-center w-full'>
-                    <h1 className='font-heading capitalize font-bold text-t5 md:text-t7'>Abyster Consulting</h1>
+                    <h1 className='font-heading capitalize font-bold text-t5 md:text-t7'>{orgHeaderTitle}</h1>
                 </div>
                     
                 <div className='flex flex-row justify-end items-center gap-4 w-full'>
