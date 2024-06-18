@@ -30,7 +30,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     const formik = useFormik({
         initialValues: orgData,
         onSubmit: async () => {
-            showSpinner(formatMessage({id:"account_creating"}));
+            showSpinner();
             try{
                 await addOrganisation(orgData).then(response => {
                     hideSpinner()

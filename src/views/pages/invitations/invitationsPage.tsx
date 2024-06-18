@@ -9,10 +9,43 @@ import { avatars } from "../../../assets/images";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
 import "./style.css"
 import { useIntl } from "react-intl";
+import { useEffect, useState } from "react";
+import { useApiServices } from "../../../services/api/ApiServiceContext";
+import { useInvitationUseCase } from "../../../services/api/usescases";
+import { StaffOrganisation } from "../../../services/api/DTO/response";
+import { useSpinnerStore } from "../../../services/store";
+import { toastify } from "../../../utils/toasts";
 
 export const InvitationPage: React.FC = () => {
 
     const {formatMessage} = useIntl();
+    const [invitationList, setInvitationList] = useState();
+    const {showSpinner, hideSpinner} = useSpinnerStore();
+    const {invitationService} = useApiServices();
+    const {getAllInvitations} = useInvitationUseCase(invitationService)
+    const currentOrg: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
+    
+    useEffect(() => {
+        async function getInvitations() {
+            try{
+                debugger
+                if(currentOrg){
+                    showSpinner()
+                    await getAllInvitations(currentOrg.organisationId, 0, 10).then(response => {
+                        debugger
+                        setInvitationList(response.content)
+                        hideSpinner()
+                    })
+                }
+            }
+            catch(error: any){
+                hideSpinner()
+                toastify('error', error.message)
+            }
+        }
+
+        getInvitations()
+    }, [])
     
     const actionsList = () => {
         return(
@@ -175,6 +208,8 @@ export const InvitationPage: React.FC = () => {
             status: 'Accepted' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
         }
     ]
+
+    console.log(invitationList)
     
     return(
         <div className=' w-full md:w-[900px] lg:w-[76%] h-full flex flex-col justify-start items-start gap-5 px-10 py-5 bg-white lg:overflow-x-hidden'>

@@ -11,11 +11,11 @@ export class InvitationService implements IInvitationServices {
         this.apiService = apiService;
     }
     
-    async getAllInvitations(orgId: string): Promise<any> {
-        const response: any = await this.apiService.get<any>(`/invitation/organisation/${orgId}`, true)
+    async getAllInvitations(orgId: string, pageNumber: number, size: number): Promise<any> {
+        const response: any = await this.apiService.get<any>(`/invitation/organisation/${orgId}?pageNumber=${pageNumber}&size=${size}`, true)
         return response;
     }
-    async sendInvitation(data: StaffInvitation): Promise<BaseApiResponse> {
+    async sendInvitation(data: StaffInvitation, ): Promise<BaseApiResponse> {
         const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>('/invitation/', data, true)
         return response
     }

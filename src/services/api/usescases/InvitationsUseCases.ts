@@ -3,10 +3,10 @@ import { IInvitationServices } from "../services/interfaces";
 
 export const useInvitationUseCase = (invitationServices: IInvitationServices | null) => {
 
-    const getAllInvitations = async (orgId: string) => {
+    const getAllInvitations = async (orgId: string, pageNumber: number, size: number) => {
         try{
             if(invitationServices){
-                const response = await invitationServices.getAllInvitations(orgId)
+                const response = await invitationServices.getAllInvitations(orgId, pageNumber, size)
                 return response;
             }
             else {
