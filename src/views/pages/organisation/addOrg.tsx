@@ -51,7 +51,7 @@ export const AddOrganisation: React.FC = () => {
     }, [])
     
     return <div className="flex flex-col justify-center items-center w-screen h-screen">
-        <h1 className="text-t8 font-bold">Add an organisation</h1>
+        <h1 className="text-t8 font-bold">{formatMessage({id:"add_org"})}</h1>
         <Stepper currentStep={addOrgStep} steps={2} />
         { addOrgStep === 1 &&
             <Step1 handleSubmitNextStep={nextStep}/>
@@ -66,6 +66,7 @@ export const AddOrganisation: React.FC = () => {
             width={237}
             icon={faCircleLeft}
             onClick={() => navigateById(pageIds.ChooseOrg)}
+            className="mb-5"
         />
     </div>
 }
