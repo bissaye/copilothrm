@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputFile, InputSelect, InputText } from "../../components/ui";
+import { DefaultButton, InputFile, InputPhone, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
@@ -97,6 +97,11 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
             text: tailleEntreprise.libelle 
         }
     })
+
+    const getSelectedCountryCode = (countryId: string) => {
+        const selectedCountry = countryList.find(country => country.countryId == countryId)
+        return selectedCountry?.prefixPhone
+    }
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
@@ -211,6 +216,11 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
                         />
                     </div>
+                    
+                </div>
+
+                {/* colonne de droite */}
+                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Nom de domaine de l'organisation */}
                     <div>
                         <InputText
@@ -224,11 +234,6 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             errorMessage={ errors.nomDomaine ? errors.nomDomaine.toString() : undefined}
                         />
                     </div>
-                </div>
-
-                {/* colonne de droite */}
-                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
-                    
                     {/* Pays de l'organisation */}
                     <div>
                         <InputSelect
@@ -265,7 +270,6 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             name = {fields.organisationZipCode.name}  
                             label={formatMessage({id:"post_code"})}
                             placeholder = {formatMessage({id: "post_code_of_organization"})}
-                            required 
                             value={values[fields.organisationZipCode.name]} 
                             onChange={handleChange}    
                             className="h-5"  
@@ -279,7 +283,6 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             name = {fields.organisationRue.name}  
                             label={formatMessage({id:"enter_your_address"})}
                             placeholder={formatMessage({id:"address_of_organization"})}
-                            required
                             value={values[fields.organisationRue.name]} 
                             onChange={handleChange}   
                             className="h-5"   
@@ -288,20 +291,21 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                     </div>
                     {/* Téléphone de l'organisation */}
                     <div>
-                        <InputText
+                        <InputPhone
                             id = {fields.organisationPhone.id}    
                             name =  {fields.organisationPhone.name}  
                             label={formatMessage({id:"phone"})}
                             placeholder = {formatMessage({id: "enter_your_phone"})}
                             required
-                            value={values[fields.organisationPhone.name]} 
+                            countryCode={getSelectedCountryCode(values.organisationPays)}
+                            value={values[fields.organisationPhone.name]}
                             onChange={handleChange}   
-                            className="h-5"   
+                            className="h-5"
                             errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
                         />
                     </div>
                     {/* Logo de l'organisation */}
-                    <div>
+                    {/* <div>
                         <InputFile
                             id = {fields.orgLogo.id}    
                             name = {fields.orgLogo.name}  
@@ -317,7 +321,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             fileType=".jpg, .jpeg, .png"
                             errorMessage={ errors.orgLogo ? errors.orgLogo.toString() : undefined}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="flex flex-col md:flex-row md:gap-6">

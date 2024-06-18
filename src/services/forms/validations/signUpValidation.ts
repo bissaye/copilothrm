@@ -40,7 +40,6 @@ export const userSignUpStepThreeSchema = yup.object(
         tailleEntreprise: yup.string().required('required_field'),
         organisationPays: yup.string().required("required_field"),
         organisationVille: yup.string().required("required_field"),
-        organisationZipCode: yup.string().required("required_field"),
         trigram: yup.string().required("required_field"),
         siret: yup.string().required("required_field"),
     }
