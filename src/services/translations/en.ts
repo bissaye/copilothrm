@@ -167,7 +167,11 @@ const en: Record<string, string> = {
     account_creating: "Creating your account...",
     chhose_an_org: "Choose an organisation",
     civilite: "Civility",
-    add_org: "Add an organization"
+    add_org: "Add an organization",
+    info_perso: "Personal infos",
+    info_compte: "Account infos",
+    info_org: "Organization infos",
+    confirm_info: "Confirm infos"
 }
 
 export default en;
