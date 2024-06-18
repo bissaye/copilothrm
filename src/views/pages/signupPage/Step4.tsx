@@ -134,7 +134,7 @@ export const Step4 : React.FC<Step4Props> = (props: Step4Props) => {
         {
             id: "industry",
             name: formatMessage({id:"industry"}),
-            value: industryList.find((industry) => industry.id == userData.industrie)!.libelle
+            value: industryList.find((industry) => industry.industrieId == userData.industrie)!.libelle
         },
         {
             id: "orgCountry",

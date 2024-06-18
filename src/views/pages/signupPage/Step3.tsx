@@ -86,7 +86,7 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
         return {
-            value: industry.id,
+            value: industry.industrieId,
             text: industry.libelle 
         }
     })

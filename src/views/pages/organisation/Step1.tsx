@@ -93,7 +93,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
         return {
-            value: industry.id,
+            value: industry.industrieId,
             text: industry.libelle 
         }
     })
@@ -243,7 +243,7 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             name =  {fields.organisationPays.name}  
                             label={formatMessage({id:"country"})}
                             placeholder = {formatMessage({id: "country_of_organization"})}
-                            required 
+                            required
                             value={values[fields.organisationPays.name]}
                             onChange={handleChange}
                             options={countryOptions}
@@ -272,7 +272,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             name = {fields.organisationZipCode.name}  
                             label={formatMessage({id:"post_code"})}
                             placeholder = {formatMessage({id: "post_code_of_organization"})}
-                            required 
                             value={values[fields.organisationZipCode.name]} 
                             onChange={handleChange}    
                             className="h-5"  
@@ -286,7 +285,6 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                             name = {fields.organisationRue.name}  
                             label={formatMessage({id:"enter_your_address"})}
                             placeholder={formatMessage({id:"address_of_organization"})}
-                            required
                             value={values[fields.organisationRue.name]} 
                             onChange={handleChange}   
                             className="h-5"   
