@@ -8,6 +8,7 @@ import { SignUpFromInvitationPage } from "./signupFromInvitation";
 import { ForgotPasswordPage } from "./ForgotPassword";
 import { InvitationPage } from "./invitations";
 import { UserProfilePage } from "./userProfile";
+import { AddOrganisation } from "./organisation";
 
 
 export {
@@ -20,5 +21,6 @@ export {
     SignUpFromInvitationPage,
     ForgotPasswordPage,
     InvitationPage,
-    UserProfilePage
+    UserProfilePage,
+    AddOrganisation
 }

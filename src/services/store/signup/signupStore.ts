@@ -4,8 +4,6 @@ import { InvitedUserSignupDatas, UserSignupData } from "../../api/DTO/request";
 import { CountryData, IndustryData, TailleEntreprise } from "../../api/DTO/response";
 
 export const useSignupStore = create<SignupStore>((set) => ({
-    signupStep: 1 as 1 | 2 | 3 | 4,
-    setSignupStep: (step) => set({signupStep: step}),
     userData: {
         nom: "",
         prenom: "",

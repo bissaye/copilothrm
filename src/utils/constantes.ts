@@ -1,3 +1,5 @@
+import { AddOrganisation } from "../views/pages/organisation";
+
 export const pageIds  = {
     LandingPage : "LandingPage",
     SignInPage : "SignInPage",
@@ -14,7 +16,8 @@ export const pageIds  = {
     Payments: "PaymentsPage",
     ChooseOrg : "ChooseOrg",
     Profile : "Profile",
-    ActivateAccount: "ActivateAccount"
+    ActivateAccount: "ActivateAccount",
+    AddOrganisation: "AddOrganisation"
 }
 
 export const otpLength :number = 6;

@@ -38,7 +38,7 @@ export const ChooseOrg: React.FC = () => {
                 </h1>
                 <p className="font-body text-t6 text-center my-3">
                     {formatMessage({id:"choose_a_workspace_below"})} <br/>
-                    pour travailler à nouveau avec votre equipe
+                    {formatMessage({id:"to_work_with_your_team_again"})}
                 </p>
             </div>
             
@@ -63,7 +63,7 @@ export const ChooseOrg: React.FC = () => {
                                             <img className="rounded-full w-5 h-5" src={organisation.users1}/>
                                             <img className="rounded-full w-5 h-5" src={organisation.users2}/>
                                             <img className="rounded-full w-5 h-5" src={organisation.users3}/>
-                                            <span className="text-gray-800 text-t2 font-body">  {organisation.members} {formatMessage({id:"members"})}</span>
+                                            <span className="text-gray-800 text-t2 font-body">{organisation.members} {formatMessage({id:"members"})}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,6 +82,7 @@ export const ChooseOrg: React.FC = () => {
                     text={formatMessage({id:"add_an_organization"})}
                     width={237}
                     icon={faPlus}
+                    onClick={() => NavigateById(pageIds.AddOrganisation)}
                 />
 
                 <DefaultButton
