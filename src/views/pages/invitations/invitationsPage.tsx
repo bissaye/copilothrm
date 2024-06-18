@@ -97,19 +97,19 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: formatMessage({id:"sender"}),
-            selector: (row: Invitation) => row.sender,
+            cell: (row: Invitation) => row.sender,
             sortable: true,
             center: true
         },
         {
             name: formatMessage({id:"receiver"}),
-            selector: (row: Invitation) => row.receiver,
+            cell: (row: Invitation) => row.receiver,
             sortable: true,
             center: true
         },
         {
             name: 'Date',
-            selector: (row: Invitation) => row.date,
+            cell: (row: Invitation) => row.date,
             sortable: true,
             center: true
         },

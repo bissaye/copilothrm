@@ -165,7 +165,8 @@ const fr: Record<string, string> = {
     no_options: "Aucune option...",
     init_form: "Initialisation du formulaire...",
     account_creating: "Création de votre compte...",
-    chhose_an_org: "Choisir une organisation"
+    chhose_an_org: "Choisir une organisation",
+    civilite: "Civilité"
 }
 
 export default fr;

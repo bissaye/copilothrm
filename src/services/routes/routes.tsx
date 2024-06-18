@@ -104,7 +104,7 @@ export const managerRoutes : Record<string, AppRoute> = {
     AddOrganisation: {
         id: pageIds.AddOrganisation,
         path: "/home/addOrganisation",
-        authRequired: false,
+        authRequired: true,
         element: <AddOrganisation />
     }
 }
