@@ -8,6 +8,7 @@ import { DefaultButton, LinkButton } from '../../ui';
 import { useAuthStore, usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { StaffOrganisation } from '../../../../services/api/DTO/response';
 // import "./style.css"
 
 export const OrganizationHeader : React.FC = () => {
@@ -22,7 +23,7 @@ export const OrganizationHeader : React.FC = () => {
 
     let orgHeaderTitle;
     switch(page) {
-        case "ChooseORg": {
+        case "ChooseOrg": {
             orgHeaderTitle = formatMessage({id: "chhose_an_org"});
             break;
         }
@@ -31,7 +32,8 @@ export const OrganizationHeader : React.FC = () => {
             break;
         }
         default: {
-            orgHeaderTitle = localStorage.getItem("currentOrg") ? JSON.parse(localStorage.getItem("currentOrg")!) : null;
+            const organisation: StaffOrganisation|null = localStorage.getItem("currentOrg") ? JSON.parse(localStorage.getItem("currentOrg")!) : null;
+            orgHeaderTitle = organisation ? organisation.raisonSociale : null
             break;
         }
     }

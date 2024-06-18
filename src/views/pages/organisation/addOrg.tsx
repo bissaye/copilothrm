@@ -31,6 +31,10 @@ export const AddOrganisation: React.FC = () => {
         setAddOrgStep(addOrgStep - 1 as  1 | 2 )
     }
 
+    const titles = [formatMessage({id:"info_org"}),
+        formatMessage({id:"confirm_info"})
+    ]
+
     useEffect(() => {
         async function getAddOrgDatas() {
             showSpinner(formatMessage({id:"init_form"}))
@@ -52,7 +56,7 @@ export const AddOrganisation: React.FC = () => {
     
     return <div className="flex flex-col justify-center items-center w-screen h-screen">
         <h1 className="text-t8 font-bold">{formatMessage({id:"add_org"})}</h1>
-        <Stepper currentStep={addOrgStep} steps={2} />
+        <Stepper currentStep={addOrgStep} steps={2} titles={titles} />
         { addOrgStep === 1 &&
             <Step1 handleSubmitNextStep={nextStep}/>
         }
