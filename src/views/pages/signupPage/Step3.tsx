@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputFile, InputPhone, InputSelect, InputText } from "../../components/ui";
+import { DefaultButton, InputPhone, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
 import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";

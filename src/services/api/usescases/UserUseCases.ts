@@ -1,4 +1,4 @@
-import { ChangeUserPasswordData, StaffInvitation, UpdateUserData } from "../DTO/request";
+import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
 import { StaffResponse } from "../DTO/response";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
