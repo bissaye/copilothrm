@@ -27,7 +27,6 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
     const user: UserData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
     const initialValues = {
         organisationId: organisation.organisationId,
-        departementId: "",
         senderId: user.staff.staffId,
         objetInvite: `Invitation à rejoindre notre organisation ${organisation.raisonSociale}`,
         civilite: "",
