@@ -160,6 +160,7 @@ const en: Record<string, string> = {
     enter_new_password: "Enter your new password",
     confirm_new_password: "Confirm your new password",
     loading: "Loading...",
+    account_activation_pending: "Activating your account...",
     account_activated: "Your account was activated successfully. Sign in.",
     account_activated_error: "Error while activating your account",
     no_options: "No options...",

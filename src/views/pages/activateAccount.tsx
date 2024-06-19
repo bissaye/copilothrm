@@ -9,7 +9,7 @@ import { FooterLandingPage } from "../components/common";
 import { useEffect, useState } from "react";
 import { useUserUseCase } from "../../services/api/usescases";
 import { useApiServices } from "../../services/api/ApiServiceContext";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsis, faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useSpinnerStore } from "../../services/store";
 import { useLocation } from "react-router-dom";
 
@@ -30,30 +30,24 @@ export const ActivateAccount: React.FC = () => {
     const token = queryParams.get('token');
     
     useEffect(() => {
-        debugger
         if (!token || token == ''){
             NavigateById(pageIds.SignInPage)
         }
         else{
-
             async function activateAccount(){
                 showSpinner()
-                debugger
                 try{
                     await activateUserAccount(token!).then(response => {
-                        debugger
                         hideSpinner()
                         setMessage(response.message)
                         setAccountActivated(true)
                     });
                 }catch(error: any){
-                    debugger
                     hideSpinner()
                     setMessage(error.message)
                     setAccountActivated(false)
                 }
             }
-        
             activateAccount();
         }
     }, [])
@@ -62,7 +56,12 @@ export const ActivateAccount: React.FC = () => {
         <Fragment>
             <main>
                 <div className="h-full w-full flex flex-col justify-between items-center">
-                    { accountActivated ?
+                    { accountActivated == null ?
+                        <div className="w-[500px] h-[300px] bg-white shadow-md flex flex-col justify-center items-center gap-5 mt-s12">
+                            <FontAwesomeIcon icon={faEllipsis} className="text-primary text-6xl" />
+                            <p className="text-2xl px-10 font-medium text-center">{formatMessage({id:"account_activation_pending"})}</p>
+                        </div>
+                     : accountActivated == true ?
                         <div className="w-[500px] h-[300px] bg-white shadow-md flex flex-col justify-center items-center gap-5 mt-s12">
                             <FontAwesomeIcon icon={faCheckCircle} className="text-primary text-6xl" />
                             <p className="text-2xl px-10 font-medium text-center">{formatMessage({id:"account_activated"})}</p>
@@ -75,7 +74,6 @@ export const ActivateAccount: React.FC = () => {
                             />
                         </div>
                     :
-
                         <div className="w-[500px] h-[300px] bg-white shadow-md flex flex-col justify-center items-center gap-5 mt-s12">
                             <FontAwesomeIcon icon={faExclamationCircle} className="text-red-400 text-6xl" />
                             <p className="text-2xl px-10 font-medium text-center">
