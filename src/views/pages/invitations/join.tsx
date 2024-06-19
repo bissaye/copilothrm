@@ -74,15 +74,19 @@ export const RejoindreOrganizationPage: React.FC = () => {
                     }
                 }
                 else if(response.status == 404){
+                    hideSpinner()
                     const invitation = {
                         username: username,
                         orgId: orgId
                     }
                     localStorage.setItem('invitation', JSON.stringify(invitation))
                     navigateById(pageIds.SignUpFromInvitationPage)
+                    toastify('error', response.message)
                 }
                 else {
+                    hideSpinner()
                     navigateById(pageIds.LandingPage)
+                    toastify('error', response.message)
                 }
             }
         }
