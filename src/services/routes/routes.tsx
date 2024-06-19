@@ -2,6 +2,7 @@ import { AppRoute } from "../../utils/interfaces/type"
 import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage, AddOrganisation} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 import { ActivateAccount } from "../../views/pages/activateAccount";
+import { RejoindreOrganizationPage } from "../../views/pages/invitations";
 
 
 
@@ -43,6 +44,12 @@ export const publicRoutes : Record<string, AppRoute> = {
         path: "/activation",
         authRequired: false,
         element: <ActivateAccount/>
+    },
+    JoinOrganizationPage:{
+        id: pageIds.JoinOrganisation,
+        path: "/join",
+        authRequired: false,
+        element: <RejoindreOrganizationPage/>
     }
 }
 

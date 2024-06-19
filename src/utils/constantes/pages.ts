@@ -15,7 +15,8 @@ export const pageIds  = {
     ChooseOrg : "ChooseOrg",
     Profile : "Profile",
     ActivateAccount: "ActivateAccount",
-    AddOrganisation: "AddOrganisation"
+    AddOrganisation: "AddOrganisation",
+    JoinOrganisation: "JoinOrganization"
 }
 
 

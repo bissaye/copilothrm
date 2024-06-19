@@ -1,5 +1,5 @@
 import { ChangeUserPasswordData, UpdateUserData } from "../../DTO/request";
-import { BaseApiResponse, ChangeUserPasswordResponse, StaffResponse } from "../../DTO/response";
+import { BaseApiResponse, ChangeUserPasswordResponse, StaffResponse, UserExistsResponse } from "../../DTO/response";
 import { IApiRequestService } from "../interfaces";
 import { IUserServices } from "../interfaces/IUserServices";
 
@@ -31,4 +31,8 @@ export class UserServices implements IUserServices {
         return response;
     }
 
+    public async checkUserExists(username: string): Promise<UserExistsResponse> {
+        const response: UserExistsResponse = await this.apiService.get<UserExistsResponse>(`/user/isUser/${username}`)
+        return response;
+    }
 }

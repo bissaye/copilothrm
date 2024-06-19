@@ -1,5 +1,5 @@
 import { ChangeUserPasswordData, UpdateUserData } from "../DTO/request";
-import { StaffResponse } from "../DTO/response";
+import { StaffResponse, UserExistsResponse } from "../DTO/response";
 import { IUserServices } from "../services/interfaces/IUserServices";
 
 export const useUserUseCase = (userServices: IUserServices | null) => {
@@ -80,10 +80,30 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         }
     }
 
+    const checkUserExists = async (username: string) => {
+        try{
+            if(userServices){
+                const response: UserExistsResponse = await userServices.checkUserExists(username)
+                return response;
+            }
+            else {
+                throw new Error("erreur userServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
     return {
         updateUserProfile,
         changeUserPassword,
         activateUserAccount,
-        getUserInfos
+        getUserInfos,
+        checkUserExists
     }
 }

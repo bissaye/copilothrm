@@ -2,11 +2,8 @@
 import { BaseApiResponse} from "./baseResponses";
 
 export interface UserData {
-    userId: string;
-    username: string;
-    derniereconnexion: string; 
-    active: boolean;
-    superAdmin: boolean;
+    accessToken: string,
+    refreshToken: string,
     organisations: StaffOrganisation[]
     staff: Staff
 }
@@ -45,8 +42,7 @@ export interface Staff {
     adresseZipCode: string,
     adresseVille: string,
     familyContactPhone: string,
-    familyContactQuality: string,
-    userId: string
+    familyContactQuality: string
 }
 
 export interface DeviseMonetaire {
@@ -60,6 +56,7 @@ export interface StaffUser {
     userId: string,
     username: string,
     derniereconnexion: string,
+    staff: boolean,
     active: boolean,
     superAdmin: boolean
 }
