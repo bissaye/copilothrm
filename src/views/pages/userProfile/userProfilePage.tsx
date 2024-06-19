@@ -183,7 +183,7 @@ export const UserProfilePage: React.FC = () => {
                             <div className="flex flex-col gap-1 justify-start items-start">
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faAt} className="text-neutral-600" />
-                                    <p className="text-neutral-600 font-body text-t3">{user.username}</p>
+                                    <p className="text-neutral-600 font-body text-t3">{user.staff.user.username}</p>
                                 </span>
                                 <span className="flex gap-3 justify-center items-center">
                                     <FontAwesomeIcon icon={faPhone} className="text-neutral-600" />
@@ -242,7 +242,7 @@ export const UserProfilePage: React.FC = () => {
                                         />
                                     </span>
                                 </div>
-                                <p className="text-neutral-600 font-body text-t3">{user.username}</p>
+                                <p className="text-neutral-600 font-body text-t3">{user.staff.user.username}</p>
                             </div>
                             <div className="w-1/2 py-5 px-5 flex flex-col gap-3 ">
                                 {/* Nom de famille */}

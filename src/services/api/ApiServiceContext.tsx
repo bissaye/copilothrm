@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { ApiRequestService } from "./services/implementations/ApiRequestService";
-import { IApiRequestService, IAuthServices, IFormServices, IInvitationServices, IOrganizationServices, IUserServices } from "./services/interfaces";
+import { IApiRequestService, IAuthServices, IFormServices, IInvitationServices, IOrganizationServices, IStaffService, IUserServices } from "./services/interfaces";
 import { AuthServices } from "./services/implementations/AuthServices";
-import { FormServices, InvitationService, UserServices } from "./services/implementations";
+import { FormServices, InvitationService, StaffServices, UserServices } from "./services/implementations";
 import { OrganizationService } from "./services/implementations/OrganizationService";
 
 
@@ -12,12 +12,14 @@ const ApiServicesContext = createContext<{
     formServices: IFormServices | null;
     orgServices: IOrganizationServices | null;
     invitationService: IInvitationServices | null;
+    staffService: IStaffService | null;
 }>({
     authService:null,
     userServices: null,
     formServices: null,
     orgServices: null,
-    invitationService: null
+    invitationService: null,
+    staffService: null
 })
 
 export const ApiServiceProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
@@ -34,12 +36,15 @@ export const ApiServiceProvider: React.FC<{ children: React.ReactNode}> = ({chil
     
     const invitationService: IInvitationServices = new InvitationService(apiRequestService);
 
+    const staffService: IStaffService = new StaffServices(apiRequestService);
+
     return <ApiServicesContext.Provider value={{
         authService, 
         userServices,
         formServices,
         orgServices,
-        invitationService
+        invitationService,
+        staffService
         }}>
         {children}
     </ApiServicesContext.Provider>
