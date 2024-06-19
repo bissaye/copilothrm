@@ -1,8 +1,7 @@
-import { useIntl } from "react-intl";
 import { useNavigateById } from "../../../hooks";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useStaffUseCase, useUserUseCase } from "../../../services/api/usescases";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSpinnerStore } from "../../../services/store";
 import { useLocation } from "react-router-dom";
 import { pageIds } from "../../../utils/constantes";
@@ -12,15 +11,11 @@ import { toastify } from "../../../utils/toasts";
 
 export const RejoindreOrganizationPage: React.FC = () => {
     //hooks
-    const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
     const { userServices, staffService } = useApiServices()
     const { checkUserExists } = useUserUseCase(userServices)
     const { joinOrganisation } = useStaffUseCase(staffService)
-    const [accountActivated, setAccountActivated] = useState<boolean | null>(null);
-    const [message, setMessage] = useState('')
     const {showSpinner, hideSpinner} = useSpinnerStore()
-    const NavigateById = useNavigateById()
 
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search);
@@ -40,7 +35,7 @@ export const RejoindreOrganizationPage: React.FC = () => {
                 debugger
                 const response = await checkUserExists(username);
                 debugger
-                if(response.status == 200){
+                if(response.status == 200 || response.status == 204){
                     const user: UserData = JSON.parse(localStorage.getItem("user")!)
                     if(user?.staff.user.username == username){
                         if(user?.accessToken){
