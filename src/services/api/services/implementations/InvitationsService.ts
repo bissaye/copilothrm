@@ -1,5 +1,5 @@
 import { StaffInvitation } from "../../DTO/request";
-import { BaseApiResponse } from "../../DTO/response";
+import { BaseApiResponse, OrganisationInvitationResponse } from "../../DTO/response";
 import { IApiRequestService } from "../interfaces";
 import { IInvitationServices } from "../interfaces/IInvitationServices";
 
@@ -11,8 +11,8 @@ export class InvitationService implements IInvitationServices {
         this.apiService = apiService;
     }
     
-    async getAllInvitations(orgId: string, pageNumber: number, size: number): Promise<any> {
-        const response: any = await this.apiService.get<any>(`/invitation/organisation/${orgId}?pageNumber=${pageNumber}&size=${size}`, true)
+    async getAllInvitations(orgId: string, pageNumber: number, size: number): Promise<OrganisationInvitationResponse> {
+        const response: OrganisationInvitationResponse = await this.apiService.get<OrganisationInvitationResponse>(`/invitation/organisation/${orgId}?pageNumber=${pageNumber}&size=${size}`, true)
         return response;
     }
     async sendInvitation(data: StaffInvitation, ): Promise<BaseApiResponse> {

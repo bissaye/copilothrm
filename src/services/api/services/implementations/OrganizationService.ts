@@ -1,5 +1,5 @@
 import { OrganizationData } from "../../DTO/request";
-import { BaseApiResponse } from "../../DTO/response";
+import { OrganisationInvitationResponse } from "../../DTO/response";
 import { IApiRequestService, IOrganizationServices } from "../interfaces";
 
 export class OrganizationService implements IOrganizationServices {
@@ -10,8 +10,8 @@ export class OrganizationService implements IOrganizationServices {
         this.apiService = apiService;
     }
     
-    public async addOrganisation(data: OrganizationData): Promise<any> {
-        const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>('/organisation/byManager', data, true)
+    public async addOrganisation(data: OrganizationData): Promise<OrganisationInvitationResponse> {
+        const response: OrganisationInvitationResponse = await this.apiService.post<OrganisationInvitationResponse>('/organisation/byManager', data, true)
         return response
     }
     

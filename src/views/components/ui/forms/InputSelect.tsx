@@ -3,7 +3,7 @@ import { InputSelectOptions, InputSelectProps } from "../../../../utils/interfac
 import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProps) => {
     const {id, name, value, placeholder, disabled, onChange, options, className, onBlur} = props
@@ -79,6 +79,13 @@ export const InputSelect : React.FC<InputSelectProps> = (props : InputSelectProp
                         }}
                         autoComplete=""
                     />
+                    <FontAwesomeIcon 
+                            icon={faCircleXmark}
+                            onClick={() => {
+                                setInputValue('')
+                            }}
+                            className=" cursor-pointer text-gray-550"
+                        />
                     { showOptions ?
                         <FontAwesomeIcon 
                             icon={faChevronUp}
