@@ -17,21 +17,21 @@ export const PublicHeader : React.FC = () => {
 
     const {formatMessage} = useIntl();
 
-    const [isFixed, setIsFixed] = useState(false);
+    // const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const topOffset = window.scrollY;
-            const shouldFix = topOffset > 100; 
+        // const handleScroll = () => {
+        //     const topOffset = window.scrollY;
+        //     const shouldFix = topOffset > 100; 
 
-            setIsFixed(shouldFix);
-        };
+        //     setIsFixed(shouldFix);
+        // };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        // window.addEventListener('scroll', handleScroll);
+        // return () => {
+        //     window.removeEventListener('scroll', handleScroll);
+        // };
     }, []);
 
     const showMenu = () => {
@@ -40,7 +40,7 @@ export const PublicHeader : React.FC = () => {
 
 
     return <Fragment>
-        <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full ${isFixed ? 'fixed z-10' : ''}`}>
+        <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full'`}>
             
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>

@@ -9,7 +9,6 @@ import { useAuthStore, usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { StaffOrganisation } from '../../../../services/api/DTO/response';
-// import "./style.css"
 
 export const OrganizationHeader : React.FC = () => {
 
@@ -18,7 +17,7 @@ export const OrganizationHeader : React.FC = () => {
     const {formatMessage} = useIntl();
     const {signOut} = useAuthStore();
 
-    const [isFixed, setIsFixed] = useState(false);
+    // const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
     let orgHeaderTitle;
@@ -39,17 +38,17 @@ export const OrganizationHeader : React.FC = () => {
     }
 
     useEffect(() => {
-        const handleScroll = () => {
-            const topOffset = window.scrollY;
-            const shouldFix = topOffset > 100; 
+        // const handleScroll = () => {
+        //     const topOffset = window.scrollY;
+        //     const shouldFix = topOffset > 100; 
 
-            setIsFixed(shouldFix);
-        };
+        //     setIsFixed(shouldFix);
+        // };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        // window.addEventListener('scroll', handleScroll);
+        // return () => {
+        //     window.removeEventListener('scroll', handleScroll);
+        // };
     }, []);
 
     const showMenu = () => {
@@ -62,7 +61,7 @@ export const OrganizationHeader : React.FC = () => {
 
 
     return <Fragment>
-        <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-15 w-full ${isFixed ? 'fixed z-10' : ''}`}>
+        <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-15 w-full`}>
             <div className='h-full shadow-m border border-gray-500 rounded rounded-8'>
                 <Link to={managerRoutes.HomePage.path} type='link'
                 className=' text-slate-600 h-full flex justify-center items-center md:w-[260px] ld:w-[300px]'

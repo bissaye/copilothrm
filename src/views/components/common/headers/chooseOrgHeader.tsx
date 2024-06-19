@@ -9,7 +9,6 @@ import { useAuthStore, usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { imagesLogo } from '../../../../assets/images';
-// import "./style.css"
 
 export const ChooseOrgHeader : React.FC = () => {
 
@@ -18,7 +17,7 @@ export const ChooseOrgHeader : React.FC = () => {
     const {formatMessage} = useIntl();
     const {signOut} = useAuthStore();
 
-    const [isFixed, setIsFixed] = useState(false);
+    // const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
     let orgHeaderTitle;
@@ -34,17 +33,17 @@ export const ChooseOrgHeader : React.FC = () => {
     }
 
     useEffect(() => {
-        const handleScroll = () => {
-            const topOffset = window.scrollY;
-            const shouldFix = topOffset > 100; 
+        // const handleScroll = () => {
+        //     const topOffset = window.scrollY;
+        //     const shouldFix = topOffset > 100; 
 
-            setIsFixed(shouldFix);
-        };
+        //     setIsFixed(shouldFix);
+        // };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        // window.addEventListener('scroll', handleScroll);
+        // return () => {
+        //     window.removeEventListener('scroll', handleScroll);
+        // };
     }, []);
 
     const showMenu = () => {
@@ -57,7 +56,7 @@ export const ChooseOrgHeader : React.FC = () => {
 
 
     return <Fragment>
-        <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-15 w-full ${isFixed ? 'fixed z-10' : ''}`}>
+        <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 shadow-md md:px-8 lg:gap-14 xl:px-15 w-full`}>
             {/* Logo Copilot */}
             <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
             
