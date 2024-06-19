@@ -36,9 +36,9 @@ export const ChooseOrg: React.FC = () => {
     }
 
     return <Fragment>
-        <div className="flex flex-col justify-between items-center w-full h-screen pt-7 gap-3 mb-7">
+        <div className="flex flex-col justify-start items-center w-full h-full py-7 gap-5">
             {/* <img src={imagesLogo.main}/> */}
-            <div>
+            <div className="">
                 <h1 className=" font-heading font-bold text-t8 text-center">
                     {formatMessage({id:"welcome_back"})}
                 </h1>
@@ -80,7 +80,7 @@ export const ChooseOrg: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
 
                 <DefaultButton
                     type="primary"
