@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputText } from "../../components/ui"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import DataTable from 'react-data-table-component';
-import { Invitation } from "../../../utils/interfaces/type";
 import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
 import "./style.css"
 import { useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useInvitationUseCase } from "../../../services/api/usescases";
-import { StaffOrganisation } from "../../../services/api/DTO/response";
 import { useSpinnerStore } from "../../../services/store";
 import { toastify } from "../../../utils/toasts";
+import { Invitation, StaffOrganisation } from "../../../services/api/DTO/response";
+import { avatars } from "../../../assets/images";
 
 export const InvitationPage: React.FC = () => {
 
@@ -29,7 +29,8 @@ export const InvitationPage: React.FC = () => {
                 if(currentOrg){
                     showSpinner()
                     await getAllInvitations(currentOrg.organisationId, 0, 10).then(response => {
-                        setInvitationList(response.content)
+                        const data = response.content.data
+                        setInvitationList(data)
                         hideSpinner()
                     })
                 }
@@ -57,16 +58,16 @@ export const InvitationPage: React.FC = () => {
     const statusBadge = (status: string) => {
         let classname;
         switch(status){
-            case 'Accepted':
+            case 'ACCEPTED':
                 classname = 'bg-green-100 text-green-700 '
                 break;
-            case 'Pending':
+            case 'PENDING':
                 classname = 'bg-[#fff6cf] text-yellow-700 '
                 break;
-            case 'Rejected':
+            case 'REJECTED':
                 classname = 'bg-red-100 text-red-700'
                 break;
-            case 'Expired':
+            case 'EXPIRED':
             classname = 'bg-gray-100 text-gray-700 '
             break;
         }
@@ -120,30 +121,30 @@ export const InvitationPage: React.FC = () => {
     const columns = [
         {
             name: 'Avatar',
-            cell: (row: Invitation) => <img src={row.avatar} className="w-10"></img>,
+            cell: () => <img src={avatars.avatarLandingPage} className="w-10"></img>,
             center: true
         },
         {
             name: formatMessage({id:"sender"}),
-            cell: (row: Invitation) => row.sender,
+            cell: (row: Invitation) => row.senderName,
             sortable: true,
             center: true
         },
         {
             name: formatMessage({id:"receiver"}),
-            cell: (row: Invitation) => row.receiver,
+            cell: (row: Invitation) => row.emailDestinataire,
             sortable: true,
             center: true
         },
         {
             name: 'Date',
-            cell: (row: Invitation) => row.date,
+            cell: (row: Invitation) => new Date(row.dateEnvoi).toDateString(),
             sortable: true,
             center: true
         },
         {
             name: 'Status',
-            cell: (row: Invitation) => statusBadge(row.status),
+            cell: (row: Invitation) => statusBadge(row.nomStatus),
             center: true
         },
         {
@@ -155,12 +156,11 @@ export const InvitationPage: React.FC = () => {
 
     const data = invitationList ? invitationList.map((invitation) => {
         return {
-            id: invitation.id,
-            avatar: invitation.avatar,
-            receiver: invitation.receiver,
-            sender: invitation.sender,
-            date: invitation.date,
-            status: invitation.status
+            inviteId: invitation.inviteId,
+            emailDestinataire: invitation.emailDestinataire,
+            senderName: invitation.senderName,
+            dateEnvoi: invitation.dateEnvoi,
+            nomStatus: invitation.nomStatus
         }
     }) : []
 

@@ -4,6 +4,25 @@ import { IStaffService } from "../services/interfaces";
 
 export const useStaffUseCase = (staffService: IStaffService | null) => {
     
+    const getUserOrganisations = async () => {
+        try{
+            if(staffService){
+                const response = await staffService.getOrganisations()
+                return response;
+            }
+            else {
+                throw new Error("erreur staffServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+    
     const joinOrganisation = async (data: JoinOrganisation) => {
         try{
             if(staffService){
@@ -24,6 +43,7 @@ export const useStaffUseCase = (staffService: IStaffService | null) => {
     }
 
     return {
+        getUserOrganisations,
         joinOrganisation
     }
 }
