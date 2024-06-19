@@ -171,7 +171,8 @@ const fr: Record<string, string> = {
     info_perso: "Infos Personnelles",
     info_compte: "Infos Compte",
     info_org: "Infos Organisation",
-    confirm_info: "Confirmation infos"
+    confirm_info: "Confirmation infos",
+    no_invitations_for_this_org: "Aucune invitation pour cette organisation"
 }
 
 export default fr;

@@ -19,7 +19,7 @@ import { toastify } from "../../../utils/toasts";
 export const InvitationPage: React.FC = () => {
 
     const {formatMessage} = useIntl();
-    const [invitationList, setInvitationList] = useState();
+    const [invitationList, setInvitationList] = useState<Invitation[] | null >(null);
     const {showSpinner, hideSpinner} = useSpinnerStore();
     const {invitationService} = useApiServices();
     const {getAllInvitations} = useInvitationUseCase(invitationService)
@@ -28,11 +28,9 @@ export const InvitationPage: React.FC = () => {
     useEffect(() => {
         async function getInvitations() {
             try{
-                debugger
                 if(currentOrg){
                     showSpinner()
                     await getAllInvitations(currentOrg.organisationId, 0, 10).then(response => {
-                        debugger
                         setInvitationList(response.content)
                         hideSpinner()
                     })
@@ -121,7 +119,6 @@ export const InvitationPage: React.FC = () => {
         }
     }
 
-    // const {formatMessage} = useIntl();
     const columns = [
         {
             name: 'Avatar',
@@ -158,58 +155,18 @@ export const InvitationPage: React.FC = () => {
         }
     ]
 
-    const data = [
-        {
-            id: 1,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Stephane Zang',
-            sender: 'Geovani Tsague',
-            date: new Date().toDateString(),
-            status: 'Rejected' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
-        },
-        {
-            id: 2,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Martial Kom',
-            sender: 'Franck Bissaye',
-            date: new Date().toDateString(),
-            status: 'Accepted' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
-        },
-        {
-            id: 3,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Olive Mengolo',
-            sender: 'Geovani Tsague',
-            date: new Date().toDateString(),
-            status: 'Pending' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
-        },
-        {
-            id: 4,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Franck Bissaye',
-            sender: 'Geovani Tsague',
-            date: new Date().toDateString(),
-            status: 'Pending' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
-        },
-        {
-            id: 5,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Karlson Kembou',
-            sender: 'Rodrigue Tahago',
-            date: new Date().toDateString(),
-            status: 'Expired' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
-        },
-        {
-            id: 6,
-            avatar: avatars.avatarLandingPage,
-            receiver: 'Christian Tchuente',
-            sender: 'Geovani Tsague',
-            date: new Date().toDateString(),
-            status: 'Accepted' as 'Pending' | 'Accepted' | 'Rejected' | 'Expired'
+    const data = invitationList ? invitationList.map((invitation) => {
+        return {
+            id: invitation.id,
+            avatar: invitation.avatar,
+            receiver: invitation.receiver,
+            sender: invitation.sender,
+            date: invitation.date,
+            status: invitation.status
         }
-    ]
+    }) : []
 
-    console.log(invitationList)
+    const noDataMessage = <span className="m-10 py-5 px-5 bg-gray-300 text-zinc-600 w-full text-center rounded-md shadow-md hover:bg-gray-250">{formatMessage({id:"no_invitations_for_this_org"})}</span>
     
     return(
         <div className=' w-full md:w-[900px] lg:w-[76%] h-full flex flex-col justify-start items-start gap-5 px-10 py-5 bg-white lg:overflow-x-hidden'>
@@ -251,6 +208,7 @@ export const InvitationPage: React.FC = () => {
             fixedHeader
             pagination
             customStyles={tableCustomStyles}
+            noDataComponent={noDataMessage}
             >
 
             </DataTable>
