@@ -24,38 +24,45 @@ export const RejoindreOrganizationPage: React.FC = () => {
     const orgId = queryParams.get('orgId');
     
     useEffect(() => {
+        async function joinOrg(body: JoinOrganisation){
+            await joinOrganisation(body).then(response => {
+                toastify('success', response.message)
+                hideSpinner()
+            })
+        }
         async function redirectUser() {
-            debugger
             if(!username || !orgId || username == '' || orgId == ''){
                 navigateById(pageIds.SignInPage)
             }
             else{
-                debugger
-                showSpinner()
-                debugger
-                const response = await checkUserExists(username);
-                debugger
-                if(response.status == 200 || response.status == 204){
-                    const user: UserData = JSON.parse(localStorage.getItem("user")!)
-                    if(user?.staff.user.username == username){
-                        if(user?.accessToken){
-                            const body: JoinOrganisation = { username: username, idOrganisation: orgId}
-                            try
-                            {
-                                await joinOrganisation(body).then(response => {
-                                    debugger
-                                    toastify('success', response.message)
+                try{
+                    showSpinner()
+                    await checkUserExists(username).then(response => {
+                    if(response.status == 200 || response.status == 204){
+                        const user: UserData = JSON.parse(localStorage.getItem("user")!)
+                        if(user?.staff.user.username == username){
+                            if(user?.accessToken){
+                                const body: JoinOrganisation = { username: username, idOrganisation: orgId}
+                                try
+                                {
+                                    joinOrg(body)
+                                }
+                                catch(error: any)
+                                {
                                     hideSpinner()
-                                })
+                                    toastify('error', error.message)
+                                }
                             }
-                            catch(error: any)
-                            {
-                                debugger
-                                hideSpinner()
-                                toastify('error', error.message)
+                            else{
+                                const invitation = {
+                                    username: username,
+                                    orgId: orgId
+                                }
+                                localStorage.setItem('invitation', JSON.stringify(invitation))
+                                navigateById(pageIds.SignInPage)
                             }
                         }
-                        else{
+                        else {
                             const invitation = {
                                 username: username,
                                 orgId: orgId
@@ -63,17 +70,9 @@ export const RejoindreOrganizationPage: React.FC = () => {
                             localStorage.setItem('invitation', JSON.stringify(invitation))
                             navigateById(pageIds.SignInPage)
                         }
-                    }
-                    else {
-                        const invitation = {
-                            username: username,
-                            orgId: orgId
-                        }
-                        localStorage.setItem('invitation', JSON.stringify(invitation))
-                        navigateById(pageIds.SignInPage)
-                    }
+                    }})
                 }
-                else if(response.status == 404){
+                catch(error: any){
                     hideSpinner()
                     const invitation = {
                         username: username,
@@ -81,12 +80,7 @@ export const RejoindreOrganizationPage: React.FC = () => {
                     }
                     localStorage.setItem('invitation', JSON.stringify(invitation))
                     navigateById(pageIds.SignUpFromInvitationPage)
-                    toastify('error', response.message)
-                }
-                else {
-                    hideSpinner()
-                    navigateById(pageIds.LandingPage)
-                    toastify('error', response.message)
+                    toastify('error', error.message)
                 }
             }
         }
