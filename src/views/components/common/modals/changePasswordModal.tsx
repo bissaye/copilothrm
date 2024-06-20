@@ -6,7 +6,7 @@ import { useSpinnerStore } from "../../../../services/store"
 import { toastify } from "../../../../utils/toasts"
 import { ChangeUserPasswordData } from "../../../../services/api/DTO/request"
 import { useUserUseCase } from "../../../../services/api/usescases"
-import { BaseModalLayout } from "./baseModalLayout"
+import { BaseModalLayout } from "../../ui/modals"
 import { changePasswordSchema } from "../../../../services/forms/validations"
 
 
