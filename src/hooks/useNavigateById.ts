@@ -10,10 +10,15 @@ const getPathById = (id: string): string | undefined => {
 export const useNavigateById = () => {
     const navigate = useNavigate();
 
-    const navigatById = useCallback((id: string) => {
+    const navigatById = useCallback((id: string, data?: any) => {
         const path = getPathById(id);
         if(path){
-            navigate(path);
+            if(data){
+                navigate(`${path}`, {state: data });
+            }
+            else{
+                navigate(path);
+            }
         }else{
             console.error(`Route not found for ID: ${id}`);
         }
