@@ -9,6 +9,8 @@ export const changePasswordSchema = yup.object(
             .matches(/[0-9]/,"incorrect_password_number")
             .matches(/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,"incorrect_password_special_char")
             .test('no(space', "incorrect_password_whitespace", (value) => !/\s/.test(value))
-            .min(8, "incorrect_password_length")
+            .min(8, "incorrect_password_length"),
+        confirmNewPassword: yup.string().required("required_field")
+        .oneOf([yup.ref('newPassword')], 'unmatching_password'),
     }
 )
