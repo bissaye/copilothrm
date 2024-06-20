@@ -1,13 +1,16 @@
 import { useNavigateById } from "../../../hooks";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useStaffUseCase, useUserUseCase } from "../../../services/api/usescases";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSpinnerStore } from "../../../services/store";
 import { useLocation } from "react-router-dom";
 import { pageIds } from "../../../utils/constantes";
 import { UserData } from "../../../services/api/DTO/response";
 import { JoinOrganisation } from "../../../services/api/DTO/request";
 import { toastify } from "../../../utils/toasts";
+import { useIntl } from "react-intl";
+import { FooterLandingPage } from "../../components/common";
+import "./style.css"
 
 export const RejoindreOrganizationPage: React.FC = () => {
     //hooks
@@ -15,11 +18,11 @@ export const RejoindreOrganizationPage: React.FC = () => {
     const { userServices, staffService } = useApiServices()
     const { checkUserExists } = useUserUseCase(userServices)
     const { joinOrganisation } = useStaffUseCase(staffService)
-    const {showSpinner, hideSpinner} = useSpinnerStore()
+    const { formatMessage } = useIntl();
+    const { showSpinner, hideSpinner } = useSpinnerStore()
 
     const location = useLocation()
     const queryParams = new URLSearchParams(location.search);
-    console.log(queryParams.entries)
     const username = queryParams.get('username');
     const orgId = queryParams.get('orgId');
     
@@ -32,7 +35,7 @@ export const RejoindreOrganizationPage: React.FC = () => {
         }
         async function redirectUser() {
             if(!username || !orgId || username == '' || orgId == ''){
-                navigateById(pageIds.SignInPage)
+                // navigateById(pageIds.SignInPage)
             }
             else{
                 try{
@@ -74,20 +77,27 @@ export const RejoindreOrganizationPage: React.FC = () => {
                 }
                 catch(error: any){
                     hideSpinner()
-                    const invitation = {
-                        username: username,
-                        orgId: orgId
+                    const data = {
+                        invitation: {
+                            username: username,
+                            orgId: orgId
+                        }
                     }
-                    localStorage.setItem('invitation', JSON.stringify(invitation))
-                    navigateById(pageIds.SignUpFromInvitationPage)
-                    toastify('error', error.message)
+                    navigateById(pageIds.SignUpFromInvitationPage, data)
+                    console.log(error.message)
                 }
             }
         }
 
         redirectUser()
     }, [])
-    return <div>
-        Rejoignez l'organisation
-    </div>
+    return <Fragment>
+        <div className="container w-full flex flex-col justify-center items-center">
+            <div className="w-2/3 px-10 py-5 rounded-md shadow-md text-center border border-gray-100">
+                <p className="font-heading font-bold text-t8 text-secondary-900">{formatMessage({id:"join_organization"})}</p>
+            </div>
+        </div>
+
+        <FooterLandingPage />
+    </Fragment>
 }
