@@ -6,7 +6,7 @@ import { useSpinnerStore } from "../../../../services/store"
 import { toastify } from "../../../../utils/toasts"
 import { ChangeUserPasswordData } from "../../../../services/api/DTO/request"
 import { useUserUseCase } from "../../../../services/api/usescases"
-import { BaseModalLayout } from "./baseModalLayout"
+import { BaseModalLayout } from "../../ui/modals"
 import { changePasswordSchema } from "../../../../services/forms/validations"
 
 
@@ -24,7 +24,8 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = (props: C
 
     const initialValues: ChangeUserPasswordData = {
         lastPassword: "",
-        newPassword: ""
+        newPassword: "",
+        confirmNewPassword: ""
     }
 
     const formik = useFormik({
@@ -69,7 +70,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = (props: C
                             errorMessage={errors.lastPassword ? errors.lastPassword.toString() : undefined}
                         />
                     </div>
-                    <div className="mb-4">
+                    <div className="">
                         <InputPassword
                             id={"newPassword"}
                             name={"newPassword"}
@@ -78,6 +79,17 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = (props: C
                             onChange={handleChange}
                             label={formatMessage({ id: "new_password" })}
                             errorMessage={errors.newPassword ? errors.newPassword.toString() : undefined}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <InputPassword
+                            id={"confirmNewPassword"}
+                            name={"confirmNewPassword"}
+                            placeholder={formatMessage({ id: "confirm_new_password" })}
+                            value={values.confirmNewPassword}
+                            onChange={handleChange}
+                            label={formatMessage({ id: "confirm_new_password" })}
+                            errorMessage={errors.confirmNewPassword ? errors.confirmNewPassword.toString() : undefined}
                         />
                     </div>
 

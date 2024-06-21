@@ -10,6 +10,7 @@ import { useInvitationSignupStore, useSpinnerStore } from '../../../services/sto
 import { useApiServices } from '../../../services/api/ApiServiceContext';
 import { useAuthUseCase } from '../../../services/api/usescases/AuthUseCases';
 import { toastify } from '../../../utils/toasts';
+import { useLocation } from 'react-router-dom';
 
 export const SignUpFromInvitationPage : React.FC = () => {
     
@@ -21,7 +22,8 @@ export const SignUpFromInvitationPage : React.FC = () => {
     const navigateById = useNavigateById();
     const { showSpinner, hideSpinner } = useSpinnerStore()
     const {initCountryList, invitedUserDatas } = useInvitationSignupStore();
-
+    const location = useLocation()
+    const data = location.state;
     const [signupStep, setSignupStep] = useState< 1 | 2 >(1);
 
     const nextStep = () => {
@@ -63,8 +65,13 @@ export const SignUpFromInvitationPage : React.FC = () => {
 
     return <Fragment>
         <div className='w-full h-full flex flex-col justify-center items-center gap-4'>
+            { data && "invitation" in data &&
+                <div className="w-full bg-red-300 px-10 py-5 text-red-800 text-center">
+                    {`${formatMessage({id:"you_have_invited_to_org_start"})} ${data.invitation.orgId} ${formatMessage({id:"you_have_invited_to_org_end"})}`}
+                </div>
+            }
             <div className='flex flex-col items-center w-4/5 lg:min-h-[536px] rounded-xl mb-16 border-gray-500 p-4'>
-                <h1 className='font-bold font-heading text-t8 text-black capitalize my-4'>
+                <h1 className='font-bold font-heading text-t8 text-black my-4'>
                     {formatMessage({id:"sign_up_link"})}
                 </h1>
                 <Stepper currentStep={signupStep} steps={2} />

@@ -1,14 +1,15 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MouseEventHandler, useRef } from "react";
-import { Fragment } from "react/jsx-runtime"
+import { Fragment } from "react/jsx-runtime";
+import "./style.css"
 
 interface ModalProps {
     children: React.ReactNode
     onClose: () => void;
     header: string
 }
-export const BaseModalLayout: React.FC<ModalProps> = ({children, onClose, header}) => {
+export const BaseModalLayout: React.FC<ModalProps> = ({ children, onClose, header}) => {
 
     const modalRef = useRef<HTMLDivElement>(null)
     const handleClickOutside: MouseEventHandler = (event) => {
@@ -22,8 +23,9 @@ export const BaseModalLayout: React.FC<ModalProps> = ({children, onClose, header
             onClick={handleClickOutside}
         >
             <div className="w-full h-full flex justify-center items-center ">
+                {/* modal */}
                 <div 
-                    className="flex flex-col justify-between bg-white w-[450px] rounded-lg gap-4"
+                    className={`modal flex flex-col justify-between bg-white w-[450px] rounded-lg gap-4`}
                     ref={modalRef}
                 >
                         {/* Modal Header */}

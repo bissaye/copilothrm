@@ -174,7 +174,10 @@ const en: Record<string, string> = {
     info_org: "Organization infos",
     confirm_info: "Confirm infos",
     no_invitations_for_this_org: "No invitation for this organization",
-    no_organisations: "You have no organizations."
+    no_organisations: "You have no organizations.",
+    you_have_invited_to_org_start: "You have been invited to join organization ",
+    you_have_invited_to_org_end: ". Create an account to be able access it.",
+    join_organization: "Joining organization..."
 }
 
 export default en;

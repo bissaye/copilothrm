@@ -16,6 +16,7 @@ export const Sidebar : React.FC = () => {
     const {showInviteModal, setShowInviteModal} = useInviteMemberStore()
     const { page } = usePageStore();
     const navigateById = useNavigateById();
+    const isLogged = localStorage.getItem('isLogged')
 
     const sidebarMenuItems = MANAGER_SIDEBAR_MENU_ITEMS;
 
@@ -54,7 +55,7 @@ return(
             <div className='flex flex-row justify-evenly gap-4 items-start h-[40px] mb-3'>
                 <div className="relative">
                     <img src={avatars.avatarLandingPage} className='w-9 h-9 rounded-full'/>
-                    <span className="h-3 w-3 rounded-full border-white border-[1.5px] bg-emerald-400 absolute bottom-[0.01rem] left-7"></span>
+                    <span className={`h-3 w-3 rounded-full border-white border-[1.5px] ${isLogged ? isLogged == '1' ? 'bg-green-500 border-green-500' : 'bg-red-500 border-red-500' : 'bg-gray-500 border-gray-500'} absolute bottom-[0.01rem] left-7`}></span>
                 </div>
                 <div className="flex flex-col justify-center items-start">
                     <h1 className=' font-body font-bold text-black text-t3'>

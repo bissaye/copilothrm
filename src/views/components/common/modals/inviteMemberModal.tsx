@@ -1,7 +1,7 @@
 import { DefaultButton, InputSelect, InputText } from "../../ui"
 import { useIntl } from "react-intl"
 import { useFormik } from "formik"
-import { BaseModalLayout } from "./baseModalLayout"
+import { BaseModalLayout } from "../../ui/modals"
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
 import { useInvitationUseCase } from "../../../../services/api/usescases"
 import { toastify } from "../../../../utils/toasts"

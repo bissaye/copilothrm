@@ -1,6 +1,7 @@
 export interface ChangeUserPasswordData {
     lastPassword: string,
-    newPassword: string
+    newPassword: string,
+    confirmNewPassword: string
 }
 
 export interface UpdateUserData {

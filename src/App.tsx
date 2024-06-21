@@ -28,7 +28,6 @@ function App() {
         closeOnClick={true}
         pauseOnHover={true}
          />
-
         {loading && <Spinner />}
       </Internationalisation>
     </Fragment>
