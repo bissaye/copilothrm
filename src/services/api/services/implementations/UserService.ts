@@ -31,8 +31,8 @@ export class UserServices implements IUserServices {
         return response;
     }
 
-    public async checkUserExists(username: string): Promise<UserExistsResponse> {
-        const response: UserExistsResponse = await this.apiService.get<UserExistsResponse>(`/user/isUser/${username}`)
+    public async checkUserExists(token: string): Promise<UserExistsResponse> {
+        const response: UserExistsResponse = await this.apiService.get<UserExistsResponse>(`/user/isUser/${token}`)
         return response;
     }
 }

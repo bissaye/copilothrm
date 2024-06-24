@@ -6,7 +6,7 @@ const en: Record<string, string> = {
     not_found_page : "Page not found",
     home_link: "Home",
     sign_in_link: "Sign in",
-    sign_up_link: "Sign up",
+    sign_up_link: "Create your manager account",
     functionality_link: "Functionalities",
     about_link: "About",
     contact_link: "Contact",
@@ -167,6 +167,7 @@ const en: Record<string, string> = {
     init_form: "Initializing form...",
     account_creating: "Creating your account...",
     chhose_an_org: "Choose an organisation",
+    change_org: "Change organization",
     civilite: "Civility",
     add_org: "Add an organization",
     info_perso: "Personal infos",
@@ -175,8 +176,10 @@ const en: Record<string, string> = {
     confirm_info: "Confirm infos",
     no_invitations_for_this_org: "No invitation for this organization",
     no_organisations: "You have no organizations.",
-    you_have_invited_to_org_start: "You have been invited to join organization ",
+    you_have_invited_to_org_start: " you have been invited to join organization ",
     you_have_invited_to_org_end: ". Create an account to be able access it.",
+    you_have_invited_to_org_middle_login: ". Log in with the account ",
+    you_have_invited_to_org_end_login: " to access it.",
     join_organization: "Joining organization..."
 }
 

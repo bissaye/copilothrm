@@ -72,7 +72,7 @@ return(
         </div> 
         <LinkButton
             type="primary"
-            text={formatMessage({id:"chhose_an_org"})}
+            text={formatMessage({id:"change_org"})}
             width={237}
             icon={faCircleLeft}
             onClick={() => navigateById(pageIds.ChooseOrg)}

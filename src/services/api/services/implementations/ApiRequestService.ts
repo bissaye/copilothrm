@@ -33,7 +33,7 @@ export class ApiRequestService implements IApiRequestService {
 
     }
 
-    public async post<T>(path: string, data: any, auth: boolean = false): Promise<T> {
+    public async post<T>(path: string, data?: any, auth: boolean = false): Promise<T> {
 
         if (auth) {
             this.apiClient.defaults.headers.common["Authorization"] = `Bearer ${this.token}`;

@@ -6,7 +6,7 @@ const fr: Record<string, string> = {
     not_found_page : "Page introuvable",
     home_link: "Accueil",
     sign_in_link: "Se connecter",
-    sign_up_link: "Créer votre compte",
+    sign_up_link: "Créer votre compte manager",
     functionality_link: "Fonctionnalités",
     about_link: "A propos",
     contact_link: "Contact",
@@ -167,6 +167,7 @@ const fr: Record<string, string> = {
     init_form: "Initialisation du formulaire...",
     account_creating: "Création de votre compte...",
     chhose_an_org: "Choisir une organisation",
+    change_org: "Changer d'organisation",
     civilite: "Civilité",
     add_org: "Ajouter une organisation",
     info_perso: "Infos Personnelles",
@@ -175,8 +176,10 @@ const fr: Record<string, string> = {
     confirm_info: "Confirmation infos",
     no_invitations_for_this_org: "Aucune invitation pour cette organisation",
     no_organisations: "Vous n'avez pas d'organisations.",
-    you_have_invited_to_org_start: "Vous avez été invité à rejoindre l'organisation ",
-    you_have_invited_to_org_end: ". Créez un compte pour pouvoir y accéder.",
+    you_have_invited_to_org_start: " vous avez été invité(e) à rejoindre l'organisation ",
+    you_have_invited_to_org_end_create_account: ". Créez un compte pour pouvoir y accéder.",
+    you_have_invited_to_org_middle_login: ". Connectez vous avec l'adresse ",
+    you_have_invited_to_org_end_login: " pour y accéder.",
     join_organization: "Rejoignez l'organisation..."
 }
 

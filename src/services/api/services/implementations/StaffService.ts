@@ -1,4 +1,4 @@
-import { JoinOrganisation } from "../../DTO/request";
+import { InvitedUserSignupDatas } from "../../DTO/request";
 import { BaseApiResponse } from "../../DTO/response";
 import { StaffOrganisationResponse } from "../../DTO/response/staff";
 import { IApiRequestService, IStaffService } from "../interfaces";
@@ -15,8 +15,13 @@ export class StaffServices implements IStaffService {
         return response;
     }
     
-    public async joinOrganisation(data: JoinOrganisation): Promise<any> {
-        const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>('/staff/join', data, true)
+    public async joinOrganisation(token: string): Promise<any> {
+        const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>(`/staff/join/${token}`, {}, true)
+        return response;
+    }
+
+    public async addNewUserToOrganisation(data: InvitedUserSignupDatas): Promise<any> {
+        const response: BaseApiResponse = await this.apiService.post<BaseApiResponse>(`/staff/`, data)
         return response;
     }
     

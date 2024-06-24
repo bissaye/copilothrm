@@ -80,10 +80,10 @@ export const useUserUseCase = (userServices: IUserServices | null) => {
         }
     }
 
-    const checkUserExists = async (username: string) => {
+    const checkUserExists = async (token: string) => {
         try{
             if(userServices){
-                const response: UserExistsResponse = await userServices.checkUserExists(username)
+                const response: UserExistsResponse = await userServices.checkUserExists(token)
                 return response;
             }
             else {
