@@ -83,7 +83,7 @@ docker_image_build:
   image: docker:24.0.7-cli-alpine3.18
   stage: docker_build
   dependencies:
-    - sonarcloud-check
+    - build_app
   services:
     - docker:24.0.7-cli-alpine3.18
   cache: {}
