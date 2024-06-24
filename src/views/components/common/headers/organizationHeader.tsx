@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { pageIds } from '../../../../utils/constantes';
 import { managerRoutes, publicRoutes } from '../../../../services/routes/routes';
@@ -16,6 +16,9 @@ export const OrganizationHeader : React.FC = () => {
 
     const {formatMessage} = useIntl();
     const {signOut} = useAuthStore();
+    const location = useLocation()
+    const data = location.state
+    console.log(data)
 
     // const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);

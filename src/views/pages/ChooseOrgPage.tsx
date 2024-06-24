@@ -12,6 +12,7 @@ import { useApiServices } from "../../services/api/ApiServiceContext";
 import { useStaffUseCase } from "../../services/api/usescases";
 import { StaffOrganisationContent } from "../../services/api/DTO/response/staff";
 import { toastify } from "../../utils/toasts";
+import { useLocation } from "react-router-dom";
 
 export const ChooseOrg: React.FC = () => {
     const {formatMessage} = useIntl();
@@ -21,15 +22,18 @@ export const ChooseOrg: React.FC = () => {
     const { getUserOrganisations } = useStaffUseCase(staffService)
     const {showSpinner, hideSpinner} = useSpinnerStore()
     const [userOrganisations, setUserOrganisations] = useState<StaffOrganisationContent[] | null>(null)
+    const location = useLocation()
+    const data = location.state
 
     const user: UserData = JSON.parse(localStorage.getItem("user")!)
 
     const loggedUser = user.staff.user;
 
     const handleOpenOrg = (orgId: string) => {
-        const currentOrg = user.organisations.find(org => org.organisationId == orgId);
-        localStorage.setItem('currentOrg', JSON.stringify(currentOrg));
-        NavigateById(pageIds.HomePage)
+        const currentOrg = userOrganisations ? userOrganisations.find(org => org.organisation.organisationId == orgId) : null;
+        localStorage.setItem('currentOrg', JSON.stringify(currentOrg)); 
+        const orgData = {...data, ...currentOrg}
+        NavigateById(pageIds.HomePage, orgData)
     }
 
     useEffect(() => {
