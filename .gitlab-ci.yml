@@ -24,6 +24,7 @@ default:
   cache:
     paths:
       - node_modules/
+      - sonar-project.properties
 
 variables:
   image_tag: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
