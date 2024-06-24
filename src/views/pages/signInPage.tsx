@@ -18,16 +18,20 @@ import { toastify } from '../../utils/toasts';
 import { useSpinnerStore } from '../../services/store';
 import { IApiRequestService } from '../../services/api/services/interfaces';
 import { ApiRequestService } from '../../services/api/services/implementations';
+import { useLocation } from 'react-router-dom';
+import { useStaffUseCase } from '../../services/api/usescases';
 
 export const SignInPage : React.FC = () => {
-    const {authService} = useApiServices();
+    const {authService, staffService} = useApiServices();
     const apiRequestService: IApiRequestService = ApiRequestService.getInstance()
     const {login} =useAuthUseCase(authService, apiRequestService);
+    const { joinOrganisation } = useStaffUseCase(staffService)
 
     const {formatMessage} = useIntl();
     const navigateById = useNavigateById();
     const { showSpinner, hideSpinner } = useSpinnerStore()
-
+    const location = useLocation()
+    const data = location.state;
     const fields : Record<string, FieldsInfo> = {
         email :{
             id : "email",
@@ -50,16 +54,33 @@ export const SignInPage : React.FC = () => {
         initialValues: initialValues,
         validationSchema: userSignInSchema,
         onSubmit: async (values) => {
-
             const body : UserAuthData = {username : values.email, password: values.password};
             try{
                 showSpinner()
-                await login(body).then(() => {
+                await login(body).then(async () => {
+                    debugger
+                    if(data && "invitationToken" in data){
+                        const token = data.invitationToken
+                        await joinOrganisation(token).then((res) => {
+                            debugger
+                            hideSpinner()
+                            toastify('success', res.message)
+                            navigateById(pageIds.ChooseOrg)
+                        })
+                        .catch((error) => {
+                            debugger
+                            hideSpinner()
+                            toastify('error', error.message)
+                        })
+                    }
+                    else{
                         hideSpinner()
                         navigateById(pageIds.ChooseOrg)
-                    });
+                    }
+                })
             }
             catch(error: any){
+                debugger
                 hideSpinner()
                 toastify('error', error.message);
             }
@@ -69,6 +90,16 @@ export const SignInPage : React.FC = () => {
 
     return <Fragment>
         <div className='min-h-svh w-full flex flex-col justify-start items-center'>
+            { data && "invitationToken" in data && "invitationData" in data &&
+                <div className="w-full bg-red-300 px-10 py-5 text-red-800 text-center">
+                    <span className="font-bold">{data.invitationData.nomComplet}</span>
+                    {formatMessage({id:"you_have_invited_to_org_start"})} 
+                    <span className="font-bold">{data.invitationData.nomOrganisation}</span>
+                    {formatMessage({id:"you_have_invited_to_org_middle_login"})} 
+                    <span className="font-bold">{data.invitationData.email}</span>
+                    {formatMessage({id:"you_have_invited_to_org_end_login"})}
+                </div>
+            } 
             <div className='w-[90%] md:w-[495px] lg:min-h-[536px] rounded-xl mt-4 mb-16 border-gray-500 shadow-xl p-4'>
                 <h1 className='font-bold font-heading text-t8 text-black capitalize'>
                     Hello.
