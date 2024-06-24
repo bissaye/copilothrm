@@ -35,7 +35,7 @@ export const RejoindreOrganizationPage: React.FC = () => {
                 await checkInvitationValidity(token).then(async (response) => {
                     debugger
                     const invitationData: CheckInvitationValidityResponseData = response.content
-                    await checkUserExists(token).then(async (res) => {
+                    await checkUserExists(token).then(async () => {
                         debugger
                         const user: UserData = (localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")!) : null
                         if(!user){

@@ -8,7 +8,6 @@ import { Step2 } from './Step2';
 import { ApiRequestService, FormServices } from '../../../services/api/services/implementations';
 import { useInvitationSignupStore, useSpinnerStore } from '../../../services/store';
 import { useApiServices } from '../../../services/api/ApiServiceContext';
-import { useAuthUseCase } from '../../../services/api/usescases/AuthUseCases';
 import { toastify } from '../../../utils/toasts';
 import { useLocation } from 'react-router-dom';
 import { useStaffUseCase } from '../../../services/api/usescases';

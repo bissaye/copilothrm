@@ -1,4 +1,4 @@
-import { InvitedUserSignupDatas, JoinOrganisation } from "../DTO/request";
+import { InvitedUserSignupDatas } from "../DTO/request";
 import { BaseApiResponse } from "../DTO/response";
 import { IStaffService } from "../services/interfaces";
 
