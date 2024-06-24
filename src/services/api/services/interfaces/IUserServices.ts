@@ -6,5 +6,5 @@ export interface IUserServices {
     updateUserProfile(user: UpdateUserData): Promise<any>;
     changePassword(data: ChangeUserPasswordData): Promise<ChangeUserPasswordResponse>;
     activateUserAccount(token: string): Promise<BaseApiResponse>;
-    checkUserExists(username: string): Promise<UserExistsResponse>
+    checkUserExists(token: string): Promise<UserExistsResponse>
 }
