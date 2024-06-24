@@ -44,8 +44,31 @@ export const useInvitationUseCase = (invitationServices: IInvitationServices | n
         }
     }
 
+    const checkInvitationValidity = async (token: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.checkInvitationValidity(token)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.status == 404){
+                throw new Error(String("Cette invitation n'est plus valide"))
+            }
+            else if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
     return {
         getAllInvitations,
-        sendInvitation
+        sendInvitation,
+        checkInvitationValidity
     }
 }
