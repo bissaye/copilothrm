@@ -74,6 +74,8 @@ sonarcloud-check:
       - .sonar/cache
   script:
     - sonar-scanner
+  tags:
+    - docker_runner62
 
 
 docker_image_build:
