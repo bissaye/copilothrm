@@ -1,5 +1,5 @@
 import { InvitedUserSignupDatas, OrganizationData, UserSignupData } from "../../../services/api/DTO/request";
-import { CountryData, IndustryData, OrganisationInvitation, StaffOrganisationContent, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
+import { CountryData, IndustryData, OrganisationInvitation, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
     isLogged: boolean;

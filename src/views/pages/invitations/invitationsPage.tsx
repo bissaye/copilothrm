@@ -4,7 +4,7 @@ import { DefaultButton, InputText } from "../../components/ui"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import DataTable from 'react-data-table-component';
 import { useIntl } from "react-intl";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useInvitationUseCase } from "../../../services/api/usescases";
 import { useOrganisationInvitationsStore, useSpinnerStore } from "../../../services/store";
