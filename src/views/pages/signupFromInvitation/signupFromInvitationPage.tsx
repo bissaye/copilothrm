@@ -40,13 +40,6 @@ export const SignUpFromInvitationPage : React.FC = () => {
         formatMessage({id:"confirm_info"})
     ]
 
-    if(data && "invitationData" in data){
-        const idOrg = data.invitationData.idOrganisation
-        setInvitedUserDatas(idOrg)
-    }
-    else{
-        navigateById(pageIds.SignInPage)
-    }
 
     const submitForm = async () => {
         try{
@@ -73,6 +66,13 @@ export const SignUpFromInvitationPage : React.FC = () => {
             catch(error){
                 console.log(error)
             }
+        }
+        if(data && "invitationData" in data){
+            const idOrg = data.invitationData.idOrganisation
+            setInvitedUserDatas(idOrg)
+        }
+        else{
+            navigateById(pageIds.SignInPage)
         }
         getSignupDatas()
     }, [])
