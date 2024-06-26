@@ -1,5 +1,5 @@
 import { InvitedUserSignupDatas, OrganizationData, UserSignupData } from "../../../services/api/DTO/request";
-import { CountryData, IndustryData, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
+import { CountryData, IndustryData, OrganisationInvitation, StaffOrganisationContent, TailleEntreprise, UserAuthResponse } from "../../../services/api/DTO/response";
 
 export type AuthStore = {
     isLogged: boolean;
@@ -50,6 +50,13 @@ export type InvitationSignupStore = {
 export type InviteMemberStore = {
   showInviteModal: boolean;
   setShowInviteModal: (show: boolean) => void
+}
+
+export type InvitationStore = {
+  invitationList: OrganisationInvitation | null,
+  invitationListUpdated: boolean,
+  setInvitationList: (values: OrganisationInvitation) => void,
+  setInvitationListUpdated: (value: boolean) => void
 }
 
 export type SpinnerStore = {

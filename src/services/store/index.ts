@@ -1,7 +1,7 @@
 import { useAuthStore } from "./auth/authStore";
 import { useInviteMemberStore } from "./inviteMember/inviteMemberStore";
 import { useLangStore } from "./lang/langStore";
-import { useOrganisationStore } from "./organisation/organisationStore";
+import { useOrganisationInvitationsStore, useOrganisationStore } from "./organisation/organisationStore";
 import { usePageStore } from "./page/pageStore";
 import { useSignupStore, useInvitationSignupStore } from "./signup/signupStore";
 import { useSpinnerStore } from "./spinner/spinnerStore";
@@ -13,5 +13,6 @@ export {
     useInvitationSignupStore,
     useInviteMemberStore,
     useSpinnerStore,
-    useOrganisationStore
+    useOrganisationStore,
+    useOrganisationInvitationsStore
 }
