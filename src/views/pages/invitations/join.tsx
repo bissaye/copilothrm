@@ -70,9 +70,9 @@ export const RejoindreOrganizationPage: React.FC = () => {
                             }
                         }
                     })
-                    .catch((error) => {
+                    .catch(() => {
                         hideSpinner()
-                        toastify('error', error.message)
+                        // toastify('error', error.message)
                         navigateById(pageIds.SignUpFromInvitationPage, {
                             invitationToken: token,
                             invitationData: invitationData

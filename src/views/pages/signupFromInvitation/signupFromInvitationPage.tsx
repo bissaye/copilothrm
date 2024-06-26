@@ -44,6 +44,9 @@ export const SignUpFromInvitationPage : React.FC = () => {
         const idOrg = data.invitationData.idOrganisation
         setInvitedUserDatas(idOrg)
     }
+    else{
+        navigateById(pageIds.SignInPage)
+    }
 
     const submitForm = async () => {
         try{

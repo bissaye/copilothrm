@@ -67,6 +67,7 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
                 else {
                     await sendInvitation(body).then(response => {
                         hideSpinner()
+                        setInvitationListUpdated(true)
                         toastify('success', response.message)
                         onClose()
                     })
