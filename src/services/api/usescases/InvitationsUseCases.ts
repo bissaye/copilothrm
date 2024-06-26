@@ -44,6 +44,63 @@ export const useInvitationUseCase = (invitationServices: IInvitationServices | n
         }
     }
 
+    const editInvitation = async (invitationId: string, data: StaffInvitation) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.editInvitation(invitationId, data)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const resendInvitation = async (inviteId: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.resendInvitation(inviteId)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const cancelInvitation = async (inviteId: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.cancelInvitation(inviteId)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
     const checkInvitationValidity = async (token: string) => {
         try{
             if(invitationServices){
@@ -69,6 +126,9 @@ export const useInvitationUseCase = (invitationServices: IInvitationServices | n
     return {
         getAllInvitations,
         sendInvitation,
-        checkInvitationValidity
+        resendInvitation,
+        checkInvitationValidity,
+        editInvitation,
+        cancelInvitation
     }
 }

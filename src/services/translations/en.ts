@@ -180,7 +180,15 @@ const en: Record<string, string> = {
     you_have_invited_to_org_end: ". Create an account to be able access it.",
     you_have_invited_to_org_middle_login: ". Log in with the account ",
     you_have_invited_to_org_end_login: " to access it.",
-    join_organization: "Joining organization..."
+    join_organization: "Joining organization...",
+    delete_invitation_title: "Delete invitation ",
+    do_you_really_want_to_delete_invitation: "Do you really want to cancel this invitation ?",
+    yes: "Yes",
+    no: "No",
+    resend_invite_title: "Resend invitation",
+    resend_invite: "Resend this invitation ?",
+    update: "Update",
+    resend_number: "Number of relaunches"
 }
 
 export default en;

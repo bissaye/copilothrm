@@ -180,7 +180,15 @@ const fr: Record<string, string> = {
     you_have_invited_to_org_end_create_account: ". Créez un compte pour pouvoir y accéder.",
     you_have_invited_to_org_middle_login: ". Connectez vous avec l'adresse ",
     you_have_invited_to_org_end_login: " pour y accéder.",
-    join_organization: "Rejoignez l'organisation..."
+    join_organization: "Rejoignez l'organisation...",
+    delete_invitation_title: "Supprimer l'invitation ",
+    do_you_really_want_to_delete_invitation: "Voulez-vous vraiment abandonner cette invitation ?",
+    yes: "Oui",
+    no: "Non",
+    resend_invite_title: "Relancer l'invitation",
+    resend_invite: "Voulez-vous relancer cette invitation ?",
+    update: "Mettre à jour",
+    resend_number: "Nombre de relances"
 }
 
 export default fr;

@@ -5,23 +5,25 @@ import { BaseModalLayout } from "../../ui/modals"
 import { useApiServices } from "../../../../services/api/ApiServiceContext"
 import { useInvitationUseCase } from "../../../../services/api/usescases"
 import { toastify } from "../../../../utils/toasts"
-import { useSpinnerStore } from "../../../../services/store"
+import { useOrganisationInvitationsStore, useSpinnerStore } from "../../../../services/store"
 import { inviteMemberSchema } from "../../../../services/forms/validations";
 import { StaffInvitation } from "../../../../services/api/DTO/request";
-import { StaffOrganisation, UserData } from "../../../../services/api/DTO/response";
+import { Invitation, StaffOrganisation, UserData } from "../../../../services/api/DTO/response";
 
 
 interface InviteMemberModalProps {
     onClose: () => void;
+    invitation?: Invitation
 }
 
 export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: InviteMemberModalProps) => {
 
-    const { onClose } = props;
+    const { onClose, invitation } = props;
     const {formatMessage} = useIntl();
     const {invitationService} = useApiServices();
-    const {sendInvitation} = useInvitationUseCase(invitationService)
+    const {sendInvitation, editInvitation} = useInvitationUseCase(invitationService)
     const {showSpinner, hideSpinner} = useSpinnerStore()
+    const { setInvitationListUpdated} = useOrganisationInvitationsStore();
 
     const organisation: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
     const user: UserData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
@@ -29,10 +31,11 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
         organisationId: organisation.organisationId,
         senderId: user.staff.staffId,
         objetInvite: `Invitation à rejoindre notre organisation ${organisation.raisonSociale}`,
-        civilite: "",
-        nomComplet: "",
-        emailDestinataire: ""
+        civilite: invitation ? invitation.civilite as keyof StaffInvitation : "",
+        nomComplet: invitation ? invitation.nomComplet as keyof StaffInvitation : "",
+        emailDestinataire: invitation ? invitation.emailDestinataire as keyof StaffInvitation : ""
     }
+    debugger
 
     const civiliteOptions = [
         {
@@ -54,11 +57,21 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
             const body: StaffInvitation = {...values}
             try {
                 showSpinner()
-                await sendInvitation(body).then(response => {
-                    hideSpinner()
-                    toastify('success', response.message)
-                    onClose()
-                })
+                if(invitation){
+                    await editInvitation(invitation.inviteId, body).then(response => {
+                        hideSpinner()
+                        toastify('success', response.message)
+                        setInvitationListUpdated(true)
+                        onClose()
+                    })
+                }
+                else {
+                    await sendInvitation(body).then(response => {
+                        hideSpinner()
+                        toastify('success', response.message)
+                        onClose()
+                    })
+                }
             }
             catch(error: any){
                 hideSpinner()
@@ -118,7 +131,7 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
 
                     <DefaultButton 
                             type={"primary"} 
-                            text={formatMessage({id:"invite"})} 
+                            text={ invitation ? formatMessage({id:"update"}) : formatMessage({id:"invite"})} 
                             bgWhite={false}
                             typeForm="submit"
                             textSize={12}
