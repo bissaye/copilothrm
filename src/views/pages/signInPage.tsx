@@ -58,17 +58,14 @@ export const SignInPage : React.FC = () => {
             try{
                 showSpinner()
                 await login(body).then(async () => {
-                    debugger
                     if(data && "invitationToken" in data){
                         const token = data.invitationToken
                         await joinOrganisation(token).then((res) => {
-                            debugger
                             hideSpinner()
                             toastify('success', res.message)
                             navigateById(pageIds.ChooseOrg)
                         })
                         .catch((error) => {
-                            debugger
                             hideSpinner()
                             toastify('error', error.message)
                         })
@@ -80,7 +77,6 @@ export const SignInPage : React.FC = () => {
                 })
             }
             catch(error: any){
-                debugger
                 hideSpinner()
                 toastify('error', error.message);
             }
