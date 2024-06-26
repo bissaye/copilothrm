@@ -188,7 +188,8 @@ const en: Record<string, string> = {
     resend_invite_title: "Resend invitation",
     resend_invite: "Resend this invitation ?",
     update: "Update",
-    resend_number: "Number of relaunches"
+    resend_number: "Number of relaunches",
+    create_your_collab_account: "Create your collaborator account"
 }
 
 export default en;

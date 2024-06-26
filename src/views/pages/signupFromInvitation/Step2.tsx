@@ -114,7 +114,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 />
                 <DefaultButton
                     type = "primary"
-                    text = {formatMessage({id: "sign_up_link"})}
+                    text = {formatMessage({id: "create_your_collab_account"})}
                     bgWhite = {false}
                     typeForm='submit'
                     marginY={20}

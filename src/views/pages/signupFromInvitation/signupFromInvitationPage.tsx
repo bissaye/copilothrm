@@ -90,7 +90,7 @@ export const SignUpFromInvitationPage : React.FC = () => {
             }
             <div className='flex flex-col items-center w-4/5 lg:min-h-[536px] rounded-xl mb-16 border-gray-500 p-4'>
                 <h1 className='font-bold font-heading text-t8 text-black my-4'>
-                    {formatMessage({id:"sign_up_link"})}
+                    {formatMessage({id:"create_your_collab_account"})}
                 </h1>
                 <Stepper currentStep={signupStep} steps={2} titles={titles} />
                 

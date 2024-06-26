@@ -188,7 +188,8 @@ const fr: Record<string, string> = {
     resend_invite_title: "Relancer l'invitation",
     resend_invite: "Voulez-vous relancer cette invitation ?",
     update: "Mettre à jour",
-    resend_number: "Nombre de relances"
+    resend_number: "Nombre de relances",
+    create_your_collab_account: "Créer votre compte collaborateur"
 }
 
 export default fr;
