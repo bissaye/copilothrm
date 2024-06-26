@@ -1,6 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MouseEventHandler, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Fragment } from "react/jsx-runtime";
 import "./style.css"
 
@@ -17,7 +18,7 @@ export const BaseModalLayout: React.FC<ModalProps> = ({ children, onClose, heade
             onClose()
         }
     }
-    return <Fragment>
+    return createPortal(<Fragment>
         <div 
             className="h-screen w-screen bg-black/40 absolute top-0 left-0 z-10"
             onClick={handleClickOutside}
@@ -29,7 +30,7 @@ export const BaseModalLayout: React.FC<ModalProps> = ({ children, onClose, heade
                     ref={modalRef}
                 >
                         {/* Modal Header */}
-                    <div className="flex justify-between items-start w-full h-14 px-5 py-3">
+                    <div className="flex justify-between items-start w-full h-14 px-5 py-3 border-b-2">
                         <h1 className="font-heading font-bold text-t5">{header}</h1>
                         <button
                         onClick={onClose}
@@ -41,5 +42,5 @@ export const BaseModalLayout: React.FC<ModalProps> = ({ children, onClose, heade
                 </div>
             </div>
         </div>
-    </Fragment>
+    </Fragment>, document.body)
 }
