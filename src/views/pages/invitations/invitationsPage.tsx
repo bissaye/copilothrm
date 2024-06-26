@@ -3,56 +3,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { DefaultButton, InputText } from "../../components/ui"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import DataTable from 'react-data-table-component';
-import { faPencil } from "@fortawesome/free-solid-svg-icons/faPencil";
-import "./style.css"
 import { useIntl } from "react-intl";
 import { useEffect, useState } from "react";
 import { useApiServices } from "../../../services/api/ApiServiceContext";
 import { useInvitationUseCase } from "../../../services/api/usescases";
-import { useSpinnerStore } from "../../../services/store";
-import { toastify } from "../../../utils/toasts";
-import { Invitation, StaffOrganisation } from "../../../services/api/DTO/response";
+import { useOrganisationInvitationsStore, useSpinnerStore } from "../../../services/store";
+import { Invitation, StaffOrganisationContent } from "../../../services/api/DTO/response";
 import { avatars } from "../../../assets/images";
+import { InvitationActionDropdown } from "./invitationActions";
+import "./style.css"
 
 export const InvitationPage: React.FC = () => {
 
     const {formatMessage} = useIntl();
-    const [invitationList, setInvitationList] = useState<Invitation[] | null >(null);
+    const {invitationList, setInvitationList, invitationListUpdated} = useOrganisationInvitationsStore();
     const {showSpinner, hideSpinner} = useSpinnerStore();
     const {invitationService} = useApiServices();
     const {getAllInvitations} = useInvitationUseCase(invitationService)
-    const currentOrg: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
+    const currentOrg: StaffOrganisationContent = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
     
     useEffect(() => {
-        async function getInvitations() {
-            try{
-                if(currentOrg){
-                    showSpinner()
-                    await getAllInvitations(currentOrg.organisationId, 0, 10).then(response => {
-                        const data = response.content.data
-                        setInvitationList(data)
-                        hideSpinner()
-                    })
-                }
-            }
-            catch(error: any){
-                hideSpinner()
-                toastify('error', error.message)
+        getInvitations()
+
+    }, [])
+
+    useEffect(() => {
+        getInvitations()
+    }, [invitationListUpdated])
+
+    const getInvitations = async () => {
+        try{
+            if(currentOrg){
+                showSpinner()
+                await getAllInvitations(currentOrg.organisation.organisationId, 0, 10).then(response => {
+                    const data = response.content
+                    setInvitationList(data)
+                    hideSpinner()
+                })
             }
         }
-
-        getInvitations()
-    }, [])
-    
-    const actionsList = () => {
-        return(
-            <div>
-                <button
-                >
-                    <FontAwesomeIcon icon={faPencil} />
-                </button>
-            </div>
-        )
+        catch(error: any){
+            hideSpinner()
+        }
     }
 
     const statusBadge = (status: string) => {
@@ -67,6 +59,9 @@ export const InvitationPage: React.FC = () => {
             case 'REJECTED':
                 classname = 'bg-red-100 text-red-700'
                 break;
+            case 'CANCELLED':
+                classname = 'bg-orange-100 text-orange-700'
+                break;
             case 'EXPIRED':
             classname = 'bg-gray-100 text-gray-700 '
             break;
@@ -74,7 +69,7 @@ export const InvitationPage: React.FC = () => {
         return (
             <div className="h-full w-full flex justify-center items-center">
                 <span
-                className={`w-[70px] text-t1 text-center rounded-[30px] px-2 py-1 self-center font-bold ${classname}`}
+                className={`w-fit text-t1 text-center rounded-[30px] px-2 py-1 self-center font-bold ${classname}`}
                 >
                     {status}
                 </span>
@@ -121,26 +116,22 @@ export const InvitationPage: React.FC = () => {
     const columns = [
         {
             name: 'Avatar',
-            cell: () => <img src={avatars.avatarLandingPage} className="w-10"></img>,
-            center: true
+            cell: () => <img src={avatars.avatarLandingPage} className="w-10"></img>
         },
         {
             name: formatMessage({id:"sender"}),
             cell: (row: Invitation) => row.senderName,
             sortable: true,
-            center: true
         },
         {
             name: formatMessage({id:"receiver"}),
             cell: (row: Invitation) => row.emailDestinataire,
             sortable: true,
-            center: true
         },
         {
             name: 'Date',
             cell: (row: Invitation) => new Date(row.dateEnvoi).toDateString(),
             sortable: true,
-            center: true
         },
         {
             name: 'Status',
@@ -149,18 +140,20 @@ export const InvitationPage: React.FC = () => {
         },
         {
             name: 'Actions',
-            cell: () => <div>{actionsList()}</div>,
+            cell: (row: Invitation) => <InvitationActionDropdown invitation={row} />,
             center: true
         }
     ]
 
-    const data = invitationList ? invitationList.map((invitation) => {
+    const data = invitationList?.data ? invitationList.data.map((invitation) => {
         return {
             inviteId: invitation.inviteId,
             emailDestinataire: invitation.emailDestinataire,
             senderName: invitation.senderName,
             dateEnvoi: invitation.dateEnvoi,
-            nomStatus: invitation.nomStatus
+            nomStatus: invitation.nomStatus,
+            civilite: invitation.civilite,
+            nomComplet: invitation.nomComplet,
         }
     }) : []
 
@@ -168,6 +161,7 @@ export const InvitationPage: React.FC = () => {
     
     return(
         <div className=' w-full md:w-[900px] lg:w-[76%] h-full flex flex-col justify-start items-start gap-5 px-10 py-5 bg-white lg:overflow-x-hidden'>
+            
             <div className="flex items-center gap-3">
                 <FontAwesomeIcon icon={faEnvelope} className="text-secondary text-t7" />
                 <h1 className="text-t6 font-heading font-bold">
@@ -197,6 +191,7 @@ export const InvitationPage: React.FC = () => {
                     className="font-bold rounded-l-none rounded-r-md"
                 />
             </div>
+            <span className="self-end font-bold">Total <span className="text-primary">{invitationList?.totalElements}</span> invitations.</span>
 
             {/* Liste des invitations */}
             <DataTable
@@ -204,12 +199,14 @@ export const InvitationPage: React.FC = () => {
             data={data}
             selectableRows
             fixedHeader
+            fixedHeaderScrollHeight="300px"
             pagination
             customStyles={tableCustomStyles}
             noDataComponent={noDataMessage}
             >
-
             </DataTable>
+
+            
         </div>
     )
 }
