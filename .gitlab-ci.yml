@@ -7,8 +7,8 @@ workflow:
 
 stages: 
   - build_webapp
+  - sonarcloud-check
   - docker_build
-  - delivery_image
   - deploy_dev
   - deploy_release
   - clean_up
@@ -24,6 +24,7 @@ default:
   cache:
     paths:
       - node_modules/
+      - sonar-project.properties
 
 variables:
   image_tag: $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
@@ -46,6 +47,34 @@ build_app:
       else
         npm run build -- --mode=production;
       fi
+  tags:
+    - docker_runner62
+
+sonarcloud-check:
+  image:
+    name: sonarsource/sonar-scanner-cli:10
+    entrypoint: [""]
+  stage: sonarcloud-check
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+    SONAR_ANALYSIS_MODE: publish
+    SONAR_PROJECT_VERSION: $CI_JOB_ID
+    SONAR_TOKEN: $SONAR_TOKEN
+    SONAR_SOURCES: .
+    SONAR_GITLAB_PROJECT_ID: $SONAR_GITLAB_PROJECT_ID
+    CI_BUILD_REF: $CI_COMMIT_SHA
+    CI_BUILD_REF_NAME: $CI_COMMIT_REF_NAME
+    SONAR_URL: "https://sonarcloud.io"
+    SONAR_PROJECT_KEY: $SONAR_PROJECT_KEY
+  dependencies:
+    - build_app
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner
   tags:
     - docker_runner62
 
