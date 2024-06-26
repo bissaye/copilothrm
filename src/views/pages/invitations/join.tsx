@@ -33,10 +33,8 @@ export const RejoindreOrganizationPage: React.FC = () => {
             else{
                 showSpinner()
                 await checkInvitationValidity(token).then(async (response) => {
-                    debugger
                     const invitationData: CheckInvitationValidityResponseData = response.content
                     await checkUserExists(token).then(async () => {
-                        debugger
                         const user: UserData = (localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")!) : null
                         if(!user){
                             navigateById(pageIds.SignInPage)
@@ -73,9 +71,12 @@ export const RejoindreOrganizationPage: React.FC = () => {
                         }
                     })
                     .catch((error) => {
-                        debugger
                         hideSpinner()
                         toastify('error', error.message)
+                        navigateById(pageIds.SignUpFromInvitationPage, {
+                            invitationToken: token,
+                            invitationData: invitationData
+                        })
                     })
                           
                 })
