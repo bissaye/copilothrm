@@ -8,7 +8,7 @@ import { toastify } from "../../../../utils/toasts"
 import { useOrganisationInvitationsStore, useSpinnerStore } from "../../../../services/store"
 import { inviteMemberSchema } from "../../../../services/forms/validations";
 import { StaffInvitation } from "../../../../services/api/DTO/request";
-import { Invitation, StaffOrganisation, UserData } from "../../../../services/api/DTO/response";
+import { Invitation, StaffOrganisationContent, UserData } from "../../../../services/api/DTO/response";
 
 
 interface InviteMemberModalProps {
@@ -25,17 +25,16 @@ export const InviteMemberModal : React.FC<InviteMemberModalProps> = (props: Invi
     const {showSpinner, hideSpinner} = useSpinnerStore()
     const { setInvitationListUpdated} = useOrganisationInvitationsStore();
 
-    const organisation: StaffOrganisation = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
+    const organisation: StaffOrganisationContent = localStorage.getItem('currentOrg') ? JSON.parse(localStorage.getItem('currentOrg')!) : null;
     const user: UserData = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null;
     const initialValues = {
-        organisationId: organisation.organisationId,
+        organisationId: organisation.organisation.organisationId,
         senderId: user.staff.staffId,
-        objetInvite: `Invitation à rejoindre notre organisation ${organisation.raisonSociale}`,
+        objetInvite: `Invitation à rejoindre notre organisation ${organisation.organisation.raisonSociale}`,
         civilite: invitation ? invitation.civilite as keyof StaffInvitation : "",
         nomComplet: invitation ? invitation.nomComplet as keyof StaffInvitation : "",
         emailDestinataire: invitation ? invitation.emailDestinataire as keyof StaffInvitation : ""
     }
-    debugger
 
     const civiliteOptions = [
         {

@@ -205,8 +205,6 @@ export const InvitationPage: React.FC = () => {
             noDataComponent={noDataMessage}
             >
             </DataTable>
-
-            
         </div>
     )
 }
