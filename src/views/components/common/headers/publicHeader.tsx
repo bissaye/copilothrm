@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { pageIds } from '../../../../utils/constantes';
@@ -8,7 +8,7 @@ import { DefaultButton, LinkButton } from '../../ui';
 import { imagesLogo } from '../../../../assets/images';
 import { usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBars } from '@fortawesome/free-solid-svg-icons';
 import "./style.css"
 
 export const PublicHeader : React.FC = () => {
@@ -39,8 +39,7 @@ export const PublicHeader : React.FC = () => {
     }
 
 
-    return <Fragment>
-        <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full'`}>
+    return <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full'`}>
             
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
@@ -80,6 +79,8 @@ export const PublicHeader : React.FC = () => {
                                 type="secondary"
                                 bgWhite={false}
                                 text={formatMessage({id:"sign_up_link"})}
+                                className='hover:bg-secondary-400 transition duration-300 ease-in-out'
+                                icon={faArrowRight}
                             />
                         </Link>
                     }
@@ -132,5 +133,4 @@ export const PublicHeader : React.FC = () => {
                 </div>
             </div>
         </div>
-    </Fragment>
 }

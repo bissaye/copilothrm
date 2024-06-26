@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { pageIds } from '../../../../utils/constantes';
@@ -7,7 +7,7 @@ import { useIntl } from 'react-intl';
 import { DefaultButton, LinkButton } from '../../ui';
 import { useAuthStore, usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBars } from '@fortawesome/free-solid-svg-icons';
 import { imagesLogo } from '../../../../assets/images';
 
 export const ChooseOrgHeader : React.FC = () => {
@@ -55,10 +55,9 @@ export const ChooseOrgHeader : React.FC = () => {
     }
 
 
-    return <Fragment>
-        <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 shadow-md md:px-8 lg:gap-14 xl:px-15 w-full`}>
+    return <div className={`bg-white h-[7rem] flex flex-row justify-between items-center p-4 shadow-md md:px-8 lg:gap-14 xl:px-15 w-full`}>
             {/* Logo Copilot */}
-            <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
+            <img src={imagesLogo.main} alt="" className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
             
             <div className="w-full hidden md:flex">
             
@@ -71,6 +70,8 @@ export const ChooseOrgHeader : React.FC = () => {
                     <DefaultButton
                         type="secondary"
                         bgWhite={false}
+                        className='hover:bg-secondary-400 transition duration-300 ease-in-out'
+                        icon={faArrowLeft}
                         text={formatMessage({id:"logout_link"})}
                         onClick={logout}
                     />
@@ -102,5 +103,4 @@ export const ChooseOrgHeader : React.FC = () => {
                 </div>
             </div>
         </div>
-    </Fragment>
 }
