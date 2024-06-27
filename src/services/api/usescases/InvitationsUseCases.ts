@@ -15,7 +15,7 @@ export const useInvitationUseCase = (invitationServices: IInvitationServices | n
         }
         catch (err: any) {
             if(err.response.status == 404){
-                throw new Error(String("Aucune invitation envoyées"))
+                throw new Error(String("Aucune invitation envoyée"))
             }
             else if(err.response.data.message) {
               const message = err.response.data.message;

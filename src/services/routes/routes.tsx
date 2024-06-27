@@ -1,5 +1,5 @@
 import { AppRoute } from "../../utils/interfaces/type"
-import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage, AddOrganisation} from "../../views/pages";
+import { HomePage , SignInPage, SignUpPage, LandingPage, ChooseOrg, SignUpFromInvitationPage, ForgotPasswordPage, InvitationPage, UserProfilePage, AddOrganisation, DepartmentsPage} from "../../views/pages";
 import { pageIds } from "../../utils/constantes";
 import { ActivateAccount } from "../../views/pages/activateAccount";
 import { RejoindreOrganizationPage } from "../../views/pages/invitations";
@@ -76,7 +76,7 @@ export const managerRoutes : Record<string, AppRoute> = {
         id: pageIds.Departments,
         path: "/home/org-home/departments",
         authRequired: true,
-        element: <HomePage/>
+        element: <DepartmentsPage/>
     },
     Teams:{
         id: pageIds.Teams,

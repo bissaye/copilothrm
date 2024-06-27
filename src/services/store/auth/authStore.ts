@@ -21,7 +21,10 @@ export const useAuthStore = create<AuthStore>((set) =>({
     
     // sign out
     signOut: async ()  =>{
-        // localStorage.clear();
+        localStorage.removeItem('user');
+        localStorage.removeItem("token");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("currentOrg");
         localStorage.setItem("isLogged", "0");
         set({isLogged: false});
         return false

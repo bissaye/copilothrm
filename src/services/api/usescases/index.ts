@@ -4,3 +4,5 @@ export * from './FormUseCases';
 export * from './OrganisationUseCase';
 export * from './InvitationsUseCases';
 export * from './StaffUseCases';
+export * from './UserUseCases';
+export * from './DepartmentsUseCases';

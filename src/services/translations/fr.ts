@@ -189,7 +189,16 @@ const fr: Record<string, string> = {
     resend_invite: "Voulez-vous relancer cette invitation ?",
     update: "Mettre à jour",
     resend_number: "Nombre de relances",
-    create_your_collab_account: "Créer votre compte collaborateur"
+    create_your_collab_account: "Créer votre compte collaborateur",
+    add: "Ajouter",
+    department_title: "Intitulé du département",
+    edit: "Modifier",
+    add_or_remove_staff: "Affecter/Retirer personnel",
+    no_departments: "Cette organisation n'a aucun département. Ajoutez-en un maintenant.",
+    created_at: "Créé le ",
+    head_department: "Chef de département",
+    employees: "Employés",
+    number_employees: "Nombre d'employés"
 }
 
 export default fr;

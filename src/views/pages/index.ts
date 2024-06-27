@@ -9,6 +9,7 @@ import { ForgotPasswordPage } from "./ForgotPassword";
 import { InvitationPage } from "./invitations";
 import { UserProfilePage } from "./userProfile";
 import { AddOrganisation } from "./organisation";
+import { DepartmentsPage } from "./departments";
 
 
 export {
@@ -22,5 +23,6 @@ export {
     ForgotPasswordPage,
     InvitationPage,
     UserProfilePage,
-    AddOrganisation
+    AddOrganisation,
+    DepartmentsPage
 }
