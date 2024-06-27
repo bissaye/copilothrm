@@ -11,6 +11,8 @@ import { useApiServices } from '../../../services/api/ApiServiceContext';
 import { toastify } from '../../../utils/toasts';
 import { useLocation } from 'react-router-dom';
 import { useStaffUseCase } from '../../../services/api/usescases';
+import { log } from 'console';
+import { InvitedUserSignupDatas } from '../../../services/api/DTO/request';
 
 export const SignUpFromInvitationPage : React.FC = () => {
     
@@ -44,6 +46,7 @@ export const SignUpFromInvitationPage : React.FC = () => {
     const submitForm = async () => {
         try{
             const body = invitedUserDatas;
+            console.log(body)
             showSpinner()
             await addStaffUser(body).then(() => {
                 navigateById(pageIds.SignInPage)
@@ -68,8 +71,10 @@ export const SignUpFromInvitationPage : React.FC = () => {
             }
         }
         if(data && "invitationData" in data){
-            const idOrg = data.invitationData.idOrganisation
-            setInvitedUserDatas(idOrg)
+            const idOrg = {
+                idOrganisation: data.invitationData.idOrganisation
+            }
+            setInvitedUserDatas(idOrg as InvitedUserSignupDatas)
         }
         else{
             navigateById(pageIds.SignInPage)
