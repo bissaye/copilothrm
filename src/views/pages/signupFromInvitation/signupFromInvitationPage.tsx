@@ -47,6 +47,7 @@ export const SignUpFromInvitationPage : React.FC = () => {
             const body = invitedUserDatas;
             showSpinner()
             await addStaffUser(body).then(() => {
+                debugger
                 navigateById(pageIds.SignInPage)
                 hideSpinner();
             })

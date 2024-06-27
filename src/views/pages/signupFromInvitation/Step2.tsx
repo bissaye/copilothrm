@@ -46,6 +46,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
+            
             const body: InvitedUserSignupDatas = {...values};
             setInvitedUserDatas(body);
             handleSubmitNextStep();

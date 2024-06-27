@@ -32,26 +32,35 @@ export const RejoindreOrganizationPage: React.FC = () => {
             }
             else{
                 showSpinner()
-                await checkInvitationValidity(token).then(async (response) => {
-                    const invitationData: CheckInvitationValidityResponseData = response.content
-                    await checkUserExists(token).then(async () => {
-                        const user: UserData = (localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")!) : null
-                        if(!user){
-                            navigateById(pageIds.SignInPage)
-                        }
-                        else {
-                            if(user.staff.email == invitationData.email){
-                                if(user.accessToken){
-                                    await joinOrganisation(token).then(response => {
-                                        debugger
+                try{
+                    await checkInvitationValidity(token).then(async (response) => {
+                        const invitationData: CheckInvitationValidityResponseData = response.content
+                        await checkUserExists(token).then(async () => {
+                            const user: UserData = (localStorage.getItem("user")) ? JSON.parse(localStorage.getItem("user")!) : null
+                            if(!user){
+                                navigateById(pageIds.SignInPage)
+                            }
+                            else {
+                                if(user.staff.email == invitationData.email){
+                                    if(user.accessToken){
+                                        await joinOrganisation(token).then(response => {
+                                            debugger
+                                            hideSpinner()
+                                            navigateById(pageIds.ChooseOrg)
+                                            toastify('success', response.message)
+                                        })
+                                        .catch((error) => {
+                                            hideSpinner()
+                                            toastify('error', error.message)
+                                        })
+                                    }
+                                    else {
                                         hideSpinner()
-                                        navigateById(pageIds.ChooseOrg)
-                                        toastify('success', response.message)
-                                    })
-                                    .catch((error) => {
-                                        hideSpinner()
-                                        toastify('error', error.message)
-                                    })
+                                        navigateById(pageIds.SignInPage, {
+                                            invitationToken: token,
+                                            invitationData: invitationData
+                                        })
+                                    }
                                 }
                                 else {
                                     hideSpinner()
@@ -61,25 +70,23 @@ export const RejoindreOrganizationPage: React.FC = () => {
                                     })
                                 }
                             }
-                            else {
-                                hideSpinner()
-                                navigateById(pageIds.SignInPage, {
-                                    invitationToken: token,
-                                    invitationData: invitationData
-                                })
-                            }
-                        }
-                    })
-                    .catch(() => {
-                        hideSpinner()
-                        // toastify('error', error.message)
-                        navigateById(pageIds.SignUpFromInvitationPage, {
-                            invitationToken: token,
-                            invitationData: invitationData
                         })
+                        .catch(() => {
+                            hideSpinner()
+                            // toastify('error', error.message)
+                            navigateById(pageIds.SignUpFromInvitationPage, {
+                                invitationToken: token,
+                                invitationData: invitationData
+                            })
+                        })
+                            
                     })
-                          
-                })
+                }
+            catch(error: any){
+                hideSpinner()
+                toastify('error', error.message )
+                navigateById(pageIds.SignInPage)
+                }
             }
         }
 
