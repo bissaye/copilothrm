@@ -28,16 +28,22 @@ export const DropInvitationModal: React.FC<DropInvitationModalProps> = (props: D
 
     const dropInvitation = async () => {
         showSpinner()
-        await cancelInvitation(invitationId).then( response => {
-            hideSpinner()
-            toastify('success', response.message)
-            setInvitationListUpdated(true)
-            setDropdownVisible(false)
-        })
-        .catch((error) => {
+        try{
+            await cancelInvitation(invitationId).then( response => {
+                hideSpinner()
+                toastify('success', response.message)
+                setInvitationListUpdated(true)
+                setDropdownVisible(false)
+            })
+            .catch((error) => {
+                hideSpinner()
+                toastify('error', error.message)
+            })
+        }
+        catch(error: any){
             hideSpinner()
             toastify('error', error.message)
-        })
+        }
     }
 
     const { formatMessage } = useIntl();

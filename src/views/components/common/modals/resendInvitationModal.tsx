@@ -26,16 +26,22 @@ export const ResendInvitationModal: React.FC<ResendInvitationModalProps> = (prop
     }
 
     const reSendInvitation = async () => {
-        showSpinner()
-        await resendInvitation(invitationId).then( response => {
-            hideSpinner()
-            toastify('success', response.message)
-            setDropdownVisible(false)
-        })
-        .catch((error) => {
+        try{
+            showSpinner()
+            await resendInvitation(invitationId).then( response => {
+                hideSpinner()
+                toastify('success', response.message)
+                setDropdownVisible(false)
+            })
+            .catch((error) => {
+                hideSpinner()
+                toastify('error', error.message)
+            })
+        }
+        catch(error: any){
             hideSpinner()
             toastify('error', error.message)
-        })
+        }
     }
 
     const { formatMessage } = useIntl();
