@@ -4,7 +4,7 @@ import { DefaultButton, InputPassword, InputText } from "../../components/ui";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { userSignUpStepTwoSchema } from "../../../services/forms/validations";
-import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { InvitedUserSignupDatas } from "../../../services/api/DTO/request";
 import { useInvitationSignupStore } from "../../../services/store/signup/signupStore";
 
 interface Step2Props {
@@ -16,11 +16,10 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
     // props
     const { handleSubmitNextStep, handlePrevStep } = props;
 
-
     // hooks
     const {formatMessage} = useIntl();
     const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
-
+    
     //constantes
     const fields : Record<string, FieldsInfo> = {
         email :{
@@ -31,9 +30,9 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
             id : "password",
             name : "password",
         },
-        confirmPassword :{
-            id : "confirmPassword",
-            name : "confirmPassword",
+        cpassword :{
+            id : "cpassword",
+            name : "cpassword",
         }
     }
     const initialValues: any = {}
@@ -47,6 +46,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
         validateOnBlur: true,
         validateOnChange: true,
         onSubmit: async (values) => {
+            
             const body: InvitedUserSignupDatas = {...values};
             setInvitedUserDatas(body);
             handleSubmitNextStep();
@@ -91,14 +91,14 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px]">
                     <InputPassword
-                        id = {fields.confirmPassword.id}    
-                        name =  {fields.confirmPassword.name}  
+                        id = {fields.cpassword.id}    
+                        name =  {fields.cpassword.name}  
                         label={formatMessage({id:"confirm_password"})}
                         placeholder = {formatMessage({id: "confirm_your_password"})}
                         icon = {faLock}  
-                        value={values[fields.confirmPassword.name]} 
+                        value={values[fields.cpassword.name]} 
                         onChange={handleChange}  
-                        errorMessage={ errors.confirmPassword ? errors.confirmPassword.toString() : undefined}
+                        errorMessage={ errors.cpassword ? errors.cpassword.toString() : undefined}
                     />
                 </div>
             </div>
@@ -115,7 +115,7 @@ export const Step2 : React.FC<Step2Props> = (props: Step2Props) => {
                 />
                 <DefaultButton
                     type = "primary"
-                    text = {formatMessage({id: "sign_up_link"})}
+                    text = {formatMessage({id: "create_your_collab_account"})}
                     bgWhite = {false}
                     typeForm='submit'
                     marginY={20}

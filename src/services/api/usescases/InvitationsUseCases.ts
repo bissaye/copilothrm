@@ -1,0 +1,134 @@
+import { StaffInvitation } from "../DTO/request";
+import { IInvitationServices } from "../services/interfaces";
+
+export const useInvitationUseCase = (invitationServices: IInvitationServices | null) => {
+
+    const getAllInvitations = async (orgId: string, pageNumber: number, size: number) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.getAllInvitations(orgId, pageNumber, size)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.status == 404){
+                throw new Error(String("Aucune invitation envoyée"))
+            }
+            else if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const sendInvitation = async (data: StaffInvitation) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.sendInvitation(data)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const editInvitation = async (invitationId: string, data: StaffInvitation) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.editInvitation(invitationId, data)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const resendInvitation = async (inviteId: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.resendInvitation(inviteId)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const cancelInvitation = async (inviteId: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.cancelInvitation(inviteId)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    const checkInvitationValidity = async (token: string) => {
+        try{
+            if(invitationServices){
+                const response = await invitationServices.checkInvitationValidity(token)
+                return response;
+            }
+            else {
+                throw new Error("erreur invitationServices not set");
+            }
+        }
+        catch (err: any) {
+            if(err.response.status == 404){
+                throw new Error(String("Cette invitation n'est plus valide"))
+            }
+            else if(err.response.data.message) {
+              const message = err.response.data.message;
+              throw new Error(String(message))
+            }
+            throw new Error(String(err));
+        }
+    }
+
+    return {
+        getAllInvitations,
+        sendInvitation,
+        resendInvitation,
+        checkInvitationValidity,
+        editInvitation,
+        cancelInvitation
+    }
+}

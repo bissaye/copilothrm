@@ -1,10 +1,11 @@
 import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
-import { DefaultButton, InputText } from "../../components/ui";
+import { DefaultButton, InputPhone, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
-import { UserSignupData } from "../../../utils/interfaces/DTO/request";
+import { UserSignupData } from "../../../services/api/DTO/request";
 import { useSignupStore } from "../../../services/store";
 import { userSignUpStepThreeSchema } from "../../../services/forms/validations";
+import { InputSelectOptions } from "../../../utils/interfaces/props";
 
 interface Step3Props {
     handleSubmitNextStep: () => void;
@@ -18,42 +19,88 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
     
     // hooks
     const {formatMessage} = useIntl();
-    const { userData, setUserData } = useSignupStore();
+    const { userData, setUserData, countryList, industryList, tailleEntrepriseList } = useSignupStore();
 
     // constantes
     const fields : Record<string, FieldsInfo> = {
-        socialReason :{
-            id : "socialReason",
-            name : "socialReason",
+        raisonSociale :{
+            id : "raisonSociale",
+            name : "raisonSociale",
         },
         siret: {
             id: "siret",
             name: "siret"
         },
-        industry: {
-            id: "industry",
-            name: "industry"
+        industrie: {
+            id: "industrie",
+            name: "industrie"
         },
-        orgAddress: {
-            id: "orgAddress",
-            name: "orgAddress"
+        nomDomaine:{
+            id: "nomDomaine",
+            name: "nomDomaine"
         },
-        orgCountry :{
-            id : "orgCountry",
-            name : "orgCountry",
+        tailleEntreprise:{
+            id: "tailleEntreprise",
+            name: "tailleEntreprise"
         },
-        orgCity: {
-            id: "orgCity",
-            name: "orgCity"
+        organisationEmail: {
+            id: "organisationEmail",
+            name: "organisationEmail"
         },
-        orgPostcode: {
-            id: "orgPostcode",
-            name: "orgPostcode"
+        organisationPhone: {
+            id: "organisationPhone",
+            name: "organisationPhone"
+        },
+        organisationRue: {
+            id: "organisationRue",
+            name: "organisationRue"
+        },
+        organisationPays :{
+            id : "organisationPays",
+            name : "organisationPays",
+        },
+        organisationVille: {
+            id: "organisationVille",
+            name: "organisationVille"
+        },
+        organisationZipCode: {
+            id: "organisationZipCode",
+            name: "organisationZipCode"
         },
         orgLogo: {
             id: "orgLogo",
             name: "orgLogo"
+        },
+        trigram: {
+            id: "trigram",
+            name: "trigram"
         }
+    }
+
+    const countryOptions: InputSelectOptions[] = countryList.map((country) => {
+        return {
+            value: country.countryId,
+            text: country.libelle 
+        }
+    });
+
+    const industrieOptions: InputSelectOptions[] = industryList.map((industry) => {
+        return {
+            value: industry.industrieId,
+            text: industry.libelle 
+        }
+    })
+
+    const tailleEntrepriseOptions: InputSelectOptions[] = tailleEntrepriseList.map((tailleEntreprise) => {
+        return {
+            value: tailleEntreprise.tailleEntrepriseId,
+            text: tailleEntreprise.libelle 
+        }
+    })
+
+    const getSelectedCountryCode = (countryId: string) => {
+        const selectedCountry = countryList.find(country => country.countryId == countryId)
+        return selectedCountry?.prefixPhone
     }
 
     const initialValues: any = {}
@@ -78,23 +125,24 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
 
     return(
         <form 
-            className="flex flex-col gap-7 items-center w-full"
+            className="flex flex-col items-center w-full"
             onSubmit={handleSubmit}
         >
-            <div className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-36 mb-8 w-full">
+            <div className="flex flex-col md:flex-row justify-center items-start gap-5 md:gap-36 mb-8 w-full">
                 {/* colonne de gauche */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
                     {/* Raison sociale */}
                     <div>
                         <InputText
-                            id = {fields.socialReason.id}    
-                            name =  {fields.socialReason.name}  
+                            id = {fields.raisonSociale.id}    
+                            name =  {fields.raisonSociale.name}  
                             label={formatMessage({id:"social_reason"})}
-                            placeholder = {formatMessage({id: "enter_social_reason"})} 
-                            value={values[fields.socialReason.name]}
+                            placeholder = {formatMessage({id: "enter_social_reason"})}
+                            required
+                            value={values[fields.raisonSociale.name]}
                             onChange={handleChange}
-                            // onBlur={handleBlur}
-                            errorMessage={ errors.socialReason ? errors.socialReason.toString() : undefined}
+                            className="h-5"
+                            errorMessage={ errors.raisonSociale ? errors.raisonSociale.toString() : undefined}
                         />
                     </div>
                     {/* SIRET */}
@@ -103,88 +151,177 @@ export const Step3 : React.FC<Step3Props> = (props: Step3Props) => {
                             id = {fields.siret.id}    
                             name =  {fields.siret.name}  
                             label={formatMessage({id:"siret"})}
-                            placeholder = {formatMessage({id: "enter_siret_number"})} 
+                            placeholder = {formatMessage({id: "enter_siret_number"})}
+                            required
                             value={values[fields.siret.name]} 
                             onChange={handleChange}
+                            className="h-5"
                             errorMessage={ errors.siret ? errors.siret.toString() : undefined}
+                        />
+                    </div>
+                    {/* TRIGRAM */}
+                    <div>
+                        <InputText
+                            id = {fields.trigram.id}    
+                            name =  {fields.trigram.name}  
+                            label="Trigram"
+                            placeholder = "Trigram"
+                            required 
+                            value={values[fields.trigram.name]} 
+                            onChange={handleChange}
+                            className="h-5"
+                            errorMessage={ errors.trigram ? errors.trigram.toString() : undefined}
                         />
                     </div>
                     {/* Industrie */}
                     <div>
-                        <InputText
-                            id = {fields.industry.id}    
-                            name = {fields.industry.name}  
+                        <InputSelect
+                            id = {fields.industrie.id}    
+                            name = {fields.industrie.name}  
                             label={formatMessage({id:"industry"})}
-                            placeholder = {formatMessage({id: "choose_industry"})} 
-                            value={values[fields.industry.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.industry ? errors.industry.toString() : undefined}
+                            placeholder = {formatMessage({id: "choose_industry"})}
+                            required
+                            value={values[fields.industrie.name]} 
+                            onChange={handleChange}
+                            options={industrieOptions}
+                            className="h-5"
+                            errorMessage={ errors.industrie ? errors.industrie.toString() : undefined}
                         />
                     </div>
-                    {/* Adresse postale */}
+                    {/* Taille de l'entreprise */}
+                    <div>
+                        <InputSelect
+                            id = {fields.tailleEntreprise.id}    
+                            name = {fields.tailleEntreprise.name}  
+                            label={formatMessage({id:"org_size"})}
+                            placeholder = {formatMessage({id: "choose_org_size"})}
+                            value={values[fields.tailleEntreprise.name]} 
+                            onChange={handleChange}
+                            options={tailleEntrepriseOptions}
+                            className="h-5"
+                            errorMessage={ errors.tailleEntreprise ? errors.tailleEntreprise.toString() : undefined}
+                        />
+                    </div>
+                    {/* Email de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgAddress.id}    
-                            name = {fields.orgAddress.name}  
-                            label={formatMessage({id:"enter_your_address"})}
-                            placeholder={formatMessage({id:"address_of_organization"})}
-                            value={values[fields.orgAddress.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.orgAddress ? errors.orgAddress.toString() : undefined}
+                            id = {fields.organisationEmail.id}    
+                            name =  {fields.organisationEmail.name}  
+                            label='Email'
+                            placeholder = {formatMessage({id: "enter_social_reason"})}
+                            required
+                            value={values[fields.organisationEmail.name]}
+                            onChange={handleChange}
+                            className="h-5"
+                            errorMessage={ errors.organisationEmail ? errors.organisationEmail.toString() : undefined}
                         />
                     </div>
+                    
                 </div>
 
                 {/* colonne de droite */}
                 <div className="w-full md:w-[422px] flex flex-col gap-4 ">
-                    {/* Pays de l'organisation */}
+                    {/* Nom de domaine de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgCountry.id}    
-                            name =  {fields.orgCountry.name}  
-                            label={formatMessage({id:"country"})}
-                            placeholder = {formatMessage({id: "country_of_organization"})} 
-                            value={values[fields.orgCountry.name]}
+                            id = {fields.nomDomaine.id}    
+                            name =  {fields.nomDomaine.name}  
+                            label={formatMessage({id:"domain_name"})}
+                            placeholder = {formatMessage({id: "enter_domain_name"})} 
+                            value={values[fields.nomDomaine.name]}
                             onChange={handleChange}
-                            errorMessage={ errors.orgCountry ? errors.orgCountry.toString() : undefined}
+                            className="h-5"
+                            errorMessage={ errors.nomDomaine ? errors.nomDomaine.toString() : undefined}
+                        />
+                    </div>
+                    {/* Pays de l'organisation */}
+                    <div>
+                        <InputSelect
+                            id = {fields.organisationPays.id}    
+                            name =  {fields.organisationPays.name}  
+                            label={formatMessage({id:"country"})}
+                            placeholder = {formatMessage({id: "country_of_organization"})}
+                            required 
+                            value={values[fields.organisationPays.name]}
+                            onChange={handleChange}
+                            options={countryOptions}
+                            className="h-5"
+                            errorMessage={ errors.organisationPays ? errors.organisationPays.toString() : undefined}
                         />
                     </div>
                     {/* Ville de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgCity.id}    
-                            name =  {fields.orgCity.name}  
+                            id = {fields.organisationVille.id}    
+                            name =  {fields.organisationVille.name}  
                             label={formatMessage({id:"city"})}
-                            placeholder = {formatMessage({id: "city_of_organization"})} 
-                            value={values[fields.orgCity.name]} 
+                            placeholder = {formatMessage({id: "city_of_organization"})}
+                            required
+                            value={values[fields.organisationVille.name]} 
                             onChange={handleChange}
-                            errorMessage={ errors.orgCity ? errors.orgCity.toString() : undefined}
+                            className="h-5"
+                            errorMessage={ errors.organisationVille ? errors.organisationVille.toString() : undefined}
                         />
                     </div>
                     {/* Code postal de l'organisation */}
                     <div>
                         <InputText
-                            id = {fields.orgPostcode.id}    
-                            name = {fields.orgPostcode.name}  
+                            id = {fields.organisationZipCode.id}    
+                            name = {fields.organisationZipCode.name}  
                             label={formatMessage({id:"post_code"})}
-                            placeholder = {formatMessage({id: "post_code_of_organization"})} 
-                            value={values[fields.orgPostcode.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.orgPostcode ? errors.orgPostcode.toString() : undefined}
+                            placeholder = {formatMessage({id: "post_code_of_organization"})}
+                            value={values[fields.organisationZipCode.name]} 
+                            onChange={handleChange}    
+                            className="h-5"  
+                            errorMessage={ errors.organisationZipCode ? errors.organisationZipCode.toString() : undefined}
+                        />
+                    </div>
+                    {/* Adresse postale */}
+                    <div>
+                        <InputText
+                            id = {fields.organisationRue.id}    
+                            name = {fields.organisationRue.name}  
+                            label={formatMessage({id:"enter_your_address"})}
+                            placeholder={formatMessage({id:"address_of_organization"})}
+                            value={values[fields.organisationRue.name]} 
+                            onChange={handleChange}   
+                            className="h-5"   
+                            errorMessage={ errors.organisationRue ? errors.organisationRue.toString() : undefined}
+                        />
+                    </div>
+                    {/* Téléphone de l'organisation */}
+                    <div>
+                        <InputPhone
+                            id = {fields.organisationPhone.id}    
+                            name =  {fields.organisationPhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})}
+                            required
+                            countryCode={getSelectedCountryCode(values.organisationPays)}
+                            value={values[fields.organisationPhone.name]}
+                            onChange={handleChange}   
+                            className="h-5"
+                            errorMessage={ errors.organisationPhone ? errors.organisationPhone.toString() : undefined}
                         />
                     </div>
                     {/* Logo de l'organisation */}
-                    <div>
-                        <InputText
+                    {/* <div>
+                        <InputFile
                             id = {fields.orgLogo.id}    
                             name = {fields.orgLogo.name}  
                             label='Logo'
                             placeholder={formatMessage({id:"organization_logo"})}
                             value={values[fields.orgLogo.name]} 
-                            onChange={handleChange}      
+                            onChange={(e) => {
+                                if (e.target.files && e.target.files[0]) {
+                                    formik.setFieldValue(fields.orgLogo.name, e.target.files[0].name)
+                                }
+                            }}      
+                            className="h-5"
+                            fileType=".jpg, .jpeg, .png"
                             errorMessage={ errors.orgLogo ? errors.orgLogo.toString() : undefined}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="flex flex-col md:flex-row md:gap-6">

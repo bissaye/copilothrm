@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 
 export const CustumInputContainer : React.FC<CustomInputProps> = (props : CustomInputProps) => {
     const {formatMessage} = useIntl();
-    const { icon , label, required, children, errorMessage} = props
+    const { icon , label, required, children, errorMessage, bgNone} = props
 
 
     return <Fragment>
@@ -21,7 +21,7 @@ export const CustumInputContainer : React.FC<CustomInputProps> = (props : Custom
                     }
                 </label>
             }
-            <div className={`bg-gray-200 p-2 w-full  flex flex-row justify-start items-center gap-2 ${errorMessage && "border border-danger"}`}>
+            <div className={`${bgNone ? "bg-transparent" : "bg-gray-200"} p-2 w-full  flex flex-row justify-start items-center gap-2 ${errorMessage && "border border-danger"}`}>
                 {
                     icon &&
                     <FontAwesomeIcon icon={icon} className='text-black'/>

@@ -1,0 +1,13 @@
+.animate-success {
+    transition: all 1s ease-in-out;
+    animation: default_success 1s forwards;
+}
+
+@keyframes default_success {
+    0%, 100% {
+        transform: scale(0.5)
+    }
+    50% {
+        transform: scale(1)
+    }
+}

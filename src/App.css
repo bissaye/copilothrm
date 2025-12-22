@@ -57,3 +57,18 @@ tbody > tr:nth-of-type(even) {
 thead {
   @apply bg-gray-400;
 }
+
+.first-word-uppercase::first-letter {
+  text-transform: capitalize;
+}
+
+main {
+  height: calc(100vh - 6rem)
+}
+
+.font-heading {
+  font-family: "Baloo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400, 500, 600, 700, 800;
+  font-style: normal;
+}

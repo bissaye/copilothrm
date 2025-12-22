@@ -19,11 +19,28 @@ interface DefaultButtonProps {
     height?: number;
     className?: string;
     disabled?: boolean;
+    radius?: 'none' | 'sm' | 'md' | '2xl' | '3xl',
 }
 
 export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButtonProps) => {
 
-    const { type, text, icon, onClick, bgWhite, typeForm, textSize, paddingX, paddingY, marginX, marginY,  width, widthFull, height, className, disabled} = props;
+    const { type, 
+        text, 
+        icon, 
+        onClick, 
+        bgWhite, 
+        typeForm, 
+        textSize, 
+        paddingX, 
+        paddingY, 
+        marginX, 
+        marginY, 
+        width, 
+        widthFull, 
+        height, 
+        className, 
+        disabled,
+        radius } = props;
 
     const bgType = {
         "primary" : "bg-primary",
@@ -43,6 +60,8 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
     const backgroundColorClass :string = bgWhite ? " bg-[#FFFFFF]" : bgType[type];
 
     let fontSize = textSize ? `${textSize}px` : "16px";
+
+    let borderRadius = radius ? `rounded-${radius}` : "rounded-xl";
 
     let padding : any = {
         paddingRight : "16px",
@@ -99,7 +118,7 @@ export const DefaultButton : React.FC<DefaultButtonProps> = (props: DefaultButto
                         }
                     }
                 }
-                className={` font-body flex flex-row justify-center items-center gap-3  rounded-xl ${backgroundColorClass} ${className ? className : ""} ${bgWhite ? `border ${borderType[type]} ${textType[type]}` : "text-white"}`}
+                className={` font-body flex flex-row justify-center items-center gap-3 ${borderRadius} ${backgroundColorClass} ${className ? className : ""} ${bgWhite ? `border ${borderType[type]} ${textType[type]}` : "text-white"}`}
                 style={{
                     ...padding,
                     ...margin,

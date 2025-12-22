@@ -9,7 +9,7 @@ export const InputPassword : React.FC<InputTextProps> = (props : InputTextProps)
 
     const [showPass, setShowPass] = useState<boolean>(false);
     const [type, setType] = useState<'password' | 'text'>('password');
-    const {id, name, value, placeholder, disabled, onChange} = props;
+    const {id, name, value, placeholder, disabled, blockCopy, blockPaste, onChange} = props;
 
     useEffect(()=>{
         if(showPass){
@@ -38,8 +38,19 @@ export const InputPassword : React.FC<InputTextProps> = (props : InputTextProps)
                         }
                     }}
                     autoComplete=""
+                    onPaste = {(e) => {
+                        if(blockPaste){
+                            e.preventDefault();
+                        }
+                    }}
+                    onCopy={(e) => {
+                        if(blockCopy){
+                            e.preventDefault();
+                        }
+                    }}
                 />
                 {
+                    
                     !showPass ?
                     <FontAwesomeIcon 
                         icon={faEye}

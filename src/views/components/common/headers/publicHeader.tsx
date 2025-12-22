@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LanguageSwitcher } from '../internationalisation';
 import { pageIds } from '../../../../utils/constantes';
@@ -8,7 +8,7 @@ import { DefaultButton, LinkButton } from '../../ui';
 import { imagesLogo } from '../../../../assets/images';
 import { usePageStore } from '../../../../services/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faBars } from '@fortawesome/free-solid-svg-icons';
 import "./style.css"
 
 export const PublicHeader : React.FC = () => {
@@ -17,21 +17,21 @@ export const PublicHeader : React.FC = () => {
 
     const {formatMessage} = useIntl();
 
-    const [isFixed, setIsFixed] = useState(false);
+    // const [isFixed, setIsFixed] = useState(false);
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const topOffset = window.scrollY;
-            const shouldFix = topOffset > 100; 
+        // const handleScroll = () => {
+        //     const topOffset = window.scrollY;
+        //     const shouldFix = topOffset > 100; 
 
-            setIsFixed(shouldFix);
-        };
+        //     setIsFixed(shouldFix);
+        // };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        // window.addEventListener('scroll', handleScroll);
+        // return () => {
+        //     window.removeEventListener('scroll', handleScroll);
+        // };
     }, []);
 
     const showMenu = () => {
@@ -39,8 +39,7 @@ export const PublicHeader : React.FC = () => {
     }
 
 
-    return <Fragment>
-        <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full ${isFixed ? 'fixed z-10' : ''}`}>
+    return <div className={`bg-white shadow-m h-24 flex flex-row justify-between items-center p-4 md:px-8 lg:gap-14 xl:px-20 w-full'`}>
             
             <Link to={publicRoutes.LandingPage.path} type='link' className=' text-slate-600'>
                 <img src={imagesLogo.main} className='lg:w-[15vw] md:w-[10vw] sm:w-[13vw]'/>
@@ -49,11 +48,11 @@ export const PublicHeader : React.FC = () => {
             <div className="w-full hidden md:flex">
             
                 <div className='flex flex-row justify-end items-center w-full'>
-                    <Link to={publicRoutes.LandingPage.path} type='link' className={` px-s7 py-s5 text-t3 font-body  ${page === pageIds.LandingPage ? "text-primary font-bold" : "text-gray-800" } `}>
+                    <Link to={publicRoutes.LandingPage.path} type='link' className={`px-s7 py-s5 text-t3 font-body  ${page === pageIds.LandingPage ? "text-primary font-bold" : "text-gray-800" } `}>
                         {formatMessage({id:"home_link"})}
                     </Link>
                     
-                    <Link to={publicRoutes.LandingPage.path} type='link' className='  px-s7 py-s5 text-t3 font-body text-gray-800 capitalize'>
+                    <Link to={publicRoutes.LandingPage.path} type='link' className='px-s7 py-s5 text-t3 font-body text-gray-800 capitalize'>
                         {formatMessage({id:"pricing_link"})}
                     </Link>
                 </div>
@@ -73,11 +72,15 @@ export const PublicHeader : React.FC = () => {
                     {
                         page !== pageIds.SignUpPage 
                         &&
+                        page !== pageIds.ActivateAccount 
+                        &&
                         <Link to={publicRoutes.SignUpPage.path} type='link' className=' text-slate-600'>
                             <DefaultButton
                                 type="secondary"
                                 bgWhite={false}
                                 text={formatMessage({id:"sign_up_link"})}
+                                className='hover:bg-secondary-400 transition duration-300 ease-in-out'
+                                icon={faArrowRight}
                             />
                         </Link>
                     }
@@ -130,5 +133,4 @@ export const PublicHeader : React.FC = () => {
                 </div>
             </div>
         </div>
-    </Fragment>
 }

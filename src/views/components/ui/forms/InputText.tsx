@@ -4,7 +4,8 @@ import { CustumInputContainer } from "./custumInputContainer";
 import './style.css'
 
 export const InputText : React.FC<InputTextProps> = (props : InputTextProps) => {
-    const {id, name, value, placeholder, disabled, onChange, onBlur} = props
+    const {id, name, value, placeholder, disabled, onChange, onBlur, className} = props
+    
     return <Fragment>
         <CustumInputContainer
             {...props}
@@ -13,7 +14,7 @@ export const InputText : React.FC<InputTextProps> = (props : InputTextProps) => 
                 id = {id}
                 name = {name}
                 type='text'
-                className='default-input'
+                className={`default-input ${className}`} 
                 value={value}
                 placeholder= {placeholder}
                 disabled={disabled}

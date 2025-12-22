@@ -2,9 +2,10 @@ import { useIntl } from "react-intl";
 import { FieldsInfo } from "../../../utils/interfaces/type";
 import { DefaultButton, InputDate, InputSelect, InputText } from "../../components/ui";
 import { useFormik } from "formik";
-import { userSignUpStepOneSchema } from "../../../services/forms/validations";
-import { InvitedUserSignupDatas } from "../../../utils/interfaces/DTO/request";
+import { invitedUserSignupStepOneSchema } from "../../../services/forms/validations";
+import { InvitedUserSignupDatas } from "../../../services/api/DTO/request";
 import { useInvitationSignupStore } from "../../../services/store";
+import { InputSelectOptions } from "../../../utils/interfaces/props";
 
 interface Step1Props {
     handleSubmitNextStep: () => void;
@@ -14,64 +15,63 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const { handleSubmitNextStep } = props;
     const {formatMessage} = useIntl();
-    const { invitedUserDatas, setInvitedUserDatas } = useInvitationSignupStore();
+    const { invitedUserDatas, setInvitedUserDatas, gender, countryList } = useInvitationSignupStore();
     const fields : Record<string, FieldsInfo> = {
-        surname :{
-            id : "surname",
-            name : "surname",
+        nom :{
+            id : "nom",
+            name : "nom",
         },
-        firstname :{
-            id : "firstname",
-            name : "firstname",
+        prenom :{
+            id : "prenom",
+            name : "prenom",
         },
-        birthplace :{
-            id : "birthplace",
-            name : "birthplace",
+        lieuNaissance :{
+            id : "lieuNaissance",
+            name : "lieuNaissance",
         },
-        birthdate :{
-            id : "birthdate",
-            name : "birthdate",
+        dateNaissance :{
+            id : "dateNaissance",
+            name : "dateNaissance",
         },
-        userPhone :{
-            id : "userPhone",
-            name : "userPhone",
+        mobilePhone :{
+            id : "mobilePhone",
+            name : "mobilePhone",
         },
-        userCountry :{
-            id : "userCountry",
-            name : "userCountry",
+        country :{
+            id : "country",
+            name : "country",
         },
-        userCity :{
-            id : "userCity",
-            name : "userCity",
+        adresseVille :{
+            id : "adresseVille",
+            name : "adresseVille",
         },
-        userPostcode :{
-            id : "userPostcode",
-            name : "userPostcode",
+        adresseZipCode :{
+            id : "adresseZipCode",
+            name : "adresseZipCode",
         },
-        userAddress :{
-            id : "userAddress",
-            name : "userAddress",
+        adresseRue :{
+            id : "adresseRue",
+            name : "adresseRue",
         },
-        gender :{
-            id : "gender",
-            name : "gender",
+        sexe :{
+            id : "sexe",
+            name : "sexe",
         }
     }
 
-    const genderOptions = [
-        {
-            value: "",
-            text: formatMessage({id:"select"})
-        },
-        {
-            value: "0",
-            text: formatMessage({id:"man"})
-        },
-        {
-            value: "1",
-            text: formatMessage({id:"woman"})
+    const genderOptions: InputSelectOptions[] = gender.map((obj) => {
+        return {
+            value: obj.value,
+            text: formatMessage({id: obj.text})
         }
-    ]
+    })
+
+    const countryOptions: InputSelectOptions[] = countryList.map((country) => {
+        return {
+            value: country.countryId,
+            text: country.libelle 
+        }
+    });
 
     const initialValues: any = {}
     Object.entries(fields).map(([_, field]) => {
@@ -81,10 +81,10 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
 
     const formik = useFormik({
         initialValues: initialValues,
-        validationSchema: userSignUpStepOneSchema,
+        validationSchema: invitedUserSignupStepOneSchema,
         validateOnBlur: true,
         validateOnChange: true,
-        onSubmit: async (values) => {
+        onSubmit: (values) => {
             const body: InvitedUserSignupDatas = {...values};
             setInvitedUserDatas(body);
             handleSubmitNextStep();
@@ -104,126 +104,129 @@ export const Step1 : React.FC<Step1Props> = (props: Step1Props) => {
                     {/* Nom de famille */}
                     <div>
                         <InputText
-                            id = {fields.surname.id}    
-                            name =  {fields.surname.name}  
+                            id = {fields.nom.id}    
+                            name =  {fields.nom.name}  
                             label={formatMessage({id:"surname"})}
                             placeholder = {formatMessage({id: "enter_your_surname"})} 
-                            value={values[fields.surname.name]}
+                            value={values[fields.nom.name]}
                             onChange={handleChange}
-                            errorMessage={ errors.surname ? errors.surname.toString() : undefined}
+                            errorMessage={ errors.nom ? errors.nom.toString() : undefined}
                         />
                     </div>
                     {/* Prénom */}
                     <div>
                         <InputText
-                            id = {fields.firstname.id}    
-                            name =  {fields.firstname.name}  
+                            id = {fields.prenom.id}    
+                            name =  {fields.prenom.name}  
                             label={formatMessage({id:"firstname"})}
                             placeholder = {formatMessage({id: "enter_your_firstname"})} 
-                            value={values[fields.firstname.name]} 
+                            value={values[fields.prenom.name]} 
                             onChange={handleChange}
-                            errorMessage={ errors.firstname ? errors.firstname.toString() : undefined}
-                        />
-                    </div>
-                    {/* Lieu de naissance */}
-                    <div>
-                        <InputText
-                            id = {fields.birthplace.id}    
-                            name = {fields.birthplace.name}  
-                            label={formatMessage({id:"birth_place"})}
-                            placeholder = {formatMessage({id: "your_place_of_birth"})} 
-                            value={values[fields.birthplace.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.birthplace ? errors.birthplace.toString() : undefined}
+                            errorMessage={ errors.prenom ? errors.prenom.toString() : undefined}
                         />
                     </div>
                     {/* Date de naissance */}
                     <div>
                         <InputDate
-                            id = {fields.birthdate.id}    
-                            name = {fields.birthdate.name}  
+                            id = {fields.dateNaissance.id}    
+                            name = {fields.dateNaissance.name}  
                             label={formatMessage({id:"birthdate"})}
-                            value={values[fields.birthdate.name]} 
+                            value={values[fields.dateNaissance.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.birthdate ? errors.birthdate.toString() : undefined}
+                            errorMessage={ errors.dateNaissance ? errors.dateNaissance.toString() : undefined}
                         />
                     </div>
-                    {/* Téléphone */}
+                    {/* Lieu de naissance */}
                     <div>
                         <InputText
-                            id = {fields.userPhone.id}    
-                            name =  {fields.userPhone.name}  
-                            label={formatMessage({id:"phone"})}
-                            placeholder = {formatMessage({id: "enter_your_phone"})} 
-                            value={values[fields.userPhone.name]} 
+                            id = {fields.lieuNaissance.id}    
+                            name = {fields.lieuNaissance.name}  
+                            label={formatMessage({id:"birth_place"})}
+                            placeholder = {formatMessage({id: "your_place_of_birth"})} 
+                            value={values[fields.lieuNaissance.name]} 
                             onChange={handleChange}      
-                            errorMessage={ errors.userPhone ? errors.userPhone.toString() : undefined}
-                        />
-                    </div>
-                </div>
-
-                {/* colonne de droite */}
-                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
-                    {/* Pays */}
-                    <div>
-                        <InputText
-                            id = {fields.userCountry.id}    
-                            name =  {fields.userCountry.name}  
-                            label={formatMessage({id:"country"})}
-                            placeholder = {formatMessage({id: "enter_your_country"})} 
-                            value={values[fields.userCountry.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.userCountry ? errors.userCountry.toString() : undefined}
-                        />
-                    </div>
-                    {/* Ville */}
-                    <div>
-                        <InputText
-                            id = {fields.userCity.id}    
-                            name =  {fields.userCity.name}  
-                            label={formatMessage({id:"city"})}
-                            placeholder = {formatMessage({id: "enter_your_city"})} 
-                            value={values[fields.userCity.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.userCity ? errors.userCity.toString() : undefined}
-                        />
-                    </div>
-                    {/* Code postal */}
-                    <div>
-                        <InputText
-                            id = {fields.userPostcode.id}    
-                            name =  {fields.userPostcode.name}  
-                            label={formatMessage({id:"post_code"})}
-                            placeholder = {formatMessage({id: "enter_your_post_code"})} 
-                            value={values[fields.userPostcode.name]} 
-                            onChange={handleChange}      
-                            errorMessage={ errors.userPostcode ? errors.userPostcode.toString() : undefined}
-                        />
-                    </div>
-                    {/* Adresse postale */}
-                    <div>
-                        <InputText
-                            id = {fields.userAddress.id}    
-                            name =  {fields.userAddress.name}  
-                            label={formatMessage({id:"address"})}
-                            placeholder = {formatMessage({id: "enter_your_address"})} 
-                            value={values[fields.userAddress.name]} 
-                            onChange={handleChange}
-                            errorMessage={ errors.userAddress ? errors.userAddress.toString() : undefined}
+                            errorMessage={ errors.lieuNaissance ? errors.lieuNaissance.toString() : undefined}
                         />
                     </div>
                     {/* Sexe */}
                     <div>
                         <InputSelect
-                            id = {fields.gender.id}    
-                            name =  {fields.gender.name}  
+                            id = {fields.sexe.id}    
+                            name =  {fields.sexe.name}  
                             label={formatMessage({id:"gender"})}
-                            value={values[fields.gender.name]} 
+                            value={values[fields.sexe.name]} 
                             onChange={handleChange}
                             options={genderOptions}      
-                            errorMessage={ errors.gender ? errors.gender.toString() : undefined}
+                            errorMessage={ errors.sexe ? errors.sexe.toString() : undefined}
                         />
                     </div>
+                    
+                </div>
+
+                {/* colonne de droite */}
+                <div className="w-full md:w-[422px] flex flex-col gap-4 ">
+                    {/* Téléphone */}
+                    <div>
+                        <InputText
+                            id = {fields.mobilePhone.id}    
+                            name =  {fields.mobilePhone.name}  
+                            label={formatMessage({id:"phone"})}
+                            placeholder = {formatMessage({id: "enter_your_phone"})} 
+                            value={values[fields.mobilePhone.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.mobilePhone ? errors.mobilePhone.toString() : undefined}
+                        />
+                    </div>
+                    {/* Pays */}
+                    <div>
+                        <InputSelect
+                            id = {fields.country.id}    
+                            name =  {fields.country.name}  
+                            options={countryOptions}
+                            label={formatMessage({id:"country"})}
+                            placeholder = {formatMessage({id: "enter_your_country"})} 
+                            value={values[fields.country.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.country ? errors.country.toString() : undefined}
+                        />
+                    </div>
+                    {/* Ville */}
+                    <div>
+                        <InputText
+                            id = {fields.adresseVille.id}    
+                            name =  {fields.adresseVille.name}  
+                            label={formatMessage({id:"city"})}
+                            placeholder = {formatMessage({id: "enter_your_city"})} 
+                            value={values[fields.adresseVille.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.adresseVille ? errors.adresseVille.toString() : undefined}
+                        />
+                    </div>
+                    {/* Code postal */}
+                    <div>
+                        <InputText
+                            id = {fields.adresseZipCode.id}    
+                            name =  {fields.adresseZipCode.name}  
+                            label={formatMessage({id:"post_code"})}
+                            placeholder = {formatMessage({id: "enter_your_post_code"})} 
+                            value={values[fields.adresseZipCode.name]} 
+                            onChange={handleChange}      
+                            errorMessage={ errors.adresseZipCode ? errors.adresseZipCode.toString() : undefined}
+                        />
+                    </div>
+                    {/* Adresse postale */}
+                    <div>
+                        <InputText
+                            id = {fields.adresseRue.id}    
+                            name =  {fields.adresseRue.name}  
+                            label={formatMessage({id:"address"})}
+                            placeholder = {formatMessage({id: "enter_your_address"})} 
+                            value={values[fields.adresseRue.name]} 
+                            onChange={handleChange}
+                            errorMessage={ errors.adresseRue ? errors.adresseRue.toString() : undefined}
+                        />
+                    </div>
+                    
                 </div>
                 
             </div>
